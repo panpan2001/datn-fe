@@ -1,0 +1,1 @@
+folder structure: https://www.xenonstack.com/insights/reactjs-project-structure#:~:text=The%20files%20in%20the%20pages,to%20call%20an%20async%20operation.

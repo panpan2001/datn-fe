@@ -1,0 +1,5 @@
+@import './RootStyle.css';
+
+.login-page_container {
+    background-color: var(--background-color);
+}

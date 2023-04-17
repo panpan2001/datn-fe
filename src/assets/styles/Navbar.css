@@ -1,0 +1,29 @@
+@import './RootStyle.css';
+
+
+.navbar_container{
+    padding: .75rem  0 !important;
+    background-color: var(--background-color);
+
+}
+
+.navbar{
+    background-color: var(--background-color) !important;
+
+}
+.navbar-menu{
+    height: 80%;
+    padding: 1em 0;
+
+}
+
+ .logo{
+    padding: .25em 1em;
+    border-right: 1px solid black;
+}
+#logo-brand{
+    max-width: 5rem !important;
+}
+.navbar-menu{
+    margin-left: 1em ;
+}
