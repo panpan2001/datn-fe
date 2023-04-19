@@ -1,11 +1,20 @@
-import Navbar from "../../components/Navbar"
 import '../../assets/styles/LoginPage.css'
-import  Footer  from "../../components/Footer"
+import LoginForm from '../../components/LoginForm'
 const LoginPage=()=>{
 return (
     <div className="login-page_container container-fluid">
-        <Navbar/>
-        <Footer/>
+       <div className="columns">
+        <div className="column login-page_images ">
+                <img src={require('../../assets/images/18.jpg')} alt="plane"/>
+        </div>
+        <div className="column is-4 ">
+        <LoginForm/>
+        </div>
+        <div className="column login-page_images_2">
+        <img src={require('../../assets/images/1.jpg')} alt="plane"/>
+
+        </div>
+       </div>
     </div>
 )
 }

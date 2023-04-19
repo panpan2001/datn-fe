@@ -1,4 +1,5 @@
 @import './RootStyle.css';
+
 .App {
   text-align: center;
   font-family: var(--font-family-app);

@@ -1,5 +1,37 @@
 @import './RootStyle.css';
 
 .login-page_container {
-    background-color: var(--background-color);
+  
+    display: flex;
+    flex-direction: column;
+    padding: 0 3rem 3rem;
+    flex-grow: 1;
 }
+
+
+
+.login-page_images img{
+    width: 27%;
+    z-index: 0;
+    position: absolute;
+    left: 5%;
+    top: 30%;
+
+}
+.login-page_images_2 img{
+    width: 30%;
+    z-index: 0;
+    position: absolute;
+    right: 2%;
+    top: 25%;
+
+}
+
+@media  screen and (width<=768px) {
+    .login-page_images img ,.login-page_images_2 img {
+        display: none !important;
+    }
+}
+
+
+ 

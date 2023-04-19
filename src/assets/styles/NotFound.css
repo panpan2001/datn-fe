@@ -1,0 +1,4 @@
+@import './RootStyle.css';
+*{
+    font-size: var(--font-size-h5);
+}

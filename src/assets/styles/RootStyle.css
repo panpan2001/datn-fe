@@ -1,8 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Lora:wght@450&display=swap");
+
 :root{
-    --font-family-app:Montserrat ;
-    --font-size-normal: 1.05em;
+    --font-family-app: "Lora", serif;
+    --font-size-normal: 1.05rem;
+    --font-size-h5:1.25rem;
     --background-color: #F5FBFF;
     --background-color-footer: #32393F;
+    --border-color: #ACEFF6;
   }
   
   
