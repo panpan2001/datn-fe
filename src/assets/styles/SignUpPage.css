@@ -1,0 +1,27 @@
+
+.signup-choose{
+    display: flex !important;
+    margin-left: 7rem;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 2rem;
+}
+.signup-choose label{
+    margin-bottom: .25rem !important;
+}
+
+#signup_control{
+    display: flex !important;
+    /* flex-direction: inherit !important; 
+    align-items: center !important;
+    justify-content: center; */
+    gap: 2rem;
+}
+
+#signup_control .radio{
+    display: flex !important;
+    
+    gap: .5rem !important;
+    align-items: center !important;
+}

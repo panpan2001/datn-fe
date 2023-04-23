@@ -14,13 +14,13 @@ const Navbar = () => {
             <a className="navbar-item" href='/'>
               Trang chủ
             </a>
-            <a className="navbar-item">
+            <a className="navbar-item" href="">
               Tìm kiếm giáo viên
             </a>
-            <a className="navbar-item">
+            <a className="navbar-item" href="">
               Tìm kiếm lớp học
             </a>
-            <a className="navbar-item">
+            <a className="navbar-item" href="">
               Trở thành giáo viên
             </a>
           </div>
@@ -28,11 +28,11 @@ const Navbar = () => {
           <div className="navbar-end">
             <div className="navbar-item">
               <div className="buttons">
-                <a className="button sign_up is-info">
-                  Sign up
+                <a className="button sign_up is-info" href="/signup">
+                  Đăng kí
                 </a>
                 <a className="button log_in is-light" href='/login'>
-                  Log in
+                  Đăng nhập 
                 </a>
                 
               </div>

@@ -11,15 +11,15 @@
 
 
 .login-page_images img{
-    width: 27%;
+    width: 23%;
     z-index: 0;
     position: absolute;
     left: 5%;
-    top: 30%;
+    top: 28%;
 
 }
 .login-page_images_2 img{
-    width: 30%;
+    width: 25%;
     z-index: 0;
     position: absolute;
     right: 2%;

@@ -4,7 +4,7 @@ const LoginForm = () => {
     return (
         <div className="login-form_container">
             <label className="label login-name_label is-size-3">
-                <strong>Login</strong>
+                <strong>Đăng nhập </strong>
             </label>
             <div className="field">
                 <label className="label">Username</label>
@@ -21,28 +21,28 @@ const LoginForm = () => {
 
             <div className="field is-grouped is-grouped-centered">
                 <div className="control">
-                    <button className="button is-link">Login</button>
+                    <button className="button is-link">Đăng nhập </button>
                 </div>
             </div>
             <label className="label  ">
                 <Link>Quên mật khẩu?</Link>
             </label>
-            <hr />
+            {/* <hr /> */}
            
             <label className="label sign-up_label">
                 <p>Chưa có tài khoản?   </p>
-                <p>Đăng kí với vai trò:   </p>
+                {/* <p>Đăng kí với vai trò:   </p> */}
 
-                {/* <Link>  Đăng kí ngay</Link> */}
+                <Link to="/signup/student">  Đăng kí ngay</Link>
             </label>
-            <div className="field is-grouped is-grouped-centered">
+            {/* <div className="field is-grouped is-grouped-centered">
                 <div className="control">
                     <button className="button is-info">Học sinh </button>
                 </div>
                 <div className="control">
                     <button className="button is-gray">Giáo viên </button>
                 </div>
-            </div>
+            </div> */}
 
         </div>)
 }

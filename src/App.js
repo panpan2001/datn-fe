@@ -2,15 +2,12 @@ import React from 'react';
 import './assets/styles/App.css';
 import ProjectRoute from './routes/ProjectRoutes';
 
-import Layout from './layouts';
+import MainLayout from './layouts/mainLayout';
 function App() {
   return (
     <div className="App">
-      {/* <Layout>
-      <ProjectRoute/>
-      </Layout>
-      */}
-      <Layout children={<ProjectRoute/>}/>
+     
+      <MainLayout children={<ProjectRoute/>}/>
         </div>
   );
 }

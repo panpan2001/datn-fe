@@ -6,6 +6,21 @@
   font-size: var(--font-size-normal);
   background-color: var(--background-color);
 }
+
+@layer {
+  button{
+      font-family: var( --font-family-app) !important;
+  }
+  button:hover{
+      border: 1px solid white;
+      filter: brightness(1.1);
+      box-shadow: 0px 0px 10px rgb(139, 137, 137) !important ;
+      font-family: var( --font-family-app) !important;
+  }
+  hr{
+      border: 1px solid rgb(239, 237, 237) !important; ;
+  }
+}
 /* *{
 outline: 1px solid blue ;
 } */
