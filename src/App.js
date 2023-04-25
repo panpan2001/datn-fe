@@ -1,13 +1,16 @@
 import React from 'react';
 import './assets/styles/App.css';
-import ProjectRoute from './routes/ProjectRoutes';
+import UserRoutes from './routes/UserRoutes';
 
-import MainLayout from './layouts/mainLayout';
+import UserLayout from './layouts/UserLayout';
+import AdminManagementLayout from './layouts/AdminManagementLayout';
+import AdminRoutes from './routes/AdminRoutes';
 function App() {
   return (
     <div className="App">
      
-      <MainLayout children={<ProjectRoute/>}/>
+      <UserLayout children={<UserRoutes/>}/>
+      {/* <AdminManagementLayout children={<AdminRoutes/>} /> */}
         </div>
   );
 }
