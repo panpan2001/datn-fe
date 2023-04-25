@@ -1,0 +1,10 @@
+#level{
+    display: flex !important;
+}
+#level::after{
+    
+    align-self: flex-start;
+    content: "*";
+    color: red;
+    margin-left: 0.25rem;
+}

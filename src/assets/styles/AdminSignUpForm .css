@@ -7,7 +7,7 @@
     background-color: white;
     border: 1px solid var(--border-color);
     border-radius: 10px;
-    padding: 1rem 1rem 2.5rem 1rem;
+    padding: 1rem 2rem 2.5rem 2rem;
     justify-content: flex-start;
     
 }
@@ -15,14 +15,23 @@
 .admin-signup-form_container:hover{
     box-shadow: 0px 0px 10px var(--border-color);
 }
-.admin-signup-form_container .field :nth-child(1){
-    display: flex;
+.column.is-6 .field  {
+    display: flex !important;
     flex-direction: column;
     align-items: flex-start;
 }
-.admin-signup-form_container .field .input :nth-child(3){
-    width: 100%;
-}
+
+
+.field  .label::after {
+    content: "*";
+    color: red;
+    margin-left: 0.25rem;
+
+  }
+  #signup_button{
+    display: flex !important;
+    align-self: center;
+  }
 
 .gender-signup_form .control{
         display: flex;
@@ -35,13 +44,13 @@
     /* #gender-1, #gender-2, #gender-3 */
     div[id^="gender-"]
     {
-        display: flex;
-          flex-direction: inherit !important; 
-          gap: 0.25rem !important;
-          align-items: center !important;
+          display: flex;
+          flex-direction: inherit ; 
+          gap: 0.25rem ;
+          align-items: center ;
       }
       #btn-thoat{
-        color: white !important;
+        color: white ;
     }
     
 } 

@@ -1,6 +1,6 @@
 @import './RootStyle.css';
 
-.student-signup-form_container {
+.teacher-signup-form_container {
     display: flex;
     flex-direction: column;
     margin-bottom: 1rem;
@@ -12,7 +12,7 @@
     
 }
 
-.student-signup-form_container:hover{
+.teacher-signup-form_container:hover{
     box-shadow: 0px 0px 10px var(--border-color);
 }
 .column.is-6 .field  {
@@ -22,16 +22,16 @@
 }
 
 
-.field  .label::after:nth-child(n-2) {
+.field  .label::after {
     content: "*";
     color: red;
     margin-left: 0.25rem;
-
   }
-  
   #signup_button{
     display: flex !important;
     align-self: center;
+    flex-direction: row;
+    gap:1rem
   }
 
 .gender-signup_form .control{
@@ -45,12 +45,12 @@
     /* #gender-1, #gender-2, #gender-3 */
     div[id^="gender-"]
     {
-        display: flex;
-          flex-direction: inherit !important; 
-          gap: 0.25rem !important;
-          align-items: center !important;
+          display: flex;
+          flex-direction: inherit ; 
+          gap: 0.25rem ;
+          align-items: center ;
       }
-  
+      
 } 
  
 
@@ -63,4 +63,10 @@
 .sign-up_label p{
     margin-right: 1rem ;
 }
-
+#singup-button_footer{
+    background-color: white !important;
+    width: 100% !important;
+    align-self: center !important;
+    justify-content: center;
+    padding: 2rem 2rem 0 2rem !important;
+}
