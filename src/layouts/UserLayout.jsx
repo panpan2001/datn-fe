@@ -2,10 +2,10 @@ import  { Suspense ,lazy} from 'react'
 import '../assets/styles/Layout.css'
 const Navbar =lazy(() => import('../components/Navbar'))
 const Footer = lazy(() => import('../components/Footer'))
-const MainLayout = ({ children }) => {
+const UserLayout = ({ children }) => {
     return (
         <Suspense  >
-        <div className='layout_container container-fluid'>
+        <div className='user-layout_container container-fluid'>
             <Navbar />
             <main>{children}</main>
             <Footer />
@@ -13,4 +13,4 @@ const MainLayout = ({ children }) => {
         </Suspense>
     )
 }
-export default MainLayout
+export default UserLayout

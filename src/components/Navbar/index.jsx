@@ -20,7 +20,7 @@ const Navbar = () => {
             <a className="navbar-item" href="">
               Tìm kiếm lớp học
             </a>
-            <a className="navbar-item" href="">
+            <a className="navbar-item" href="/signup/teacher">
               Trở thành giáo viên
             </a>
           </div>

@@ -1,6 +1,5 @@
-import GenderRadioButton from '../../components/RadioButton/GenderRaioButton'
 import StudentSignUpForm from '../../components/StudentSignUpForm'
-import SignUpLayout from '../../layouts/signUpLayout'
+import SignUpLayout from '../../layouts/SignUpLayout'
 import '../../assets/styles/SignUpPage.css'
 import { Link, Outlet } from 'react-router-dom'
 import { useState } from 'react'
@@ -8,7 +7,7 @@ const SignUpPage = ({img_singup_link,signup_type_form}) => {
 
     return (
 
-        <>
+        <div className='sign-up-page_container container-fluid'>
             <div className="signup-choose">
                 <label className="label signup_label is-size-4">
                     <strong>Bạn là: </strong>
@@ -25,7 +24,7 @@ const SignUpPage = ({img_singup_link,signup_type_form}) => {
             {/* student sign up  */}
             {/* <SignUpLayout img_singup_link={img_singup_link} signup_type_form={signup_type_form} /> */}
             <Outlet img_singup_link={img_singup_link} signup_type_form={signup_type_form}/>
-        </>
+        </div>
     )
 }
 

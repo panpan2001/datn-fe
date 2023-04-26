@@ -1,0 +1,7 @@
+#judge-level_control{
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    align-self: center;
+
+}

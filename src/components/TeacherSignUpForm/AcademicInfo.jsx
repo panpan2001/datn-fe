@@ -26,19 +26,34 @@ function AcademicInfo() {
           </div>
         </div>
 
-        <div className="column ">
+        <div className="column is-6">
           <div className="field is-multiline">
             <label className="label" >Chứng chỉ</label>
             <input className="input" type="textarea" placeholder="Trình độ học vấn" />
           </div>
         </div>
-        <div className="column">
+        <div className="column is-6">
+          <div className="field is-multiline">
+            <label className="label" >Minh chứng chứng chỉ (đường dẫn ảnh)</label>
+            <input className="input" type="textarea" placeholder="Minh chứng chứng chỉ" />
+          </div>
+        </div>
+
+        <div className="column is-6">
           <div className="field">
             <label className="label">Mô tả cá nhân </label>
             <input className="input" type="textarea" placeholder="Mô tả cá nhân" />
           </div>
         </div>
 
+        <div className="column is-6">
+          <div className="field">
+            <label className="label">Mô tả học vấn</label>
+            <input className="input" type="textarea" placeholder="Mô tả học vấn" />
+          </div>
+        </div>
+      
+        
         
       </div>
     </div>

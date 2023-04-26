@@ -1,0 +1,36 @@
+
+.student-judge-form_container{
+    width: 85%;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding:1rem;
+    background-color: white;
+    margin: 10% ;
+}
+.student-judge-form_container:hover{
+    box-shadow: 0 0 10px var(--border-color);
+}
+#student-pre-next_button{
+    gap: 2rem;
+    justify-content: space-between;
+    display: flex !important;
+    flex-direction: row;
+    padding:  1rem 0;
+    margin: 0 5rem !important ;
+}
+
+#student-submit_button{
+    gap:2rem;
+    background-color: white;
+
+}
+#student-judge-form_body{
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+}
+#student-judge-form_footer{
+    background-color: white !important;
+    padding: 0 !important
+
+}

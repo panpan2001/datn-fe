@@ -1,0 +1,45 @@
+.image-info_container{
+    display: flex;
+    opacity: 1;
+    flex-direction: column;
+    position: relative;
+    min-height: 50vh;
+}
+
+.file-input{
+    opacity: 1;
+    content:"Chọn ảnh" !important;
+    color: var(--background-color);
+    position: relative !important;
+
+}
+
+#choose-image_button{
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
+#upload-teacher-image_p{
+    position: absolute;
+    left: 25%;
+}
+#display-teacher-image-upload_column{
+    align-self: center;
+    gap: 1rem;
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+}
+
+/* .image-info_container .columns{
+    justify-content: center;
+    align-items: center;
+} */
+
+.teacher-image-sign-up_div {
+    width:'auto';
+    max-height:"128px"
+}

@@ -5,7 +5,7 @@ import PersonalInfo from "./PersonalInfo"
 import AcademicInfo from './AcademicInfo'
 import ImageInfo from './ImageInfo'
 const TeacherSignUpForm = () => {
-    const FormTitle = ["Thông tin cá nhân", "Thông tin học vấn", "Ảnh cá nhân và chứng chỉ/bằng cấp"]
+    const FormTitle = ["Thông tin cá nhân", "Thông tin học vấn", "Ảnh chân dung"]
     const [page, setPage] = useState(0)
     const handleNext = () => {
         setPage((currentPage) => currentPage + 1)
@@ -14,8 +14,7 @@ const TeacherSignUpForm = () => {
         setPage((currentPage) => currentPage - 1)
     }
     return (
-        <div className="form">
-            <div className="progressbar"></div>
+        // <div className="teacher-singup_form">
             <form className='teacher-signup-form_container container-fluid mr-6'>
                 <div className="header">
                     <label className="label login-name_label is-size-3">
@@ -47,7 +46,7 @@ const TeacherSignUpForm = () => {
                     </div>
                 </div>
             </form >
-        </div>
+        // </div>
 
     )
 }
