@@ -11,14 +11,7 @@ function JudgeLevelRadioButton({ judgeLevelLabels }) {
        </label>
       )}
      
-      {/* <label class="radio">
-        <input type="radio" name="judge-level_radio_button" />
-        Not going
-      </label>
-      <label class="radio" disabled>
-        <input type="radio" name="judge-level_radio_button" />
-        Maybe
-      </label> */}
+    
     </div>
   )
 }

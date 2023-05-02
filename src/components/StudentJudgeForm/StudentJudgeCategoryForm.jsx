@@ -12,19 +12,14 @@ function StudentJudgeCategoryForm({ formName, formContents,judgeLevelLabels }) {
             <div class="table-container">
             <table class="table   is-striped is-narrow is-hoverable is-fullwidth ">
                 {formContents.map(formContent =>
-                   
-                      
-
                             <tbody>
                                 <tr className='mt-3 mb-3'>
                                     <td>
                                         <label className="label" id='student-judge-category-form_label-content' >{formContent}</label>
                                     </td>
-                                    <td><JudgeLevelRadioButton id={formContent} judgeLevelLabels={judgeLevelLabels}/></td>
+                                    <td><JudgeLevelRadioButton  judgeLevelLabels={judgeLevelLabels}/></td>
                                 </tr>
                             </tbody>
-                      
-                    
                 )}
                   </table>
                 </div>
