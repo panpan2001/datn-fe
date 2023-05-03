@@ -3,6 +3,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import TeacherSignUpForm from "../components/TeacherSignUpForm";
 import AdminSignUpForm from "../components/AdminSignUpForm";
 import StudentSignUpForm from "../components/StudentSignUpForm";
+import FindingTeacherPage from "../pages/FindingTeacherPage";
+import FindingCoursePage from "../pages/FindingCoursePage";
 
 const LandingPage= React.lazy(() => import('../pages/LandingPage'));
 const LoginPage= React.lazy(() => import('../pages/LoginPage'));
@@ -22,6 +24,8 @@ const ProjectRoute = () => {
                             <Route path="/signup/teacher" element={<SignUpLayout img_singup_link={require('../assets/images/12.jpg')} signup_type_form={<TeacherSignUpForm />} />} />
                             <Route path="/signup/admin" element={<SignUpLayout img_singup_link={require('../assets/images/18.jpg')} signup_type_form={<AdminSignUpForm />} />} /> */}
                         </Route>
+                        <Route path='/findingTeacher' element={<FindingTeacherPage/>}/>
+                        <Route path='/findingCourse' element={<FindingCoursePage/>}/>
                     </Routes>
                 </BrowserRouter>
     )

@@ -14,13 +14,13 @@ const Navbar = () => {
             <a className="navbar-item" href='/'>
               Trang chủ
             </a>
-            <a className="navbar-item" href="">
+            <a className="navbar-item" href="/findingTeacher">
               Tìm kiếm giáo viên
             </a>
-            <a className="navbar-item" href="">
+            <a className="navbar-item" href="/findingCourse">
               Tìm kiếm lớp học
             </a>
-            <a className="navbar-item" href="/signup/teacher">
+            <a className="navbar-item" href="/signup">
               Trở thành giáo viên
             </a>
           </div>
