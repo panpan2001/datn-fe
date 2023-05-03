@@ -1,7 +1,7 @@
 import React, { Suspense, lazy } from 'react'
 import { Outlet } from 'react-router-dom'
 
-const AdminSidebar = React.lazy(() => import('../components/AdminSidebar'))
+const AdminSidebar = React.lazy(() => import('../../components/AdminSidebar'))
 function AdminManagementLayout({ children }) {
     return (
         <Suspense>

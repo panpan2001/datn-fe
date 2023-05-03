@@ -57,17 +57,18 @@ const AdminSignUpForm=()=>{
                     </div>
                 </div>
                 <div className="column is-6">
-                    <div className="field">
-                        <label className="label">Tên đăng nhập </label>
-                        <input className="input" type="text" placeholder="Tên đăng nhập" />
-                    </div>
-                </div>
-                <div className="column is-6">
-                    <div className="field">
-                        <label className="label">Mật khẩu </label>
-                        <input className="input" type="text" placeholder="Mật khẩu" />
-                    </div>
-                </div>
+          <div className="field">
+            <label className="label">Mật khẩu </label>
+            <input className="input" type="text" placeholder="Mật khẩu" />
+          </div>
+        </div>
+
+        <div className="column is-6">
+          <div className="field">
+            <label className="label">Nhắc lại mật khẩu </label>
+            <input className="input" type="text" placeholder="Nhắc lại mật khẩu" />
+          </div>
+        </div>
             </div>
             <div className="field is-grouped is-grouped-centered" id='signup_button'>
                     <button className="button is-link" type="submit">Đăng kí</button>

@@ -25,3 +25,17 @@
     gap: .5rem !important;
     align-items: center !important;
 }
+
+ .role-signup_column{
+    display: flex !important;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.role-signup_control{
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+}
+

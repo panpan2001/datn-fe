@@ -7,7 +7,7 @@ const SignUpLayout=({img_singup_link,signup_type_form})=>{
                 <div className="column">
                     <img src={img_singup_link} alt=""/>
                 </div>
-                <div className="column is-6">
+                <div className="column is-6 ml-6">
                     {signup_type_form}
                 </div>
             </div>

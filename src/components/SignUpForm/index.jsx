@@ -1,23 +1,8 @@
-import StudentSignUpForm from '../../components/StudentSignUpForm'
-import SignUpLayout from '../../layouts/ChildrenLayouts/SignUpLayout'
-import '../../assets/styles/SignUpPage.css'
-import { Link, Outlet } from 'react-router-dom'
-import { useState } from 'react'
-import SignUpForm from '../../components/SignUpForm'
-import '../../assets/styles/SignUpPage.css'
-const SignUpPage = () => {
-
-    return (
-
-        <div className='sign-up-page_container container-fluid'>
-
-            <div className="columns">
-                <div className="column is-6">
-                    <img className='signup_img' src={require('../../assets/images/18.jpg')} alt="" />
-                </div>
-                <div className="column is-6 ml-3 mr-3">
-                    <SignUpForm/>
-                    {/* <form className='admin-signup-form_container container-fluid mr-6'>
+import { Link } from "react-router-dom"
+import '../../assets/styles/SignUpForm .css'
+const SignUpForm=()=>{
+    return(
+        <form className='admin-signup-form_container container-fluid mr-6'>
                         <label className="label login-name_label is-size-3">
                             <strong className='is-size-4'>Đăng kí với vai trò là: </strong>
                             <div className="column is-12 role-signup_column">
@@ -58,15 +43,15 @@ const SignUpPage = () => {
                                     <div class="control">
                                         <div id="gender-1">
                                             <input type="radio" name="rsvp" />
-                                            <label class="radio " >Nam</label>
+                                            <label class="radio is-size-6" >Nam</label>
                                         </div>
                                         <div id="gender-2">
                                             <input type="radio" name="rsvp" />
-                                            <label class="radio ">Nữ</label>
+                                            <label class="radio is-size-6 ">Nữ</label>
                                         </div>
                                         <div id="gender-3">
                                             <input type="radio" name="rsvp" />
-                                            <label class="radio ">Khác</label>
+                                            <label class="radio is-size-6">Khác</label>
                                         </div>
                                     </div>
                                 </div>
@@ -107,25 +92,7 @@ const SignUpPage = () => {
                             <button className="button is-link" type="submit">Đăng kí</button>
                         </div>
 
-                    </form > */}
-                </div>
-            </div>
-        </div>
+                    </form > 
     )
 }
-
-export default SignUpPage
-
-{/* <div className="signup-choose">
-                <label className="label signup_label is-size-4">
-                    <strong>Bạn là: </strong>
-
-                </label>
-                <div class="control is-size-4 has-text-link " id="signup_control">
-                    <Link to='/signup'> Học viên</Link>
-                    <Link to='/signup/teacher'>Giáo viên</Link>
-                    <Link to='/signup/admin'>Quản trị viên</Link>
-                </div>
-            </div> */}
-
-{/* <Outlet img_singup_link={img_singup_link} signup_type_form={signup_type_form}/> */ }
+export default SignUpForm

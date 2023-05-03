@@ -4,8 +4,9 @@ import { useState } from "react"
 import PersonalInfo from "./PersonalInfo"
 import AcademicInfo from './AcademicInfo'
 import ImageInfo from './ImageInfo'
+import DegreeInfo from './DegreeInfo'
 const TeacherSignUpForm = () => {
-    const FormTitle = ["Thông tin cá nhân", "Thông tin học vấn", "Ảnh chân dung"]
+    const FormTitle = ["Thông tin cá nhân", "Thông tin học vấn","Thông tin chứng chỉ", "Ảnh chân dung"]
     const [page, setPage] = useState(0)
     const handleNext = () => {
         setPage((currentPage) => currentPage + 1)
@@ -25,7 +26,9 @@ const TeacherSignUpForm = () => {
                     </label>
                 </div>
                 <div className="body">
-                   {page==0? <PersonalInfo/>:(page==1? <AcademicInfo/>:<ImageInfo/>) } 
+                   {page==0? <PersonalInfo/>:
+                   (page==1? <AcademicInfo/>:
+                   (page==2?<DegreeInfo/>:<ImageInfo/>)) } 
                 </div>
                 <div className="footer" id='singup-button_footer'>
                     <div className="field is-grouped is-grouped-centered" id='signup_button'>

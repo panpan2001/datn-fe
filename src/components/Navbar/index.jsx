@@ -1,8 +1,8 @@
 import '../../assets/styles/Navbar.css'
 const Navbar = () => {
   return (
-    <div className="navbar_container container">
-      <nav className="navbar" role="navigation" aria-label="main navigation">
+    <div className="navbar_container container ">
+      <nav className="navbar " role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
           <a className="logo" href="/">
             <img id='logo-brand' src={require("../../assets/images/logo.jpg")} />

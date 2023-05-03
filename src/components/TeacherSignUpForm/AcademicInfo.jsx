@@ -4,52 +4,45 @@ function AcademicInfo() {
   return (
     <div className='academic-info_container'>
       <div className="columns is-multiline">
-        <div className="column is-6">
+      {/* <div className="column is-6">
           <div className="field">
             <label className="label" >Trình độ học vấn</label>
             <input className="input" type="text" placeholder="Trình độ học vấn" />
           </div>
-        </div>
-        
-       
+        </div> */}
+
         <div className="column is-6">
-          <label className="label" id="level"  >Cấp độ </label>
-          <div className=" field select ">
-            <select >
-              <option value="CEFR Level A1 - Beginner">CEFR Level A1 - Beginner</option>
-              <option value="CEFR Level A2 - Pre-intermediate ">CEFR Level A2 - Pre-intermediate</option>
-              <option value="CEFR Level B1 - Intermediate">CEFR Level B1 - Intermediate</option>
-              <option value="CEFR Level B2 - Upper-Intermediate">CEFR Level B2 - Upper-Intermediate</option>
-              <option value="CEFR Level C1 - 	Advanced">CEFR Level C1 - 	Advanced</option>
-              <option value="CEFR Level C2 - Mastery">CEFR Level C2 - Mastery</option>
-            </select>
+          <div className="field">
+            <label className="label" >Tên trường </label>
+            <input className="input" type="text" placeholder="Tên trường" />
           </div>
         </div>
 
         <div className="column is-6">
           <div className="field is-multiline">
-            <label className="label" >Chứng chỉ</label>
-            <input className="input" type="textarea" placeholder="Trình độ học vấn" />
-          </div>
-        </div>
-        <div className="column is-6">
-          <div className="field is-multiline">
-            <label className="label" >Minh chứng chứng chỉ (đường dẫn ảnh)</label>
-            <input className="input" type="textarea" placeholder="Minh chứng chứng chỉ" />
+            <label className="label" >Chuyên ngành</label>
+            <input className="input" type="textarea" placeholder="Chuyên ngành" />
           </div>
         </div>
 
         <div className="column is-6">
           <div className="field">
-            <label className="label">Mô tả cá nhân </label>
-            <input className="input" type="textarea" placeholder="Mô tả cá nhân" />
+            <label className="label" >Thời gian học </label>
+            <input className="input" type="text" placeholder="Thời gian học" />
           </div>
         </div>
 
         <div className="column is-6">
+          <div className="field ">
+            <label className="label" >Minh chứng học vấn (đường dẫn ảnh)</label>
+            <input className="input" type="textarea" placeholder="Minh chứng học vấn (đường dẫn ảnh)" />
+          </div>
+        </div> 
+
+        <div className="column is-12">
           <div className="field">
             <label className="label">Mô tả học vấn</label>
-            <input className="input" type="textarea" placeholder="Mô tả học vấn" />
+            <textarea class="textarea is-info" placeholder="Mô tả học vấn"></textarea>
           </div>
         </div>
       
