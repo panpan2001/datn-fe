@@ -19,7 +19,7 @@ const Navbar = () => {
         <div className="navbar-menu">
           <div className="navbar-start">
             {user ?
-              <Link className="navbar-item" to='/'>
+              <Link className="navbar-item" to='/profile'>
                 Trang cá nhân
               </Link>
               :

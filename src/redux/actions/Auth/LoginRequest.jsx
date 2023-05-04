@@ -1,12 +1,13 @@
 import axios from "axios"
 import {loginStart, loginSuccess, loginFailure} from "../../slices/Auth/loginSlice"
-
+import { LoginApi } from "../../../utils/BaseUrl"
 const loginUser=async(user,dispatch,navigate)=>{
     dispatch(loginStart())
     try{
-        const res=await axios.post("http://localhost:3001/api/auth/login",user)
+        const res=await axios.post(LoginApi,user)
         dispatch(loginSuccess(res.data))
-        navigate("/admin")
+        navigate("/")
+        
     }
     catch(err){
         dispatch(loginFailure(err))

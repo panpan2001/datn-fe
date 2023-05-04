@@ -1,10 +1,11 @@
 import axios from "axios";
 import { registerStart, registerSuccess, registerFailure } from "../../slices/Auth/registerSlice";
+import { RegisterApi } from "../../../utils/BaseUrl";
 
 const registerUser=async(user,dispatch,navigate)=>{
     dispatch(registerStart())
     try {
-        const res= await axios.post("http://localhost:3001/api/auth/register",user)
+        const res= await axios.post(RegisterApi,user)
         dispatch(registerSuccess(res.data))
         navigate('/login')
     } catch (error) {

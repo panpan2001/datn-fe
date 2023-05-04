@@ -6,41 +6,44 @@ const initialState = {
         allAccounts:null,
         isFetching:false,
         error:false
-    }
+    },
+    msg:""
 }
 
-const AccountSlice = createSlice({
-    name:"accounts",
+const delAccountSlice = createSlice({
+    name:"delAccounts",
     initialState:initialState,
     reducers:{
-        getAccountStart: (state)=>{
-            return state.accounts.isFetching=true
+        delAccountStart: (state)=>{
+            console.log("delAccountStart")
+             state.accounts.isFetching=true
         },
-        getAccountSuccess:(state,action)=>{
+        delAccountSuccess:(state,action)=>{
+            console.log("delAccountSucess")
             return {
                 ...state,
                 accounts:{
                     ...state.accounts,
-                    allAccounts:action.payload,
                     isFetching:false,
-                    error:false
-                }
+                },
+                msg:action.payload
             }
         },
-        getAccountFailure:(state,action)=>{
+        delAccountFailure:(state,action)=>{
             return {
                 ...state,
                 accounts:{
                     ...state.accounts,
                     isFetching:false,
                     error:true
-                }
+                },
+                msg:action.payload
             }
         }
     }
     
 })
 
-export const {getAccountStart,getAccountSuccess,getAccountFailure}=AccountSlice.actions
-const accountReducer= AccountSlice.reducer
-export default accountReducer
+export const {delAccountStart,delAccountSuccess,delAccountFailure}= delAccountSlice.actions
+const delAccountReducer= delAccountSlice.reducer
+export default delAccountReducer
