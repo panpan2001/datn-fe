@@ -2,7 +2,7 @@ import '../../assets/styles/LoginForm.css'
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { useState } from 'react'
-import loginUser from '../../redux/actions/LoginRequest'
+import loginUser from '../../redux/actions/Auth/LoginRequest'
 import { useDispatch } from 'react-redux'
 const LoginForm = () => {
     // const { register, handleSubmit, watch, formState: { errors } } = useForm();
@@ -31,7 +31,7 @@ const LoginForm = () => {
             </div>
             <div className="field">
                 <label className="label">Mật khẩu</label>
-                <input className="input" type="text" placeholder="Password"  onChange={e=>setPassword(e.target.value)}/>
+                <input className="input" type="password " placeholder="Password"  onChange={e=>setPassword(e.target.value)}/>
             </div>
             <br />
             <div className="field is-grouped is-grouped-centered" id='login_button'>

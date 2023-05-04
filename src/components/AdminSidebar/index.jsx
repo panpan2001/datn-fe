@@ -1,19 +1,22 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 function AdminSidebar () {
+  const navigate=useNavigate()
   return (
     <div>
       <p>AdminSidebar </p>
       <br/>
-      <Link href='/admin'>Dashboard</Link>
+      <Link to='/admin'>Dashboard</Link>
     <br/>
-      <Link href='/admin/student'>Student</Link>
+      <Link to='/admin/student'>Student</Link>
     <br/>
       
-      <Link href='/admin/teacher'>Teacher</Link>
+      <Link to='/admin/teacher'>Teacher</Link>
       <br/>
-      <Link href='/admin/course'>Course </Link>
+      <Link to='/admin/course'>Course </Link>
+      <br/>
+      {/* <Link to={navigate(-1)}>Back </Link> */}
      
 
     </div>
