@@ -7,18 +7,18 @@ const SignUpForm=()=>{
                             <strong className='is-size-4'>Đăng kí với vai trò là: </strong>
                             <div className="column is-12 role-signup_column">
                                 <div className="field role-signup_field">
-                                    <div class="control role-signup_control" id="role-signup_control">
+                                    <div className="control role-signup_control" id="role-signup_control">
                                         <div id="role-1">
                                             <input type="radio" name="role_radio-button" />
-                                            <label class="radio is-size-5 " >Học viên</label>
+                                            <label className="radio is-size-5 " >Học viên</label>
                                         </div>
                                         <div id="role-2">
                                             <input type="radio" name="role_radio-button" />
-                                            <label class="radio is-size-5 ">Giáo viên</label>
+                                            <label className="radio is-size-5 ">Giáo viên</label>
                                         </div>
                                         <div id="role-3">
                                             <input type="radio" name="role_radio-button" />
-                                            <label class="radio is-size-5">Quản trị viên </label>
+                                            <label className="radio is-size-5">Quản trị viên </label>
                                         </div>
                                     </div>
                                 </div>
@@ -40,18 +40,18 @@ const SignUpForm=()=>{
                             <div className="column is-6">
                                 <div className="field gender-signup_form" >
                                     <label className="label">Giới tính</label>
-                                    <div class="control" >
+                                    <div className="control" >
                                         <div id="gender-1">
                                             <input type="radio" name="gender_radio-button"/>
-                                            <label class="radio is-size-6" >Nam</label>
+                                            <label className="radio is-size-6" >Nam</label>
                                         </div>
                                         <div id="gender-2">
                                             <input type="radio" name="gender_radio-button" />
-                                            <label class="radio is-size-6 ">Nữ</label>
+                                            <label className="radio is-size-6 ">Nữ</label>
                                         </div>
                                         <div id="gender-3">
                                             <input type="radio" name="gender_radio-button" />
-                                            <label class="radio is-size-6">Khác</label>
+                                            <label className="radio is-size-6">Khác</label>
                                         </div>
                                     </div>
                                 </div>

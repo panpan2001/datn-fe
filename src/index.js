@@ -5,13 +5,14 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import 'bulma/css/bulma.min.css'; 
+import store from './redux/stores';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  // <Provider store={store}>
+  <Provider store={store}>
  <React.StrictMode>
     <App />
   </React.StrictMode>
-  // </Provider>
+  </Provider>
  
 );
 

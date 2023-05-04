@@ -6,14 +6,14 @@ function AdminSidebar () {
     <div>
       <p>AdminSidebar </p>
       <br/>
-      <a href='/admin'>Dashboard</a>
+      <Link href='/admin'>Dashboard</Link>
     <br/>
-      <a href='/admin/student'>Student</a>
+      <Link href='/admin/student'>Student</Link>
     <br/>
       
-      <a href='/admin/teacher'>Teacher</a>
+      <Link href='/admin/teacher'>Teacher</Link>
       <br/>
-      <a href='/admin/course'>Course </a>
+      <Link href='/admin/course'>Course </Link>
      
 
     </div>

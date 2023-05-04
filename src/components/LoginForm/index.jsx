@@ -1,18 +1,37 @@
 import '../../assets/styles/LoginForm.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
+import { useState } from 'react'
+import loginUser from '../../redux/actions/LoginRequest'
+import { useDispatch } from 'react-redux'
 const LoginForm = () => {
+    // const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    // const onSubmit = data => console.log(data);
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const dispatch= useDispatch()
+    const navigate= useNavigate()
+    const handleSubmit=(e)=>{
+        e.preventDefault();
+        const newUser={
+            email:email,
+            password:password
+        };
+        loginUser(newUser,dispatch,navigate)
+    }
+
     return (
-        <form className="login-form_container">
+        <form className="login-form_container" onSubmit={handleSubmit}>
             <label className="label login-name_label is-size-3">
                 <strong className='is-size-4'>Đăng nhập </strong>
             </label>
             <div className="field">
                 <label className="label">Email</label>
-                <input className="input" type="text" placeholder="Email" />
+                <input className="input" type="email" placeholder="Email" onChange={e=>setEmail(e.target.value)}/>
             </div>
             <div className="field">
                 <label className="label">Mật khẩu</label>
-                <input className="input" type="text" placeholder="Password" />
+                <input className="input" type="text" placeholder="Password"  onChange={e=>setPassword(e.target.value)}/>
             </div>
             <br />
             <div className="field is-grouped is-grouped-centered" id='login_button'>
