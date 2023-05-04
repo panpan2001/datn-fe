@@ -13,13 +13,13 @@ function AdminSidebar() {
           </Link>
         </div>
       </header>
-      <main className="columns is-multiline side-bar-column mt-6">
+      <main className="columns is-multiline side-bar-column">
         <div className="column-1">
 
           <Link to='/admin'>
             <div className="columns icon-link_column">
-              <div className="column is-3 is-narrow">
-                <AiOutlineHome />
+              <div className="column is-3 is-narrow ">
+                <AiOutlineHome className='sidebar_icon-1' />
               </div>
               <div className="column icon-link_column_name">
                 <p>Tổng quan</p>
@@ -31,7 +31,7 @@ function AdminSidebar() {
           <Link to='/admin/student'>
             <div className="columns icon-link_column">
               <div className="column is-3 is-narrow">
-              <AiOutlineTeam />
+              <AiOutlineTeam className='sidebar_icon-2' />
               </div>
               <div className="column icon-link_column_name">
               <p>Học sinh</p>
@@ -43,7 +43,7 @@ function AdminSidebar() {
           <Link to='/admin/teacher'>
           <div className="columns icon-link_column">
               <div className="column is-3 is-narrow">
-              <AiOutlineUser />
+              <AiOutlineUser className='sidebar_icon-3' />
               </div>
               <div className="column icon-link_column_name">
               <p>Giáo viên</p>
@@ -55,7 +55,7 @@ function AdminSidebar() {
           <Link to='/admin/course'>
           <div className="columns icon-link_column">
               <div className="column is-3 is-narrow">
-              <AiOutlineSolution />
+              <AiOutlineSolution className='sidebar_icon-4'/>
               </div>
               <div className="column icon-link_column_name">
               <p >Khóa học</p>
@@ -65,7 +65,7 @@ function AdminSidebar() {
         </div>
       </main>
       <br />
-      <footer className='mt-6'>
+      <footer className='mb-6'>
         <Link to={navigate('/')}>
           <AiOutlineLogout />
         </Link>
