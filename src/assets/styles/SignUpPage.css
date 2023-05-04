@@ -1,4 +1,6 @@
-
+.sign-up-page_container{
+    min-height: 100vh;
+}
 .signup-choose{
     display: flex !important;
     margin-left: 7rem;

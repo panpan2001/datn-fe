@@ -1,4 +1,10 @@
 @import './RootStyle.css';
-*{
+.not-found-page_container{
     font-size: var(--font-size-h5);
+    min-height: 100vh !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
 }

@@ -11,7 +11,7 @@ function AdminManagementLayout({ children }) {
                         <AdminSidebar />
                     </div>
                     <main className="column admin-management-display_container">
-                        {children}
+                        <Outlet/>
                     </main>
                 </div>
             </div>

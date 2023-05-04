@@ -1,18 +1,17 @@
 import React from 'react';
 import './assets/styles/App.css';
 import UserRoutes from './routes/UserRoutes';
-
 import UserLayout from './layouts/ParentLayouts/UserLayout';
-// import AdminManagementLayout from './layouts/AdminManagementLayout';
 import AdminRoutes from './routes/AdminRoutes';
-// import StudentJudgeForm from './components/StudentJudgeForm';
+import AdminManagementLayout from './layouts/ParentLayouts/AdminManagementLayout';
+import StudentJudgeForm from './components/StudentJudgeForm';
+import ContainerRoutes from './routes/ContainerRoutes';
 function App() {
   return (
     <div className="App">
-     
-      <UserLayout children={<UserRoutes/>}/>
-      {/* <AdminManagementLayout children={<AdminRoutes/>} /> */}
-      {/* <StudentJudgeForm/> */}
+      
+      <ContainerRoutes/>
+    
         </div>
   );
 }
