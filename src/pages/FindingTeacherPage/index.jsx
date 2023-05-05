@@ -7,7 +7,7 @@ import { AccountApi, RefreshTokenApi } from '../../utils/BaseUrl'
 import DelAccounts from '../../redux/actions/Account/DelAccounts'
 import jwtDecode from 'jwt-decode'
 import { loginSuccess } from '../../redux/slices/Auth/loginSlice'
-
+import createAxiosJWT from '../../utils/createInstance'
 const FindingTeacherPage=()=> {
     const accounts= useSelector(state=>state.login.login?.currentUser)
     const accountList= useSelector(state=>state.getAccount.accounts?.allAccounts)
@@ -18,35 +18,8 @@ const FindingTeacherPage=()=> {
     // console.table(students)
     const dispatch= useDispatch()
     const navigate = useNavigate()
-    let axiosJWT = axios.create()
-    const refreshTooken= async()=>{
-        try {
-            const res= await axios.post(RefreshTokenApi,{withCredentials: true})
-            return res.data
-        } catch (error) {
-            console.log(error)
-        }
-    }
-    axiosJWT.interceptors.request.use(
-        async (config) => {
-            let date= new Date()
-            const decodeToken = jwtDecode(accounts?.accessToken)
-            if(decodeToken < date.getTime()/1000){
-                const data= await refreshTooken()
-                const refreshAccount={
-                    ...accounts,
-                    accessToken:data.accessToken,
-                    // refreshToken:data.refreshToken
-                }
-                dispatch(loginSuccess(refreshAccount))
-                config.headers['token']=`Bearer ${data.accessToken}`
-            }
-            return config
-        },
-        (error) => {
-            return Promise.reject(error)
-        }
-    )
+    let axiosJWT= createAxiosJWT(dispatch,accounts,loginSuccess)
+
 const handleDelete=(id)=>{
     console.log(id)
     DelAccounts(accounts?.accessToken,dispatch,id,axiosJWT)

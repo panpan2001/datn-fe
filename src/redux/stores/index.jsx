@@ -3,11 +3,11 @@ import loginReducer from "../slices/Auth/loginSlice";
 import registerReducer from "../slices/Auth/registerSlice";
 import getAccountReducer from "../slices/Account/GetAccountSlice";
 import delAccountReducer from "../slices/Account/DeleteAccountSlice";
-// import persistStore from "redux-persist/es/persistStore";
 import { persistStore } from "redux-persist";
 import persistReducer from "redux-persist/es/persistReducer";
 import { FLUSH,  REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from "redux-persist";
 import storage from 'redux-persist/lib/storage'
+import logoutReducer from "../slices/Auth/logoutSlice";
 const persistConfig = {
     key:'root',
     version:1,
@@ -19,7 +19,8 @@ const rootReducer= combineReducers({
     login: loginReducer,
     signup: registerReducer,
     getAccount: getAccountReducer,
-    delAccount: delAccountReducer
+    delAccount: delAccountReducer,
+    logout: logoutReducer
 })
 const persistedReducer=persistReducer(persistConfig,rootReducer)
 
