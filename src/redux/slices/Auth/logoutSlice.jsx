@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const initialState={
     logout:{
         currentUser: null,
@@ -18,11 +19,15 @@ const logoutSlice= createSlice({
             return {
                 ...state,
                 logout:{
+                    ...state.logout,
                     isFetching:true
                 }
             }
         },
         logoutSuccess:(state,action)=>{
+            toast.success('Đăng xuất thành công!', {
+                position: toast.POSITION.BOTTOM_RIGHT
+            });
             return {
                 ...state,
                 logout:{
@@ -36,6 +41,9 @@ const logoutSlice= createSlice({
         },
 
         logoutFailure:(state,action)=>{
+            toast.error('Đăng xuất thất bại !', {
+                position: toast.POSITION.BOTTOM_RIGHT
+            });
             return {
                 ...state,
                 logout:{

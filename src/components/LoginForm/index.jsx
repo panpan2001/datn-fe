@@ -6,6 +6,8 @@ import loginUser from '../../redux/actions/Auth/LoginRequest'
 import { useDispatch } from 'react-redux'
 import { useFormik } from 'formik'
 import * as Yup from "yup"
+
+
 const LoginForm = () => {
 
     const dispatch = useDispatch()
@@ -27,11 +29,12 @@ const LoginForm = () => {
         })
         ,
         onSubmit: (values) => {
-            console.log("login successfully")
+            console.log("login form's summiting")
             loginUser(values, dispatch, navigate)
         }
 
     })
+  
     return (
         <form className="login-form_container" onSubmit={formilk.handleSubmit}>
             <label className="label login-name_label is-size-3">
@@ -73,7 +76,6 @@ const LoginForm = () => {
                 <p className=" is-size-6 ">Chưa có tài khoản?   </p>
                 <Link className=" is-size-6 " to="/signup">  Đăng kí ngay</Link>
             </label>
-
         </form>
     )
 }

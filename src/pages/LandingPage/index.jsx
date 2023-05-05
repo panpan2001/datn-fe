@@ -1,3 +1,4 @@
+import { ToastContainer } from 'react-toastify'
 import '../../assets/styles/LandingPage.css'
 
 const LandingPage = () => {
@@ -18,6 +19,8 @@ const LandingPage = () => {
            <section className="landing-page_section-5">
             <p>section-5</p>
            </section>
+           <ToastContainer/>
+
         </div>
     )
 }

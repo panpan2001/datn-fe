@@ -5,6 +5,9 @@ import registerUser from "../../redux/actions/Auth/RegisterRequest"
 import { useDispatch } from "react-redux"
 import { useFormik } from "formik"
 import * as Yup from "yup"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const SignUpForm = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -248,7 +251,7 @@ const SignUpForm = () => {
             <div className="field is-grouped is-grouped-centered" id='signup_button'>
                 <button className="button is-link" type="submit" >Đăng kí</button>
             </div>
-
+<ToastContainer/>
         </form >
     )
 }

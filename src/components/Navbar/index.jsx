@@ -74,7 +74,7 @@ let axiosJWT= createAxiosJWT(dispatch,user,logoutSuccess)
                       Quan li
                     </Link> : ""}
                   <Link className="button log_in is-light" to='/' onClick={handleLogout}>
-                    Thoát
+                    Đăng xuất
                   </Link>
                 </div>
               </div> :

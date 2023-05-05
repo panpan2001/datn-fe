@@ -28,16 +28,16 @@ function ContainerRoutes() {
         {/* User page  */}
 
         <Route path='/' element={<UserLayout />} >
-          {/* <Route index element={<LandingPage />} />
-            <Route path="*" element={<NotFound />} /> */}
+          <Route index element={<LandingPage />} />
+            <Route path="*" element={<NotFound />} />
           <Route path="/login" element={<LoginPage children={<LoginForm/>} />} />
           <Route path="/forgotPassword" element={<LoginPage children={<ForgotPasswordForm/>} />} />
           <Route path="/signup" element={<SignUpPage />}/>
-          {/* <Route path='/findingTeacher' element={<FindingTeacherPage />} />
+          <Route path='/findingTeacher' element={<FindingTeacherPage />} />
           <Route path='/findingCourse' element={<FindingCoursePage />} />
           <Route path='/profile' element={<ProfilePage />}>
             <Route index element={<PersonalInfo />} />
-          </Route> */}
+          </Route>
         </Route>
 
         {/* Admin page  */}

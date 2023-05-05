@@ -1,4 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const initialState = {
     
@@ -16,7 +18,12 @@ const registerSlice = createSlice({
       
         // register
         registerStart: (state) => {
-            state.register.isFetching = true
+            return {
+                ...state, register: {
+                    ...state.register,
+                    isFetching: true,
+                }
+            }
         },
         registerSuccess: (state, action) => {
             return {
@@ -38,6 +45,7 @@ const registerSlice = createSlice({
                     isRegister: false
                 }
             }
+          
         }
     }
 })

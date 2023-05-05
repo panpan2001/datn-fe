@@ -1,6 +1,8 @@
 import axios from "axios";
 import { registerStart, registerSuccess, registerFailure } from "../../slices/Auth/registerSlice";
 import { RegisterApi } from "../../../utils/BaseUrl";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const registerUser=async(user,dispatch,navigate)=>{
     dispatch(registerStart())
@@ -8,9 +10,16 @@ const registerUser=async(user,dispatch,navigate)=>{
         const res= await axios.post(RegisterApi,user)
         dispatch(registerSuccess(res.data))
         navigate('/login')
+        toast.success('Đăng xuất thành công!', {
+            position: toast.POSITION.BOTTOM_RIGHT
+        });
+
     } catch (error) {
         dispatch(registerFailure(error))
         console.log(error)
+        toast.error('Đăng kí thất bại !', {
+            position: toast.POSITION.BOTTOM_RIGHT
+        });
     }
 }
 

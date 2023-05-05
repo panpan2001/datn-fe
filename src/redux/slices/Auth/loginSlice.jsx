@@ -14,10 +14,14 @@ const loginSlice = createSlice({
     initialState: initialState,
     reducers: {
         loginStart: (state) => {
-            state.login.isFetching = true
+           return {
+               ...state, login: {
+                   ...state.login,
+                   isFetching: true
+               }
+           } 
         },
         loginSuccess: (state, action) => {
-
             return {
                 ...state, login: {
                     ...state.login,
@@ -29,7 +33,6 @@ const loginSlice = createSlice({
             }
         },
         loginFailure: (state) => {
-
             return {
                 ...state, login: {
                     ...state.login,
@@ -47,7 +50,6 @@ const loginSlice = createSlice({
             state.login.isFetching = true
         },
         logoutSuccess: (state, action) => {
-
             return {
                 ...state, login: {
                     ...state.login,

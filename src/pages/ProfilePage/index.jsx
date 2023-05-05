@@ -1,6 +1,7 @@
 import React from 'react'
 import ProfileSideBar from '../../components/ProfileSidebar'
 import { Outlet } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify'
 
 function ProfilePage() {
   return (
@@ -13,6 +14,7 @@ function ProfilePage() {
     <div className="column">
         <Outlet/>
     </div>
+    <ToastContainer/>
     </div>
   )
 }
