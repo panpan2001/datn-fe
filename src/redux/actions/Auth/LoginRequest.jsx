@@ -8,11 +8,13 @@ const loginUser=async(user,dispatch,navigate)=>{
     dispatch(loginStart())
     try{
         const res=await axios.post(LoginApi,user)
+       
         dispatch(loginSuccess(res.data))
-        navigate("/")
+        navigate("/profile")
         toast.success('Đăng nhập thành công!', {
             position: toast.POSITION.BOTTOM_RIGHT
         });
+    
     }
     catch(err){
         console.log("login failure")

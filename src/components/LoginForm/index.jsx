@@ -6,6 +6,7 @@ import loginUser from '../../redux/actions/Auth/LoginRequest'
 import { useDispatch } from 'react-redux'
 import { useFormik } from 'formik'
 import * as Yup from "yup"
+import { toast } from 'react-toastify'
 
 
 const LoginForm = () => {
@@ -31,6 +32,7 @@ const LoginForm = () => {
         onSubmit: (values) => {
             console.log("login form's summiting")
             loginUser(values, dispatch, navigate)
+            // toast.success("Đăng nhập thành công !")
         }
 
     })

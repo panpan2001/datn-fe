@@ -10,7 +10,7 @@ const registerUser=async(user,dispatch,navigate)=>{
         const res= await axios.post(RegisterApi,user)
         dispatch(registerSuccess(res.data))
         navigate('/login')
-        toast.success('Đăng xuất thành công!', {
+        toast.success('Đăng kí thành công!', {
             position: toast.POSITION.BOTTOM_RIGHT
         });
 
