@@ -7,6 +7,8 @@ import FindingTeacherPage from "../pages/FindingTeacherPage";
 import FindingCoursePage from "../pages/FindingCoursePage";
 import UserLayout from '../layouts/ParentLayouts/UserLayout';
 import AdminManagementLayout from '../layouts/ParentLayouts/AdminManagementLayout'
+import LoginForm from '../components/LoginForm';
+import ForgotPasswordForm from '../components/ForgotPasswordForm';
 
 const LandingPage = React.lazy(() => import('../pages/LandingPage'));
 const LoginPage = React.lazy(() => import('../pages/LoginPage'));
@@ -28,11 +30,11 @@ function ContainerRoutes() {
         <Route path='/' element={<UserLayout />} >
           {/* <Route index element={<LandingPage />} />
             <Route path="*" element={<NotFound />} /> */}
-          <Route path="/login" element={<LoginPage />} />
-          {/* <Route path="/signup" element={<SignUpPage />}>
-          </Route> */}
+          <Route path="/login" element={<LoginPage children={<LoginForm/>} />} />
+          <Route path="/forgotPassword" element={<LoginPage children={<ForgotPasswordForm/>} />} />
+          {/* <Route path="/signup" element={<SignUpPage />}/>
           <Route path='/findingTeacher' element={<FindingTeacherPage />} />
-          {/* <Route path='/findingCourse' element={<FindingCoursePage />} />
+          <Route path='/findingCourse' element={<FindingCoursePage />} />
           <Route path='/profile' element={<ProfilePage />}>
             <Route index element={<PersonalInfo />} />
           </Route> */}

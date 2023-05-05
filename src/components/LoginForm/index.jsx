@@ -31,14 +31,14 @@ const LoginForm = () => {
             </div>
             <div className="field">
                 <label className="label">Mật khẩu</label>
-                <input className="input" type="password " placeholder="Password"  onChange={e=>setPassword(e.target.value)}/>
+                <input className="input" type="password " placeholder="********"  onChange={e=>setPassword(e.target.value)}/>
             </div>
             <br />
             <div className="field is-grouped is-grouped-centered" id='login_button'>
                 <button className="button is-link" type="submit">Đăng nhập </button>
             </div>
             <label className="label sign-up_label ">
-                <Link className=" is-size-6 mt-2 ">Quên mật khẩu?</Link>
+                <Link className=" is-size-6 mt-2 " to='/forgotPassword'>Quên mật khẩu?</Link>
             </label>
             <br />
             <label className="label sign-up_label ">

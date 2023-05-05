@@ -1,6 +1,7 @@
 import { LogoutApi } from "../../../utils/BaseUrl"
-import { logoutFailure, logoutStart, logoutSuccess } from "../../slices/Auth/logoutSlice"
+// import { logoutFailure, logoutStart, logoutSuccess } from "../../slices/Auth/logoutSlice"
 
+import { logoutFailure,logoutStart,logoutSuccess } from "../../slices/Auth/loginSlice"
 
 const logoutUser= async (dispatch,id,accessToken,axiosJWT,navigate)=>{
 dispatch(logoutStart())
