@@ -1,0 +1,24 @@
+@import './RootStyle.css';
+.profile-page_container_columns{
+    width: 100%;
+    min-height: 100vh;
+}
+.profile-page_aside-links{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 100%;
+    justify-content: flex-start;
+    
+}
+.aside_icon{
+    display: flex;
+    align-self: flex-end;
+    
+}
+#profile_img{
+    width: 6rem !important;
+    border-radius: 50% !important;
+    clip-path: circle(50%) !important;
+border: 1px solid 
+}

@@ -1,0 +1,24 @@
+@import './RootStyle.css';
+
+.item{
+    display: flex;
+    padding : 6px 10px 6px 10px;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 2rem ;
+    border-radius: 10px;
+}
+
+.icon{
+    margin-right: .5rem;
+    margin-top: .25rem;
+}
+/* .item-name:hover {
+    display: flex !important;
+    opacity:1 !important;
+    
+}
+.item-name{
+    opacity: 0;
+    display: 'none';
+} */

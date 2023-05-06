@@ -1,24 +1,23 @@
 import React from 'react'
 import ProfileSideBar from '../../components/ProfileSidebar'
 import { Outlet } from 'react-router-dom'
-import { ToastContainer, toast } from 'react-toastify'
-import { useSelector } from 'react-redux'
+import '../../assets/styles/ProfilePage.css'
 
 function ProfilePage() {
-  
   return (
+
     <div className='profile-page_container container-fluid'>
-      <div className="columns">
-        <aside className='profile-page_aside column is-2'>
+      <div className="columns profile-page_container_columns ">
+        <div className='column  profile-page_aside-links'>
           <ProfileSideBar />
-        </aside>
+        </div>
+        <div className="column is-10 profile-page_content">
+          <Outlet />
+        </div>
       </div>
-      <div className="column">
-        <Outlet />
-      </div>
-   
     </div>
   )
 }
 
 export default ProfilePage
+

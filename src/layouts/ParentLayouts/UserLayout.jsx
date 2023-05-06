@@ -10,16 +10,12 @@ const UserLayout = ({ children }) => {
         <div className='user-layout_container container-fluid'>
             <header>
             <Navbar />
-
             </header>
-            {/* <main >{children}</main> */}
             <main >
                 <Outlet/>
             </main>
-
             <footer>
             <Footer />
-
             </footer>
         </div>
         </Suspense>
