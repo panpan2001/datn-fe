@@ -1,6 +1,5 @@
-import { ToastContainer } from 'react-toastify'
 import '../../assets/styles/LoginPage.css'
-import LoginForm from '../../components/LoginForm'
+
 const LoginPage=({children})=>{
 return (
     <div className="login-page_container container-fluid">
@@ -16,7 +15,6 @@ return (
 
         </div>
        </div>
-       <ToastContainer/>
     </div>
 )
 }

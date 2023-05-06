@@ -9,6 +9,7 @@ import UserLayout from '../layouts/ParentLayouts/UserLayout';
 import AdminManagementLayout from '../layouts/ParentLayouts/AdminManagementLayout'
 import LoginForm from '../components/LoginForm';
 import ForgotPasswordForm from '../components/ForgotPasswordForm';
+import { useSelector } from 'react-redux';
 
 const LandingPage = React.lazy(() => import('../pages/LandingPage'));
 const LoginPage = React.lazy(() => import('../pages/LoginPage'));
@@ -22,32 +23,40 @@ const TeacherManagementPage = React.lazy(() => import('../pages/TeacherManagemen
 const ProfilePage = React.lazy(() => import('../pages/ProfilePage'))
 const PersonalInfo = React.lazy(() => import('../components/PersonalInfo'))
 function ContainerRoutes() {
+  const isLoggedIn = useSelector((state) => state.login.login?.isLoggedIn)
+  const currentUSer = useSelector((state) => state.login.login?.currentUser)
   return (
     <BrowserRouter>
       <Routes>
-        {/* User page  */}
 
         <Route path='/' element={<UserLayout />} >
+          {/* user vs non-user can access */}
           <Route index element={<LandingPage />} />
-            <Route path="*" element={<NotFound />} />
-          <Route path="/login" element={<LoginPage children={<LoginForm/>} />} />
-          <Route path="/forgotPassword" element={<LoginPage children={<ForgotPasswordForm/>} />} />
-          <Route path="/signup" element={<SignUpPage />}/>
+          <Route path="*" element={<NotFound />} />
+          <Route path="/login" element={<LoginPage children={<LoginForm />} />} />
+          <Route path="/forgotPassword" element={<LoginPage children={<ForgotPasswordForm />} />} />
+          <Route path="/signup" element={<SignUpPage />} />
           <Route path='/findingTeacher' element={<FindingTeacherPage />} />
           <Route path='/findingCourse' element={<FindingCoursePage />} />
-          <Route path='/profile' element={<ProfilePage />}>
-            <Route index element={<PersonalInfo />} />
-          </Route>
+{/* user can access */}
+          {isLoggedIn &&
+            <>
+              <Route path='/profile' element={<ProfilePage />}>
+                <Route index element={<PersonalInfo />} />
+              </Route>
+              {currentUSer.role_name && currentUSer.role_name == 'admin' &&
+                // just  admin can access
+                <Route path='/admin' element={<AdminManagementLayout />}>
+                  <Route index element={<DashboardPage />} />
+                  <Route path='/admin/student' element={<StudentManagementPage />} />
+                  <Route path='/admin/teacher' element={<TeacherManagementPage />} />
+                  <Route path='/admin/course' element={<CourseManagementPage />} />
+                  <Route path="/admin/*" element={<NotFound />} />
+                </Route>
+              }
+            </>
+          }
         </Route>
-
-        {/* Admin page  */}
-        {/* <Route path='/admin' element={<AdminManagementLayout />}>
-            <Route index element={<DashboardPage />} />
-            <Route path='/admin/student'  element={<StudentManagementPage />} />
-             <Route path='/admin/teacher' element={<TeacherManagementPage />} />
-            <Route path='/admin/course' element={<CourseManagementPage />} />
-            <Route path="/admin/*" element={<NotFound />} />
-          </Route> */}
       </Routes>
     </BrowserRouter>
   )

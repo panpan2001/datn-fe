@@ -32,7 +32,6 @@ const LoginForm = () => {
         onSubmit: (values) => {
             console.log("login form's summiting")
             loginUser(values, dispatch, navigate)
-            // toast.success("Đăng nhập thành công !")
         }
 
     })

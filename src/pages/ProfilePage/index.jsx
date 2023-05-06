@@ -16,7 +16,7 @@ function ProfilePage() {
       <div className="column">
         <Outlet />
       </div>
-      <ToastContainer />
+   
     </div>
   )
 }
