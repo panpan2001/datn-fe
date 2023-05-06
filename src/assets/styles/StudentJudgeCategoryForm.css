@@ -9,3 +9,12 @@
   display: flex;
   justify-content: flex-start;
 }
+/* td{
+  width: 60%;
+} */
+
+.student-judge-category-form{
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}

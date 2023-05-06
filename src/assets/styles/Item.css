@@ -5,13 +5,23 @@
     padding : 6px 10px 6px 10px;
     align-items: center;
     justify-content: flex-start;
-    gap: 2rem ;
+    gap: 1rem ;
     border-radius: 10px;
+    color:   rgb(7, 105, 170);;
+    
 }
 
 .icon{
     margin-right: .5rem;
     margin-top: .25rem;
+}
+
+.icon svg{
+    height: 2rem !important;
+    width: 2rem !important;
+}
+.item-name{
+    margin-top: .5rem !important;
 }
 /* .item-name:hover {
     display: flex !important;

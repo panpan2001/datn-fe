@@ -1,6 +1,98 @@
 @import  './RootStyle.css';
+.profile-page_container_columns{
+    width: 100%;
+    min-height: 100vh;
+}
+.profile-page_aside-links{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 100%;
+    justify-content: flex-start;
+    
+}
+.aside_icon{
+    display: flex;
+    align-self: flex-end;
+    
+}
+#admin_profile_img{
+    width: 6rem !important;
+    border-radius: 50% !important;
+    clip-path: circle(50%) !important;
+/* border: 1px solid  */
+}
+.admin-sidebar{
+    /* display: none; */
+    /* width: 5rem; */
+    /* width: 14rem; */
+    min-height: 95vh;
+    justify-content: start;
+    align-items: start;
+    flex-direction: column;
+border: 1px solid var(--border-color);
+padding : 1rem;
+margin-left: .75rem;
+display: flex;
+flex-direction: column;
+background: rgba(255, 255, 255, 0.3);
+box-shadow: 0 8px 8px 0 var(--border-color);
+border-radius: 10px;
+}
+/* line-icon */
+.lines_icon{
+    display: flex;
+    align-self: flex-end;
+border-radius: 5px;
+}
 
-:root{
+/* profile */
+.profile{
+    display: flex;
+    align-items: center;
+border-radius: 50%;
+margin-bottom: 1rem;
+align-self: center;
+
+}
+
+
+
+/* groups */
+
+.groups{
+display: flex;
+flex-direction: column;
+width: 100%;
+
+}
+
+.group{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    
+    }
+
+/* body_container */
+.body_container{
+    flex:1;}
+
+.admin-sidebar_item{
+    color: rgb(7, 105, 170);
+    gap: 0 !important
+}
+.admin-sidebar_item svg{
+    height: 2rem !important;
+    width: 2rem !important;
+}
+.admin-sidebar_item p{
+    margin-top: .5rem 
+}
+
+
+
+/* :root{
     --link-color: #2c7077;
 }
 .admin-side-bar_section{
@@ -61,9 +153,10 @@ div[class^="column-"]:hover{
 svg[class^="sidebar_icon"]{
     /* margin-right: 0.5rem;
     margin-bottom: 0.4rem; */
-    height: 1.5rem !important;
-    width: 1.5rem !important;
-}
-.sidebar_icon-1{
+    /* height: 1.5rem !important;
+    width: 1.5rem !important; */
+/* } */
+/*.sidebar_icon-1{
     margin-left: 1rem;
-}
+} */
+

@@ -8,10 +8,10 @@ function ProfilePage() {
 
     <div className='profile-page_container container-fluid'>
       <div className="columns profile-page_container_columns ">
-        <div className='column  profile-page_aside-links'>
+        <div className='column is-3 profile-page_aside-links'>
           <ProfileSideBar />
         </div>
-        <div className="column is-10 profile-page_content">
+        <div className="column is-7  profile-page_content">
           <Outlet />
         </div>
       </div>

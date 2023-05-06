@@ -1,7 +1,21 @@
 @import './RootStyle.css';
 
 /* profile-page_container */
-
+.profile-page_container_columns{
+    width: 100%;
+    min-height: 100vh;
+}
+.profile-page_aside-links{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* height: 100%; */
+    justify-content: flex-start;
+    margin-left: 10rem;
+    /* position: absolute; */
+    top: 10rem;
+    
+}
 .profile-page_container{
     display: flex;
     margin: 1rem;
@@ -19,7 +33,28 @@ display: flex;
 justify-content: flex-start;
 align-items: center;
 }
+.profile-page_content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
 
+
+
+@media  (width<= 1024px) {
+    .profile-page_container_columns{
+        display: flex;
+        flex-direction: column;
+        gap: .25rem;
+        align-items: center;
+    }
+    
+    .profile-page_aside-links{
+        margin-left: 0 !important;
+    
+    }
+}
 /* sidebar */
 /* .sidebar:hover{
     width: 14rem;
@@ -29,58 +64,3 @@ transition: width 0.2s linear 0.4s;
 .sidebar:not(:hover){
     transition: width 0.2s linear 0.4s;
 } */
-.sidebar{
-    /* display: none; */
-    /* width: 5rem; */
-    /* width: 14rem; */
-    justify-content: start;
-    align-items: start;
-    flex-direction: column;
-border: 1px solid var(--border-color);
-padding : 1rem;
-/* margin: 2rem; */
-display: flex;
-flex-direction: column;
-background: rgba(255, 255, 255, 0.3);
-box-shadow: 0 8px 8px 0 var(--border-color);
-border-radius: 10px;
-}
-/* line-icon */
-.lines_icon{
-    display: flex;
-    align-self: flex-end;
-border-radius: 5px;
-}
-
-/* profile */
-.profile{
-    display: flex;
-    align-items: center;
-border-radius: 50%;
-margin-bottom: 1rem;
-align-self: center;
-
-}
-
-
-
-/* groups */
-
-.groups{
-display: flex;
-flex-direction: column;
-width: 100%;
-
-}
-
-.group{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    
-    }
-
-/* body_container */
-.body_container{
-    flex:1;
-}

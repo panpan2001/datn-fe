@@ -5,6 +5,7 @@ import AdminManagementLayout from '../layouts/ParentLayouts/AdminManagementLayou
 import LoginForm from '../components/LoginForm';
 import ForgotPasswordForm from '../components/ForgotPasswordForm';
 import { useSelector } from 'react-redux';
+import StudentJudgeForm from '../components/StudentJudgeForm';
 
 const LandingPage = React.lazy(() => import('../pages/LandingPage'));
 const LoginPage = React.lazy(() => import('../pages/LoginPage'));
@@ -27,20 +28,27 @@ function ContainerRoutes() {
       <Routes>
         <Route path='/' element={<UserLayout />} >
           {/* user vs non-user can access */}
-          {/* <Route index element={<LandingPage />} />
-          <Route path="*" element={<NotFound />} /> */}
+          <Route index element={<LandingPage />} />
+          <Route path="*" element={<NotFound />} />
           <Route path="/login" element={<LoginPage children={<LoginForm />} />} />
-          {/* <Route path="/forgotPassword" element={<LoginPage children={<ForgotPasswordForm />} />} />
+          <Route path="/forgotPassword" element={<LoginPage children={<ForgotPasswordForm />} />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path='/findingTeacher' element={<FindingTeacherPage />} />
-          <Route path='/findingCourse' element={<FindingCoursePage />} /> */}
+          <Route path='/findingCourse' element={<FindingCoursePage />} />
           {/* user can access */}
           {isLoggedIn &&
             <>
               <Route path='/profile' element={<ProfilePage />}>
                 <Route index element={<PersonalInfo />} />
+                {/* <Route path='/myclass' element={<PersonalInfo />} /> */}
+                <Route path='/profile/judgeTeacher' element={<StudentJudgeForm />} />
               </Route>
-              {/* {currentUSer.role_name && currentUSer.role_name == 'admin' &&
+              
+            </>
+          }
+        </Route>
+        
+        {isLoggedIn &&currentUSer.role_name && currentUSer.role_name == 'admin' &&
                 // just  admin can access
                 <Route path='/admin' element={<AdminManagementLayout />}>
                   <Route index element={<DashboardPage />} />
@@ -49,10 +57,7 @@ function ContainerRoutes() {
                   <Route path='/admin/course' element={<CourseManagementPage />} />
                   <Route path="/admin/*" element={<NotFound />} />
                 </Route>
-              } */}
-            </>
-          }
-        </Route>
+              }
       </Routes>
     </BrowserRouter>
   )

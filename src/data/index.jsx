@@ -9,8 +9,9 @@ export   const TeachingAbilityNames = [
 export const KnowledgeNames=[
     "Tiêu chí 1: Giáo viên có kiến thức tiếng Anh tốt.",
     "Tiêu chí 2: Giáo viên có năng lực sử dụng tiếng Anh thành thạo cho việc giảng dạy. ",
-    "Tiêu chí 3: Giảng viên có năng lực hướng dẫn kỹ năng nghe, nói, đọc, viết trong giảng dạy.",
-    "Tiêu chí 4: Giảng viên giảng dạy tốt các kiến thức về ngữ âm, ngữ nghĩa, ngữ pháp và từ vựng. "
+    "Tiêu chí 3: Giảng viên có hướng dẫn kỹ năng nghe, nói, đọc, viết trong giảng dạy.",
+    "Tiêu chí 4: Giảng viên giảng dạy tốt kiến thức ngữ âm, ngữ nghĩa, ngữ pháp và từ vựng. "
+    
 ]
 
 export const AttitudeNames=[

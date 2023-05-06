@@ -6,11 +6,13 @@ import { useState } from 'react'
 import '../../assets/styles/ProfilePage.css'
 import Item from '../Item'
 import { motion } from 'framer-motion'
+import { AiOutlineUser, AiOutlineSetting, AiOutlineBook, AiOutlineEdit, AiOutlineDatabase } from 'react-icons/ai'
+import { useSelector } from 'react-redux'
 
 
 
 const ProfileSideBar = () => {
-
+  const currentUser = useSelector((state) => state.login.login?.currentUser)
   return (
 
     <div className="sidebar">
@@ -22,19 +24,22 @@ const ProfileSideBar = () => {
 
       <div className="groups">
         <div className="group">
-          <Item icon={<GiHamburgerMenu />} name={"Dashboard"} />
-          <Item icon={<GiHamburgerMenu />} name={"Performance"} />
+          <Item icon={<AiOutlineUser />} name={"Hồ sơ cá nhân"} navigate={'/profile'} />
+          {currentUser.role_name &&
+            currentUser.role_name == 'admin' ?
+            <Item icon={<AiOutlineDatabase />} name={"Quản lí"} navigate={'/admin'} /> :
+            (currentUser.role_name == 'student' ?
+              <>
+                <Item icon={<AiOutlineBook />} name={"Lớp học của tôi"} />
+                <Item icon={< AiOutlineEdit />} name={"Đánh giá giáo viên"} navigate={'/profile/judgeTeacher'} />
+              </> : ""
+
+            )
+          }
+          <Item icon={<AiOutlineSetting />} name={"Cài đặt"} />
         </div>
       </div>
-      <div className="group">
-        <Item icon={<GiHamburgerMenu />} name={"Sales"} />
-        <Item icon={<GiHamburgerMenu />} name={"Checklist"} />{" "}
-        <Item icon={<GiHamburgerMenu />} name={"Customers"} />
-      </div>
-      <div className="group">
-        <Item icon={<GiHamburgerMenu />} name={"Segments"} />
-        <Item icon={<GiHamburgerMenu />} name={"Themems"} />
-      </div>
+
     </div>
   )
 }
@@ -42,37 +47,3 @@ const ProfileSideBar = () => {
 export default ProfileSideBar
 
 
-  // const sideContainerVariants = {
-  //   true: {
-  //     width: '15rem',
-  //   },
-  //   false: {
-  //     transition: {
-  //       delay: 0.6
-  //     }
-  //   }
-  // }
-
-  // const sidebarVariants = {
-  //   true: {},
-  //   false: {
-  //     with: '3rem',
-  //     transition: {
-  //       delay: 0.4
-  //     }
-  //   }
-  // }
-
-  // const profileVariants = {
-  //   true: {
-  //     alignSelf: 'center',
-  //     with: '4rem',
-
-  //   },
-  //   false: {
-  //     alignSelf: 'flex-start',
-  //     marginTop: '2rem',
-  //     with: '3rem',
-
-  //   }
-  // }

@@ -2,11 +2,16 @@ import React from 'react'
 import '../../assets/styles/Item.css'
 import { motion } from 'framer-motion'
 import { GiHamburgerMenu } from 'react-icons/gi'
-function Item({ icon, name }) {
+import { useNavigate } from 'react-router-dom'
+function Item({ icon, name ,navigate}) {
 
-   
+   const directTo=useNavigate()
+//    const handleNavigate=()=>{
+//        navigate(navigate)
+//    }
     return (
         <motion.div className='item'
+        onClick={()=>directTo(navigate)}
             whileHover={{
                 backgroundColor: 'rgba(255,255,255,255,0.3)',
                 cursor: 'pointer',
