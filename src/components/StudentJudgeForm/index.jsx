@@ -18,13 +18,13 @@ function StudentJudgeForm() {
                 Đánh giá giáo viên
             </label>
             <StudentJudgeCategoryForm formName={JudgeFormNames[0]} formContents={TeachingAbilityNames} judgeLevelLabels={LevelLabelNames} radioLabel={JudgeFormNames[0]} />
-            <br/>
+            <hr/>
             <StudentJudgeCategoryForm formName={JudgeFormNames[1]} formContents={KnowledgeNames} judgeLevelLabels={LevelLabelNames} radioLabel={JudgeFormNames[1]}/>
-            <br/>
+            <hr/>
             <StudentJudgeCategoryForm formName={JudgeFormNames[2]} formContents={AttitudeNames} judgeLevelLabels={LevelLabelNames} radioLabel={JudgeFormNames[2]}/>
-            <br/>
+            <hr/>
             <StudentJudgeCategoryForm formName={JudgeFormNames[3]} formContents={StudentPleasantNames} judgeLevelLabels={DecideLabelNames} />
-            <br/>
+            <hr/>
             <Other />
             <br/>
             <div className="field is-grouped is-grouped-centered mt-3" id="student-submit_button">

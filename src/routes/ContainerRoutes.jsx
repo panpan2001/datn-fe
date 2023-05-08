@@ -29,26 +29,26 @@ function ContainerRoutes() {
         <Route path='/' element={<UserLayout />} >
           {/* user vs non-user can access */}
           <Route index element={<LandingPage />} />
-          <Route path="*" element={<NotFound />} />
+          {/* <Route path="*" element={<NotFound />} />
           <Route path="/login" element={<LoginPage children={<LoginForm />} />} />
           <Route path="/forgotPassword" element={<LoginPage children={<ForgotPasswordForm />} />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path='/findingTeacher' element={<FindingTeacherPage />} />
-          <Route path='/findingCourse' element={<FindingCoursePage />} />
+          <Route path='/findingCourse' element={<FindingCoursePage />} /> */}
           {/* user can access */}
-          {isLoggedIn &&
+          {/* {isLoggedIn &&
             <>
               <Route path='/profile' element={<ProfilePage />}>
                 <Route index element={<PersonalInfo />} />
-                {/* <Route path='/myclass' element={<PersonalInfo />} /> */}
+                <Route path='/myclass' element={<PersonalInfo />} />
                 <Route path='/profile/judgeTeacher' element={<StudentJudgeForm />} />
               </Route>
               
             </>
-          }
+          } */}
         </Route>
         
-        {isLoggedIn &&currentUSer.role_name && currentUSer.role_name == 'admin' &&
+        {/* {isLoggedIn &&currentUSer.role_name && currentUSer.role_name == 'admin' &&
                 // just  admin can access
                 <Route path='/admin' element={<AdminManagementLayout />}>
                   <Route index element={<DashboardPage />} />
@@ -57,7 +57,7 @@ function ContainerRoutes() {
                   <Route path='/admin/course' element={<CourseManagementPage />} />
                   <Route path="/admin/*" element={<NotFound />} />
                 </Route>
-              }
+              } */}
       </Routes>
     </BrowserRouter>
   )

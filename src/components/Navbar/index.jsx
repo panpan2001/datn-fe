@@ -22,11 +22,11 @@ let axiosJWT= createAxiosJWT(dispatch,user,logoutSuccess)
   }
 
   return (
-    <div className="navbar_container container ">
+    <div className="navbar_container container-fluid  ">
       <nav className="navbar " role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
           <a className="logo" href="/">
-            <img id='logo-brand' src={require("../../assets/images/logo.jpg")} />
+            <img id='logo-brand' src={require("../../assets/images/logo2.jpg")} />
           </a>
         </div>
 

@@ -8,8 +8,18 @@
     gap: 1rem ;
     border-radius: 10px;
     color:   rgb(7, 105, 170);;
+    width: 100%;
+}
+
+.item:hover{
+    background-color: rgba(255,255,255,255,0.3);
+    cursor: pointer;
+    box-shadow:0 8px 8px 0  var(--border-color) ;
+border: 1px solid rgba(255,255,255,0.18);
+/* filter: blur(5.5px); */
     
 }
+
 
 .icon{
     margin-right: .5rem;
@@ -23,12 +33,3 @@
 .item-name{
     margin-top: .5rem !important;
 }
-/* .item-name:hover {
-    display: flex !important;
-    opacity:1 !important;
-    
-}
-.item-name{
-    opacity: 0;
-    display: 'none';
-} */

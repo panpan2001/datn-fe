@@ -39,3 +39,8 @@
     padding: 0 !important
 
 }
+
+hr{
+    margin: 1rem 0 !important;
+    width: 100%;
+}

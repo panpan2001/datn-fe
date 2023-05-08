@@ -2,4 +2,22 @@
 
 .landing-page_container {
     background-color: var(--background-color);
+} 
+.landing-page_hero-columns {
+background-color: rgb(199, 194, 187);
+}
+.landing-page_section-1{
+background-color: aqua;
+}
+.landing-page_section-2{
+    background-color: blanchedalmond;
+}
+.landing-page_section-3{
+    background-color: yellowgreen;
+}
+.landing-page_section-4{
+    background-color: chocolate;
+}
+.landing-page_section-5{
+    background-color: cornflowerblue;
 }

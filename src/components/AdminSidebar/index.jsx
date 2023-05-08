@@ -88,11 +88,11 @@ function AdminSidebar() {
     <div className="groups">
       <div className="group">
         
-        <Item className='admin-sidebar_item' icon={<AiOutlineHome />} name={"Tổng quan"} navigate={'/dashboard'} />
+        <Item className='admin-sidebar_item' icon={<AiOutlineHome />} name={"Tổng quan"} navigate={'/admin'} />
       
-        <Item icon={< AiOutlineTeam />} name={"Học viên"} navigate={'/student'} />
-        <Item icon={< AiOutlineUser />} name={"Giáo viên"} navigate={'/teacher'}/>
-        <Item icon={< AiOutlineSolution  />} name={"Lớp học"} navigate={'/course'} />
+        <Item icon={< AiOutlineTeam />} name={"Học viên"} navigate={'/admin/student'} />
+        <Item icon={< AiOutlineUser />} name={"Giáo viên"} navigate={'/admin/teacher'}/>
+        <Item icon={< AiOutlineSolution  />} name={"Lớp học"} navigate={'/admin/course'} />
       </div>
     </div>
     
