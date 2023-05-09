@@ -6,7 +6,7 @@ import { AccountApi } from "../../../utils/BaseUrl"
 const getAllAccounts = async (accessToken, dispatch, axiosJWT) => {
     dispatch(getAccountStart())
     try {
-        const res = await axiosJWT.get(AccountApi.getAllAccount,
+        const res = await axiosJWT.get(AccountApi,
             {
                 headers: { token: `Bearer ${accessToken}` }
             }

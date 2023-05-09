@@ -4,9 +4,14 @@ const LoginApi= BASE_URL+"/auth/login"
 const RegisterApi= BASE_URL+"/auth/register"
 const RefreshTokenApi= BASE_URL+"/auth/refresh"
 const LogoutApi= BASE_URL+"/auth/logout"
-const AccountApi={
-    getAllAccount:BASE_URL+"/accounts/",
-} 
+const AccountApi=BASE_URL+"/accounts/"
+const StudentApi=BASE_URL+"/students/"
 
 
- export {LoginApi,RegisterApi,AccountApi,RefreshTokenApi,LogoutApi}
+
+ export {LoginApi,
+    RegisterApi,
+    AccountApi,
+    RefreshTokenApi,
+    LogoutApi,
+    StudentApi}

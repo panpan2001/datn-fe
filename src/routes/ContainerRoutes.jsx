@@ -6,6 +6,7 @@ import LoginForm from '../components/LoginForm';
 import ForgotPasswordForm from '../components/ForgotPasswordForm';
 import { useSelector } from 'react-redux';
 import StudentJudgeForm from '../components/StudentJudgeForm';
+import CompleteInfoPage from '../pages/CompleteInfoPage';
 
 const LandingPage = React.lazy(() => import('../pages/LandingPage'));
 const LoginPage = React.lazy(() => import('../pages/LoginPage'));
@@ -29,23 +30,24 @@ function ContainerRoutes() {
         <Route path='/' element={<UserLayout />} >
           {/* user vs non-user can access */}
           <Route index element={<LandingPage />} />
-          {/* <Route path="*" element={<NotFound />} />
+          {/* <Route path="*" element={<NotFound />} /> */}
           <Route path="/login" element={<LoginPage children={<LoginForm />} />} />
-          <Route path="/forgotPassword" element={<LoginPage children={<ForgotPasswordForm />} />} />
-          <Route path="/signup" element={<SignUpPage />} />
+          {/* <Route path="/forgotPassword" element={<LoginPage children={<ForgotPasswordForm />} />} /> */}
+          {/* <Route path="/signup" element={<SignUpPage />} /> */}
           <Route path='/findingTeacher' element={<FindingTeacherPage />} />
-          <Route path='/findingCourse' element={<FindingCoursePage />} /> */}
+          <Route path='/findingCourse' element={<FindingCoursePage />} />
           {/* user can access */}
-          {/* {isLoggedIn &&
+          {isLoggedIn &&
             <>
+              <Route path='/completeInfo' element={<CompleteInfoPage />} />
               <Route path='/profile' element={<ProfilePage />}>
                 <Route index element={<PersonalInfo />} />
-                <Route path='/myclass' element={<PersonalInfo />} />
+                <Route path='/profile/myclass' element={<PersonalInfo />} />
                 <Route path='/profile/judgeTeacher' element={<StudentJudgeForm />} />
               </Route>
               
             </>
-          } */}
+          }
         </Route>
         
         {/* {isLoggedIn &&currentUSer.role_name && currentUSer.role_name == 'admin' &&

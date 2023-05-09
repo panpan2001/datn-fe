@@ -5,7 +5,7 @@ import { AccountApi } from "../../../utils/BaseUrl"
 const DelAccounts= async(accessToken,dispatch,id,axiosJWT)=>{
     dispatch(delAccountStart())
     try {
-        const res= await axiosJWT.delete(AccountApi.getAllAccount+id,{
+        const res= await axiosJWT.delete(AccountApi+id,{
             withCredentials: true ,
             headers:{token:`Bearer ${accessToken}`}
         })
