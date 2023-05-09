@@ -22,12 +22,12 @@ const FindingTeacherPage = () => {
                 <div className="columns">
                     <div className="column is-8">
                         <p> <strong className='is-size-4'>Tìm kiếm giáo viên tiếng Anh và bắt đầu hành trình tuyệt vời của riêng bạn</strong> </p>
-                       <SearchBar/>
+                        <SearchBar />
                         <div className="columns is-multiline">
-                            <FilterCategory/> 
-                            <FilterCategory/> 
-                            <FilterCategory/> 
-                            <FilterCategory/> 
+                            <FilterCategory />
+                            <FilterCategory />
+                            <FilterCategory />
+                            <FilterCategory />
                         </div>
                     </div>
                     <div className="column is-4">
@@ -37,95 +37,98 @@ const FindingTeacherPage = () => {
             </hero>
             <hr />
             <section className="finding-teacher-page_section-1 show-teacher ">
-            <br/>
-            <strong>Show  Teacher</strong>
+                <br />
+                <strong>Show  Teacher</strong>
                 <div className="columns">
                     <div className="column is-9">
-                        <TeacherShortInfoLeft/>
-                        <br/>
-                        <br/>
-                        <TeacherShortInfoLeft/>
-                        <br/>
-                        <br/>
-                        <TeacherShortInfoLeft/>
-                        <br/>
-                        <br/>
-                        <TeacherShortInfoLeft/>
-                        <br/>
-                        <br/>
+                        <TeacherShortInfoLeft />
+                        <br />
+                        <br />
+                        <TeacherShortInfoLeft />
+                        <br />
+                        <br />
+                        <TeacherShortInfoLeft />
+                        <br />
+                        <br />
+                        <TeacherShortInfoLeft />
+                        <br />
+                        <br />
                     </div>
                     <div className="column is-3">
                         <strong>New Teacher</strong>
-                        <TeacherShortInfoRight/>
-                        <br/>
-                        <br/>
-                        <TeacherShortInfoRight/>
-                        <br/>
-                        <br/>
+                        <TeacherShortInfoRight />
+                        <br />
+                        <br />
+                        <TeacherShortInfoRight />
+                        <br />
+                        <br />
                     </div>
                 </div>
 
             </section>
-            <hr/>
-         
+            <hr />
+
             <section className="finding-teacher-page_section-2">
-            <br/>
+                <br />
                 <strong>Top Teacher</strong>
                 <div className="columns is-multiline">
                     <div className="column is-3">
-                    <TeacherShortInfoRight/>
+                        <TeacherShortInfoRight />
                     </div>
                     <div className="column is-3">
-                    <TeacherShortInfoRight/>
+                        <TeacherShortInfoRight />
                     </div>
                     <div className="column is-3">
-                    <TeacherShortInfoRight/>
+                        <TeacherShortInfoRight />
                     </div>
                     <div className="column is-3">
-                    <TeacherShortInfoRight/>
+                        <TeacherShortInfoRight />
                     </div>
                 </div>
-                
+
             </section>
-           
-            <br/>
-            <hr/>
+
+            <br />
+            <hr />
             <section className="finding-teacher-page_section-3">
-            <br/>
-            <strong>How FT work </strong>
-            <div className="columns">
-                <div className="column is-3">
-                <img src={require('../../assets/images/logo.jpg')} alt="" srcset=""
-                style={{
-                    width: "70%"
-                }}
-                />
+                <br />
+                <strong>How FT work </strong>
+                <div className="columns">
+                    <div className="column is-2"></div>
+
+                    <div className="column is-2">
+                        <img src={require('../../assets/images/logo.jpg')} alt="" srcset=""
+                            // style={{
+                            //     width: "70%"
+                            // }}
+                        />
+                    </div>
+                    <div className="column is-6">
+                        <HowFTWorkAccordion title="Title 1">
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                Suspendisse elementum mauris et porta mattis.
+                            </p>
+                        </HowFTWorkAccordion>
+                        <HowFTWorkAccordion title="Title 1">
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                Suspendisse elementum mauris et porta mattis.
+                            </p>
+                        </HowFTWorkAccordion>
+                        <HowFTWorkAccordion title="Title 1">
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                Suspendisse elementum mauris et porta mattis.
+                            </p>
+                        </HowFTWorkAccordion>
+                    </div>
+                    <div className="column is-2"></div>
                 </div>
-                <div className="column is-9">
-                <HowFTWorkAccordion title="Title 1"> 
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse elementum mauris et porta mattis.
-            </p>
-                </HowFTWorkAccordion>
-                <HowFTWorkAccordion title="Title 1">
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Suspendisse elementum mauris et porta mattis.
-                </p>
-                    </HowFTWorkAccordion>
-                    <HowFTWorkAccordion title="Title 1">
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Suspendisse elementum mauris et porta mattis.
-                </p>
-                    </HowFTWorkAccordion>
-                </div>
-            </div>
-                
+
             </section>
-            <hr/>
-            <br/>
+            <hr />
+            <br />
             <section className="finding-teacher-page_section-4">
                 <p>section-4</p>
             </section>

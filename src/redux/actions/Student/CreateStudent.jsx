@@ -3,7 +3,7 @@ import { createStudentFailure, createStudentStart , createStudentSuccess} from "
 import axios from "axios"
 import { StudentApi } from "../../../utils/BaseUrl"
 
-const createStudent=async(id,values,accessToken,dispatch,axiosJWT,navigate)=>{
+const createStudent=async(id,values,accessToken,axiosJWT,dispatch,navigate)=>{
     dispatch(createStudentStart())
     try {
         const res=await axiosJWT.post(StudentApi+id,id,{

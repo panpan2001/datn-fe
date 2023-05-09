@@ -1,0 +1,5 @@
+@import './RootStyle.css';
+
+hr{
+    opacity: 1 !important;
+}

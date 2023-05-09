@@ -5,6 +5,8 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import 'bulma/css/bulma.min.css'; 
+// import 'bootstrap/dist/css/bootstrap.min.css'
+// import "bootstrap/dist/js/bootstrap.bundle.min.js"
 import store, { persistor } from './redux/stores';
 import { PersistGate } from 'redux-persist/integration/react';
 const root = ReactDOM.createRoot(document.getElementById('root'));
