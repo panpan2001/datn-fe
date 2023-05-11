@@ -35,8 +35,8 @@ function ContainerRoutes() {
           <Route path="/login" element={<LoginPage children={<LoginForm />} />} />
           {/* <Route path="/forgotPassword" element={<LoginPage children={<ForgotPasswordForm />} />} /> */}
           <Route path="/signup" element={<SignUpPage />} />
-          {/* <Route path='/findingTeacher' element={<FindingTeacherPage />} /> */}
-          {/* <Route path='/findingCourse' element={<FindingCoursePage />} /> */}
+          <Route path='/findingTeacher' element={<FindingTeacherPage />} />
+          <Route path='/findingCourse' element={<FindingCoursePage />} />
           {/* user can access */}
           <Route path='/completeInfo' element={<CompleteInfoPage />} /> :
 
@@ -47,7 +47,7 @@ function ContainerRoutes() {
                 <Route path='/profile' element={<ProfilePage />}>
                   <Route index element={<PersonalInfo />} />
                   <Route path='/profile/myclass' element={<PersonalInfo />} />
-                  {/* <Route path='/profile/judgeTeacher' element={<StudentJudgeForm />} /> */}
+                  <Route path='/profile/judgeTeacher' element={<StudentJudgeForm />} />
                 </Route>
               {/* } */}
             </>

@@ -9,20 +9,19 @@ import ContainerRoutes from './routes/ContainerRoutes';
 import { ToastContainer } from 'react-toastify';
 
 function App() {
-  
+
   return (
     <div className="App">
-      
+            
       <ContainerRoutes/>
     <ToastContainer/>
-   
-        </div>
+      </div>
   );
 }
 
 export default App;
- {/* <div class="header"></div> */}
-  {/* <input type="checkbox" class="openSidebarMenu" id="openSidebarMenu"/>
+{/* <div class="header"></div> */ }
+{/* <input type="checkbox" class="openSidebarMenu" id="openSidebarMenu"/>
   <label for="openSidebarMenu" class="sidebarIconToggle">
     <div class="spinner diagonal part-1"></div>
     <div class="spinner horizontal"></div>

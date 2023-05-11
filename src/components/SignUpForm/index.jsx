@@ -80,6 +80,8 @@ const SignUpForm = () => {
                                     onChange={formik.handleChange} />
                                 <label className="radio is-size-5 " >Học viên</label>
                             </div>
+                                
+                            
                             <div id="role-2">
                                 <input
                                     type="radio"
@@ -218,6 +220,8 @@ const SignUpForm = () => {
 
                     </div>
                 </div>
+                {/* { formik.values.role_name === 'student'? <p>alo</p> :""} */}
+{/* muon cho hien ra ma dk student luon nhung ma met qua, chinh lam nen thoi */}
                 <div className="column is-6">
                     <div className="field">
                         <label className="label">Mật khẩu </label>

@@ -1,0 +1,20 @@
+@import './RootStyle.css';
+
+.student-complete-info_form{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border-color);
+    background: white;
+    padding: 2rem;
+    border-radius: 30px;
+    margin: 2rem 0
+}
+
+#student-complete-info_button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.student-complete-info_label{
+    display: flex !important;
+}

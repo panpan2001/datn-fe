@@ -4,6 +4,8 @@
   background-color: var(--background-color-footer) !important;
   color: rgb(234, 234, 234);
   margin-top: .25em !important ;
+  padding-top:3rem;
+  padding-bottom: 3rem;
 }
 
 div[id$='footer'] {

@@ -1,14 +1,61 @@
 @import './RootStyle.css';
 
 .complete-info-page{
-    min-height: 100vh;
+    min-height: 70vh;
 display: flex;
 flex-direction: row;
 justify-content: center;
 align-items: center;
+
+}
+.complete-info-page_column-6{
+    display: flex;
+    justify-content: flex-end;
+}
+div[id^='message']{
+  
+    display: flex;
+    align-items: center;
+    border: 1px solid #77c1c9;
+    background-color: #c7e6e9;
 }
 
-.complete-info-page_form{
+#message-1{
+    height: 12rem;
+    border-radius: 50%;
+    width: 14rem;
+    position: absolute;
+    top: 6rem;
+    right:27rem;
+    padding: .75rem;
+}
+
+#message-2{
+    width: 3rem;
+    height: 3rem;
+    position: absolute;
+    top: 15rem;
+    border-radius: 50%;
+    right:22rem;
+  
+   
+}
+#message-3{
+    width: 1.5rem;
+    height: 1.5rem;
+    position: absolute;
+    top: 17rem;
+    border-radius: 50%;
+    right:19rem;
+}
+.complete-info-page_column{
+    display: flex;
+}
+
+.complete-info-page_image{
+    width: 60% !important;
+}
+/* .complete-info-page_form{
     display: flex;
     flex-direction: column;
-}
+} */
