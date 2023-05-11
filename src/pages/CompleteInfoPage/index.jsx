@@ -1,12 +1,12 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import createStudent from '../../redux/actions/Student/CreateStudent'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
 import createAxiosJWT from '../../utils/createInstance'
 import { createStudentSuccess } from '../../redux/slices/Student/createStudentSlice'
-
+import '../../assets/styles/CompleteInfoPage.css'
 const CompleteInfoPage = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -32,46 +32,54 @@ const CompleteInfoPage = () => {
     })
     ,
     onSubmit: (values) => {
-      const student={
-        account_id:account_id,
-        parent_name:values.parent_name,
-        parent_phone_number:values.parent_phone_number
+      const student = {
+        account_id: account_id,
+        parent_name: values.parent_name,
+        parent_phone_number: values.parent_phone_number
       }
       createStudent(student, accessToken, axiosJWT, dispatch, navigate)
-        }
+    }
 
   })
-  console.log("account id : ",account_id)
+  // console.log("account id : ", account_id)
   return (
-    <form onSubmit={formilk.handleSubmit}>
-      <div className="field">
-        <label className="label">Email</label>
-        <input
-          className="input"
-          type="text"
-          placeholder="parent_name"
-          name='parent_name'
-          id='parent_name'
-          value={formilk.values.parent_name}
-          onChange={formilk.handleChange} />
-        {formilk.errors.parent_name && <p className="help is-danger">{formilk.errors.parent_name}</p>}
+    <div className="columns complete-info-page">
+      <div className="column is-3"></div>
+      <div className="column is-6">
+        <form className='complete-info-page_form  is-centered' onSubmit={formilk.handleSubmit}>
+          <div className=" field">
+            <label className="label">Họ tên phụ huynh </label>
+            <input
+              className="input"
+              type="text"
+              placeholder="parent_name"
+              name='parent_name'
+              id='parent_name'
+              value={formilk.values.parent_name}
+              onChange={formilk.handleChange} />
+            {formilk.errors.parent_name && <p className="help is-danger">{formilk.errors.parent_name}</p>}
+          </div>
+          <div className="field">
+            <label className="label">Số điện thoại phụ huynh</label>
+            <input
+              className="input"
+              type="text "
+              placeholder="parent_phone_number"
+              name='parent_phone_number'
+              id='parent_phone_number'
+              value={formilk.values.parent_phone_number}
+              onChange={formilk.handleChange} />
+            {formilk.errors.parent_phone_number && <p className="help is-danger">{formilk.errors.parent_phone_number}</p>}
+          </div>
+          <div className="field is-grouped is-grouped-centered" id='login_button'>
+           <Link to = '/login'> <button className="button is-link" type="submit">Hoàn thành </button></Link>
+          </div>
+        </form>
       </div>
-      <div className="field">
-        <label className="label">Mật khẩu</label>
-        <input
-          className="input"
-          type="text "
-          placeholder="parent_phone_number"
-          name='parent_phone_number'
-          id='parent_phone_number'
-          value={formilk.values.parent_phone_number}
-          onChange={formilk.handleChange} />
-        {formilk.errors.parent_phone_number && <p className="help is-danger">{formilk.errors.parent_phone_number}</p>}
-      </div>
-      <div className="field is-grouped is-grouped-centered" id='login_button'>
-        <button className="button is-link" type="submit">Hoàn thành </button>
-      </div>
-    </form>
+      <div className="column is-3"></div>
+
+    </div>
+
   )
 }
 

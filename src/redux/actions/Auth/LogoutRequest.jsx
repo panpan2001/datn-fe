@@ -19,6 +19,7 @@ try {
 } catch (error) {
     dispatch(logoutFailure(error))
     console.log(error)
+    // navigate('/profile')
     toast.error('Đăng xuất thất bại !', {
         position: toast.POSITION.BOTTOM_RIGHT
     });

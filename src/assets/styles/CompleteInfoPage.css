@@ -1,0 +1,14 @@
+@import './RootStyle.css';
+
+.complete-info-page{
+    min-height: 100vh;
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+}
+
+.complete-info-page_form{
+    display: flex;
+    flex-direction: column;
+}
