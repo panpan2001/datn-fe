@@ -12,7 +12,7 @@ const CompleteInfoPage = () => {
   const navigate = useNavigate()
   const user = useSelector((state) => state.login.login?.currentUser)
   const accessToken = user?.accessToken
-  const id = user?._id
+  const account_id = user?._id
   let axiosJWT = createAxiosJWT(dispatch, user, createStudentSuccess)
   const formilk = useFormik({
     initialValues: {
@@ -32,13 +32,16 @@ const CompleteInfoPage = () => {
     })
     ,
     onSubmit: (values) => {
-      console.log("lcomplete info form's summiting")
-
-      createStudent(id,values, accessToken, axiosJWT, dispatch, navigate)
-      console.log(id,values)
-    }
+      const student={
+        account_id:account_id,
+        parent_name:values.parent_name,
+        parent_phone_number:values.parent_phone_number
+      }
+      createStudent(student, accessToken, axiosJWT, dispatch, navigate)
+        }
 
   })
+  console.log("account id : ",account_id)
   return (
     <form onSubmit={formilk.handleSubmit}>
       <div className="field">

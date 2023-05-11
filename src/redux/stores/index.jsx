@@ -9,6 +9,8 @@ import { FLUSH,  REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from "redux-persis
 import storage from 'redux-persist/lib/storage'
 import logoutReducer from "../slices/Auth/logoutSlice";
 import createStudentReducer from "../slices/Student/createStudentSlice";
+import getStudentByIdReducer from "../slices/Student/getStudentByIdSlice";
+import getStudentByAccountIdReducer from "../slices/Student/getStudentByAccountIdSlice";
 const persistConfig = {
     key:'root',
     version:1,
@@ -22,7 +24,9 @@ const rootReducer= combineReducers({
     getAccount: getAccountReducer,
     delAccount: delAccountReducer,
     logout: logoutReducer,
-    createStudent:createStudentReducer
+    createStudent:createStudentReducer,
+    getStudentByAccountId: getStudentByAccountIdReducer,
+    getStudentById: getStudentByIdReducer
 })
 const persistedReducer=persistReducer(persistConfig,rootReducer)
 
@@ -30,10 +34,10 @@ const store= configureStore({
     reducer: persistedReducer,
     middware: (getDefaultMiddleware) => 
     getDefaultMiddleware({
-        serializableCheck: false
-        // {
-        //     ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-        // },
+        serializableCheck: 
+        {
+            ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        },
         
     })
 }

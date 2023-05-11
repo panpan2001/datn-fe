@@ -2,7 +2,11 @@ import React from 'react'
 
 function TeacherShortInfoRight() {
   return (
-    <div class="card">
+    <div class="card"
+    // style={{
+    //     backgroundColor: "#c2f8ff",
+    // }}
+    >
                             <div class="card-image">
                                 <figure class="image ">
                                     <img src={require('../../assets/images/2.jpg')} alt="Placeholder image" 

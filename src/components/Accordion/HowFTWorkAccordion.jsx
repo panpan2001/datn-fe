@@ -11,10 +11,12 @@ const HowFTWorkAccordion = (props) => {
   const { cardState } = state;
 
   return (
-    <div className="column "
-   
-    >
-      <div className="card" aria-hidden={cardState ? "false" : "true"}>
+    <div className="column ">
+      <div className="card " aria-hidden={cardState ? "false" : "true"}
+       style={{
+        backgroundColor: " rgb(167 235 246)",
+    }}
+      >
         <header
           className="card-header"
           style={{ cursor: "pointer" }}

@@ -1,11 +1,16 @@
 import React from 'react'
+import '../../assets/styles/TeacherShortInfoLeft.css'
 
 function TeacherShortInfoLeft() {
     return (
-        <div class="card">
-            <div class="card-content">
-                <div class="media">
-                    <div class="media-left">
+        <div class="card teacher-short-info-left_card"
+        style={{
+            backgroundColor: "#c2f8ff",
+        }}
+        >
+            <div class="card-content teacher-short-info-left_card-content">
+                <div class="media teacher-short-info-left_media">
+                    <div class="media-left teacher-short-info-left_media-left">
                         <figure class="image ">
                             <img src={require('../../assets/images/1.jpg')} alt="Placeholder image"
                                 style={{
@@ -17,7 +22,7 @@ function TeacherShortInfoLeft() {
                             />
                         </figure>
                     </div>
-                    <div class="media-content">
+                    <div class="media-content teacher-short-info-left_media-content">
                         <p class="title is-4">John Smith</p>
                         <p class="subtitle is-6">@johnsmith</p>
                         <p>

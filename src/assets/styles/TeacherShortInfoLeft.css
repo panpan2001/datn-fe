@@ -1,0 +1,12 @@
+@import './RootStyle.css';
+
+.teacher-short-info-left_media{
+    gap:1rem
+}
+
+.teacher-short-info-left_media-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}

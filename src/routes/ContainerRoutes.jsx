@@ -23,6 +23,8 @@ const CompleteInfoPage = React.lazy(() => import('../pages/CompleteInfoPage'))
 function ContainerRoutes() {
   const isLoggedIn = useSelector((state) => state.login.login?.isLoggedIn)
   const currentUSer = useSelector((state) => state.login.login?.currentUser)
+  const student=useSelector((state)=>state.getStudentById.students?.infoStudent)
+
   return (
     <BrowserRouter>
       <Routes>
@@ -30,25 +32,27 @@ function ContainerRoutes() {
           {/* user vs non-user can access */}
           <Route index element={<LandingPage />} />
           {/* <Route path="*" element={<NotFound />} /> */}
-          {/* <Route path="/login" element={<LoginPage children={<LoginForm />} />} /> */}
+          <Route path="/login" element={<LoginPage children={<LoginForm />} />} />
           {/* <Route path="/forgotPassword" element={<LoginPage children={<ForgotPasswordForm />} />} /> */}
-          {/* <Route path="/signup" element={<SignUpPage />} /> */}
+          <Route path="/signup" element={<SignUpPage />} />
           <Route path='/findingTeacher' element={<FindingTeacherPage />} />
-          {/* <Route path='/findingCourse' element={<FindingCoursePage />} /> */}
+          <Route path='/findingCourse' element={<FindingCoursePage />} />
           {/* user can access */}
-          {/* {isLoggedIn &&
+          {isLoggedIn &&
             <>
-              <Route path='/completeInfo' element={<CompleteInfoPage />} />
-              <Route path='/profile' element={<ProfilePage />}>
-                <Route index element={<PersonalInfo />} />
-                <Route path='/profile/myclass' element={<PersonalInfo />} />
-                <Route path='/profile/judgeTeacher' element={<StudentJudgeForm />} />
-              </Route>
-              
+              {/* {student ? */}
+                <Route path='/completeInfo' element={<CompleteInfoPage />} /> :
+
+                <Route path='/profile' element={<ProfilePage />}>
+                  <Route index element={<PersonalInfo />} />
+                  <Route path='/profile/myclass' element={<PersonalInfo />} />
+                  <Route path='/profile/judgeTeacher' element={<StudentJudgeForm />} />
+                </Route>
+              {/* } */}
             </>
-          } */}
+          }
         </Route>
-        
+
         {/* {isLoggedIn &&currentUSer.role_name && currentUSer.role_name == 'admin' &&
                 // just  admin can access
                 <Route path='/admin' element={<AdminManagementLayout />}>

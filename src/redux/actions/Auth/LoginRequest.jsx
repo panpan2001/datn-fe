@@ -10,7 +10,7 @@ const loginUser=async(user,dispatch,navigate)=>{
         const res=await axios.post(LoginApi,user)
        
         dispatch(loginSuccess(res.data))
-        navigate("/completeInfo")
+        navigate("/profile")
         toast.success('Đăng nhập thành công!', {
             position: toast.POSITION.BOTTOM_RIGHT
         });

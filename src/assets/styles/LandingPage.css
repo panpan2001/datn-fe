@@ -1,23 +1,115 @@
 @import './RootStyle.css';
 
 .landing-page_container {
-    background-color: var(--background-color);
-} 
+  background-color: var(--background-color);
+}
+
 .landing-page_hero-columns {
-background-color: rgb(199, 194, 187);
+  background-color: var(--background-color);
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  margin: 0 3rem;
 }
-.landing-page_section-1{
-background-color: aqua;
+
+#landing-page_hero-left {
+  display: inherit;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  /* margin: 0 2rem  */
 }
-.landing-page_section-2{
-    background-color: blanchedalmond;
+
+.landing-page_section-1 {
+  padding: 3rem;
+  background-color: white;
+  border-radius: 30px;
+  border: 1px solid #7eb7de;
+  box-shadow: 0 0 8px 0 var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
-.landing-page_section-3{
-    background-color: yellowgreen;
+
+.landing-page_section-1-1-column{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.25rem;
+
 }
-.landing-page_section-4{
-    background-color: chocolate;
+
+
+.landing-page_section-2 {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
-.landing-page_section-5{
-    background-color: cornflowerblue;
+
+.landing-page_section-2-columns {
+  display: flex;
+  flex-direction: row;
+  /* gap: 2rem; */
+  margin:inherit
+}
+
+.landing-page_section-2-columns-left {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-self: center;
+  gap: 2rem;
+  background-color: white;
+  border-radius: 30px;
+  border: 1px solid #77c1f2;
+  box-shadow: 0 0 8px 0 var(--border-color);
+  padding: 2rem 0 3rem 4rem  ;
+}
+
+.landing-page_section-2-columns-left-columns {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-self: flex-start;
+  gap:.5rem 
+}
+
+.landing-page_section-2-p, .landing-page_section-2-strong,.landing-page_section-2-link{
+    display: flex;
+    align-self: flex-start;
+}
+
+.landing-page_section-2-div{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: .5rem;
+}
+
+.landing-page_section-2-p{
+    display: flex;
+    align-self: flex-start;
+    margin-top: 0.5rem;
+}
+.landing-page_section-2-icon,.landing-page_section-1-1-icon{
+color:#00c4a7
+}
+.landing-page_section-3 {
+  display:flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: flex-start;
+}
+.landing-page_img{
+width: 70%;
+}
+.landing-page_section-4 {
+  background-color: chocolate;
+}
+
+.landing-page_section-5 {
+  background-color: cornflowerblue;
 }

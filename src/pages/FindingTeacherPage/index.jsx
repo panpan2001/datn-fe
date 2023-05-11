@@ -14,15 +14,18 @@ import TeacherShortInfoRight from '../../components/TeacherShortInfoCard/Teacher
 import SearchBar from '../../components/SearchBar'
 import FilterCategory from '../../components/FilterCategory'
 import HowFTWorkAccordion from '../../components/Accordion/HowFTWorkAccordion'
+import Pagination from '../../components/Pagination'
 const FindingTeacherPage = () => {
 
     return (
         <div className='finding-teacher-page_container container'>
             <hero className="finding-teacher-page_hero">
                 <div className="columns">
-                    <div className="column is-8">
-                        <p> <strong className='is-size-4'>Tìm kiếm giáo viên tiếng Anh và bắt đầu hành trình tuyệt vời của riêng bạn</strong> </p>
+                    <div className="column is-8 is-centered finding-teacher-page_hero-left">
+                        <p> <strong className='is-size-3'>Tìm kiếm giáo viên tiếng Anh <br/>và bắt đầu hành trình tuyệt vời của riêng bạn</strong> </p>
+                        <br/>
                         <SearchBar />
+                        <br/>
                         <div className="columns is-multiline">
                             <FilterCategory />
                             <FilterCategory />
@@ -31,14 +34,15 @@ const FindingTeacherPage = () => {
                         </div>
                     </div>
                     <div className="column is-4">
-                        <img src={require('../../assets/images/12.jpg')} alt="" srcset="" />
+                        <img className='finding-teacher_image ' src={require('../../assets/images/12.jpg')} alt="" srcset="" />
                     </div>
                 </div>
             </hero>
             <hr />
+            <br />
             <section className="finding-teacher-page_section-1 show-teacher ">
                 <br />
-                <strong>Show  Teacher</strong>
+                {/* <strong>Show  Teacher</strong> */}
                 <div className="columns">
                     <div className="column is-9">
                         <TeacherShortInfoLeft />
@@ -55,7 +59,7 @@ const FindingTeacherPage = () => {
                         <br />
                     </div>
                     <div className="column is-3">
-                        <strong>New Teacher</strong>
+                        {/* <strong>New Teacher</strong> */}
                         <TeacherShortInfoRight />
                         <br />
                         <br />
@@ -63,14 +67,17 @@ const FindingTeacherPage = () => {
                         <br />
                         <br />
                     </div>
+                   
                 </div>
-
+                <Pagination/>
             </section>
             <hr />
 
             <section className="finding-teacher-page_section-2">
                 <br />
-                <strong>Top Teacher</strong>
+                <strong className='is-size-4'>Giáo viên nổi bật</strong>
+                <br/>
+                <br/>
                 <div className="columns is-multiline">
                     <div className="column is-3">
                         <TeacherShortInfoRight />
@@ -92,34 +99,34 @@ const FindingTeacherPage = () => {
             <hr />
             <section className="finding-teacher-page_section-3">
                 <br />
-                <strong>How FT work </strong>
+                <strong className='is-size-4'>Làm sao để tham gia học? </strong>
+                <br/>
                 <div className="columns">
                     <div className="column is-2"></div>
 
                     <div className="column is-2">
-                        <img src={require('../../assets/images/logo.jpg')} alt="" srcset=""
+                        <img  src={require('../../assets/images/logo.jpg')} alt="" srcset=""
                             // style={{
                             //     width: "70%"
                             // }}
                         />
                     </div>
                     <div className="column is-6">
-                        <HowFTWorkAccordion title="Title 1">
+                        <HowFTWorkAccordion title="Lựa chọn giáo viên yêu thích của bạn">
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                Suspendisse elementum mauris et porta mattis.
+                                Sử dụng thanh công cụ hoặc bộ lọc để tìm ra giáo viên bạn ưng ý nhất.
                             </p>
                         </HowFTWorkAccordion>
-                        <HowFTWorkAccordion title="Title 1">
+                        <HowFTWorkAccordion title="Tham gia học thử">
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                Suspendisse elementum mauris et porta mattis.
+                                Lựa chọn thời gian học tốt nhất cho bạn và kết nối với giáo viên.
                             </p>
                         </HowFTWorkAccordion>
-                        <HowFTWorkAccordion title="Title 1">
+                        <HowFTWorkAccordion title="Đăng kí và bắt đầu ">
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                Suspendisse elementum mauris et porta mattis.
+                                Đăng kí học và xây dựng hành trình của riêng bạn với sự hỗ trợ của giáo viên.
+                                <br/>
+                                Bạn cũng có thể lựa chọn những giáo viên khác  theo ý muốn bất kì lúc nào.
                             </p>
                         </HowFTWorkAccordion>
                     </div>
@@ -127,11 +134,13 @@ const FindingTeacherPage = () => {
                 </div>
 
             </section>
-            <hr />
+            <br />
+            <br />
+            {/* <hr />
             <br />
             <section className="finding-teacher-page_section-4">
                 <p>section-4</p>
-            </section>
+            </section> */}
         </div>
     )
 }

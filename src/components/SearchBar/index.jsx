@@ -3,7 +3,11 @@ import { BsSearch } from 'react-icons/bs'
 
 function SearchBar() {
     return (
-        <div class="search-bar_container">
+        <div class="search-bar_container"
+       style={{
+           width: '50rem',
+       }}
+        >
           
                 {/* <BsSearch/> */}
                 <input class="input" type="text" placeholder="Tìm kiếm" />

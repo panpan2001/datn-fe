@@ -3,3 +3,14 @@
 hr{
     opacity: 1 !important;
 }
+.finding-teacher_image{
+    width: 70%;
+}
+
+.finding-teacher-page_hero-left{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}

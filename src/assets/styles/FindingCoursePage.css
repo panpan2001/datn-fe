@@ -1,0 +1,23 @@
+@import './RootStyle.css';
+
+.finding-course_section-1{
+    background-color: rgba(206, 203, 203, 0.15);
+    padding: 2rem 2rem 
+}
+
+#finding-course_hero{
+    display: flex !important;
+    flex-direction: row !important;
+    gap:2rem 
+}
+
+.finding-course_hero-right{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.finding-course-image{
+    width: 70%;
+}
