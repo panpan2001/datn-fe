@@ -13,9 +13,12 @@ const getStudentByAccountId = async ( dispatch,account_id,axiosJWT,accessToken) 
         })
         console.table("student info ",res.data)
         dispatch(getStudentByAccountIdSuccess(res.data))
-        
+       
     } catch (error) {
         dispatch(getStudentByAccountIdFailure(error))
+        // toast.error('Ôi lỗi rồi !', {
+        //     position: toast.POSITION.BOTTOM_RIGHT
+        // });
     }
 }
 
