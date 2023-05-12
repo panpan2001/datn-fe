@@ -26,7 +26,8 @@ const rootReducer= combineReducers({
     logout: logoutReducer,
     createStudent:createStudentReducer,
     getStudentByAccountId: getStudentByAccountIdReducer,
-    getStudentById: getStudentByIdReducer
+    getStudentById: getStudentByIdReducer,
+    getAccountById: getAccountReducer
 })
 const persistedReducer=persistReducer(persistConfig,rootReducer)
 

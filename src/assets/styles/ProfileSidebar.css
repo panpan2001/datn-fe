@@ -12,7 +12,9 @@
 border: 1px solid 
 }
 .sidebar{
-   
+    position: -webkit-sticky;
+    position: sticky;
+    top:6rem ;
     width: 16rem;
     justify-content: start;
     align-items: start;

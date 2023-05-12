@@ -7,6 +7,7 @@ const getStudentByAccountId = async ( dispatch,account_id,axiosJWT,accessToken) 
     
     dispatch(getStudentByAccountIdStart())
     try {
+        console.log("tao dang get may do ")
         const res= await axiosJWT.get(StudentApi+'account/'+account_id,account_id,{
             withCredentials: true,
             headers:{token: `Bearer ${accessToken}`}
@@ -16,9 +17,9 @@ const getStudentByAccountId = async ( dispatch,account_id,axiosJWT,accessToken) 
        
     } catch (error) {
         dispatch(getStudentByAccountIdFailure(error))
-        // toast.error('Ôi lỗi rồi !', {
-        //     position: toast.POSITION.BOTTOM_RIGHT
-        // });
+        toast.error('Ôi lỗi rồi !', {
+            position: toast.POSITION.BOTTOM_RIGHT
+        });
     }
 }
 

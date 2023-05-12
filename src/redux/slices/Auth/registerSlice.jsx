@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const initialState = {
     
     register: {
-        // currentUser:null,
+        currentUser:null,
         isFetching: false,
         error: false,
         isRegister: false
@@ -29,7 +29,7 @@ const registerSlice = createSlice({
             return {
                 ...state, register: {
                     ...state.register,
-                    // currentUser:action.payload,
+                    currentUser:action.payload,
                     isRegister: true,
                     error: false,
                     isFetching: false

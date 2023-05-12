@@ -1,6 +1,6 @@
 @import './RootStyle.css';
 
-.student-signup-form_container {
+.student-profile-form_container {
     display: flex;
     flex-direction: column;
     margin-bottom: 1rem;
@@ -22,12 +22,12 @@
 }
 
 
-.field  .label::after:nth-child(n-2) {
+/* .field  .label::after:nth-child(n-2) {
     content: "*";
     color: red;
     margin-left: 0.25rem;
 
-  }
+  } */
   
   #signup_button{
     display: flex !important;
@@ -49,6 +49,7 @@
           flex-direction: inherit !important; 
           gap: 0.25rem !important;
           align-items: center !important;
+          color:black !important
       }
   
 } 

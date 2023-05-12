@@ -7,7 +7,7 @@ const createStudent=async(student,accessToken,axiosJWT,dispatch,navigate)=>{
     dispatch(createStudentStart())
     try {
         
-        await console.log(student)
+         console.log("tao tao may roi ne:")
         const res=await axiosJWT.post(StudentApi+ student.account_id,student,{
             withCredentials: true,
             headers:{token: `Bearer ${accessToken}`}

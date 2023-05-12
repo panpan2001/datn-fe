@@ -11,7 +11,7 @@
     align-items: flex-start;
     /* height: 100%; */
     justify-content: flex-start;
-    margin-left: 10rem;
+    margin-left: 7.5rem;
     /* position: absolute; */
     top: 10rem;
     
@@ -36,7 +36,7 @@ align-items: center;
 .profile-page_content{
     display: flex;
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
     flex-direction: row;
 }
 

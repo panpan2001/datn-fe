@@ -5,8 +5,9 @@ import PersonalInfo from "./PersonalInfo"
 import AcademicInfo from './AcademicInfo'
 import ImageInfo from './ImageInfo'
 import DegreeInfo from './DegreeInfo'
-const TeacherSignUpForm = () => {
-    const FormTitle = ["Thông tin cá nhân", "Thông tin học vấn","Thông tin chứng chỉ", "Ảnh chân dung"]
+import { Link } from 'react-router-dom'
+const TeacherCompleteInfoForm = () => {
+    const FormTitle = [ "Thông tin học vấn","Thông tin chứng chỉ", "Ảnh chân dung"]
     const [page, setPage] = useState(0)
     const handleNext = () => {
         setPage((currentPage) => currentPage + 1)
@@ -26,9 +27,9 @@ const TeacherSignUpForm = () => {
                     </label>
                 </div>
                 <div className="body">
-                   {page==0? <PersonalInfo/>:
-                   (page==1? <AcademicInfo/>:
-                   (page==2?<DegreeInfo/>:<ImageInfo/>)) } 
+                   {page==0? <AcademicInfo/>:
+                   (page==1? <DegreeInfo/>:<ImageInfo/>)
+                    } 
                 </div>
                 <div className="footer" id='singup-button_footer'>
                     <div className="field is-grouped is-grouped-centered" id='signup_button'>
@@ -44,7 +45,9 @@ const TeacherSignUpForm = () => {
                                 Sau
                             </button>}
                         {page == FormTitle.length - 1 &&
-                            <button className="button is-link" type="submit">Đăng kí</button>
+                        <Link to='/login'>
+                            <button className="button is-link" type="submit">Hoàn thành</button>
+                            </Link>
                         }
                     </div>
                 </div>
@@ -54,4 +57,4 @@ const TeacherSignUpForm = () => {
     )
 }
 
-export default TeacherSignUpForm
+export default TeacherCompleteInfoForm 
