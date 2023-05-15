@@ -34,7 +34,7 @@ div[id^='message']{
     width: 3rem;
     height: 3rem;
     position: absolute;
-    top: 15rem;
+    top: 12rem;
     border-radius: 50%;
     right:22rem;
   
@@ -44,7 +44,7 @@ div[id^='message']{
     width: 1.5rem;
     height: 1.5rem;
     position: absolute;
-    top: 17rem;
+    top: 13rem;
     border-radius: 50%;
     right:19rem;
 }

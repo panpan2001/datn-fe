@@ -1,0 +1,44 @@
+@import './RootStyle.css';
+
+.detail-teacher-page{
+    display: flex;
+    flex-direction: row ;
+    /* justify-content: center;
+    align-items: center; */
+    background-color: white !important;
+    /* gap: 2rem; */
+padding : 2rem ;
+}
+.detail-teacher{
+    display: flex !important;
+    flex-direction: column;
+    gap:2rem;
+    justify-content: center !important;
+    align-items: center !important;
+}
+.info-teacher{
+display: inherit;
+/* flex-direction: row; */
+justify-content: center !important;
+align-items: center !important;
+}
+
+.teacher-description,.teacher-schedule,.teacher-academic,.teacher-degree{
+display: inherit !important;
+flex-direction: column;
+/* gap: 1rem; */
+justify-content: flex-start;
+align-items: flex-start;
+border: 1px solid var(--border-color);
+    border-radius: 10px;
+    box-shadow: 0 4px 4px 4px #f7f7f7;
+    padding: 2rem !important;
+
+}
+
+
+.more-teacher-aside{
+   position: -webkit-sticky;
+   position: sticky;
+   top:3rem ;
+}

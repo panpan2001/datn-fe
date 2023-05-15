@@ -6,7 +6,7 @@ const initialState={
         currentUser: null,
         isFetching: false,
         isLoggedOut: false,
-        error:true
+        error:false
     }
 }
 

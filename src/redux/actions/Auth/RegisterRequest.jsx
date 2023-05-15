@@ -9,7 +9,8 @@ const registerUser=async(user,dispatch,navigate)=>{
     try {
         const res= await axios.post(RegisterApi,user)
         dispatch(registerSuccess(res.data))
-        navigate('/completeInfo')
+        if(user.role_name === 'student') navigate('/completeInfoStudent')
+        if(user.role_name === 'teacher') navigate('/completeInfoTeacher')
         toast.success('Đăng kí thành công!', {
             position: toast.POSITION.BOTTOM_RIGHT
         });

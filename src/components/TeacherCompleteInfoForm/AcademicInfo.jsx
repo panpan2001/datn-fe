@@ -1,16 +1,10 @@
 import React from 'react'
 import '../../assets/styles/AcademicInfo.css'
+import { Link } from 'react-router-dom'
 function AcademicInfo() {
   return (
     <div className='academic-info_container'>
       <div className="columns is-multiline">
-      {/* <div className="column is-6">
-          <div className="field">
-            <label className="label" >Trình độ học vấn</label>
-            <input className="input" type="text" placeholder="Trình độ học vấn" />
-          </div>
-        </div> */}
-
         <div className="column is-6">
           <div className="field">
             <label className="label" >Tên trường </label>
@@ -34,10 +28,26 @@ function AcademicInfo() {
 
         <div className="column is-6">
           <div className="field ">
-            <label className="label" >Minh chứng học vấn (đường dẫn ảnh)</label>
-            <input className="input" type="textarea" placeholder="Minh chứng học vấn (đường dẫn ảnh)" />
+          <label className="label" >Minh chứng học vấn </label>
+
+          <button type='button' className='button is-primary' id="choose-image_button"
+      style={{width: "145px"}}>
+            <p id='upload-teacher-image_p'>Chọn ảnh</p>
+            <input className="input-img"
+              type="file"
+              multiple accept="image/*"
+              name="resume"
+              id='input-img'
+              style={{opacity:0,
+                
+                width: "145px",
+                marginLeft: "-18px",
+                height: "40px",
+              }}
+               />
+          </button>
           </div>
-        </div> 
+        </div>  
 
         <div className="column is-12">
           <div className="field">
@@ -45,9 +55,10 @@ function AcademicInfo() {
             <textarea class="textarea is-info" placeholder="Mô tả học vấn"></textarea>
           </div>
         </div>
-      
-        
-        
+        <Link to='/completeInfoTeacher/degree'>
+          <button type="submit"  className='button is-primary'>here</button>
+          
+        </Link>
       </div>
     </div>
   )

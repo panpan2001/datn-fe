@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function DegreeInfo() {
   return (
@@ -41,7 +42,10 @@ function DegreeInfo() {
           </div>
         </div>
 
-    
+        <Link to='/completeInfoTeacher/description'>
+          <button type="submit"  className='button is-primary'>here</button>
+          
+        </Link>
         
         
       </div>
