@@ -16,10 +16,9 @@
 
 #choose-image_button{
     display: flex;
-    /* flex-direction: column; */
+   width: 140px;
     justify-content: center;
     align-items: center;
-    width: 50%;
 }
 #upload-teacher-image_p{
     position: absolute;
@@ -30,6 +29,8 @@
     gap: 1rem;
     display: flex !important;
     flex-direction: column;
+    gap:2rem;
+    justify-content: center;
     align-items: center;
     flex-grow: 1;
 }

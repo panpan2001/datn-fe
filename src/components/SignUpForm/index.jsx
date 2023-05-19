@@ -56,13 +56,10 @@ const SignUpForm = () => {
                 .oneOf([Yup.ref("password"), null], "Mật khẩu không trùng khớp!")
         }),
         onSubmit: (values) => {
-            console.log("newUser");
-            // e.preventDefault(e)
-            console.table(values)
+         
             registerUser(values, dispatch, navigate)
         }
     })
-    console.log("error: ", formik.errors)
 
     return (
         <form className='admin-signup-form_container container-fluid mr-6' onSubmit={formik.handleSubmit}>

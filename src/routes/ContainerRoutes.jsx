@@ -9,6 +9,7 @@ import StudentJudgeForm from '../components/StudentJudgeForm';
 import AcademicInfo from '../components/TeacherCompleteInfoForm/AcademicInfo';
 import DegreeInfo from '../components/TeacherCompleteInfoForm/DegreeInfo';
 import ImageInfo from '../components/TeacherCompleteInfoForm/ImageInfo';
+import TeacherAcademicDegreeInfoForm from '../components/TeacherCompleteInfoForm';
 
 const LandingPage = React.lazy(() => import('../pages/LandingPage'));
 const LoginPage = React.lazy(() => import('../pages/LoginPage'));
@@ -17,11 +18,13 @@ const SignUpPage = React.lazy(() => import('../pages/SignUpPage'));
 const DashboardPage = React.lazy(() => import('../pages/DasboardPage'));
 const FindingTeacherPage = React.lazy(() => import("../pages/FindingTeacherPage"));
 const FindingCoursePage = React.lazy(() => import("../pages/FindingCoursePage"));
-
 const ProfilePage = React.lazy(() => import('../pages/ProfilePage'))
 const PersonalInfo = React.lazy(() => import('../components/PersonalInfo'))
-const StudentCompleteInfoPage = React.lazy(() => import('../pages/CompleteInfoPage/index'))
-const TeacherCompleteInfoPage = React.lazy(() => import('../pages/CompleteInfoPage/index copy'))
+const StudentCompleteInfoPage = React.lazy(() => import('../pages/CompleteInfoPage/Student'))
+const TeacherCompleteInfoPage = React.lazy(() => import('../pages/CompleteInfoPage/Teacher'))
+const DetailTeacherPage= React.lazy(() => import('../pages/DetailTeacherPage'))
+
+
 function ContainerRoutes() {
   const isLoggedIn = useSelector((state) => state.login.login?.isLoggedIn)
   const currentUSer = useSelector((state) => state.login.login?.currentUser)
@@ -39,16 +42,16 @@ function ContainerRoutes() {
           {/* <Route path="/forgotPassword" element={<LoginPage children={<ForgotPasswordForm />} />} /> */}
           <Route path="/signup" element={<SignUpPage />} />
           <Route path='/findingTeacher' element={<FindingTeacherPage />} />
-          <Route path='/findingCourse' element={<FindingCoursePage />} />
+          <Route path='detailTeacher/:id' element={<DetailTeacherPage />} />
+          {/* <Route path='/findingCourse' element={<FindingCoursePage />} /> */}
           {/* user can access */}
           {isRegister && <>
 
             <Route path='/completeInfoStudent' element={<StudentCompleteInfoPage />} /> 
-            {/* <Route path='/completeInfoTeacher' element={<TeacherCompleteInfoPage />} > */}
-              <Route path='/completeInfoTeacher/academic' element={<AcademicInfo/>} />
-              <Route path='/completeInfoTeacher/degree' element={<DegreeInfo/>} />
+            <Route path='/completeInfoTeacher' element={<TeacherCompleteInfoPage />} >
+              <Route index element={<TeacherAcademicDegreeInfoForm/>} />
               <Route path='/completeInfoTeacher/description' element={<ImageInfo/>} />
-            {/* </Route> */}
+            </Route>
           </>}
           {isLoggedIn &&
             <>

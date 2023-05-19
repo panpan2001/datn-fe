@@ -2,9 +2,10 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 function DegreeInfo() {
+  
   return (
-    <div className='degree-info_container'>
-         <div className="columns is-multiline">
+    <form className='degree-info_container'>
+      <div className="columns is-multiline">
 
         <div className="column is-6">
           <div className="field">
@@ -12,14 +13,14 @@ function DegreeInfo() {
             <input className="input" type="text" placeholder="Tên trường" />
           </div>
         </div>
-        
+
         <div className="column is-6">
           <div className="field">
             <label className="label" >Thời gian học </label>
             <input className="input" type="text" placeholder="Thời gian học" />
           </div>
         </div>
-       
+
         <div className="column is-6">
           <label className="label" id="level"  >Cấp độ </label>
           <div className=" field select ">
@@ -34,23 +35,36 @@ function DegreeInfo() {
           </div>
         </div>
 
-        
+
         <div className="column is-6">
           <div className="field ">
             <label className="label" >Minh chứng chứng chỉ (đường dẫn ảnh)</label>
-            <input className="input" type="text" placeholder="Minh chứng chứng chỉ (đường dẫn ảnh)" />
-          </div>
-        </div>
+            <button type='button' className='button is-primary' id="choose-image-degree_button">
+              <p id='upload-teacher-image_p'>Chọn ảnh</p>
+              <input className="input-img"
+                type="file"
+                multiple accept="image/*"
+                name="resume"
+                id='input-img'
+                style={{
+                  opacity: 0,
 
-        <Link to='/completeInfoTeacher/description'>
-          <button type="submit"  className='button is-primary'>here</button>
-          
-        </Link>
-        
-        
+                  width: "145px",
+                  marginLeft: "-18px",
+                  height: "40px",
+                }}
+              />
+            </button>
+          </div>
+
+            <button type="submit" className='button is-primary'>here</button>
+
+
+
+        </div>
       </div>
-    </div>
-  )
+      </form>
+      )
 }
 
-export default DegreeInfo
+      export default DegreeInfo

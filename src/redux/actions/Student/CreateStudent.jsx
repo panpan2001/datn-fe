@@ -3,17 +3,14 @@ import { createStudentFailure, createStudentStart , createStudentSuccess} from "
 import axios from "axios"
 import { StudentApi } from "../../../utils/BaseUrl"
 
-const createStudent=async(student,accessToken,axiosJWT,dispatch,navigate)=>{
+const createStudent=async(values,dispatch,navigate)=>{
     dispatch(createStudentStart())
     try {
         
          console.log("tao tao may roi ne:")
-        const res=await axiosJWT.post(StudentApi+ student.account_id,student,{
-            withCredentials: true,
-            headers:{token: `Bearer ${accessToken}`}
-        })
+        const res=await axios.post(StudentApi+ values.account_id,values)
         dispatch(createStudentSuccess(res.data))
-        navigate('/profile')
+        navigate('/login')
         toast.success('Bạn đã hoàn thiện hồ sơ cá nhân!', {
             position: toast.POSITION.BOTTOM_RIGHT
         });

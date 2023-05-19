@@ -1,21 +1,27 @@
 @import './RootStyle.css';
 
-.teacher-signup-form_container {
+#teacher-complete-info_form {
     display: flex;
-    flex-direction: column;
+    flex-direction: column ;
     margin-bottom: 1rem;
     background-color: white;
     border: 1px solid var(--border-color);
     border-radius: 10px;
-    padding: 1rem 2rem 2.5rem 2rem;
+    padding: 2rem !important;
     justify-content: flex-start;
+    /* min-width: 70%; */
     
 }
 
-.teacher-signup-form_container:hover{
+#teacher-complete-info_form:hover{
     box-shadow: 0px 0px 10px var(--border-color);
 }
-.column.is-6 .field  {
+
+.teacher-degree-info,.teacher-academic-info{
+    display: flex !important ;
+    flex-direction: row;
+}
+.column.is-5 .field  {
     display: flex !important;
     flex-direction: column;
     align-items: flex-start;

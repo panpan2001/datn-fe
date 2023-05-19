@@ -5,15 +5,15 @@ import createStudent from '../../redux/actions/Student/CreateStudent'
 import { Link, useNavigate } from 'react-router-dom'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
-import createAxiosJWT from '../../utils/createInstance'
-import { createStudentSuccess } from '../../redux/slices/Student/createStudentSlice'
 const StudentCompleteInfoPage = () => {
+  console.log("Hoho StudentCompleteInfoPage ")
+
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const user = useSelector((state) => state.login.login?.currentUser)
-  const accessToken = user?.accessToken
+  const user = useSelector((state) => state.signup.register?.currentUser)
   const account_id = user?._id
-  let axiosJWT = createAxiosJWT(dispatch, user, createStudentSuccess)
+  console.log("user id complete info student page: ",account_id)
+
   const formilk = useFormik({
     initialValues: {
       parent_name: '',
@@ -32,17 +32,14 @@ const StudentCompleteInfoPage = () => {
     })
     ,
     onSubmit: (values) => {
-      const student = {
-        account_id: account_id,
-        parent_name: values.parent_name,
-        parent_phone_number: values.parent_phone_number
-      }
-      createStudent(student, accessToken, axiosJWT, dispatch, navigate)
+      values={...values,account_id:account_id}
+      console.log("h la submit form ", values)
+      createStudent(values,dispatch, navigate)
     }
 
   })
 
-  
+  console.log("values ", formilk.values)
 
   return (
     <div className="columns complete-info-page">
@@ -73,7 +70,7 @@ const StudentCompleteInfoPage = () => {
             {formilk.errors.parent_phone_number && <p className="help is-danger">{formilk.errors.parent_phone_number}</p>}
           </div>
           <div className="field is-grouped is-grouped-centered mt-4" id='student-complete-info_button'>
-           <Link to = '/login'> <button className="button is-link " type="submit">Hoàn thành </button></Link>
+           <button className="button is-link " type="submit">Hoàn thành </button>
           </div>
         </form>
     </div>

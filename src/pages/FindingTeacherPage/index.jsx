@@ -1,83 +1,86 @@
 import React, { useEffect } from 'react'
 import '../../assets/styles/FindingTeacherPage.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import getAllAccounts from '../../redux/actions/Account/GetAllAccounts'
-import axios from 'axios'
-import { AccountApi, RefreshTokenApi } from '../../utils/BaseUrl'
-import DelAccounts from '../../redux/actions/Account/DelAccounts'
-import jwtDecode from 'jwt-decode'
-import { loginSuccess } from '../../redux/slices/Auth/loginSlice'
-import createAxiosJWT from '../../utils/createInstance'
 import TeacherShortInfoLeft from '../../components/TeacherShortInfoCard/TeacherShortInfoLeft'
 import TeacherShortInfoRight from '../../components/TeacherShortInfoCard/TeacherShortInfoRight'
 import SearchBar from '../../components/SearchBar'
 import FilterCategory from '../../components/FilterCategory'
 import HowFTWorkAccordion from '../../components/Accordion/HowFTWorkAccordion'
 import Pagination from '../../components/Pagination'
+import getAllTeachers from '../../redux/actions/Teacher/GetAllTeachersInfo'
+import axios from 'axios'
 const FindingTeacherPage = () => {
+    const teachers = useSelector(state => state.getAllTeachers.teachers?.infoTeacher)
+    // console.table(teachers)
+    const dispatch = useDispatch()
+    useEffect(() => {
+        getAllTeachers(dispatch)
+
+    }, [])
+
+
 
     return (
         <div className='finding-teacher-page_container container'>
-            <hero className="finding-teacher-page_hero">
+            <div className="finding-teacher-page_hero">
                 <div className="columns">
                     <div className="column is-8 is-centered finding-teacher-page_hero-left">
-                        <p> <strong className='is-size-3'>Tìm kiếm giáo viên tiếng Anh <br/>và bắt đầu hành trình tuyệt vời của riêng bạn</strong> </p>
-                        <br/>
+                        <p> <strong className='is-size-3'>Tìm kiếm giáo viên tiếng Anh <br />và bắt đầu hành trình tuyệt vời của riêng bạn</strong> </p>
+                        <br />
                         <SearchBar />
-                        <br/>
-                        <div className="columns is-multiline">
+                        <br />
+                        {/* <div className="columns is-multiline">
                             <FilterCategory />
                             <FilterCategory />
                             <FilterCategory />
                             <FilterCategory />
-                        </div>
+                        </div> */}
                     </div>
                     <div className="column is-4">
-                        <img className='finding-teacher_image ' src={require('../../assets/images/12.jpg')} alt="" srcset="" />
+                        <img className='finding-teacher_image ' src={require('../../assets/images/12.jpg')} alt="" />
                     </div>
                 </div>
-            </hero>
+            </div>
             <hr />
             <br />
             <section className="finding-teacher-page_section-1 show-teacher ">
                 <br />
-                {/* <strong>Show  Teacher</strong> */}
+
                 <div className="columns">
-                    <div className="column is-9">
-                        <TeacherShortInfoLeft />
-                        <br />
-                        <br />
-                        <TeacherShortInfoLeft />
-                        <br />
-                        <br />
-                        <TeacherShortInfoLeft />
-                        <br />
-                        <br />
-                        <TeacherShortInfoLeft />
-                        <br />
-                        <br />
+                    <div className="column is-9 ml-3">
+                        {teachers.map((teacher) => 
+                            <>
+                              <TeacherShortInfoLeft data={teacher} />
+                            <br />
+                            <br />
+                        </>      
+                        )}
                     </div>
+
                     <div className="column is-3">
-                        {/* <strong>New Teacher</strong> */}
-                        <TeacherShortInfoRight />
+                        {teachers.map((teacher) => 
+                            <>
+                            <TeacherShortInfoRight data={teacher} />
+
+                            <br />
+                            <br />
+                        </>      
+                        )}
                         <br />
                         <br />
-                        <TeacherShortInfoRight />
-                        <br />
-                        <br />
+                       
                     </div>
-                   
+
                 </div>
-                <Pagination/>
+                <Pagination />
             </section>
             <hr />
 
-            <section className="finding-teacher-page_section-2">
+            {/* <section className="finding-teacher-page_section-2">
                 <br />
                 <strong className='is-size-4'>Giáo viên nổi bật</strong>
-                <br/>
-                <br/>
+                <br />
+                <br />
                 <div className="columns is-multiline">
                     <div className="column is-3">
                         <TeacherShortInfoRight />
@@ -93,22 +96,22 @@ const FindingTeacherPage = () => {
                     </div>
                 </div>
 
-            </section>
+            </section> */}
 
             <br />
             <hr />
             <section className="finding-teacher-page_section-3">
                 <br />
                 <strong className='is-size-4'>Làm sao để tham gia học? </strong>
-                <br/>
+                <br />
                 <div className="columns">
                     <div className="column is-2"></div>
 
                     <div className="column is-2">
-                        <img  src={require('../../assets/images/logo.jpg')} alt="" srcset=""
-                            // style={{
-                            //     width: "70%"
-                            // }}
+                        <img src={require('../../assets/images/logo.jpg')} alt=""
+                        // style={{
+                        //     width: "70%"
+                        // }}
                         />
                     </div>
                     <div className="column is-6">
@@ -125,7 +128,7 @@ const FindingTeacherPage = () => {
                         <HowFTWorkAccordion title="Đăng kí và bắt đầu ">
                             <p>
                                 Đăng kí học và xây dựng hành trình của riêng bạn với sự hỗ trợ của giáo viên.
-                                <br/>
+                                <br />
                                 Bạn cũng có thể lựa chọn những giáo viên khác  theo ý muốn bất kì lúc nào.
                             </p>
                         </HowFTWorkAccordion>

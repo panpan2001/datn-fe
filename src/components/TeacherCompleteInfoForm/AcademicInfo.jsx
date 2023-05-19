@@ -55,10 +55,10 @@ function AcademicInfo() {
             <textarea class="textarea is-info" placeholder="Mô tả học vấn"></textarea>
           </div>
         </div>
-        <Link to='/completeInfoTeacher/degree'>
+        {/* <Link to='/completeInfoTeacher/degree'>
           <button type="submit"  className='button is-primary'>here</button>
           
-        </Link>
+        </Link> */}
       </div>
     </div>
   )

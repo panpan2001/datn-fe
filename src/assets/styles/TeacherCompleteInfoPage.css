@@ -1,0 +1,78 @@
+@import './RootStyle.css';
+
+#teacher-complete-info-page {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 2rem 0;
+}
+.teacher-complete-info_form {
+  min-height: 70vh;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100%;
+
+  border: 1px solid var(--border-color);
+  box-shadow: 0 0 8px 0 rgb(207, 203, 203);
+  border-radius: 30px;
+  padding: 1rem;
+}
+.teacher-academic-info,
+.teacher-degree-info {
+  display: inherit;
+  flex-direction: inherit;
+  gap: 1rem;
+  width: 100%;
+  justify-content: center !important;
+  align-items: center !important;
+}
+.complete-info-page_column-6 {
+  display: flex;
+  justify-content: flex-end;
+}
+div[id^='message'] {
+  display: flex;
+  align-items: center;
+  border: 1px solid #77c1c9;
+  background-color: #c7e6e9;
+}
+
+#message-1 {
+  height: 12rem;
+  border-radius: 50%;
+  width: 14rem;
+  position: absolute;
+  top: 6rem;
+  right: 27rem;
+  padding: 0.75rem;
+}
+
+#message-2 {
+  width: 3rem;
+  height: 3rem;
+  position: absolute;
+  top: 12rem;
+  border-radius: 50%;
+  right: 22rem;
+}
+#message-3 {
+  width: 1.5rem;
+  height: 1.5rem;
+  position: absolute;
+  top: 13rem;
+  border-radius: 50%;
+  right: 19rem;
+}
+.complete-info-page_column {
+  display: flex;
+}
+
+.complete-info-page_image {
+  width: 60% !important;
+}
+/* .complete-info-page_form{
+    display: flex;
+    flex-direction: column;
+} */

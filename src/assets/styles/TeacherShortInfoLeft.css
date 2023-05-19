@@ -9,4 +9,19 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
+    text-align: left !important;
+}
+.teacher-short-info-left_sub-title{
+    display: flex;
+    flex-direction: row;
+    gap:2rem 
+}
+.sub-title-left,.sub-title-right{
+display:flex;
+flex-direction: row;
+gap:.25rem;
+}
+.sub-title-right_icon{
+    height:1.45rem !important;
+    width:1.45rem !important
 }

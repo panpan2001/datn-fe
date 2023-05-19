@@ -17,7 +17,7 @@ const getStudentByAccountId = async ( dispatch,account_id,axiosJWT,accessToken) 
        
     } catch (error) {
         dispatch(getStudentByAccountIdFailure(error))
-        toast.error('Ôi lỗi rồi !', {
+        toast.error('getStudentByAccountId failed !', {
             position: toast.POSITION.BOTTOM_RIGHT
         });
     }
