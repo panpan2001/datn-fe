@@ -10,6 +10,7 @@
     padding: 2rem !important;
     justify-content: flex-start;
     /* min-width: 70%; */
+    gap: 1rem
     
 }
 
@@ -20,6 +21,8 @@
 .teacher-degree-info,.teacher-academic-info{
     display: flex !important ;
     flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 .column.is-5 .field  {
     display: flex !important;

@@ -45,9 +45,9 @@ let axiosJWT= createAxiosJWT(dispatch,user,logoutSuccess)
             <Link className="navbar-item" to="/findingTeacher">
               Tìm kiếm giáo viên
             </Link>
-            <Link className="navbar-item" to="/findingCourse">
+            {/* <Link className="navbar-item" to="/findingCourse">
               Tìm kiếm lớp học
-            </Link>
+            </Link> */}
             {isLoggedIn ?
               // (user.role_name == 'admin' ?
               //   <Link className="navbar-item" to="/signup">
@@ -58,10 +58,10 @@ let axiosJWT= createAxiosJWT(dispatch,user,logoutSuccess)
                 Trở thành giáo viên
               </Link>
             }
-            {isLoggedIn && user.role_name == 'teacher' &&
+            {/* {isLoggedIn && user.role_name == 'teacher' &&
               <Link className="navbar-item" to="/">
                 Tạo lớp học
-              </Link>}
+              </Link>} */}
           </div>
 
           <div className="navbar-end">
@@ -72,7 +72,7 @@ let axiosJWT= createAxiosJWT(dispatch,user,logoutSuccess)
                     <Link className="button log_in is-dark" to='/admin'>
                       Quan lí
                     </Link> : ""} */}
-                  <Link className="button log_in is-light" to='/' onClick={handleLogout}>
+                  <Link className="button log_in is-light"  onClick={handleLogout}>
                     Đăng xuất
                   </Link>
                 </div>

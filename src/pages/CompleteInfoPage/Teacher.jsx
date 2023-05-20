@@ -1,9 +1,7 @@
 import React, { useEffect } from 'react'
 import '../../assets/styles/TeacherCompleteInfoPage.css'
 import { Outlet, useNavigate } from 'react-router-dom'
-import TeacherCompleteInfoForm from '../../components/TeacherCompleteInfoForm'
-import { useSelector } from 'react-redux'
-import AcademicInfo from '../../components/TeacherCompleteInfoForm/AcademicInfo'
+
 const TeacherCompleteInfoPage = () => {
 
 

@@ -12,15 +12,7 @@ const loginUser = async (user, dispatch, navigate) => {
         const res = await axios.post(LoginApi, user)
         dispatch(loginSuccess(res.data))
         await console.log("login: data id ",res.data._id)
-        // await CheckCompleteInfoMiddware(res.data.account_id)? navigate("/profile") : navigate('/completeInfo')
-        // if(res.data.role_name == "student") 
-        // { 
-        //     res.data.parent_name ? navigate("/profile") : navigate('/completeInfo')
-        // }
-        // if(res.data.role_name == "teacher") 
-        // { 
-        //     res.data.personal_image ? navigate("/profile") : navigate('/completeInfo')
-        // }
+
 navigate("/profile")
         toast.success('Đăng nhập thành công!', {
             position: toast.POSITION.BOTTOM_RIGHT

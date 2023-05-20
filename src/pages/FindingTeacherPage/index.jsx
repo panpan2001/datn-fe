@@ -23,7 +23,7 @@ const FindingTeacherPage = () => {
     return (
         <div className='finding-teacher-page_container container'>
             <div className="finding-teacher-page_hero">
-                <div className="columns">
+                <div className="columns ">
                     <div className="column is-8 is-centered finding-teacher-page_hero-left">
                         <p> <strong className='is-size-3'>Tìm kiếm giáo viên tiếng Anh <br />và bắt đầu hành trình tuyệt vời của riêng bạn</strong> </p>
                         <br />
@@ -43,11 +43,14 @@ const FindingTeacherPage = () => {
             </div>
             <hr />
             <br />
-            <section className="finding-teacher-page_section-1 show-teacher ">
+            <section className="finding-teacher-page_section-1 is-centered show-teacher ">
+            {/* <br /> */}
+                <strong className='is-size-4'>Tất cả giáo viên </strong>
+                <br />
                 <br />
 
-                <div className="columns">
-                    <div className="column is-9 ml-3">
+                <div className="columns is-centered">
+                    <div className="column is-10 ml-3">
                         {teachers.map((teacher) => 
                             <>
                               <TeacherShortInfoLeft data={teacher} />
@@ -57,7 +60,7 @@ const FindingTeacherPage = () => {
                         )}
                     </div>
 
-                    <div className="column is-3">
+                    {/* <div className="column is-3">
                         {teachers.map((teacher) => 
                             <>
                             <TeacherShortInfoRight data={teacher} />
@@ -69,34 +72,36 @@ const FindingTeacherPage = () => {
                         <br />
                         <br />
                        
-                    </div>
+                    </div> */}
 
                 </div>
                 <Pagination />
             </section>
             <hr />
 
-            {/* <section className="finding-teacher-page_section-2">
+            <section className="finding-teacher-page_section-2">
                 <br />
                 <strong className='is-size-4'>Giáo viên nổi bật</strong>
                 <br />
                 <br />
                 <div className="columns is-multiline">
-                    <div className="column is-3">
-                        <TeacherShortInfoRight />
-                    </div>
-                    <div className="column is-3">
-                        <TeacherShortInfoRight />
-                    </div>
-                    <div className="column is-3">
-                        <TeacherShortInfoRight />
-                    </div>
-                    <div className="column is-3">
-                        <TeacherShortInfoRight />
-                    </div>
+               
+                             <div className="column is-3">
+                             <TeacherShortInfoRight data={teachers[0]} />
+                         </div>  
+                     
+                         <div className="column is-3">
+                             <TeacherShortInfoRight data={teachers[1]} />
+                         </div> 
+                           <div className="column is-3">
+                             <TeacherShortInfoRight data={teachers[2]} />
+                         </div>  
+                         <div className="column is-3">
+                             <TeacherShortInfoRight data={teachers[3]} />
+                         </div>  
                 </div>
 
-            </section> */}
+            </section>
 
             <br />
             <hr />

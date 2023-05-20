@@ -6,19 +6,23 @@ import { useState } from 'react'
 import '../../assets/styles/ProfilePage.css'
 import Item from '../Item'
 import { motion } from 'framer-motion'
-import { AiOutlineUser, AiOutlineSetting, AiOutlineBook, AiOutlineEdit, AiOutlineDatabase } from 'react-icons/ai'
+import { AiOutlineUser, AiOutlineSetting, AiOutlineBook, AiOutlineEdit, AiOutlineDatabase, AiOutlineFileAdd } from 'react-icons/ai'
 import { useSelector } from 'react-redux'
 
 
 
 const ProfileSideBar = () => {
   const currentUser = useSelector((state) => state.login.login?.currentUser)
+  const teacher = useSelector(state => state.getTeacherByAccountId.teacher?.currentTeacher)
   return (
 
     <div className="sidebar">
       <div className='profile'>
         <img id='profile_img'
-          src={require('../../assets/images/1.jpg')}
+          src={currentUser.role_name=='teacher'?( teacher? teacher.personal_image:require('../../assets/images/1.jpg')):
+          (currentUser.role_name=='student'?
+          (currentUser.avatar? currentUser.avatar:require('../../assets/images/1.jpg')):
+          require('../../assets/images/1.jpg'))}
           alt="profile_img" />
       </div>
 
@@ -32,7 +36,8 @@ const ProfileSideBar = () => {
               <>
                 <Item icon={<AiOutlineBook />} name={"Lớp học của tôi"} />
                 <Item icon={< AiOutlineEdit />} name={"Đánh giá giáo viên"} navigate={'/profile/judgeTeacher'} />
-              </> : ""
+              </> : 
+               <Item icon={< AiOutlineFileAdd />} name={"Tạo lớp học"} navigate={'/profile'} />
 
             )
           }

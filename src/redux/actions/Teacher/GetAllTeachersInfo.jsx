@@ -1,5 +1,5 @@
 import axios from "axios"
-import { getAllTeacherFailure, getAllTeacherStart, getAllTeacherSuccess } from "../../slices/Teacher/GetAllteachers"
+import { getAllTeacherFailure, getAllTeacherStart, getAllTeacherSuccess } from "../../slices/Teacher/GetAllTeachersSlice"
 import { TeacherApi } from "../../../utils/BaseUrl"
 import { toast } from "react-toastify"
 

@@ -1,0 +1,7 @@
+@import './RootStyle.css';
+
+.register_buttons{
+    display:flex !important;
+    justify-content: center;
+    align-items: center;
+}

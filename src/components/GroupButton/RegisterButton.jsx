@@ -1,8 +1,8 @@
 import React from 'react'
-
+import '../../assets/styles/RegisterButton.css'
 function RegisterButton() {
   return (
-    <div className="buttons is-centered"
+    <div className="buttons is-centered register_buttons"
     style={{
         display: 'flex',
         flexDirection: 'column',

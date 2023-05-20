@@ -6,25 +6,22 @@ import getStudentByAccountId from '../../redux/actions/Student/GetStudentByAccou
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 
-const StudentProfileForm = ({ user }) => {
-
-    const student = useSelector((state) => state.getStudentById.students?.infoStudent)
-    const studentPersonalInfo = useSelector((state) => state.getStudentByAccountId.students?.infoStudent)
-
-    //   console.log("user StudentProfileForm:", user)
-    //   console.log("student:", student)
-    console.log("studentPersonalInfo:", studentPersonalInfo)
+const StudentProfileForm = () => {
+    const user = useSelector((state) => state.login.login?.currentUser)
+    console.log("student account  id:", user?._id)
     const dispatch = useDispatch()
-    const accessToken = user?.accessToken
+    // const accessToken = user?.accessToken
     const account_id = user?._id
-    let axiosJWT = createAxiosJWT(dispatch, user, getStudentByAccountIdSuccess)
+    // let axiosJWT = createAxiosJWT(dispatch, user, getStudentByAccountIdSuccess)
 
     useEffect(() => {
-        getStudentByAccountId(dispatch, account_id, axiosJWT, accessToken)
-    }, [])
+        console.log("h get student by account id ne :")
+        getStudentByAccountId(dispatch, account_id)
+    }, [account_id])
 
-const valueGender=['nam','nữ','khác']
-
+    const valueGender = ['nam', 'nữ', 'khác']
+    const studentPersonalInfo = useSelector((state) => state.getStudentByAccountId.students?.infoStudent)
+    console.log("studentPersonalInfo:", studentPersonalInfo)
 
     return (
         <form className='student-profile-form_container container-fluid mr-6'>
@@ -65,7 +62,7 @@ const valueGender=['nam','nữ','khác']
                                     value={valueGender[0]}
                                     id='nam'
                                     disabled={true}
-                                    checked={valueGender[0]==studentPersonalInfo.account_id.gender.split(" ").join("")}
+                                    checked={valueGender[0] == studentPersonalInfo.account_id.gender.split(" ").join("")}
                                 />
                                 <label className="radio ">Nam</label>
                             </div>
@@ -74,8 +71,8 @@ const valueGender=['nam','nữ','khác']
                                     value={valueGender[1]}
                                     id='nữ'
                                     disabled={true}
-                                    checked={valueGender[1]==studentPersonalInfo.account_id.gender.split(" ").join("")}
-                                    
+                                    checked={valueGender[1] == studentPersonalInfo.account_id.gender.split(" ").join("")}
+
                                 />
                                 <label className="radio ">Nữ</label>
                             </div>
@@ -84,8 +81,8 @@ const valueGender=['nam','nữ','khác']
                                     value={valueGender[2]}
                                     disabled={true}
                                     id='khác'
-                                    checked={valueGender[2]==studentPersonalInfo.account_id.gender.split(" ").join("")}
-                                    />
+                                    checked={valueGender[2] == studentPersonalInfo.account_id.gender.split(" ").join("")}
+                                />
                                 <label className="radio ">Khác</label>
                             </div>
                         </div>

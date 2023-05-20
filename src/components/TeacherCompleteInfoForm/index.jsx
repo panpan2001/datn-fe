@@ -1,11 +1,5 @@
 import '../../assets/styles/TeacherAcademicDegreeInfoForm.css'
 
-import { useState } from "react"
-import PersonalInfo from "./PersonalInfo"
-import AcademicInfo from './AcademicInfo'
-import ImageInfo from './ImageInfo'
-import DegreeInfo from './DegreeInfo'
-import { Link } from 'react-router-dom'
 const TeacherAcademicDegreeInfoForm = () => {
     return ( 
          <form className=' is-8 column ' id='teacher-complete-info_form'>
@@ -64,9 +58,9 @@ const TeacherAcademicDegreeInfoForm = () => {
         </div>
       </div>
     </div>
-    <br />
+
     <hr />
-    <br />
+
     <strong className='is-size-4'>Thông tin chứng chỉ  </strong>
     <div className="columns is-multiline teacher-degree-info">
       <div className="column is-5">

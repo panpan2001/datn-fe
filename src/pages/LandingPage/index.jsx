@@ -168,7 +168,7 @@ const LandingPage = () => {
                 <FindingClassMessage
                 title='125 giáo viên '
                 content='100% giáo viên có trình độ chuyên môn cao với ít nhất 1 chứng chỉ tiếng Anh'
-                color='is-warning'
+                color='is-info'
                 />
                 <FindingClassMessage
                 title='3h'
@@ -178,7 +178,7 @@ const LandingPage = () => {
                 <FindingClassMessage
                 title='90% '
                 content='Là tỉ lệ học viên và phụ huynh hài lòng với giáo viên của chúng tôi '
-                color='is-info'
+                color='is-warning'
                 />
                 </div>
                 <br/>

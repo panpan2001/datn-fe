@@ -11,8 +11,10 @@ import logoutReducer from "../slices/Auth/logoutSlice";
 import createStudentReducer from "../slices/Student/createStudentSlice";
 import getStudentByIdReducer from "../slices/Student/getStudentByIdSlice";
 import getStudentByAccountIdReducer from "../slices/Student/getStudentByAccountIdSlice";
-import getAllTeachersReducer from "../slices/Teacher/GetAllteachers";
-import getTeacherByIdReducer from "../slices/Teacher/GetTeacherById";
+import getAllTeachersReducer from "../slices/Teacher/GetAllTeachersSlice";
+import getTeacherByIdReducer from "../slices/Teacher/GetTeacherByIdSlice";
+import getTeacherAcademicReducer from "../slices/TeacherAcademic/getTeacherAcademicSlice";
+import getTeacherByAccountIdReducer from "../slices/Teacher/GetTeacherByAccountIdSlice";
 const persistConfig = {
     key:'root',
     version:1,
@@ -32,6 +34,8 @@ const rootReducer= combineReducers({
     getAccountById: getAccountReducer,
     getAllTeachers: getAllTeachersReducer,
     getTeacherById: getTeacherByIdReducer,
+    getTeacherByAccountId: getTeacherByAccountIdReducer,
+    getTeacherAcademic: getTeacherAcademicReducer
 })
 const persistedReducer=persistReducer(persistConfig,rootReducer)
 

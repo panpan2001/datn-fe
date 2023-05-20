@@ -31,6 +31,7 @@ function ContainerRoutes() {
   const student=useSelector((state)=>state.getStudentById.students?.infoStudent)
 
   const isRegister = useSelector((state) => state.signup.register?.isRegister)
+  console.log(isRegister)
   return (
     <BrowserRouter>
       <Routes>
@@ -42,7 +43,7 @@ function ContainerRoutes() {
           {/* <Route path="/forgotPassword" element={<LoginPage children={<ForgotPasswordForm />} />} /> */}
           <Route path="/signup" element={<SignUpPage />} />
           <Route path='/findingTeacher' element={<FindingTeacherPage />} />
-          <Route path='detailTeacher/:id' element={<DetailTeacherPage />} />
+          <Route path='/detailTeacher/:id' element={<DetailTeacherPage />} />
           {/* <Route path='/findingCourse' element={<FindingCoursePage />} /> */}
           {/* user can access */}
           {isRegister && <>

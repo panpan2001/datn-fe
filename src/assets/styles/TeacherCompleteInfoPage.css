@@ -1,11 +1,12 @@
 @import './RootStyle.css';
 
-#teacher-complete-info-page {
+ #teacher-complete-info-page {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   margin: 2rem 0;
 }
+/*
 .teacher-complete-info_form {
   min-height: 70vh;
   display: flex !important;
@@ -72,7 +73,7 @@ div[id^='message'] {
 .complete-info-page_image {
   width: 60% !important;
 }
-/* .complete-info-page_form{
+.complete-info-page_form{
     display: flex;
     flex-direction: column;
 } */
