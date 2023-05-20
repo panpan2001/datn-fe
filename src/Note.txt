@@ -11,6 +11,7 @@ nhat.pham.novasquare@gmail.com - 123456
 
 student check : phamnhikhau@gmail.com - 123456 
 
+git commit nhanh main 
 12/5
 - loi createstudent ko vo dc tu student comleteìno form ! 
 - chua lam forgot pw 

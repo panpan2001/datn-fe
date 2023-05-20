@@ -1,27 +1,72 @@
 import React, { useEffect, useState } from 'react'
 import '../../assets/styles/ImageInfo.css'
+import handleUploadImage from '../../contexts/uploadImage';
 const ImageInfo = () => {
-  const imageLabelNames = ["Ảnh cá nhân", "Ảnh bằng cấp", "Ảnh chứng chỉ"]
-  const [images, setImages] = useState([])
-  const [imageURLs, setImagesURLs] = useState([])
-  const newImageURLs = []
-  useEffect((() => {
-    if (images.length < 1) return;
+  const [images, setImages] = useState()
+  // const [imageURLs, setImagesURLs] = useState([])
+  // const newImageURLs = []
+  // useEffect((() => {
+  //   if (images.length < 1) return;
 
-    images.forEach(image => {
-      newImageURLs.push(URL.createObjectURL(image))
-      setImagesURLs(newImageURLs)
+  //   images.forEach(image => {
+  //     newImageURLs.push(URL.createObjectURL(image))
+  //     setImagesURLs(newImageURLs)
 
-    })
-    console.log(newImageURLs)
-  }), [images])
-
+  //   })
+  //   console.log(newImageURLs)
+  // }), [images])
+  console.log(images)
   const onImageChange = (e) => {
-    setImages([...e.target.files])
+    e.preventDefault()
+    setImages(e.target.files)
+   
   }
+  useEffect(() => {
+    handleUploadImage(images)
+  },[])
+  
   return (
-    <div className='image-info_container'>
-        <div className="column is-7 is-centered" id="display-teacher-image-upload_column">
+    <div className='teacher-image-info_container container'>
+      <div className="column is-7 is-centered" id="teacher-image-upload_column">
+        <strong className='is-size-4'>Mô tả cá nhân </strong>
+        <div className="column  teacher-image-upload_column-is-10">
+          <div className="field teacher-image-upload_field" >
+            <label className="label">Mô tả cá nhân</label>
+            <textarea className="textarea is-info" placeholder="Mô tả cá nhân"></textarea>
+          </div>
+        </div>
+
+
+        <div className="column teacher-image-upload_column-is-5">
+          <div className="field teacher-image-upload_field " >
+            <label className="label">Ảnh chân dung</label>
+            <div style={{
+              display: "flex",
+              flexDirection: "row",
+              gap: "1rem",
+              alignItems:"center"
+            }}>
+              <button
+               type='button ml-6'
+               className='button is-primary' 
+               id="choose-image_button"
+              //  style={{marginLeft:"1rem"}}
+               >
+                <p id='upload-teacher-image_p'>Chọn ảnh</p>
+                <input className="file-input"
+                  type="file"
+                  multiple accept="image/*"
+                  name="resume"
+                  onChange={(e) => onImageChange(e)} />
+              </button>
+              <p>{images && (images[0] ? images[0].name : '')}</p>
+
+            </div>
+
+          </div>
+        </div>
+        {/* <div className="field">
+          <label className="label">Ảnh chân dung</label>
           <button type='button' className='button is-primary' id="choose-image_button">
             <p id='upload-teacher-image_p'>Chọn ảnh</p>
             <input className="file-input"
@@ -30,12 +75,16 @@ const ImageInfo = () => {
               name="resume"
               onChange={(e) => onImageChange(e)} />
           </button>
-          <div className="teacher-image-sign-up_div" >
-          {imageURLs.map(imageSrc => <img src={imageSrc} />)}
-          </div>
+          </div> */}
 
+        {/* <div className="teacher-image-sign-up_div" > */}
+        {/* {imageURLs.map(imageSrc => <img src={imageSrc} />)} */}
+        {/* </div> */}
+        <div className="field is-grouped is-grouped-centered mt-3 " id='signup_button'>
+          <button className="button is-link" type="submit">Hoàn thành</button>
         </div>
       </div>
+    </div>
 
   )
 }

@@ -3,15 +3,17 @@ import './assets/styles/App.css';
 import ContainerRoutes from './routes/ContainerRoutes';
 import { ToastContainer } from 'react-toastify';
 import DetailTeacherpage from './pages/DetailTeacherPage';
+import ImageInfo from './components/TeacherCompleteInfoForm/ImageInfo';
 
 function App() {
 
   return (
     <div className="App">
             
-      <ContainerRoutes/>
-    <ToastContainer/>
+      {/* <ContainerRoutes/>
+    <ToastContainer/> */}
     {/* <DetailTeacherpage/> */}
+    <ImageInfo/>
       </div>
   );
 }

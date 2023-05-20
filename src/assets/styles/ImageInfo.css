@@ -1,11 +1,38 @@
-.image-info_container{
+@import './RootStyle.css';
+.teacher-image-info_container{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+#teacher-image-upload_column{
     display: flex;
     opacity: 1;
     flex-direction: column;
     position: relative;
     min-height: 50vh;
+    /* width: 100%; */
+    border: 1px solid var(--border-color);
+    border-radius: 30px;
+    background-color: white;
+    align-items: center;
+    padding: 1rem;
+    gap: 1rem;
+    width: 70%;
 }
-
+.teacher-image-upload_column-is-5, .teacher-image-upload_column-is-10{
+    display:flex !important;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100% !important;
+    
+}
+.teacher-image-upload_field{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding:0 1rem 
+}
 .file-input{
     opacity: 1;
     content:"Chọn ảnh" !important;
@@ -44,3 +71,4 @@
     width:'auto';
     max-height:"128px"
 }
+
