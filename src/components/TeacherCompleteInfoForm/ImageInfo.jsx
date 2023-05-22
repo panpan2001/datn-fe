@@ -1,30 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import '../../assets/styles/ImageInfo.css'
-import handleUploadImage from '../../contexts/uploadImage';
+import uploadImage from '../../contexts/uploadImage';
 const ImageInfo = () => {
   const [images, setImages] = useState()
-  // const [imageURLs, setImagesURLs] = useState([])
-  // const newImageURLs = []
-  // useEffect((() => {
-  //   if (images.length < 1) return;
-
-  //   images.forEach(image => {
-  //     newImageURLs.push(URL.createObjectURL(image))
-  //     setImagesURLs(newImageURLs)
-
-  //   })
-  //   console.log(newImageURLs)
-  // }), [images])
   console.log(images)
+  let img=null
   const onImageChange = (e) => {
     e.preventDefault()
     setImages(e.target.files)
    
   }
   useEffect(() => {
-    handleUploadImage(images)
+ uploadImage(images)
+//  console.log("img upload ",uploadImage(images))
   },[])
-  
+  // console.log("img cloudinary",img)
   return (
     <div className='teacher-image-info_container container'>
       <div className="column is-7 is-centered" id="teacher-image-upload_column">

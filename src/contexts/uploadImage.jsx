@@ -13,10 +13,12 @@ const uploadImage= async(image)=>{
           }
         })
         .then(res=>{
-          console.log(res)
+          console.log(res.data)
+        //   return res.data.url
         }).catch(err=>{
           console.log(err)
         })
+        
       }
       else return ;
 }
