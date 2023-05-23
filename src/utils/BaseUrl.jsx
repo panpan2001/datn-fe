@@ -1,4 +1,6 @@
 const BASE_URL = "http://localhost:3001/api"
+const UPLOAD_IMG_URL= "https://api.cloudinary.com/v1_1/djt76m22x/image/upload"
+
 
 const LoginApi = BASE_URL + "/auth/login"
 const RegisterApi = BASE_URL + "/auth/register"
@@ -12,6 +14,7 @@ const TeacherAcademicApi = BASE_URL + "/teacherAcademics/"
 
 
 export {
+   UPLOAD_IMG_URL,
    LoginApi,
    RegisterApi,
    AccountApi,

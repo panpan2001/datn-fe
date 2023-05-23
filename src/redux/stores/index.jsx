@@ -15,6 +15,7 @@ import getAllTeachersReducer from "../slices/Teacher/GetAllTeachersSlice";
 import getTeacherByIdReducer from "../slices/Teacher/GetTeacherByIdSlice";
 import getTeacherAcademicReducer from "../slices/TeacherAcademic/getTeacherAcademicSlice";
 import getTeacherByAccountIdReducer from "../slices/Teacher/GetTeacherByAccountIdSlice";
+import createTeacherReducer from "../slices/Teacher/CreateTeacherSlice";
 const persistConfig = {
     key:'root',
     version:1,
@@ -35,7 +36,8 @@ const rootReducer= combineReducers({
     getAllTeachers: getAllTeachersReducer,
     getTeacherById: getTeacherByIdReducer,
     getTeacherByAccountId: getTeacherByAccountIdReducer,
-    getTeacherAcademic: getTeacherAcademicReducer
+    getTeacherAcademic: getTeacherAcademicReducer,
+    createTeacher: createTeacherReducer
 })
 const persistedReducer=persistReducer(persistConfig,rootReducer)
 

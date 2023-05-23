@@ -1,20 +1,28 @@
 import React, { useEffect, useState } from 'react'
 import '../../assets/styles/ImageInfo.css'
 import uploadImage from '../../contexts/uploadImage';
+
 const ImageInfo = () => {
   const [images, setImages] = useState()
-  console.log(images)
-  let img=null
+  const [url, setUrl]= useState('')
   const onImageChange = (e) => {
     e.preventDefault()
     setImages(e.target.files)
    
   }
-  useEffect(() => {
- uploadImage(images)
-//  console.log("img upload ",uploadImage(images))
-  },[])
-  // console.log("img cloudinary",img)
+  
+  
+     useEffect(() => {
+       uploadImage(images).then((res)=>{
+        setUrl(res)
+        // console.log("res",res)
+        // console.log("url vs check url useEffect a",url)
+        // console.log("res vs url",res==url)
+       })
+     },[images])
+    console.log("url end ",url)
+  
+ 
   return (
     <div className='teacher-image-info_container container'>
       <div className="column is-7 is-centered" id="teacher-image-upload_column">
@@ -49,8 +57,7 @@ const ImageInfo = () => {
                   name="resume"
                   onChange={(e) => onImageChange(e)} />
               </button>
-              <p>{images && (images[0] ? images[0].name : '')}</p>
-
+             <p>{images && (images[0] ? images[0].name : '')}</p>
             </div>
 
           </div>
@@ -71,7 +78,10 @@ const ImageInfo = () => {
         {/* {imageURLs.map(imageSrc => <img src={imageSrc} />)} */}
         {/* </div> */}
         <div className="field is-grouped is-grouped-centered mt-3 " id='signup_button'>
-          <button className="button is-link" type="submit">Hoàn thành</button>
+          <button className="button is-link" 
+          type="submit"
+          disabled={url? false:true}
+          >Hoàn thành</button>
         </div>
       </div>
     </div>

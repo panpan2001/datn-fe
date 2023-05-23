@@ -19,6 +19,13 @@
     gap: 1rem;
     width: 70%;
 }
+
+#teacher-image-upload_column:hover{
+box-shadow: 0 0 8px 0 var(--border-color);
+
+
+}
+
 .teacher-image-upload_column-is-5, .teacher-image-upload_column-is-10{
     display:flex !important;
     flex-direction: column;

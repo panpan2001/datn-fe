@@ -1,23 +1,23 @@
 import axios from 'axios'
+import { UPLOAD_IMG_URL } from '../utils/BaseUrl'
 const uploadImage= async(image)=>{
     if(image){
         const formData= new FormData()
-        // console.log("image[0]",image[0])
         formData.append('file', image[0])
         formData.append('upload_preset', 'DATN_FE')
         formData.append('cloud_name', 'djt76m22x')
-        await axios.post('https://api.cloudinary.com/v1_1/djt76m22x/image/upload', formData,{
-          header:{
-            'Allowed-Origin': '*',
-            "Access-Control-Allow-Methods":"PUT, POST, GET, DELETE, PATCH, OPTIONS" 
-          }
-        })
-        .then(res=>{
-          console.log(res.data)
-        //   return res.data.url
-        }).catch(err=>{
-          console.log(err)
-        })
+        try {
+          const res= await axios.post(UPLOAD_IMG_URL, formData,{
+            header:{
+              'Allowed-Origin': '*',
+              "Access-Control-Allow-Methods":"PUT, POST, GET, DELETE, PATCH, OPTIONS" 
+            }})
+          return res.data.url
+        } catch (error) {
+          console.log(error)
+        }
+        
+        
         
       }
       else return ;
