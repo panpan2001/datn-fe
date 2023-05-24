@@ -14,7 +14,7 @@ const getTeacherAcademicSlice= createSlice({
     initialState:initialState,
     reduces:{
         getTeacherAcademicStart:(state)=>{
-            return state.academics.isFetching=true
+            state.academics.isFetching=true
         },
         getTeacherAcademicSuccess:(state,action)=>{
             return{

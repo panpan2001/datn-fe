@@ -2,7 +2,7 @@
 
 .landing-page_container {
   background-color: var(--background-color);
-}
+} 
 
 .landing-page_hero-columns {
   background-color: var(--background-color);
@@ -47,6 +47,7 @@
 .landing-page_section-2 {
   margin-top: 2rem;
   margin-bottom: 2rem;
+  padding-left:4rem
 }
 
 .landing-page_section-2-columns {
@@ -65,7 +66,7 @@
   border-radius: 30px;
   border: 1px solid #77c1f2;
   box-shadow: 0 0 8px 0 var(--border-color);
-  padding: 2rem 0 3rem 4rem  ;
+  padding: 2rem 0 3rem 2rem  ;
 }
 
 .landing-page_section-2-columns-left-columns {

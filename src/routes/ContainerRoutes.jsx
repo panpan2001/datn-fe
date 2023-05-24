@@ -46,14 +46,15 @@ function ContainerRoutes() {
           <Route path='/detailTeacher/:id' element={<DetailTeacherPage />} />
           {/* <Route path='/findingCourse' element={<FindingCoursePage />} /> */}
           {/* user can access */}
-          {isRegister && <>
+          {/* {isRegister && <> */}
 
             <Route path='/completeInfoStudent' element={<StudentCompleteInfoPage />} /> 
             <Route path='/completeInfoTeacher' element={<TeacherCompleteInfoPage />} >
-              <Route index element={<TeacherAcademicDegreeInfoForm/>} />
+              <Route index element={<AcademicInfo/>} />
+              <Route path='/completeInfoTeacher/degree' element={<DegreeInfo/>} />
               <Route path='/completeInfoTeacher/description' element={<ImageInfo/>} />
             </Route>
-          </>}
+          {/* </>} */}
           {isLoggedIn &&
             <>
                 <Route path='/profile' element={<ProfilePage />}>

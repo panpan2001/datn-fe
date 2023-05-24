@@ -124,11 +124,11 @@ const LandingPage = () => {
             <br />
             <hr />
 
-            <section className="landing-page_section-2 container">
+            <section className="landing-page_section-2 container-fluid">
 
                 <div className="columns is-centered landing-page_section-2-columns">
                     <div className="column is-6 landing-page_section-2-columns-left">
-                        <div className="columns landing-page_section-2-columns-left-columns">
+                        <div className="columns landing-page_section-2-columns-left-columns ml-3 mt-3">
 
                             <strong className="is-size-4 landing-page_section-2-strong ">Gia nhập đội ngũ giáo viên tiếng Anh của chúng tôi</strong>
                             <p className='landing-page_section-2-p'>Trở thành giáo viên tiếng Anh ngay hôm nay</p>

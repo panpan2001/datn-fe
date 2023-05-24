@@ -1,0 +1,8 @@
+@import './RootStyle.css';
+
+.degree-info_container{
+    border: 1px solid var(--border-color);
+    border-radius: 30px;
+    background-color: white;
+    padding: 2rem 0rem;
+}

@@ -4,7 +4,7 @@ import { TeacherApi } from "../../../utils/BaseUrl"
 import { toast } from "react-toastify"
 
 
-const createTeacher = async(dispatch, values)=>{
+const createTeacher = async(dispatch, values,navigate)=>{
     dispatch(createTeacherStart())
     try{
         const res= await axios.post(TeacherApi+values.account_id, values)

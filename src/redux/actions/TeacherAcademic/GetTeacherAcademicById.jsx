@@ -1,16 +1,16 @@
 import axios from "axios"
-import { getTeacherAcademicFailure, getTeacherAcademicStart, getTeacherAcademicSuccess } from "../../slices/TeacherAcademic/getTeacherAcademicSlice"
 import { TeacherAcademicApi } from "../../../utils/BaseUrl"
+import { getTeacherAcademicByIdFailure, getTeacherAcademicByIdStart, getTeacherAcademicByIdSuccess } from "../../slices/TeacherAcademic/getTeacherAcademicByIdSlice"
 
 
 const getTeacherAcademicById= async(id, dispatch)=>{
-    dispatch(getTeacherAcademicStart())
+    dispatch(getTeacherAcademicByIdStart())
     await axios.get(TeacherAcademicApi,id)
     .then(res=>{
-        dispatch(getTeacherAcademicSuccess(res.data))
+        dispatch(getTeacherAcademicByIdSuccess(res.data))
     })
     .catch(err=>{
-        dispatch(getTeacherAcademicFailure(err));
+        dispatch(getTeacherAcademicByIdFailure(err));
         console.log(err)
     })
 }

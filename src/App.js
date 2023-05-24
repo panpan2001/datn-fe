@@ -10,10 +10,10 @@ function App() {
   return (
     <div className="App">
             
-      {/* <ContainerRoutes/>
-    <ToastContainer/> */}
+      <ContainerRoutes/>
+    <ToastContainer/>
     {/* <DetailTeacherpage/> */}
-    <ImageInfo/>
+    {/* <ImageInfo/> */}
       </div>
   );
 }

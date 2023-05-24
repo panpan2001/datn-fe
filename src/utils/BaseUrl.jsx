@@ -10,6 +10,7 @@ const AccountApi = BASE_URL + "/accounts/"
 const StudentApi = BASE_URL + "/students/"
 const TeacherApi = BASE_URL + "/teachers/"
 const TeacherAcademicApi = BASE_URL + "/teacherAcademics/"
+const TeacherDegreeApi= BASE_URL + "/teacherDegrees/"
 
 
 
@@ -22,5 +23,6 @@ export {
    LogoutApi,
    StudentApi,
    TeacherApi,
-   TeacherAcademicApi
+   TeacherAcademicApi,
+   TeacherDegreeApi
 }
