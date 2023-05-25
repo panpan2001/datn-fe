@@ -1,12 +1,13 @@
 import React from 'react'
 import '../../assets/styles/TeacherShortInfoLeft.css'
 import { AiOutlineStar } from 'react-icons/ai'
-import { BsCurrencyDollar, BsFillStarFill } from 'react-icons/bs'
+import { BsCurrencyDollar, BsFillCheckCircleFill, BsFillStarFill } from 'react-icons/bs'
 import RegisterButton from '../GroupButton/RegisterButton'
 import ImageItem from '../ImageItem'
 import { Link } from 'react-router-dom'
 
 function TeacherShortInfoLeft({ data }) {
+    // console.log("elo: ",data.personal_description.split("\n"))
     return (
         <div className="card teacher-short-info-left_card"
             style={{
@@ -22,9 +23,10 @@ function TeacherShortInfoLeft({ data }) {
                     <div className="media-content teacher-short-info-left_media-content">
                         <div className="title is-4 columns ">
                             <div className="column ">{data.account_id.full_name}</div>
-                            {/* <div className="column">
-
-                                <button className="button "
+                            {/* <div className="column"> */}
+                            <BsFillCheckCircleFill
+                            className="teacher-short-nffo-left_icon-verified "/>
+                                {/* <button className="button "
                                     style={{
                                         backgroundColor: "#00c4a7",
                                         width: "140px",
@@ -38,11 +40,10 @@ function TeacherShortInfoLeft({ data }) {
                             height:"30px",
                             borderRadius:"30px",
                             color:"black "
-                            }}>Đã xác minh </button>
-                            </div> */}
+                            }}>Đã xác minh </button> */}
+                            {/* </div> */}
                         </div>
-                        {/* <p className="subtitle is-6">@johnsmith</p> */}
-                        <div className="columns ml-3  subtitle teacher-short-info-left_sub-title">
+                        <div className="columns ml-1  subtitle teacher-short-info-left_sub-title">
                             <div className="sub-title-left">
                                 <BsFillStarFill className='sub-title-right_icon' style={{ fill: "yellow" }} />
                                 <p>5</p>
@@ -53,11 +54,11 @@ function TeacherShortInfoLeft({ data }) {
                                 <p>5-15/ 1.5 tiếng</p>
                             </div>
                         </div>
-                        <p>
-                            {data.personal_description}
-
-
+                        <p id='teacher-short-info-left_p'
+                        >
+                            {data.personal_description}...
                         </p>
+                        
                         <Link to={`/detailTeacher/${data._id}`}>
                         <button className="button mt-4 "
                             style={{
@@ -70,7 +71,10 @@ function TeacherShortInfoLeft({ data }) {
                         </Link>
                         
                     </div>
+                    <div className="media-right teacher-short-info-left_media-right">
                     <RegisterButton  />
+                    </div>
+
                 </div>
 
 

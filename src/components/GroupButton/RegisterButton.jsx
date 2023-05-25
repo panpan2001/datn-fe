@@ -12,9 +12,10 @@ function RegisterButton() {
         gap: '1rem'
     }}
 >
-    <button className="button is-primary">Học thử </button>
-    <button className="button is-link">Đăng kí </button>
+    {/* <button className="button is-primary">Học thử </button> */}
+    <button className="button is-primary">Đăng kí </button>
     <button className="button is-info">Liên hệ  </button>
+    <button className="button is-danger">Đánh giá  </button>
 </div>
   )
 }

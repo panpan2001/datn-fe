@@ -24,8 +24,10 @@ const StudentProfileForm = () => {
     console.log("studentPersonalInfo:", studentPersonalInfo)
 
     return (
-        <form className='student-profile-form_container container-fluid mr-6'>
-            <label className="label login-name_label is-size-3">
+        <div className='student-profile-form_container container-fluid mr-6'>
+
+            {studentPersonalInfo && <>
+                <label className="label login-name_label is-size-3">
                 <strong className='is-size-4'>Hồ sơ cá nhân của bạn {studentPersonalInfo.account_id.full_name} </strong>
             </label>
             <div className="columns is-multiline">
@@ -156,12 +158,15 @@ const StudentProfileForm = () => {
                     </div>
                 </div>
             </div>
-            {/* <div className="field is-grouped is-grouped-centered" id='signup_button'>
-                            <button className="button is-link" type="submit">Chỉnh sửa</button>
-                        </div> */}
-
-        </form >
+            </>}
+          
+          
+        </div  >
     )
 }
 
 export default StudentProfileForm 
+
+  {/* <div className="field is-grouped is-grouped-centered" id='signup_button'>
+                            <button className="button is-link" type="submit">Chỉnh sửa</button>
+                        </div> */}

@@ -40,7 +40,7 @@ const account_id = user?._id
     onSubmit:(values)=>{
  
         values={
-          // account_id:account_id,
+          account_id:account_id,
           personal_description:values.personal_description,
           personal_image:url,
           id_academic:academic._id,
@@ -49,7 +49,7 @@ const account_id = user?._id
         }
         console.log(values)
 
-        // createTeacher(dispatch,values,navigate)
+        createTeacher(dispatch,values,navigate)
     
     }
   })

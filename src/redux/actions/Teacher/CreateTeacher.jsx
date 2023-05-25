@@ -7,7 +7,7 @@ import { toast } from "react-toastify"
 const createTeacher = async(dispatch, values,navigate)=>{
     dispatch(createTeacherStart())
     try{
-        const res= await axios.post(TeacherApi+values.account_id, values)
+        const res= await axios.post(TeacherApi, values)
         dispatch(createTeacherSuccess(res.data))
         navigate('/login')
         toast.success('Bạn đã hoàn thiện hồ sơ cá nhân!', {

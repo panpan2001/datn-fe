@@ -3,11 +3,10 @@
 .detail-teacher-page {
   display: flex;
   flex-direction: row;
-  /* justify-content: center;
-    align-items: center; */
-  background-color: white !important;
-  /* gap: 2rem; */
-  padding: 2rem;
+  background-color: var(--background-color);
+  padding-bottom:  2rem;
+  margin: 0 2rem ;
+  gap : 1rem 
 }
 
 .detail-teacher {
@@ -26,12 +25,31 @@ align-items: center !important;
 } */
 
 .detail-info-teacher_icon {
-  width: 1.45rem !important;
-  height: 1.45rem !important;
+  width: 1rem !important;
+  height: 1rem !important;
+}
+.detail-info-teacher_icon-fill{
+  width: 1.2rem !important;
+  height: 1.2rem !important;
+  margin-top: .3rem !important;
+  fill: #00c4a7
+}
+
+.detail-info-teacher_verified-button{
+  margin-top: .3rem !important;
+  background-color: #00c4a7;
+  width: 150px;
+  height: 32px;
+  border-radius: 30px;
+  color: white;
+  border: none;
+  font-size: 1rem;
 }
 
 .info-teacher-register_button {
   display: flex !important;
+  justify-content: flex-start !important;
+  align-self: flex-start !important;
 }
 
 .info-teacher,
@@ -48,6 +66,8 @@ align-items: center !important;
   border-radius: 10px;
   box-shadow: 0 4px 4px 4px #f7f7f7;
   padding: 2rem !important;
+  width: 100%;
+  background-color: white !important;
 }
 
 .info-teacher:hover,
@@ -63,7 +83,7 @@ align-items: center !important;
   flex-direction: column;
   gap: 2rem;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .info-teacher-detail {
@@ -76,17 +96,18 @@ align-items: center !important;
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding: 1rem;
+  padding-bottom: 1rem;
   flex-direction: row;
   gap: 2rem;
 }
 
-.teacher-detail-info_sub-title {
+#teacher-detail-info_sub-title {
   flex-direction: row;
   gap: 2rem;
   justify-content: flex-start;
   align-items: flex-start;
   margin-top: -1.5rem !important;
+  margin-left: -0.25rem !important;
 }
 
 .detail-info-left,
@@ -100,6 +121,7 @@ align-items: center !important;
   text-align: left;
   margin-left: 0.25rem;
   margin-bottom: 0.25rem;
+  font-size: 1rem;
 }
 
 .more-teacher-aside {
@@ -125,3 +147,6 @@ align-items: center !important;
     white-space: pre-wrap;
     text-align: left;
 } */
+.teacher_aside{
+  width: 90%;
+}

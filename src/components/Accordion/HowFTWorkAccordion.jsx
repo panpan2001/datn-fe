@@ -45,7 +45,9 @@ const HowFTWorkAccordion = (props) => {
             transition: "padding 250ms ease"
           }}
         >
-          <div className="content">{children} </div>
+          <div className="content"
+          style={{textAlign: 'left'}}
+          >{children} </div>
         </div>
       </div>
     </div>

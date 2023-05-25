@@ -25,3 +25,18 @@ gap:.25rem;
     height:1.45rem !important;
     width:1.45rem !important
 }
+
+.teacher-short-nffo-left_icon-verified{
+    height:1.2rem !important;
+    width:1.2rem !important;
+    margin-top: 1rem;
+    margin-left: 1rem;
+    fill:#00c4a7;
+
+}
+
+#teacher-short-info-left_p{
+    height:6rem;
+    overflow-y:hidden !important;
+    word-wrap: break-word !important;
+}

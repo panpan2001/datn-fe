@@ -10,13 +10,15 @@ function TeacherShortInfoRight({ data }) {
           style={{
             display: "flex",
             justifyContent: "center",
-            padding: "1rem"
+            padding: "1rem",
+            
           }}
         >
           <img src={data.personal_image} alt="Placeholder image"
             style={{
-              width: "12rem",
-              height: "12rem"
+              width: "10rem",
+              height: "10rem",
+              clipPath:"circle(50%)"
             }}
           />
         </figure>
@@ -27,13 +29,19 @@ function TeacherShortInfoRight({ data }) {
           <p className="subtitle is-6">{data.account_id.email}</p>
           <div className="columns ml-3  subtitle teacher-short-info-left_sub-title">
             <div className="sub-title-left">
-              <BsFillStarFill className='sub-title-right_icon' style={{ fill: "yellow" }} />
-              <p>5</p>
+              <BsFillStarFill className='sub-title-right_icon'
+               style={{ fill: "yellow",
+              
+               }} />
+              <p className='is-size-6 mt-1'>5</p>
 
             </div>
             <div className="sub-title-right">
-              <BsCurrencyDollar className='sub-title-right_icon' style={{ fill: "#00c4a7" }} />
-              <p>5-15/ 1.5 tiếng</p>
+              <BsCurrencyDollar className='sub-title-right_icon' 
+              style={{ fill: "#00c4a7",
+            
+              }} />
+              <p className='is-size-6 mt-1'>5-15/ 1.5 tiếng</p>
             </div>
           </div>
         </div>

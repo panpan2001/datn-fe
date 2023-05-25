@@ -10,13 +10,13 @@ import Pagination from '../../components/Pagination'
 import getAllTeachers from '../../redux/actions/Teacher/GetAllTeachersInfo'
 import axios from 'axios'
 const FindingTeacherPage = () => {
-    const teachers = useSelector(state => state.getAllTeachers.teachers?.infoTeacher)
     // console.table(teachers)
     const dispatch = useDispatch()
     useEffect(() => {
         getAllTeachers(dispatch)
 
     }, [])
+    const teachers = useSelector(state => state.getAllTeachers.teachers?.infoTeacher)
 
 
 
@@ -51,7 +51,7 @@ const FindingTeacherPage = () => {
 
                 <div className="columns is-centered">
                     <div className="column is-10 ml-3">
-                        {teachers.map((teacher) => 
+                        {teachers && teachers.map((teacher) => 
                             <>
                               <TeacherShortInfoLeft data={teacher} />
                             <br />
@@ -84,22 +84,25 @@ const FindingTeacherPage = () => {
                 <strong className='is-size-4'>Giáo viên nổi bật</strong>
                 <br />
                 <br />
+                {teachers && 
                 <div className="columns is-multiline">
                
-                             <div className="column is-3">
-                             <TeacherShortInfoRight data={teachers[0]} />
-                         </div>  
-                     
-                         <div className="column is-3">
-                             <TeacherShortInfoRight data={teachers[1]} />
-                         </div> 
-                           <div className="column is-3">
-                             <TeacherShortInfoRight data={teachers[2]} />
-                         </div>  
-                         <div className="column is-3">
-                             <TeacherShortInfoRight data={teachers[3]} />
-                         </div>  
-                </div>
+                <div className="column is-3">
+                <TeacherShortInfoRight data={teachers[0]} />
+            </div>  
+        
+            <div className="column is-3">
+                <TeacherShortInfoRight data={teachers[1]} />
+            </div> 
+              <div className="column is-3">
+                <TeacherShortInfoRight data={teachers[2]} />
+            </div>  
+            <div className="column is-3">
+                <TeacherShortInfoRight data={teachers[3]} />
+            </div>  
+   </div>
+                }
+                
 
             </section>
 
@@ -110,7 +113,7 @@ const FindingTeacherPage = () => {
                 <strong className='is-size-4'>Làm sao để tham gia học? </strong>
                 <br />
                 <div className="columns">
-                    <div className="column is-2"></div>
+                    <div className="column is-1"></div>
 
                     <div className="column is-2">
                         <img src={require('../../assets/images/logo.jpg')} alt=""
@@ -119,9 +122,9 @@ const FindingTeacherPage = () => {
                         // }}
                         />
                     </div>
-                    <div className="column is-6">
+                    <div className="column is-8">
                         <HowFTWorkAccordion title="Lựa chọn giáo viên yêu thích của bạn">
-                            <p>
+                            <p >
                                 Sử dụng thanh công cụ hoặc bộ lọc để tìm ra giáo viên bạn ưng ý nhất.
                             </p>
                         </HowFTWorkAccordion>
@@ -138,7 +141,7 @@ const FindingTeacherPage = () => {
                             </p>
                         </HowFTWorkAccordion>
                     </div>
-                    <div className="column is-2"></div>
+                    <div className="column is-1"></div>
                 </div>
 
             </section>
