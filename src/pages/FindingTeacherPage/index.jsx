@@ -29,12 +29,12 @@ const FindingTeacherPage = () => {
                         <br />
                         <SearchBar />
                         <br />
-                        {/* <div className="columns is-multiline">
+                        <div className="columns is-multiline">
                             <FilterCategory />
                             <FilterCategory />
                             <FilterCategory />
                             <FilterCategory />
-                        </div> */}
+                        </div>
                     </div>
                     <div className="column is-4">
                         <img className='finding-teacher_image ' src={require('../../assets/images/12.jpg')} alt="" />

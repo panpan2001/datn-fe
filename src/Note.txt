@@ -12,9 +12,24 @@ nhat.pham.novasquare@gmail.com - 123456
 student check : phamnhikhau@gmail.com - 123456 
 
 git commit nhanh main 
-12/5
-- loi createstudent ko vo dc tu student comleteìno form ! 
+29/5
 - chua lam forgot pw 
+- khong chạy dc ten trinh duyet khac
+
+https://stackoverflow.com/questions/71714110/can-you-submit-a-restful-request-to-a-google-forms-api 
+https://stackoverflow.com/questions/8604992/google-form-api 
+https://developers.google.com/forms/api/guides 
+https://github.com/googleapis/google-api-nodejs-client 
+https://viblo.asia/p/huong-dan-tao-api-ghi-du-lieu-len-google-sheet-1Je5EPRYlnL 
+https://cloud.google.com/workflows/docs/reference/googleapis/forms/Overview 
+https://www.postman.com/kishorebala/workspace/test/documentation/18578011-b12c1fd2-522a-4554-af73-c39b7e2a7ef3 
+https://developers.google.com/sheets/api/quickstart/nodejs 
+https://pipedream.com/apps/google-forms/integrations/node 
+https://stackoverflow.com/questions/73607092/how-to-access-google-forms-created-by-forms-api 
+Google form API nodejs 
+https://www.retgits.com/2017/08/how-to-connect-google-forms-to-apis/ 
+https://gist.github.com/5un/02c7906429274d73a6657f36f769a8be 
+https://googleapis.dev/nodejs/googleapis/latest/ 
 
 
 

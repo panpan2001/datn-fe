@@ -11,6 +11,7 @@ import getTeacherById from '../../redux/actions/Teacher/GetTeacherById'
 import getTeacherAcademicById from '../../redux/actions/TeacherAcademic/GetTeacherAcademicById'
 import VerifyStatusButton from '../../components/Button/VerifyStatusButton'
 import DetailTeacherCard from '../../components/DetailTeacherCard'
+import DetailClassModalForm from '../../components/DetailClassModalForm'
 function DetailTeacherpage() {
     const dispatch = useDispatch()
     const { id } = useParams()
@@ -21,23 +22,26 @@ function DetailTeacherpage() {
     const teacher = useSelector(state => state.getTeacherById.teacher?.currentTeacher)
 
     console.table("teacher:", teacher)
+    const [show, setShow]=useState("none")
+   
+        
     return (
         < >
             {teacher &&
                 <div className='detail-teacher-page container-fluid is-centered'>
-                    <div className="detail-teacher column   is-9">
+                    <div className="detail-teacher column  is-centered  is-9">
 
                         <div className="info-teacher column ">
-                            <strong className='is-size-5'>Về giáo viên</strong>
+                            <strong className='is-size-6'>Về giáo viên</strong>
                             <hr />
 
-                            <div className="columns  " style={{ width: "100%" }}>
+                            <div className="columns " style={{ width: "100%" }}>
                                 {/* <div className="column is-3 info-teacher_image-button">
                                     <ImageItem image={teacher.personal_image} />
 
                                 </div> */}
-                                <div className="column is-12 info-teacher-detail ">
-                                    <p class="title is-5 columns info-teacher-detail_p ">
+                                <div className="column is-10 info-teacher-detail ">
+                                    <p class="title is-6 columns info-teacher-detail_p ">
                                         <div className="column mt-1">{teacher.account_id.full_name}</div>
                                         <BsFillCheckCircleFill
                                          className='detail-info-teacher_icon-fill'/>
@@ -83,7 +87,7 @@ function DetailTeacherpage() {
 
                         <div className="teacher-academic column  ">
                             <div className="columns ">
-                                <strong className='is-size-5 mr-5'>Học vấn và chứng chỉ</strong>
+                                <strong className='is-size-6 mr-5'>Học vấn và chứng chỉ</strong>
                                 <BsFillCheckCircleFill
                                 className='detail-info-teacher_icon-fill'/>
                                 {/* <button class="button "
@@ -143,7 +147,7 @@ function DetailTeacherpage() {
                         </div>
 
                         <div className="teacher-schedule  ">
-                            <strong className='is-size-5'>Các lớp học</strong>
+                            <strong className='is-size-6'>Các lớp học</strong>
                             <hr />
                             <table class="table is-fullwidth is-hoverable">
                                 <thead>
@@ -153,8 +157,10 @@ function DetailTeacherpage() {
                                         <th>Cấp độ</th>
                                         <th>Số lượng (học sinh)</th>
                                         <th>Thời lượng (tiếng)</th>
-                                        <th>Giá tiền (VDN/ buổi)</th>
-                                        <th>Đăng kí</th>
+                                        {/* <th>Thời gian học <br/> (tháng)</th>
+                                        <th>Giá tiền <br/>  (VDN/ buổi)</th>
+                                        <th>Học thử</th> */}
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody style={{ textAlign: "left" }}>
@@ -164,9 +170,14 @@ function DetailTeacherpage() {
                                         <td>Beginner</td>
                                         <td>10 </td>
                                         <td>1.5  </td>
+                                        {/* <td>3  </td>
                                         <td>100,000 </td>
                                         <td>
-                                            <button className="button is-link">Đăng kí </button>
+                                            <button className="button is-primary">Học thử </button>
+
+                                        </td> */}
+                                        <td>
+                                            <button className="button is-link" onClick={() => setShow("block")}>Chi tiết </button>
 
                                         </td>
                                     </tr>
@@ -181,11 +192,12 @@ function DetailTeacherpage() {
                         <DetailTeacherCard data={teacher} />
                     </div>
 
+<DetailClassModalForm show={show} setShow={setShow} />
+                  
+
+   
                 </div >
-
             }
-
-
         </>
     )
 }

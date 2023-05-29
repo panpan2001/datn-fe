@@ -24,6 +24,10 @@ const StudentCompleteInfoPage = React.lazy(() => import('../pages/CompleteInfoPa
 const TeacherCompleteInfoPage = React.lazy(() => import('../pages/CompleteInfoPage/Teacher'))
 const DetailTeacherPage= React.lazy(() => import('../pages/DetailTeacherPage'))
 
+const StudentManagementPage = React.lazy(() => import('../pages/StudentManagementPage'));
+const CourseManagementPage = React.lazy(() => import('../pages/CourseManagementPage'));
+const TeacherManagementPage = React.lazy(() => import('../pages/TeacherManagementPage'));
+
 
 function ContainerRoutes() {
   const isLoggedIn = useSelector((state) => state.login.login?.isLoggedIn)
@@ -44,7 +48,7 @@ function ContainerRoutes() {
           <Route path="/signup" element={<SignUpPage />} />
           <Route path='/findingTeacher' element={<FindingTeacherPage />} />
           <Route path='/detailTeacher/:id' element={<DetailTeacherPage />} />
-          {/* <Route path='/findingCourse' element={<FindingCoursePage />} /> */}
+          <Route path='/findingCourse' element={<FindingCoursePage />} />
           {/* user can access */}
           {/* {isRegister && <> */}
 
@@ -65,7 +69,16 @@ function ContainerRoutes() {
             </>
           }
         </Route>
-
+{/* {isLoggedIn &&currentUSer.role_name && currentUSer.role_name == 'admin' &&
+                // just  admin can access
+                <Route path='/admin' element={<AdminManagementLayout />}>
+                  <Route index element={<DashboardPage />} />
+                  <Route path='/admin/student' element={<StudentManagementPage />} />
+                  <Route path='/admin/teacher' element={<TeacherManagementPage />} />
+                  <Route path='/admin/course' element={<CourseManagementPage />} />
+                  <Route path="/admin/*" element={<NotFound />} />
+                </Route>
+              } */}
       
       </Routes>
     </BrowserRouter>

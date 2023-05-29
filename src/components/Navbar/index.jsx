@@ -45,9 +45,9 @@ let axiosJWT= createAxiosJWT(dispatch,user,logoutSuccess)
             <Link className="navbar-item" to="/findingTeacher">
               Tìm kiếm giáo viên
             </Link>
-            {/* <Link className="navbar-item" to="/findingCourse">
+            <Link className="navbar-item" to="/findingCourse">
               Tìm kiếm lớp học
-            </Link> */}
+            </Link>
             {isLoggedIn ?
               // (user.role_name == 'admin' ?
               //   <Link className="navbar-item" to="/signup">

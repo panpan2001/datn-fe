@@ -1,19 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './assets/styles/App.css';
 import ContainerRoutes from './routes/ContainerRoutes';
 import { ToastContainer } from 'react-toastify';
 import DetailTeacherpage from './pages/DetailTeacherPage';
 import ImageInfo from './components/TeacherCompleteInfoForm/ImageInfo';
+import StudentJudgeForm from './components/StudentJudgeForm';
 
 function App() {
-
+  
   return (
     <div className="App">
             
       <ContainerRoutes/>
     <ToastContainer/>
-    {/* <DetailTeacherpage/> */}
-    {/* <ImageInfo/> */}
+
+    {/* <StudentJudgeForm/> */}
+  
       </div>
   );
 }
@@ -47,3 +49,22 @@ export default App;
       <div>PURE CSS SIDEBAR TOGGLE MENU</div>
     </div>
   </div> */}
+
+
+
+    {/* 
+    
+    const [s, setS]=useState("none")
+  const onshow = () => {
+  setS("block")
+  }
+    <div class="modal" style={{display: `${s}`}}>
+  <div class="modal-background"></div>
+  <div class="modal-content">
+  <p class="image is-4by3">
+      <img src="https://bulma.io/images/placeholders/1280x960.png" alt=""/>
+    </p>
+  </div>
+  <button class="modal-close is-large" aria-label="close" onClick={() => setS("none")}></button>
+</div>
+<button onClick={onshow}>a</button> */}

@@ -6,9 +6,9 @@ const TeacherCompleteInfoPage = () => {
 
 
   return (
-      <div className="columns  is-multiline  "  id="teacher-complete-info-page">
-<Outlet/>
-      </div>
+    <div className="columns  is-multiline  " id="teacher-complete-info-page">
+      <Outlet />
+    </div>
 
   )
 }

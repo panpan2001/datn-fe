@@ -24,9 +24,9 @@ export const AttitudeNames=[
 
  export const StudentPleasantNames=[
     "Tiêu chí 1: Học viên có hứng thú hoặc yêu thích bài giảng.",
-    // "Tiêu chí 2: Học viên có ý định đăng kí học sau khi học thử không.",
-    "Tiêu chí 2: Học viên có ý định đăng kí khóa học khác của giáo viên không.",
-    "Tiêu chí 3: Học viên có ý định giới thiệu người khác đăng kí học giáo viên này  không."
+    "Tiêu chí 2: Học viên có ý định đăng kí học sau khi học thử không.",
+    "Tiêu chí 3: Học viên có ý định đăng kí khóa học khác của giáo viên không.",
+    "Tiêu chí 4: Học viên có ý định giới thiệu người khác đăng kí học giáo viên này  không."
  ]
 
  export  const LevelLabelNames= ["Rất tệ","Tệ","Bình thường","Tốt","Rất tốt"]

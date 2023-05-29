@@ -65,7 +65,7 @@ const LandingPage = () => {
                         <div className="column is-3 landing-page_section-1-1-column">
                             <BsFillPersonCheckFill className='landing-page_section-1-1-icon'/>
                             <strong>Hồ sơ trung thực</strong>
-                            <p> Hồ sơ của  giáo viên<br />  được kiểm tra và xác nhận kĩ càng</p>
+                            <p> Hồ sơ giáo viên  được<br /> kiểm tra  và xác nhận kĩ càng</p>
                         </div>
                         <div className="column is-3 landing-page_section-1-1-column">
                             <BsCoin className='landing-page_section-1-1-icon'/>
