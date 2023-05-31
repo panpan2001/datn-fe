@@ -5,7 +5,6 @@ import registerUser from "../../redux/actions/Auth/RegisterRequest"
 import { useDispatch } from "react-redux"
 import { useFormik } from "formik"
 import * as Yup from "yup"
-import { toast } from "react-toastify"
 
 
 const SignUpForm = () => {

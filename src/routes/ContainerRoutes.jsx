@@ -10,6 +10,9 @@ import AcademicInfo from '../components/TeacherCompleteInfoForm/AcademicInfo';
 import DegreeInfo from '../components/TeacherCompleteInfoForm/DegreeInfo';
 import ImageInfo from '../components/TeacherCompleteInfoForm/ImageInfo';
 import TeacherAcademicDegreeInfoForm from '../components/TeacherCompleteInfoForm';
+import CurrentClassForm from '../components/CurrentClassForm/StudentCurrentClassForm';
+import TeacherCurrentClassForm from '../components/CurrentClassForm/TeacherCurrentClassForm ';
+import StudentCurrentClassForm from '../components/CurrentClassForm/StudentCurrentClassForm';
 
 const LandingPage = React.lazy(() => import('../pages/LandingPage'));
 const LoginPage = React.lazy(() => import('../pages/LoginPage'));
@@ -22,7 +25,9 @@ const ProfilePage = React.lazy(() => import('../pages/ProfilePage'))
 const PersonalInfo = React.lazy(() => import('../components/PersonalInfo'))
 const StudentCompleteInfoPage = React.lazy(() => import('../pages/CompleteInfoPage/Student'))
 const TeacherCompleteInfoPage = React.lazy(() => import('../pages/CompleteInfoPage/Teacher'))
-const DetailTeacherPage= React.lazy(() => import('../pages/DetailTeacherPage'))
+const DetailTeacherPage = React.lazy(() => import('../pages/DetailTeacherPage'))
+const CreateClassPage = React.lazy(() => import('../pages/CreateClassPage'))
+
 
 const StudentManagementPage = React.lazy(() => import('../pages/StudentManagementPage'));
 const CourseManagementPage = React.lazy(() => import('../pages/CourseManagementPage'));
@@ -32,10 +37,10 @@ const TeacherManagementPage = React.lazy(() => import('../pages/TeacherManagemen
 function ContainerRoutes() {
   const isLoggedIn = useSelector((state) => state.login.login?.isLoggedIn)
   const currentUSer = useSelector((state) => state.login.login?.currentUser)
-  const student=useSelector((state)=>state.getStudentById.students?.infoStudent)
+  const student = useSelector((state) => state.getStudentById.students?.infoStudent)
 
   const isRegister = useSelector((state) => state.signup.register?.isRegister)
-  console.log(isRegister)
+  // console.log(isRegister)
   return (
     <BrowserRouter>
       <Routes>
@@ -48,28 +53,47 @@ function ContainerRoutes() {
           <Route path="/signup" element={<SignUpPage />} />
           <Route path='/findingTeacher' element={<FindingTeacherPage />} />
           <Route path='/detailTeacher/:id' element={<DetailTeacherPage />} />
-          <Route path='/findingCourse' element={<FindingCoursePage />} />
+          {/* <Route path='/findingCourse' element={<FindingCoursePage />} /> */}
           {/* user can access */}
           {/* {isRegister && <> */}
 
-            <Route path='/completeInfoStudent' element={<StudentCompleteInfoPage />} /> 
-            <Route path='/completeInfoTeacher' element={<TeacherCompleteInfoPage />} >
-              <Route index element={<AcademicInfo/>} />
-              <Route path='/completeInfoTeacher/degree' element={<DegreeInfo/>} />
-              <Route path='/completeInfoTeacher/description' element={<ImageInfo/>} />
-            </Route>
+          <Route path='/completeInfoStudent' element={<StudentCompleteInfoPage />} />
+          <Route path='/completeInfoTeacher' element={<TeacherCompleteInfoPage />} >
+            <Route index element={<AcademicInfo />} />
+            <Route path='/completeInfoTeacher/degree' element={<DegreeInfo />} />
+            <Route path='/completeInfoTeacher/description' element={<ImageInfo />} />
+          </Route>
           {/* </>} */}
           {isLoggedIn &&
             <>
-                <Route path='/profile' element={<ProfilePage />}>
-                  <Route index element={<PersonalInfo />} />
-                  <Route path='/profile/myclass' element={<PersonalInfo />} />
-                  <Route path='/profile/judgeTeacher' element={<StudentJudgeForm />} />
-                </Route>
+              <Route path='/profile' element={<ProfilePage />}>
+                <Route index element={<PersonalInfo />} />
+                {
+                  currentUSer.role_name && currentUSer.role_name == 'student' &&
+                  <>
+                    <Route path='/profile/myclass' element={<PersonalInfo />} />
+                    <Route path='/profile/studentClass' element={<StudentCurrentClassForm />} />
+                    <Route path='/profile/judgeTeacher' element={<StudentJudgeForm />} />
+                  </>
+                }
+                {
+                  currentUSer.role_name && currentUSer.role_name == 'teacher' &&
+                  <>
+                    <Route path='/profile/teacherClass' element={<TeacherCurrentClassForm />} />
+                  </>
+                }
+
+              </Route>
+              {
+                currentUSer.role_name && currentUSer.role_name == 'teacher' &&
+                <>
+                  <Route path='/createClass' element={<CreateClassPage />} />
+                </>
+              }
             </>
           }
         </Route>
-{/* {isLoggedIn &&currentUSer.role_name && currentUSer.role_name == 'admin' &&
+        {/* {isLoggedIn &&currentUSer.role_name && currentUSer.role_name == 'admin' &&
                 // just  admin can access
                 <Route path='/admin' element={<AdminManagementLayout />}>
                   <Route index element={<DashboardPage />} />
@@ -79,7 +103,7 @@ function ContainerRoutes() {
                   <Route path="/admin/*" element={<NotFound />} />
                 </Route>
               } */}
-      
+
       </Routes>
     </BrowserRouter>
   )
@@ -106,5 +130,4 @@ const TeacherManagementPage = React.lazy(() => import('../pages/TeacherManagemen
                   <Route path="/admin/*" element={<NotFound />} />
                 </Route>
               } */}
-                        
-                      
+

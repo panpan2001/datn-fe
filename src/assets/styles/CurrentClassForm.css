@@ -1,0 +1,25 @@
+@import './RootStyle.css';
+
+.current-class_container{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    gap: 2rem;
+}
+/* .current-class_image{
+    width: 80%;
+    height: 50%;
+} */
+
+.current-class_form{
+    display: inherit !important;
+    flex-direction: row;
+    justify-content: flex-start;
+    /* border: 1px solid var(--border-color);
+    border-radius: 10px;
+    box-shadow: 0 4px 4px 4px #f7f7f7;
+    padding: 1rem !important;
+    width: 100%;
+    background-color: white !important; */
+}

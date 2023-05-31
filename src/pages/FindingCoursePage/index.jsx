@@ -8,6 +8,7 @@ import HowFTWorkAccordion from '../../components/Accordion/HowFTWorkAccordion'
 import SearchBar from '../../components/SearchBar'
 import FindingClassMessage from '../../components/Message/FindingClassMessage'
 function FindingCoursePage() {
+    
     return (
         <div className='finding-course-page_container container-fluid'>
             <hero id="finding-course_hero">

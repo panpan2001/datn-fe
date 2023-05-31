@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import '../../assets/styles/TeacherProfileForm.css'
 function TeacherProfileForm() {
     // console.log(user._id)
-    const user = useSelector((state) => state.signup.register?.currentUser)
+    const user = useSelector((state) => state.login.login?.currentUser)
     const dispatch = useDispatch()
     useEffect(() => {
         console.log("hehe i vo dc ne ")

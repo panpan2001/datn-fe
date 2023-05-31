@@ -39,6 +39,21 @@ a.navbar-item:focus{
   margin-left: 1rem;
 }
 
+.nav-bar_icon {
+  font-size: .75rem;
+  background-color: #d60909;
+  color: #fff;
+  border-radius: 50%;
+  width: 1rem;
+  height: 1rem;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  top: -0.25rem;
+    left: 1.25rem;
+}
+
+
 @media screen and (width>=920px) {
   .navbar-start,
   .navbar-menu,

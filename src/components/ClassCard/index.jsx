@@ -1,31 +1,49 @@
 import React from 'react'
-
-function ClassCard () {
+import '../../assets/styles/ClassCard.css'
+function ClassCard ({data}) {
   return (
-    <div className="column is-3 mb-4">
+    <div className="column is-6 mb-2">
         <div class="card">
   <div class="card-image">
     <figure class="image is-4by3">
-      <img src={require('../../assets/images/16.jpg')} alt="Placeholder image"/>
+      <img src={data.image} alt="Placeholder image"/>
     </figure>
   </div>
-  <div class="card-content">
-    <div class="media">
-      
-      <div class="media-content">
-        <p class="title is-size-5">John Smith</p>
-        <p class="subtitle is-size-6">@johnsmith</p>
-      </div>
-    </div>
-
+  <div class="card-content class-card">
     <div class="content">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-      Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-      <a href="#">#css</a> <a href="#">#responsive</a>
-      <br/>
-      <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+    <strong className='is-size-5'>{data.name} </strong>
     </div>
+    <div class="content">
+         <p><strong>Loại: </strong>{data.category_id.type}</p>
+    </div>
+    <div class="content">
+         <p><strong>Cấp độ: </strong>{data.category_id.level}</p>
+    </div>
+    <div className="content">
+         <p><strong>Số lượng học viên: </strong>{data.number_of_student}</p>
+    </div>
+    <div className="content">
+         <p><strong>Thời lượng buổi học(ph): </strong>{data.time_per_lesson}</p>
+    </div>
+    <div className="content">
+         <p> <strong>Thời gian học: </strong>{data.learning_period}</p>
+    </div>
+    <div className="content">
+         <p><strong>Lịch học: </strong>{data.schedule}</p>
+    </div>
+    <div className="content">
+         <p><strong>Giá tiền(VDN/ buổi): </strong>{data.cost}</p>
+    </div>
+    <div className="content">
+         <p><strong>Mô tả: </strong>{data.description}</p>
+    </div>
+                   
   </div>
+  <footer class="card-footer">
+    {/* <button type='button' class="card-footer-item">Save</button> */}
+    <button type='button' class="button is-link">Edit</button>
+    <button type='button' class="button is-danger">Delete</button>
+  </footer>
 </div>
     </div>
   )

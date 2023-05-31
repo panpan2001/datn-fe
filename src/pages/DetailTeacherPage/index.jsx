@@ -12,6 +12,7 @@ import getTeacherAcademicById from '../../redux/actions/TeacherAcademic/GetTeach
 import VerifyStatusButton from '../../components/Button/VerifyStatusButton'
 import DetailTeacherCard from '../../components/DetailTeacherCard'
 import DetailClassModalForm from '../../components/DetailClassModalForm'
+import getAllCourseByIdTeacher from '../../redux/actions/Course/GetAllCourseByIdTeacher'
 function DetailTeacherpage() {
     const dispatch = useDispatch()
     const { id } = useParams()
@@ -21,10 +22,15 @@ function DetailTeacherpage() {
     }, [id])
     const teacher = useSelector(state => state.getTeacherById.teacher?.currentTeacher)
 
-    console.table("teacher:", teacher)
-    const [show, setShow]=useState("none")
-   
-        
+    console.table("teacher:", teacher._id)
+    const [show, setShow] = useState("none")
+    useEffect(() => {
+        getAllCourseByIdTeacher(id, dispatch)
+    }, [])
+
+    const classes = useSelector((state) => state.getAllCourseByIdTeacher.courses?.currentCourses)
+    console.log(classes)
+
     return (
         < >
             {teacher &&
@@ -44,37 +50,37 @@ function DetailTeacherpage() {
                                     <p class="title is-6 columns info-teacher-detail_p ">
                                         <div className="column mt-1">{teacher.account_id.full_name}</div>
                                         <BsFillCheckCircleFill
-                                         className='detail-info-teacher_icon-fill'/>
+                                            className='detail-info-teacher_icon-fill' />
                                         <button class="button "
-                                        className='detail-info-teacher_verified-button'>Đã xác minh </button>
+                                            className='detail-info-teacher_verified-button'>Đã xác minh </button>
 
                                     </p>
                                     <div className="columns ml-3  subtitle " id='teacher-detail-info_sub-title'>
-                           <div className="detail-info-left">
-                               <BsFillStarFill
-                                   className='detail-info-teacher_icon'
-                                   style={{
-                                       fill: "yellow",
-                                   }} />
-                               <p className='is-size-6'>5</p>
+                                        <div className="detail-info-left">
+                                            <BsFillStarFill
+                                                className='detail-info-teacher_icon'
+                                                style={{
+                                                    fill: "yellow",
+                                                }} />
+                                            <p className='is-size-6'>5</p>
 
-                           </div>
-                           <div className="detail-info-right">
-                               <BsCurrencyDollar
-                                   className='detail-info-teacher_icon'
-                                   style={{
-                                       fill: "#00c4a7",
-                                       marginTop:".1rem"
-                                   }} />
-                               <p className='is-size-6'>5-15/ 1.5 tiếng</p>
-                           </div>
-                       </div>
+                                        </div>
+                                        <div className="detail-info-right">
+                                            <BsCurrencyDollar
+                                                className='detail-info-teacher_icon'
+                                                style={{
+                                                    fill: "#00c4a7",
+                                                    marginTop: ".1rem"
+                                                }} />
+                                            <p className='is-size-6'>5-15/ 1.5 tiếng</p>
+                                        </div>
+                                    </div>
                                     <p className="teacher-description_paragraph"><strong>Email:</strong> {teacher.account_id.email}</p>
                                     <p className="teacher-description_paragraph"><strong>Số điện thoại:</strong> {teacher.account_id.phone_number}</p>
-                                    <p className="teacher-description_paragraph"><strong>Giới thiệu:</strong> 
-                                    {teacher.personal_description.split("."||"\n").map((item, index) => {
-                                return <p key={index}>{item}</p>
-                            })}
+                                    <p className="teacher-description_paragraph"><strong>Giới thiệu:</strong>
+                                        {teacher.personal_description.split("." || "\n").map((item, index) => {
+                                            return <p key={index}>{item}</p>
+                                        })}
 
                                     </p>
 
@@ -89,7 +95,7 @@ function DetailTeacherpage() {
                             <div className="columns ">
                                 <strong className='is-size-6 mr-5'>Học vấn và chứng chỉ</strong>
                                 <BsFillCheckCircleFill
-                                className='detail-info-teacher_icon-fill'/>
+                                    className='detail-info-teacher_icon-fill' />
                                 {/* <button class="button "
                        style={{
                            backgroundColor: "#00c4a7",
@@ -152,35 +158,34 @@ function DetailTeacherpage() {
                             <table class="table is-fullwidth is-hoverable">
                                 <thead>
                                     <tr>
-                                        <th>STT</th>
+
                                         <th>Tên lớp học</th>
                                         <th>Cấp độ</th>
                                         <th>Số lượng (học sinh)</th>
                                         <th>Thời lượng (tiếng)</th>
-                                        {/* <th>Thời gian học <br/> (tháng)</th>
-                                        <th>Giá tiền <br/>  (VDN/ buổi)</th>
-                                        <th>Học thử</th> */}
-                                        <th></th>
+                                        <th>Thời gian học(tháng)</th>
+                                        <th>Lịch học</th>
                                     </tr>
                                 </thead>
                                 <tbody style={{ textAlign: "left" }}>
-                                    <tr >
-                                        <td>1</td>
-                                        <td>TOEIC</td>
-                                        <td>Beginner</td>
-                                        <td>10 </td>
-                                        <td>1.5  </td>
-                                        {/* <td>3  </td>
-                                        <td>100,000 </td>
-                                        <td>
-                                            <button className="button is-primary">Học thử </button>
 
-                                        </td> */}
-                                        <td>
-                                            <button className="button is-link" onClick={() => setShow("block")}>Chi tiết </button>
+                                    {classes.map((item) => (
 
-                                        </td>
-                                    </tr>
+                                        <tr key={item._id}>
+                                            <td>{item.name}</td>
+                                            <td>{item.category_id.level}</td>
+                                            <td>{item.number_of_student} </td>
+                                            <td>{item.time_per_lesson} </td>
+                                            <td>{item.learning_period} </td>
+                                            <td>{item.schedule} </td>
+                                            <td>
+                                                <button className="button is-link" onClick={() => setShow("block")}>Chi tiết </button>
+
+                                            </td>
+                                            <DetailClassModalForm data={item} show={show} setShow={setShow} />
+
+                                        </tr>
+                                    ))}
 
                                 </tbody>
                             </table>
@@ -192,10 +197,10 @@ function DetailTeacherpage() {
                         <DetailTeacherCard data={teacher} />
                     </div>
 
-<DetailClassModalForm show={show} setShow={setShow} />
-                  
 
-   
+
+
+
                 </div >
             }
         </>

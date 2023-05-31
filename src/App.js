@@ -5,6 +5,7 @@ import { ToastContainer } from 'react-toastify';
 import DetailTeacherpage from './pages/DetailTeacherPage';
 import ImageInfo from './components/TeacherCompleteInfoForm/ImageInfo';
 import StudentJudgeForm from './components/StudentJudgeForm';
+import CreateClassPage from './pages/CreateClassPage';
 
 function App() {
   
@@ -13,8 +14,7 @@ function App() {
             
       <ContainerRoutes/>
     <ToastContainer/>
-
-    {/* <StudentJudgeForm/> */}
+{/* <CreateClassPage/> */}
   
       </div>
   );

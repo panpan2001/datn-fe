@@ -1,0 +1,22 @@
+@import './RootStyle.css';
+
+.class-card{
+    display: flex !important;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 0;
+
+}
+.content{
+    display: flex !important;
+    margin-bottom: .5rem !important;
+}
+
+.card-footer{
+    display: flex !important;
+    flex-direction: row;
+    justify-content: center;
+    gap: 2rem;
+    padding: 1rem;
+}
