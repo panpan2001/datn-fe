@@ -5,7 +5,7 @@ import TeacherShortInfoLeft from '../../components/TeacherShortInfoCard/TeacherS
 import { BsCurrencyDollar, BsFillCheckCircleFill, BsFillStarFill } from 'react-icons/bs'
 import RegisterButton from '../../components/GroupButton/RegisterButton'
 import ImageItem from '../../components/ImageItem'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import getTeacherById from '../../redux/actions/Teacher/GetTeacherById'
 import getTeacherAcademicById from '../../redux/actions/TeacherAcademic/GetTeacherAcademicById'
@@ -22,15 +22,16 @@ function DetailTeacherpage() {
     }, [id])
     const teacher = useSelector(state => state.getTeacherById.teacher?.currentTeacher)
 
-    console.table("teacher:", teacher._id)
+    console.table("teacher:", teacher)
     const [show, setShow] = useState("none")
+    // can phai thay bang teacher.id_course de dong bo nha 
     useEffect(() => {
         getAllCourseByIdTeacher(id, dispatch)
-    }, [])
+    }, [id])
 
     const classes = useSelector((state) => state.getAllCourseByIdTeacher.courses?.currentCourses)
-    console.log(classes)
-
+    console.log({classes})
+/// 
     return (
         < >
             {teacher &&
@@ -49,10 +50,16 @@ function DetailTeacherpage() {
                                 <div className="column is-10 info-teacher-detail ">
                                     <p class="title is-6 columns info-teacher-detail_p ">
                                         <div className="column mt-1">{teacher.account_id.full_name}</div>
-                                        <BsFillCheckCircleFill
-                                            className='detail-info-teacher_icon-fill' />
-                                        <button class="button "
-                                            className='detail-info-teacher_verified-button'>Đã xác minh </button>
+                                        {teacher.id_academic.degree_status ?
+                                        <>
+                                         <BsFillCheckCircleFill
+                                         className='detail-info-teacher_icon-fill' />
+                                     <button class="button "
+                                         className='detail-info-teacher_verified-button'>Đã xác minh </button>
+                                        </>
+                                        :
+                                         <></>}
+                                       
 
                                     </p>
                                     <div className="columns ml-3  subtitle " id='teacher-detail-info_sub-title'>
@@ -94,16 +101,11 @@ function DetailTeacherpage() {
                         <div className="teacher-academic column  ">
                             <div className="columns ">
                                 <strong className='is-size-6 mr-5'>Học vấn và chứng chỉ</strong>
+                                {teacher.id_academic.degree_status ?
                                 <BsFillCheckCircleFill
-                                    className='detail-info-teacher_icon-fill' />
-                                {/* <button class="button "
-                       style={{
-                           backgroundColor: "#00c4a7",
-                           width: "150px",
-                           height: "32px",
-                           borderRadius: "30px",
-                           color: "white"
-                       }}>Đã xác minh </button> */}
+                                className='detail-info-teacher_icon-fill' />:<></>}
+                                
+                               
                             </div>
 
                             <hr />
@@ -162,29 +164,48 @@ function DetailTeacherpage() {
                                         <th>Tên lớp học</th>
                                         <th>Cấp độ</th>
                                         <th>Số lượng (học sinh)</th>
-                                        <th>Thời lượng (tiếng)</th>
-                                        <th>Thời gian học(tháng)</th>
-                                        <th>Lịch học</th>
+                                        <th>Thời lượng (ph)</th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        {/* <th>Thời gian học (tháng)</th>
+                                        <th>Lịch học</th> */}
                                     </tr>
                                 </thead>
                                 <tbody style={{ textAlign: "left" }}>
-
-                                    {classes.map((item) => (
-
-                                        <tr key={item._id}>
+                                        {/* can phai thay lai bang teacher.id_course de dong bo */}
+                                    {classes && classes.map((item) => (
+<>
+<tr key={item._id}>
+                                            {/* <td>{item._id}</td> */}
                                             <td>{item.name}</td>
                                             <td>{item.category_id.level}</td>
                                             <td>{item.number_of_student} </td>
                                             <td>{item.time_per_lesson} </td>
-                                            <td>{item.learning_period} </td>
-                                            <td>{item.schedule} </td>
+                                            {/* <td>{item.learning_period} </td>
+                                            <td>{item.schedule} </td> */}
                                             <td>
-                                                <button className="button is-link" onClick={() => setShow("block")}>Chi tiết </button>
+                                                {/* <button className="button is-link" onClick={() => setShow("block")}>Chi tiết </button> */}
+                                                <Link to={`/detailTeacher/${teacher._id}/detailClass/${item._id}`}>
+                                                <button className="button is-link" >Chi tiết </button>
+                                                </Link>
+                                                
 
                                             </td>
-                                            <DetailClassModalForm data={item} show={show} setShow={setShow} />
+                                            <td>
+                                                <button className="button is-primary" >Học thử </button>
+
+                                            </td>
+                                            <td>
+                                                <button className="button is-info" >Đăng kí  </button>
+
+                                            </td>
 
                                         </tr>
+                                        {/* <DetailClassModalForm id={item._id} data={item} show={show} setShow={setShow} /> */}
+
+</>
+                                       
                                     ))}
 
                                 </tbody>
@@ -194,13 +215,8 @@ function DetailTeacherpage() {
                     </div>
                     <div className="teacher_aside colunm is-3 is-multiline ">
 
-                        <DetailTeacherCard data={teacher} />
+                        <DetailTeacherCard data={teacher}  />
                     </div>
-
-
-
-
-
                 </div >
             }
         </>
@@ -215,3 +231,11 @@ export default DetailTeacherpage
                </div>
                    
             </div> */}
+ {/* <button class="button "
+                       style={{
+                           backgroundColor: "#00c4a7",
+                           width: "150px",
+                           height: "32px",
+                           borderRadius: "30px",
+                           color: "white"
+                       }}>Đã xác minh </button> */}

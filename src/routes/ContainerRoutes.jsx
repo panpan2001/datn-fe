@@ -27,7 +27,7 @@ const StudentCompleteInfoPage = React.lazy(() => import('../pages/CompleteInfoPa
 const TeacherCompleteInfoPage = React.lazy(() => import('../pages/CompleteInfoPage/Teacher'))
 const DetailTeacherPage = React.lazy(() => import('../pages/DetailTeacherPage'))
 const CreateClassPage = React.lazy(() => import('../pages/CreateClassPage'))
-
+const DetailClassPage= React.lazy(() => import('../pages/DetailClassPage'))
 
 const StudentManagementPage = React.lazy(() => import('../pages/StudentManagementPage'));
 const CourseManagementPage = React.lazy(() => import('../pages/CourseManagementPage'));
@@ -53,9 +53,12 @@ function ContainerRoutes() {
           <Route path="/signup" element={<SignUpPage />} />
           <Route path='/findingTeacher' element={<FindingTeacherPage />} />
           <Route path='/detailTeacher/:id' element={<DetailTeacherPage />} />
+            <Route path='/detailTeacher/:id/detailClass/:id' element={<DetailClassPage />} />
+           
+          
           {/* <Route path='/findingCourse' element={<FindingCoursePage />} /> */}
           {/* user can access */}
-          {/* {isRegister && <> */}
+          {isRegister && <>
 
           <Route path='/completeInfoStudent' element={<StudentCompleteInfoPage />} />
           <Route path='/completeInfoTeacher' element={<TeacherCompleteInfoPage />} >
@@ -63,7 +66,7 @@ function ContainerRoutes() {
             <Route path='/completeInfoTeacher/degree' element={<DegreeInfo />} />
             <Route path='/completeInfoTeacher/description' element={<ImageInfo />} />
           </Route>
-          {/* </>} */}
+          </>}
           {isLoggedIn &&
             <>
               <Route path='/profile' element={<ProfilePage />}>

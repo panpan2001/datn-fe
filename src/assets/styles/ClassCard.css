@@ -1,5 +1,30 @@
 @import './RootStyle.css';
 
+.class-card_container{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-content: flex-start;
+    background-color: white;
+    border:1px solid var(--border-color);
+    border-radius: 10px;
+    
+}
+.class-card_container:hover{
+    box-shadow: 0 0 8px 0 var(--border-color);
+}
+/* .class-card_image{
+    width: 50%;
+} */
+
+.class-card_left{
+    display: flex !important;
+    flex-direction: column;
+    gap: 2rem;
+    align-content: space-between;
+    justify-content: center;
+}
+
 .class-card{
     display: flex !important;
     flex-direction: column;
@@ -19,4 +44,11 @@
     justify-content: center;
     gap: 2rem;
     padding: 1rem;
+}
+.group-buttons{
+    display: flex !important;
+    flex-direction: row;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
 }

@@ -17,16 +17,17 @@ function CreateClassPage() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   let teacher = useSelector(state => state.getTeacherByAccountId.teacher?.currentTeacher)
-  console.log({teacher})
+  // console.log({teacher})
   const user = useSelector((state) => state.login.login?.currentUser)
   const accessToken = user?.accessToken
   const id = user?._id
   let axiosJWT = createAxiosJWT(dispatch, user, createCourseSuccess)
   const [images, setImages] = useState()
   const [url, setUrl] = useState('')
-console.log({user})
+// console.log({user})
 
   useEffect(() => {
+   
     getCourseCategory(dispatch)
     uploadImage(images).then((res) => {
       setUrl(res)
@@ -36,6 +37,7 @@ console.log({user})
   }, [images])
   const courseCategories = useSelector(state => state.getCourseCategory.courseCategories?.categories)
 
+console.log({courseCategories})
   const formik = useFormik({
     initialValues: {
       id_teacher: '',
@@ -83,7 +85,7 @@ console.log({user})
         description: values.description,
         image: url,
       }
-      console.log(value)
+      // console.log(value)
        createCourse(axiosJWT,accessToken, value,dispatch,navigate)
       // .then((res) => {
       //   console.log("res createCourse in create class page:",res,typeof res)

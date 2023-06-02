@@ -15,6 +15,7 @@ function TeacherCurrentClassForm() {
         getAllCourseByIdTeacher(teacher._id, dispatch)
     }, [])
     console.log("current teacher:", teacher)
+    //chinh lai ve teacher.id_course 
     useEffect(() => {
         getAllCourseByIdTeacher(teacher._id, dispatch)
     }, [])

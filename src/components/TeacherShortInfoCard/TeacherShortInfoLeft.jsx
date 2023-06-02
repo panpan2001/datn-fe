@@ -26,22 +26,7 @@ function TeacherShortInfoLeft({ data }) {
                             {/* <div className="column"> */}
                             <BsFillCheckCircleFill
                             className="teacher-short-nffo-left_icon-verified "/>
-                                {/* <button className="button "
-                                    style={{
-                                        backgroundColor: "#00c4a7",
-                                        width: "140px",
-                                        height: "30px",
-                                        borderRadius: "30px",
-                                        color: "white "
-                                    }}>Đã xác minh </button>
-                                <button className="button " 
-                             style={{backgroundColor: "yellow",
-                            width:"140px",
-                            height:"30px",
-                            borderRadius:"30px",
-                            color:"black "
-                            }}>Đã xác minh </button> */}
-                            {/* </div> */}
+                              
                         </div>
                         <div className="columns ml-1  subtitle teacher-short-info-left_sub-title">
                             <div className="sub-title-left">
@@ -56,7 +41,7 @@ function TeacherShortInfoLeft({ data }) {
                         </div>
                         <p id='teacher-short-info-left_p'
                         >
-                            {data.personal_description}...
+                            {data.personal_description}
                         </p>
                         
                         <Link to={`/detailTeacher/${data._id}`}>
@@ -84,3 +69,20 @@ function TeacherShortInfoLeft({ data }) {
 }
 
 export default TeacherShortInfoLeft
+
+  {/* <button className="button "
+                                    style={{
+                                        backgroundColor: "#00c4a7",
+                                        width: "140px",
+                                        height: "30px",
+                                        borderRadius: "30px",
+                                        color: "white "
+                                    }}>Đã xác minh </button>
+                                <button className="button " 
+                             style={{backgroundColor: "yellow",
+                            width:"140px",
+                            height:"30px",
+                            borderRadius:"30px",
+                            color:"black "
+                            }}>Đã xác minh </button> */}
+                            {/* </div> */}

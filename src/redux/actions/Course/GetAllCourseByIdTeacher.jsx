@@ -6,7 +6,7 @@ import { CourseApi } from "../../../utils/BaseUrl"
 const getAllCourseByIdTeacher=async(id,dispatch)=>{
     dispatch(getAllCourseByIdTeacherStart())
     try {
-        const res= await axios.get(CourseApi+"/teacher/"+id)
+        const res= await axios.get(CourseApi+"teacher/"+id)
         dispatch(getAllCourseByIdTeacherSuccess(res.data))
 
     }

@@ -72,7 +72,7 @@ function DetailTeacherCard({ data }) {
                         flexDirection: 'row ',
                     }}
                 >
-                    <button className="button is-link">Đăng kí </button>
+                    {/* <button className="button is-link">Đăng kí </button> */}
                     <button className="button is-info">Liên hệ  </button>
                     <button className="button is-danger">Đánh giá  </button>
                 </div>

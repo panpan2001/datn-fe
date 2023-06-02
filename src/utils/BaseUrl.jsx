@@ -11,8 +11,8 @@ const StudentApi = BASE_URL + "/students/"
 const TeacherApi = BASE_URL + "/teachers/"
 const TeacherAcademicApi = BASE_URL + "/teacherAcademics/"
 const TeacherDegreeApi= BASE_URL + "/teacherDegrees/"
-const CourseCategoryApi = BASE_URL + "/courseCategories"
-const CourseApi = BASE_URL + "/courses"
+const CourseCategoryApi = BASE_URL + "/courseCategories/"
+const CourseApi = BASE_URL + "/courses/"
 
 
 export {
