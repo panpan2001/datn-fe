@@ -1,19 +1,30 @@
 import React, { useEffect } from 'react'
 import '../../assets/styles/DetailClassModalForm.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 import { CourseApi } from '../../utils/BaseUrl'
 import getCoursebyId from '../../redux/actions/Course/GetCoursebyId'
 function DetailClassPage() {
-    const { id } = useParams()
+    const currentUser= useSelector((state) => state.login.login?.currentUser)
+    const { idClass } = useParams()
     const dispatch= useDispatch()
     const navigate= useNavigate()
-    console.log(id)
+    console.log(idClass)
     useEffect(() => {
-        getCoursebyId(id,dispatch)
+        getCoursebyId(idClass,dispatch)
     }, [])
 const data= useSelector((state)=>state.getCourseById.course?.currentCourse)
+const formatter = new Intl.NumberFormat( {
+    style: 'currency',
+    currency: 'VND',
+
+  });
+
+  const weekdays= data.schedule.split(" - ")[1].split(",")
+  let time= data.schedule.split(" - ")[0]
+  time= time.split(":")[0] <12? time+" AM" : time+" PM"
+
     return (
         <div class="container " style={{
             marginBottom: "2rem",
@@ -30,7 +41,7 @@ const data= useSelector((state)=>state.getCourseById.course?.currentCourse)
             }}
             >
                 <header class="modal-card-head">
-                    <p class="modal-card-title">Chi tiết lớp học</p>
+                    <p class="modal-card-title">Chi tiết khóa học</p>
                     <button class="modal-close is-large" aria-label="close" ></button>
 
                 </header>
@@ -54,6 +65,7 @@ const data= useSelector((state)=>state.getCourseById.course?.currentCourse)
                             <th>Thời lượng <br/> (tiếng)</th>
                             <th>Thời gian học<br/>(tháng)</th>
                             <th>Lịch học</th>
+                            <th>Giờ bắt đầu</th>
                             <th>Giá tiền<br/>(VDN/ buổi)</th>
                         </tr>
                     </thead>
@@ -66,9 +78,10 @@ const data= useSelector((state)=>state.getCourseById.course?.currentCourse)
                             <td>{data.category_id.level}</td>
                             <td>{data.number_of_student} </td>
                             <td>{data.time_per_lesson} </td>
-                            <td>{data.learning_period} </td>
-                            <td>{data.schedule} </td>
-                            <td>{data.cost} </td>
+                            <td>{data.learning_period } </td>
+                            <td>{weekdays.map((item)=><>{item}<br/></>)} </td>
+                            <td>{time} </td>
+                            <td>{formatter.format(data.cost)} </td>
 
                         </tr>
 
@@ -81,13 +94,24 @@ const data= useSelector((state)=>state.getCourseById.course?.currentCourse)
                     id='detail-class_modal'
                     style={{ gap: '2rem' }}
                 >
-                    {/* {isLoggin==false ||user.role_name||  user.role_name=='student' &&  */}
+                    { currentUser ? 
                     <>
-                        <button className="button is-primary">Học thử </button>
+                    <Link to={`/registerCourse/${idClass}`}>
+                    <button className="button is-primary">Học thử </button>
+
+                    </Link>
                         <button className="button is-info">Đăng kí  </button>
-                        <button className="button is-danger" onClick={()=>navigate(-1)}>Thoát  </button>
-                    </>
-                    {/* } */}
+                    </>:
+                     <>
+                     <Link to='/signup'>
+                     <button className="button is-primary">Học thử </button>
+                     </Link>
+                     <Link to='/signup'>
+                     <button className="button is-info">Đăng kí  </button>
+                     </Link>
+                 </>
+                     } 
+                     <button className="button is-danger" onClick={()=>navigate(-1)}>Thoát  </button>
 
                 </div>
             </div>

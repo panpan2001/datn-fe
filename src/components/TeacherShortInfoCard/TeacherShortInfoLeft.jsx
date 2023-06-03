@@ -56,9 +56,9 @@ function TeacherShortInfoLeft({ data }) {
                         </Link>
                         
                     </div>
-                    <div className="media-right teacher-short-info-left_media-right">
-                    <RegisterButton  />
-                    </div>
+                    {/* <div className="media-right teacher-short-info-left_media-right">
+                    <RegisterButton id_teacher={data._id} />
+                    </div> */}
 
                 </div>
 

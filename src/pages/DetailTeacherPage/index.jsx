@@ -24,14 +24,13 @@ function DetailTeacherpage() {
 
     console.table("teacher:", teacher)
     const [show, setShow] = useState("none")
-    // can phai thay bang teacher.id_course de dong bo nha 
     useEffect(() => {
         getAllCourseByIdTeacher(id, dispatch)
     }, [id])
 
     const classes = useSelector((state) => state.getAllCourseByIdTeacher.courses?.currentCourses)
-    console.log({classes})
-/// 
+    console.log({ classes })
+    /// 
     return (
         < >
             {teacher &&
@@ -51,15 +50,15 @@ function DetailTeacherpage() {
                                     <p class="title is-6 columns info-teacher-detail_p ">
                                         <div className="column mt-1">{teacher.account_id.full_name}</div>
                                         {teacher.id_academic.degree_status ?
-                                        <>
-                                         <BsFillCheckCircleFill
-                                         className='detail-info-teacher_icon-fill' />
-                                     <button class="button "
-                                         className='detail-info-teacher_verified-button'>Đã xác minh </button>
-                                        </>
-                                        :
-                                         <></>}
-                                       
+                                            <>
+                                                <BsFillCheckCircleFill
+                                                    className='detail-info-teacher_icon-fill' />
+                                                <button class="button "
+                                                    className='detail-info-teacher_verified-button'>Đã xác minh </button>
+                                            </>
+                                            :
+                                            <></>}
+
 
                                     </p>
                                     <div className="columns ml-3  subtitle " id='teacher-detail-info_sub-title'>
@@ -92,9 +91,7 @@ function DetailTeacherpage() {
                                     </p>
 
                                 </div>
-                                {/* <div className="column is-2 info-teacher-register_button">
-                       <RegisterButton />
-                   </div> */}
+
                             </div>
                         </div>
 
@@ -102,17 +99,13 @@ function DetailTeacherpage() {
                             <div className="columns ">
                                 <strong className='is-size-6 mr-5'>Học vấn và chứng chỉ</strong>
                                 {teacher.id_academic.degree_status ?
-                                <BsFillCheckCircleFill
-                                className='detail-info-teacher_icon-fill' />:<></>}
-                                
-                               
+                                    <BsFillCheckCircleFill
+                                        className='detail-info-teacher_icon-fill' /> : <></>}
+
+
                             </div>
-
                             <hr />
-
-
                             <table class="table is-fullwidth">
-
                                 <tbody style={{ textAlign: "left" }}>
                                     <tr>
                                         <th><strong>Học vấn</strong> </th>
@@ -166,56 +159,45 @@ function DetailTeacherpage() {
                                         <th>Số lượng (học sinh)</th>
                                         <th>Thời lượng (ph)</th>
                                         <th></th>
-                                        <th></th>
-                                        <th></th>
+                                        {/* <th></th>
+                                        <th></th> */}
                                         {/* <th>Thời gian học (tháng)</th>
                                         <th>Lịch học</th> */}
                                     </tr>
                                 </thead>
                                 <tbody style={{ textAlign: "left" }}>
-                                        {/* can phai thay lai bang teacher.id_course de dong bo */}
                                     {classes && classes.map((item) => (
-<>
-<tr key={item._id}>
-                                            {/* <td>{item._id}</td> */}
-                                            <td>{item.name}</td>
-                                            <td>{item.category_id.level}</td>
-                                            <td>{item.number_of_student} </td>
-                                            <td>{item.time_per_lesson} </td>
-                                            {/* <td>{item.learning_period} </td>
+                                        <>
+                                            <tr key={item._id}>
+                                                {/* <td>{item._id}</td> */}
+                                                <td>{item.name}</td>
+                                                <td>{item.category_id.level}</td>
+                                                <td>{item.number_of_student} </td>
+                                                <td>{item.time_per_lesson} </td>
+                                                {/* <td>{item.learning_period} </td>
                                             <td>{item.schedule} </td> */}
-                                            <td>
-                                                {/* <button className="button is-link" onClick={() => setShow("block")}>Chi tiết </button> */}
-                                                <Link to={`/detailTeacher/${teacher._id}/detailClass/${item._id}`}>
-                                                <button className="button is-link" >Chi tiết </button>
-                                                </Link>
-                                                
-
-                                            </td>
-                                            <td>
-                                                <button className="button is-primary" >Học thử </button>
-
-                                            </td>
-                                            <td>
-                                                <button className="button is-info" >Đăng kí  </button>
-
-                                            </td>
-
-                                        </tr>
-                                        {/* <DetailClassModalForm id={item._id} data={item} show={show} setShow={setShow} /> */}
-
-</>
-                                       
+                                                <td>
+                                                    {/* <button className="button is-link" onClick={() => setShow("block")}>Chi tiết </button> */}
+                                                    <Link to={`/detailTeacher/${teacher._id}/detailClass/${item._id}`}>
+                                                        <button className="button is-link" >Chi tiết </button>
+                                                    </Link>
+                                                </td>
+                                                {/* <td>
+                                                    <button className="button is-primary" >Học thử </button>
+                                                </td>
+                                                <td>
+                                                    <button className="button is-info" >Đăng kí  </button>
+                                                </td> */}
+                                            </tr>
+                                            {/* <DetailClassModalForm id={item._id} data={item} show={show} setShow={setShow} /> */}
+                                        </>
                                     ))}
-
                                 </tbody>
                             </table>
-
                         </div>
                     </div>
                     <div className="teacher_aside colunm is-3 is-multiline ">
-
-                        <DetailTeacherCard data={teacher}  />
+                        <DetailTeacherCard data={teacher} />
                     </div>
                 </div >
             }
@@ -231,7 +213,7 @@ export default DetailTeacherpage
                </div>
                    
             </div> */}
- {/* <button class="button "
+{/* <button class="button "
                        style={{
                            backgroundColor: "#00c4a7",
                            width: "150px",

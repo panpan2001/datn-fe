@@ -28,6 +28,8 @@ const TeacherCompleteInfoPage = React.lazy(() => import('../pages/CompleteInfoPa
 const DetailTeacherPage = React.lazy(() => import('../pages/DetailTeacherPage'))
 const CreateClassPage = React.lazy(() => import('../pages/CreateClassPage'))
 const DetailClassPage= React.lazy(() => import('../pages/DetailClassPage'))
+const RegisterCoursePage= React.lazy(() => import('../pages/RegisterCoursePage'))
+
 
 const StudentManagementPage = React.lazy(() => import('../pages/StudentManagementPage'));
 const CourseManagementPage = React.lazy(() => import('../pages/CourseManagementPage'));
@@ -53,9 +55,9 @@ function ContainerRoutes() {
           <Route path="/signup" element={<SignUpPage />} />
           <Route path='/findingTeacher' element={<FindingTeacherPage />} />
           <Route path='/detailTeacher/:id' element={<DetailTeacherPage />} />
-            <Route path='/detailTeacher/:id/detailClass/:id' element={<DetailClassPage />} />
-           
-          
+            <Route path='/detailTeacher/:id/detailClass/:idClass' element={<DetailClassPage />} />
+            <Route path='/registerCourse/:idClass' element={<RegisterCoursePage />} />
+
           {/* <Route path='/findingCourse' element={<FindingCoursePage />} /> */}
           {/* user can access */}
           {isRegister && <>

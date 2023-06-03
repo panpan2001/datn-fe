@@ -14,7 +14,6 @@ student check : phamnhikhau@gmail.com - 123456
 git commit nhanh main 
 29/5
 - chua lam forgot pw 
-- khong chạy dc ten trinh duyet khac
 
 https://stackoverflow.com/questions/71714110/can-you-submit-a-restful-request-to-a-google-forms-api 
 https://stackoverflow.com/questions/8604992/google-form-api 
@@ -33,3 +32,8 @@ https://googleapis.dev/nodejs/googleapis/latest/
 
 
 https://html.spec.whatwg.org/multipage/input.html 
+
+
+multi-user trying to access one method  (put, post , patch,...)
+https://stackoverflow.com/questions/149055/how-to-format-numbers-as-currency-strings
+https://www.iban.com/currency-codes 
