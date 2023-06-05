@@ -148,31 +148,35 @@ function DetailTeacherpage() {
                         </div>
 
                         <div className="teacher-schedule  ">
-                            <strong className='is-size-6'>Các lớp học</strong>
+                            <strong className='is-size-6'>Các khóa học</strong>
                             <hr />
                             <table class="table is-fullwidth is-hoverable">
                                 <thead>
                                     <tr>
-
-                                        <th>Tên lớp học</th>
+                                        <th></th>
+                                        <th>Tên khóa học</th>
                                         <th>Cấp độ</th>
                                         <th>Số lượng (học sinh)</th>
+                                        <th>Đã đăng kí </th>
                                         <th>Thời lượng (ph)</th>
                                         <th></th>
-                                        {/* <th></th>
-                                        <th></th> */}
-                                        {/* <th>Thời gian học (tháng)</th>
-                                        <th>Lịch học</th> */}
+                                        
                                     </tr>
                                 </thead>
                                 <tbody style={{ textAlign: "left" }}>
                                     {classes && classes.map((item) => (
                                         <>
                                             <tr key={item._id}>
-                                                {/* <td>{item._id}</td> */}
+                                                <td>       
+                                                {item.isDemoClass? 
+                              <button className="button course_label is-warning mr-3">Học thử</button>:
+                              <button className="button course_label is-primary mr-3">Học chính thức</button>
+                              }
+                                                </td>
                                                 <td>{item.name}</td>
                                                 <td>{item.category_id.level}</td>
                                                 <td>{item.number_of_student} </td>
+                                                <td>....</td>
                                                 <td>{item.time_per_lesson} </td>
                                                 {/* <td>{item.learning_period} </td>
                                             <td>{item.schedule} </td> */}

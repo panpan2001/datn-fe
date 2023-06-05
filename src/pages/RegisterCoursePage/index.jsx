@@ -1,7 +1,9 @@
 import React from 'react'
 import '../../assets/styles/RegisterCoursePage.css'
 import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 function RegisterCoursePage() {
+  const navigate= useNavigate()
 const course= useSelector((state)=>state.getCourseById.course?.currentCourse)
 const teacher = useSelector(state => state.getTeacherById.teacher?.currentTeacher)
 const formatter = new Intl.NumberFormat( {
@@ -199,8 +201,8 @@ time= time.split(":")[0] <12? time+" AM" : time+" PM"
        
       </section>
       <div className="register-course-group-buttons mt-6">
-        <button className="button is-primary">Đăng kí</button>
-        <button className="button is-danger">Hủy</button>
+        <button className="button is-primary" type='submit'>Đăng kí</button>
+        <button className="button is-danger" onClick={()=> navigate('/findingTeacher')}>Hủy</button>
       </div>
       </div>
      

@@ -8,7 +8,7 @@ const getCourseCategory= async(dispatch)=>{
     try {
         const res = await axios.get(CourseCategoryApi)
         dispatch(getCourseCategorySuccess(res.data))
-        console.log('course categories: ', res.data)
+        // console.log('course categories: ', res.data)
     }
     catch (error) {
         dispatch(getCourseCategoryFailure())

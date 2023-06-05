@@ -27,8 +27,8 @@
     display:flex !important;
     flex-direction: column;
     align-items: flex-start;
-    width: 100% !important;
-    padding-top: 0 !important;
+    width: 50% !important;
+    padding-top: .25rem !important;
 }
 
 .class-image-upload_field{

@@ -11,7 +11,7 @@ function ProfilePage() {
         <div className='column is-3 profile-page_aside-links'>
           <ProfileSideBar />
         </div>
-        <div className="column is-9  profile-page_content">
+        <div className="column   profile-page_content">
           <Outlet />
         </div>
       </div>

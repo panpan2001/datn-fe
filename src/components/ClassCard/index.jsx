@@ -15,7 +15,8 @@ function ClassCard({ data }) {
      // const category = useSelector(state => state.getCourseCategoryById.courseCategory?.category)
      // console.log({ category })
 
-
+     let time = data.schedule.split(" - ")[0]
+     time = time.split(":")[0] < 12 ? time + " AM" : time + " PM"
      const handledelete = () => {
 
      }
@@ -37,6 +38,14 @@ function ClassCard({ data }) {
                     <div class="card-content class-card column">
                          <div class="content">
                               <strong className='is-size-5'>{data.name} </strong>
+                              
+                              
+                         </div>
+                         <div class="content">
+                         {data.isDemoClass? 
+                              <button className="button course_label is-warning mr-3">Học thử</button>:
+                              <button className="button course_label is-primary mr-3">Học chính thức</button>
+                              }
                          </div>
                          <div class="content">
                               
@@ -59,7 +68,7 @@ function ClassCard({ data }) {
                               <p> <strong>Thời gian học: </strong>{data.learning_period}</p>
                          </div>
                          <div className="content">
-                              <p><strong>Lịch học: </strong>{data.schedule}</p>
+                              <p><strong>Lịch học: </strong>{time} - {data.schedule.split(" - ")[1]}</p>
                          </div>
                          <div className="content">
                               <p><strong>Giá tiền(VDN/ buổi): </strong>{data.cost}</p>

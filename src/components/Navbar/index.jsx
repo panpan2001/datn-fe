@@ -61,7 +61,7 @@ const Navbar = () => {
             }
             {isLoggedIn && user.role_name == 'teacher' &&
               <Link className="navbar-item" to="/createClass">
-                Tạo lớp học
+                Tạo khóa học
               </Link>}
               {isLoggedIn && user.role_name == 'student' &&
               <Link className="navbar-item" to="/profile/judgeTeacher">

@@ -251,6 +251,8 @@ const SignUpForm = () => {
             <div className="field is-grouped is-grouped-centered" id='signup_button'>
                 <button className="button is-link" type="submit" >Đăng kí</button>
             </div>
+            <strong>Đã có tài khoản? <Link to='/login'> Đăng nhập</Link>  </strong> 
+
         </form >
     )
 }

@@ -24,10 +24,10 @@ function CreateClassPage() {
   let axiosJWT = createAxiosJWT(dispatch, user, createCourseSuccess)
   const [images, setImages] = useState()
   const [url, setUrl] = useState('')
-// console.log({user})
+  // console.log({user})
 
   useEffect(() => {
-   
+
     getCourseCategory(dispatch)
     uploadImage(images).then((res) => {
       setUrl(res)
@@ -37,7 +37,7 @@ function CreateClassPage() {
   }, [images])
   const courseCategories = useSelector(state => state.getCourseCategory.courseCategories?.categories)
 
-console.log({courseCategories})
+  console.log({ courseCategories })
   const formik = useFormik({
     initialValues: {
       id_teacher: '',
@@ -49,8 +49,11 @@ console.log({courseCategories})
       cost: '',
       weekdays: '',
       time: '',
+      start_date: "",
+      end_date: "",
       description: '',
       images: '',
+      isDemoClass: false
 
     },
     validationSchema: Yup.object({
@@ -61,48 +64,77 @@ console.log({courseCategories})
       time_per_lesson: Yup.number().required('Thời lượng buổi học không được để trống')
         .min(45, "Thời lượng tối thiểu 45 ph ").max(180, "Thời lượng tối đa 180 ph "),
       learning_period: Yup.number().required('Thời gian học không được để trống')
-        .min(1, "Thời gian học tối thiểu 1 tháng ").max(12, "Thời gian học tối đa 12 tháng"),
+        .min(1, "Thời gian học tối thiểu 1 tháng hoặc 1 buổi ").max(12, "Thời gian học tối đa 12 tháng hoặc 12 buổi"),
       cost: Yup.number().required('Giá tiền không được để trống')
         .min(20000, 'Giá tiền tối thiểu 20.000 VND').max(5000000, 'Giá tiền tối đa 5.000.000 VND'),
       weekdays: Yup.string().required('Thứ không được để trống'),
       time: Yup.string().required('Giờ bắt đầu học không được để trống'),
+      start_date: Yup.string().required('Ngày bắt đầu không được để trống'),
+      end_date: Yup.string().required('Ngày kết thúc không được để trống'),
       description: Yup.string().required('Mô tả không được để trống').min(5, "Mô tả ít nhất 5 từ"),
+      isDemoClass: Yup.string().required("Nhãn lớp học không được để trống"),
 
     }),
     onSubmit: (values) => {
-      const [type,level]=formik.values.category_id.split("-")
-      const course_category_id= courseCategories.filter(courseCategory=> courseCategory.type === type && courseCategory.level === level)[0]?._id
+      const [type, level] = formik.values.category_id.split("-")
+      const course_category_id = courseCategories.filter(courseCategory => courseCategory.type === type && courseCategory.level === level)[0]?._id
+      const checkDemoClass = values.isDemoClass.toLowerCase() === 'true'
       // console.log(values)
-      let value={
-        id_teacher:teacher._id ,
+      let value = {
+        id_teacher: teacher._id,
         name: values.name,
         category_id: course_category_id,
         number_of_student: values.number_of_student,
         time_per_lesson: values.time_per_lesson,
         learning_period: values.learning_period,
-        cost:   values.cost,
-        schedule: values.time+" - "+ values.weekdays,
+        cost: values.cost,
+        schedule: values.time + " - " + values.weekdays,
+        start_date: values.start_date,
+        end_date: values.end_date,
         description: values.description,
         image: url,
+        isDemoClass: checkDemoClass
       }
-      // console.log(value)
+      console.log(value)
        createCourse(axiosJWT,accessToken, value,dispatch,navigate)
       // .then((res) => {
       //   console.log("res createCourse in create class page:",res,typeof res)
       //    updateTeacher( teacher._id,res,dispatch,axiosJWT,accessToken)
       // })
-      
+
     }
   })
 
-// console.log(formik.values)
+  // console.log(formik.values)
   return (
     <form className='create-class-page_container container  is-centered ' onSubmit={formik.handleSubmit}>
       <div className='create-class-page_form is-centered ' >
-        <strong className="is-size-5">Tạo lớp học</strong>
+        <strong className="is-size-5">Tạo khóa học</strong>
         {
           courseCategories &&
           <div className="columns is-centered  is-multiline">
+            <div className="column is-6">
+              <div className="field "  >
+                <label className="label">Nhãn lớp học</label>
+
+                <div className=" field select "
+                  placeholder="Nhãn lớp học"
+                  style={{ width: '100%' }}>
+                  <select
+                    style={{ width: '100%' }}
+                    id="isDemoClass"
+                    name="isDemoClass"
+                    value={formik.values.isDemoClass}
+                    onChange={formik.handleChange}
+                  >
+                    <option >Học thử/ Học chính thức</option>
+                    <option id="true" name='true' value={true}>Học thử</option>
+                    <option id="false" name='false' value={false}>Học chính thức</option>
+                  </select>
+                  {formik.errors.isDemoClass && <p className="help is-danger">{formik.errors.isDemoClass}</p>}
+                </div>
+              </div>
+            </div>
             <div className="column is-6">
               <div className="field">
                 <label className="label">Tên lớp học</label>
@@ -118,7 +150,6 @@ console.log({courseCategories})
                 {formik.errors.name && <p className="help is-danger">{formik.errors.name}</p>}
               </div>
             </div>
-
 
             <div className="column is-6">
               <div className="field "  >
@@ -183,7 +214,7 @@ console.log({courseCategories})
 
             <div className="column is-6">
               <div className="field">
-                <label className="label">Thời gian học (tháng)</label>
+                <label className="label">Thời gian học (tháng hoặc buổi)</label>
                 <input
                   className="input"
                   type="text"
@@ -197,25 +228,9 @@ console.log({courseCategories})
               </div>
             </div>
 
-            <div className="column is-6">
-              <div className="field">
-                <label className="label">Giá tiền(VND/buổi học) </label>
-                <input
-                  className="input"
-                  type="text"
-                  placeholder="Giá tiền"
-                  name="cost"
-                  id='cost'
-                  value={formik.values.cost}
-                  onChange={formik.handleChange}
-                />
-                {formik.errors.cost && <p className="help is-danger">{formik.errors.cost}</p>}
-              </div>
-            </div>
-
             <div className="column is-12">
               <div className="field schedule_weekdays_filed">
-                <label className="label">Lịch học </label>
+                {/* <label className="label">Lịch học </label> */}
                 <div className="schedule_weekdays_container">
                   <div className="schedule_weekdays_item column is-12">
                     <label className="label">Thứ </label>
@@ -248,23 +263,56 @@ console.log({courseCategories})
               </div>
             </div>
 
-            <div className="column is-12 tooltip_column">
-              <div className="field tooltip">
-                <label className="label" style={{ display: "flex" }}>Mô tả lớp học </label>
-                <textarea
-
-                  className="textarea is-info"
-                  placeholder="Mô tả lớp học"
-                  id='description'
-                  name='description'
-                  value={formik.values.description}
+            <div className="column is-6">
+              <div className="field">
+                <label className="label">Ngày bắt đầu</label>
+                <input
+                  className="input"
+                  type="date"
+                  placeholder="Ngày bắt đầu"
+                  name="start_date"
+                  id='start_date'
+                  min={new Date().toJSON().slice(0, 10)}
+                  value={formik.values.start_date}
                   onChange={formik.handleChange}
-                ></textarea>
-                {formik.errors.description && <p className="help is-danger">{formik.errors.description}</p>}
-                {/* <span class="tooltiptext">Tooltip text</span> */}
+                />
+                {formik.errors.start_date && <p className="help is-danger">{formik.errors.start_date}</p>}
               </div>
             </div>
-            <div className="column  class-image-upload_column-is-5">
+            <div className="column is-6">
+              <div className="field">
+                <label className="label">Ngày kết thúc</label>
+                <input
+                  className="input"
+                  type="date"
+                  placeholder="Ngày kết thúc"
+                  name="end_date"
+                  id='end_date'
+                  min={new Date().toJSON().slice(0, 10)}
+                  value={formik.values.end_date}
+                  onChange={formik.handleChange}
+                />
+                {formik.errors.end_date && <p className="help is-danger">{formik.errors.end_date}</p>}
+              </div>
+            </div>
+            <div className="column is-6">
+              <div className="field">
+                <label className="label">Giá tiền(VND/buổi học) </label>
+                <input
+                  className="input"
+                  type="text"
+                  placeholder="Giá tiền"
+                  name="cost"
+                  id='cost'
+                  value={formik.values.cost}
+                  onChange={formik.handleChange}
+                />
+                {formik.errors.cost && <p className="help is-danger">{formik.errors.cost}</p>}
+              </div>
+            </div>
+
+            <div className="column is-6 mt-1  class-image-upload_column-is-5"
+              style={{ width: "50%" }}>
               <div className="field class-image-upload_field " >
                 <label className="label">Ảnh đại diện</label>
                 <div style={{
@@ -294,8 +342,29 @@ console.log({courseCategories})
                 {/* {url ? "": <p className="help is-danger">Bạn chưa chọn ảnh</p>} */}
               </div>
             </div>
+
+            <div className="column is-12 tooltip_column">
+              <div className="field tooltip">
+                <label className="label" style={{ display: "flex" }}>Mô tả lớp học </label>
+                <textarea
+
+                  className="textarea is-info"
+                  placeholder="Mô tả lớp học"
+                  id='description'
+                  name='description'
+                  value={formik.values.description}
+                  onChange={formik.handleChange}
+                ></textarea>
+                {formik.errors.description && <p className="help is-danger">{formik.errors.description}</p>}
+                {/* <span class="tooltiptext">Tooltip text</span> */}
+              </div>
+
+            </div>
+
           </div>
         }
+
+        <p style={{ textAlign: "left" }}><strong>Lưu ý: </strong>Thời gian học tính bằng tháng với lớp học chính thức, tính bằng buổi với lớp học thử</p>
 
         <div className="field is-grouped is-grouped-centered" id='signup_button'>
           <button className="button is-info" type='submit' disabled={url ? false : true}>Tạo lớp học</button>

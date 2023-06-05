@@ -22,8 +22,9 @@ function TeacherCurrentClassForm() {
 
     const classes = useSelector((state) => state.getAllCourseByIdTeacher.courses?.currentCourses)
     console.log("classes:", classes)
+    
     return (
-        <div className='current-class_container'>
+        <div className='current-class_container container-fluid '>
             <strong className='is-size-4 is-centered'>Lớp học của tôi</strong>
 
             {/* <hr /> */}
