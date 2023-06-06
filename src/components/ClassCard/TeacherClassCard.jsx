@@ -3,8 +3,10 @@ import '../../assets/styles/ClassCard.css'
 import DetailClassModalForm from '../DetailClassModalForm'
 import { useDispatch, useSelector } from 'react-redux'
 import getCourseCategoryById from '../../redux/CourseCategory/GetCourseCategoryById'
+import moment from 'moment/moment'
+
 function ClassCard({ data }) {
-     console.log(data.category_id)
+     console.log({data})
      const [show, setShow] = useState("none")
      const dispatch = useDispatch()
      const user = useSelector((state) => state.login.login?.currentUser)
@@ -17,6 +19,9 @@ function ClassCard({ data }) {
 
      let time = data.schedule.split(" - ")[0]
      time = time.split(":")[0] < 12 ? time + " AM" : time + " PM"
+
+     const start_date= moment(data.start_date).format("DD/MM/YYYY")
+     const end_date= moment(data.end_date).format("DD/MM/YYYY") 
      const handledelete = () => {
 
      }
@@ -54,7 +59,7 @@ function ClassCard({ data }) {
                          </div>
                          <div class="content">
                               
-                              <p><strong>Loại: </strong>{data.category_id.level}</p>
+                              <p><strong>Cấp độ: </strong>{data.category_id.level}</p>
 
                               {/* <p><strong>Cấp độ: </strong>{category && category.level}</p> */}
                          </div>
@@ -65,10 +70,16 @@ function ClassCard({ data }) {
                               <p><strong>Thời lượng buổi học(ph): </strong>{data.time_per_lesson}</p>
                          </div>
                          <div className="content">
-                              <p> <strong>Thời gian học: </strong>{data.learning_period}</p>
+                              <p> <strong>Thời gian học: </strong>{data.learning_period} {data.isDemoClass? 'buổi':'tháng'}</p>
                          </div>
                          <div className="content">
                               <p><strong>Lịch học: </strong>{time} - {data.schedule.split(" - ")[1]}</p>
+                         </div>
+                         <div className="content">
+                              <p><strong>Ngày bắt đầu: </strong>{start_date}</p>
+                         </div>
+                         <div className="content">
+                              <p><strong>Ngày kết thúc: </strong>{end_date}</p>
                          </div>
                          <div className="content">
                               <p><strong>Giá tiền(VDN/ buổi): </strong>{data.cost}</p>

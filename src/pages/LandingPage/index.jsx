@@ -2,7 +2,7 @@
 import { Link } from 'react-router-dom'
 import '../../assets/styles/LandingPage.css'
 import { BsCalendar2CheckFill, BsCashCoin, BsCoin, BsFillBarChartFill, BsFillFileRuledFill, BsFillJournalBookmarkFill, BsFillPersonCheckFill, BsPencilSquare } from 'react-icons/bs'
-import ClassCard from '../../components/ClassCard'
+import ClassCard from '../../components/ClassCard/TeacherClassCard'
 import FindingClassMessage from '../../components/Message/FindingClassMessage'
 
 const LandingPage = () => {

@@ -176,7 +176,7 @@ function DetailTeacherpage() {
                                                 <td>{item.name}</td>
                                                 <td>{item.category_id.level}</td>
                                                 <td>{item.number_of_student} </td>
-                                                <td>....</td>
+                                                <td>{}</td>
                                                 <td>{item.time_per_lesson} </td>
                                                 {/* <td>{item.learning_period} </td>
                                             <td>{item.schedule} </td> */}

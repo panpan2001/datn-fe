@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import '../../assets/styles/CurrentClassForm.css'
 import getAllCourseByIdTeacher from '../../redux/actions/Course/GetAllCourseByIdTeacher'
-import ClassCard from '../ClassCard'
+import ClassCard from '../ClassCard/TeacherClassCard'
 import getTeacherByAccountId from '../../redux/actions/Teacher/GetTeacherByAccountId'
 
 function TeacherCurrentClassForm() {

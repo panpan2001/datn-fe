@@ -10,3 +10,23 @@
     border: none;
     box-shadow: none !important;
 }
+
+.detail-class_columns{
+    width: 50% !important;
+}
+.detail-class-name{
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.detail-class_content{
+display: flex;
+justify-content: flex-start;
+text-align: left;
+}
+
+.detail-class_wrap{
+    align-items: center;
+}

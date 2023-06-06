@@ -288,7 +288,8 @@ function CreateClassPage() {
                   placeholder="Ngày kết thúc"
                   name="end_date"
                   id='end_date'
-                  min={new Date().toJSON().slice(0, 10)}
+                  // min={new Date().toJSON().slice(0, 10)}
+                  min={formik.values.start_date}
                   value={formik.values.end_date}
                   onChange={formik.handleChange}
                 />

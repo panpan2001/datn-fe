@@ -5,9 +5,13 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 import { CourseApi } from '../../utils/BaseUrl'
 import getCoursebyId from '../../redux/actions/Course/GetCoursebyId'
+import moment from 'moment'
+
 function DetailClassPage() {
     let weekdays = ""
     let time = ""
+    let start_date=""
+    let end_date=""
     const currentUser = useSelector((state) => state.login.login?.currentUser)
     const { idClass } = useParams()
     const dispatch = useDispatch()
@@ -26,17 +30,20 @@ function DetailClassPage() {
         weekdays = data.schedule.split(" - ")[1].split(",")
         time = data.schedule.split(" - ")[0]
         time = time.split(":")[0] < 12 ? time + " AM" : time + " PM"
+
+     start_date= moment(data.start_date).format("DD/MM/YYYY")
+      end_date= moment(data.end_date).format("DD/MM/YYYY") 
     }
 
 
     return (
-        <div class="container " style={{
+        <div className="container " style={{
             marginBottom: "2rem",
             marginTop: "1rem",
             backgroundColor: "white",
         }}>
 
-            {data && <div class=" is-centered"
+            {data && <div className="detail-class_wrap is-centered"
 
                 style={{
                     padding: "1rem",
@@ -45,9 +52,11 @@ function DetailClassPage() {
                     gap: "1rem",
                 }}
             >
-                <header class="modal-card-head">
-                    <p class="modal-card-title">Chi tiết khóa học</p>
-                    <button class="modal-close is-large" aria-label="close" ></button>
+                <header className="modal-card-head"
+                style={{width: "100%",}}
+                >
+                    <p className="modal-card-title">Chi tiết khóa học</p>
+                    <button className="modal-close is-large" aria-label="close" ></button>
 
                 </header>
                 <img
@@ -58,7 +67,88 @@ function DetailClassPage() {
                         display: 'block'
                     }}
                 />
-                <table class="table is-fullwidth is-hoverable"
+             
+                <div className="detail-class-name ">
+                              <strong className='is-size-5'>{data.name} </strong>
+                              
+                              {data.isDemoClass? 
+                              <button className="button course_label is-warning ml-3">Học thử</button>:
+                              <button className="button course_label is-primary ml-3">Học chính thức</button>
+                              }
+                         </div>
+                 <div className="columns detail-class_columns is-multiline is-centered">
+                 
+                         
+                <div className="content column detail-class_content is-6">
+                              <p><strong>Loại: </strong>{data.category_id.type}</p>
+                         </div>
+                         <div className="content column detail-class_content is-6">
+                              <p><strong>Cấp độ: </strong>{data.category_id.level}</p>
+                         </div>
+                         <div className="content column detail-class_content is-6">
+                              <p><strong>Số lượng học viên: </strong>{data.number_of_student}</p>
+                         </div>
+                         <div className="content column detail-class_content is-6">
+                              <p><strong>Thời lượng buổi học(ph): </strong>{data.time_per_lesson}</p>
+                         </div>
+                         <div className="content column detail-class_content is-6">
+                              <p> <strong>Thời gian học: </strong>{data.learning_period} {data.isDemoClass? 'buổi':'tháng'}</p>
+                         </div>
+                         <div className="content column detail-class_content is-6">
+                              <p><strong>Lịch học: </strong>{time} - {data.schedule.split(" - ")[1]}</p>
+                         </div>
+                         <div className="content column detail-class_content is-6">
+                              <p><strong>Ngày bắt đầu: </strong>{start_date}</p>
+                         </div>
+                         <div className="content column detail-class_content is-6">
+                              <p><strong>Ngày kết thúc: </strong>{end_date}</p>
+                         </div>
+                         <div className="content column detail-class_content is-6">
+                              <p><strong>Giá tiền(VDN/ buổi): </strong>{data.cost}</p>
+                         </div>
+                         <div className="content column detail-class_content is-6">
+                              <p><strong>Mô tả: </strong>{data.description}</p>
+                         </div>
+                </div>
+                <div className="buttons is-centered"
+                    id='detail-class_modal'
+                    style={{ gap: '2rem' }}
+                >
+                    {currentUser ?
+                        (currentUser.role === "teacher" ?
+                        <>
+                        </>:
+                            <>
+                                <Link to={`/registerCourse/${idClass}`}>
+                                    <button className="button is-primary">Học thử </button>
+                                </Link>
+                                <button className="button is-info">Đăng kí  </button>
+                            </>
+                           ) :
+
+                        (<>
+                            <Link to='/login'>
+                                <button className="button is-primary">Học thử </button>
+                            </Link>
+                            <Link to='/login'>
+                                <button className="button is-info">Đăng kí  </button>
+                            </Link>
+                        </>)
+                    }
+                    <button className="button is-danger" onClick={() => navigate(-1)}>Thoát  </button>
+
+                </div>
+            </div>
+            }
+
+
+        </div>
+    )
+}
+
+export default DetailClassPage
+
+   {/* <table className="table is-fullwidth is-hoverable"
                     style={{ marginBottom: "0" }}>
                     <thead>
 
@@ -99,44 +189,9 @@ function DetailClassPage() {
                         </tr>
 
                     </tbody>
-                </table>
-                <p
+                </table> */}
+               
+                
+                {/* <p
                     style={{ textAlign: "left" }}
-                ><strong>Mô tả: </strong>{data.description}</p>
-                <div className="buttons is-centered"
-                    id='detail-class_modal'
-                    style={{ gap: '2rem' }}
-                >
-                    {currentUser ?
-                        (currentUser.role === "teacher" ?
-                        <>
-                        </>:
-                            <>
-                                <Link to={`/registerCourse/${idClass}`}>
-                                    <button className="button is-primary">Học thử </button>
-                                </Link>
-                                <button className="button is-info">Đăng kí  </button>
-                            </>
-                           ) :
-
-                        (<>
-                            <Link to='/login'>
-                                <button className="button is-primary">Học thử </button>
-                            </Link>
-                            <Link to='/login'>
-                                <button className="button is-info">Đăng kí  </button>
-                            </Link>
-                        </>)
-                    }
-                    <button className="button is-danger" onClick={() => navigate(-1)}>Thoát  </button>
-
-                </div>
-            </div>
-            }
-
-
-        </div>
-    )
-}
-
-export default DetailClassPage
+                ><strong>Mô tả: </strong>{data.description}</p> */}
