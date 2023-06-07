@@ -78,7 +78,8 @@ function CreateClassPage() {
     onSubmit: (values) => {
       const [type, level] = formik.values.category_id.split("-")
       const course_category_id = courseCategories.filter(courseCategory => courseCategory.type === type && courseCategory.level === level)[0]?._id
-      const checkDemoClass = values.isDemoClass.toLowerCase() === 'true'
+      const checkDemoClass = values.isDemoClass == 'true'
+      console.log(checkDemoClass)
       // console.log(values)
       let value = {
         id_teacher: teacher._id,
@@ -105,7 +106,7 @@ function CreateClassPage() {
     }
   })
 
-  // console.log(formik.values)
+  console.log(formik.values)
   return (
     <form className='create-class-page_container container  is-centered ' onSubmit={formik.handleSubmit}>
       <div className='create-class-page_form is-centered ' >

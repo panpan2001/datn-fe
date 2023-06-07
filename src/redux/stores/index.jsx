@@ -28,6 +28,7 @@ import getCourseCategoryByIdReducer from "../slices/CourseCategory/getCourseCate
 import getCourseByIdReducer from "../slices/Course/getCourseById";
 import createRegisterDemoCourseReducer from "../slices/DemoCourse/createRegisterDemoCourse";
 import getDemoCourseByStudentIdReducer from "../slices/DemoCourse/getDemoCourseByStudentId";
+import cancelRegisterDemoCourseReducer from "../slices/DemoCourse/cancelRegisterDemoCourse";
 
 
 const persistConfig = {
@@ -63,7 +64,8 @@ const rootReducer= combineReducers({
     getAllCourseByIdTeacher: getAllCourseByIdTeacherReducer,
     getCourseById: getCourseByIdReducer,
     createRegisterDemoCourse:createRegisterDemoCourseReducer,
-    getDemoCourseByStudentId:getDemoCourseByStudentIdReducer
+    getDemoCourseByStudentId:getDemoCourseByStudentIdReducer,
+    cancelRegisterDemoCourse:cancelRegisterDemoCourseReducer
 
 })
 const persistedReducer=persistReducer(persistConfig,rootReducer)

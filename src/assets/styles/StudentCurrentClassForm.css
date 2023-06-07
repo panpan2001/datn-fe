@@ -7,13 +7,17 @@
     align-items: center;
     gap: 2rem;
     width: 100%;
+    /* background-color: white;
+    border: 1px solid var(--border-color); */
+    /* padding :2rem 1rem 2rem 2rem ; */
+    /* border-radius: 10px; */
 }
 /* .current-class_image{
     width: 80%;
     height: 50%;
 } */
 
-.current-class_form{
+.student-current-class_form{
     display: inherit !important;
     flex-direction: column;
     justify-content: flex-start;
@@ -30,4 +34,17 @@
 .current-class_title{
     display: flex !important;
     text-align: left;
+}
+
+.student-no-class_div{
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    /* min-height: 50vh; */
+}
+
+.current-class_image{
+    width: 50%;
 }

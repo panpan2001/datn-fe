@@ -14,42 +14,52 @@ function StudentCurrentClassForm() {
     const user = useSelector((state) => state.login.login?.currentUser)
     const accessToken = user?.accessToken
     let axiosJWT = createAxiosJWT(dispatch, user, getDemoCourseByStudentIdSuccess)
+    const demoClasses = useSelector((state) => state.getDemoCourseByStudentId.demoCourse?.currentDemoCourse)
+    const officiaClasses = []
     useEffect(() => {
         getDemoCourseByStudentId(studentPersonalInfo._id, dispatch, accessToken, axiosJWT)
     }, [])
-    const demoClasses = useSelector((state) => state.getDemoCourseByStudentId.demoCourse?.currentDemoCourse)
-    console.log({demoClasses})
-    const officiaClasses=null
+    console.log({ demoClasses })
+
     return (
         <div className='current-class_container'>
-            {/* <hr /> */}
-            {demoClasses!==null || officiaClasses!==null ?
-                <div className="current-class_form columns is-centered is-multiline ">
-                    <strong className='is-size-4 is-centered'>Khóa học của tôi</strong>
-                    <div>
-                    <strong className='is-size-5 current-class_title mb-2'>Khóa học thử</strong>
-                    { demoClasses && demoClasses.map((item) => (
-                        <StudentClassAccordion data={item} />
-                    ))}
-                    <strong className='is-size-5 current-class_title mt-4 mb-2'>Khóa học chính thức</strong>
-                    { officiaClasses && officiaClasses.map((item) => (
-                        <StudentClassCard data={item} />
-                    ))}
-                    </div>
+         
+ <div className="student-current-class_form columns is-centered is-multiline ">
+ <strong className='is-size-4 is-centered'>Khóa học của tôi</strong>
+ <div>
+     <strong className='is-size-5 current-class_title mb-2'>Khóa học thử</strong>
 
-                    
-                </div> :
-                <>
+     {demoClasses &&
+                demoClasses.map((item) => (
+                    <StudentClassAccordion data={item} />
+                ))
+    }
+    <hr/>
+    <br/>
+     <strong className='is-size-5 current-class_title mt-4 mb-2'>Khóa học chính thức</strong>
+     {officiaClasses && 
+                officiaClasses.map((item) => (
+                    <StudentClassAccordion data={item} />
+                ))
+               
+    }
+ </div>
+</div>
+
+          {demoClasses || officiaClasses? 
+          
+          <div className='student-no-class_div'>
                     <img className="current-class_image" src={require('../../assets/images/no-class.jpg')} />
                     <strong className='is-size-5'>Bạn chưa có lớp học nào cả</strong>
                     <Link to='/findingTeacher'>
-                        <button className='button is-primary'>Tìm kiếm giáo viên</button>
+                        <button className='button is-primary'>Tìm kiếm </button>
                     </Link>
 
+                </div>:
+            <></>    
+            }     
 
-
-
-                </>}
+            
         </div>
     )
 }
@@ -89,3 +99,16 @@ export default StudentCurrentClassForm
 
                                 </tbody>
                                 </table> */}
+
+                                // {demoClasses && officiaClasses  ?
+
+                                //     <></>:
+                                //                     <>
+                                //                         <img className="current-class_image" src={require('../../assets/images/no-class.jpg')} />
+                                //                         <strong className='is-size-5'>Bạn chưa có lớp học nào cả</strong>
+                                //                         <Link to='/findingTeacher'>
+                                //                             <button className='button is-primary'>Tìm kiếm giáo viên</button>
+                                //                         </Link>
+                                    
+                                //                     </> 
+                                //     }

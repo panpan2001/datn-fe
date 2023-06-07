@@ -1,0 +1,12 @@
+@import './RootStyle.css';
+
+.student-class_group-icon{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem ;
+}
+
+
+.student-class_icon{
+    transform: none !important;
+}

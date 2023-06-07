@@ -20,7 +20,7 @@ const registerDemoCourse = async(value,dispatch,navigate,accessToken,axiosJWT)=>
     } catch (error) {
         dispatch(createRegisterDemoCourseFailure())
         console.log(error)
-        toast.error("Đăng ký khóa học thử thất bại",{
+        toast.error(error.response.data,{
             position: toast.POSITION.BOTTOM_RIGHT
         })
     }

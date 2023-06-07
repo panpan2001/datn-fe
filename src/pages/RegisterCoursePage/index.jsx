@@ -51,7 +51,12 @@ const formik=useFormik({
     },
     onSubmit:(values)=>{
       console.log(values)
+      if(course.isDemoClass){
         registerDemoCourse(values,dispatch,navigate,accessToken,axiosJWT)
+      }
+      else {
+        console.log("cho tao lm da nha ")
+      }
     }
 })
 
@@ -59,7 +64,7 @@ const formik=useFormik({
     <form className="register-course-page_form mt-1" onSubmit={formik.handleSubmit}>
 
       <div className="register-course-page_container container">
-        <strong className='is-size-4'>Đăng kí học thử </strong>
+        <strong className='is-size-4'>Đăng kí {course.isDemoClass? "học thử":"học chính thức"} </strong>
 
         <section className="info-teacher_section ">
           <strong className="is-size-5 ">Giáo viên của bạn</strong>
