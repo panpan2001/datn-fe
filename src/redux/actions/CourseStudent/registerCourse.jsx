@@ -1,24 +1,24 @@
 import { toast } from "react-toastify"
-import { createRegisterDemoCourseFailure, createRegisterDemoCourseStart, createRegisterDemoCourseSuccess } from "../../slices/DemoCourseStudent/createRegisterDemoCourse"
 import { CourseStudentApi } from "../../../utils/BaseUrl"
+import { registerCourseFailure, registerCourseStart, registerCourseSuccess } from "../../slices/CourseStudent/registerCourse"
 
 
-const registerCourse= (value,dispatch,navigate,accessToken,axiosJWT)=>{
-    dispatch(createRegisterDemoCourseStart())
+const registerCourse=async (value,dispatch,navigate,accessToken,axiosJWT)=>{
+    dispatch(registerCourseStart())
     try {
-        const res= axiosJWT.post(CourseStudentApi,value,{
+        const res= await  axiosJWT.post(CourseStudentApi,value,{
             headers:{
                 token: `Bearer ${accessToken}`
             }
         })
-        dispatch(createRegisterDemoCourseSuccess(res.data))
+        dispatch(registerCourseSuccess(res.data))
         toast.success("Đăng ký khóa học  thành công",{
             position: toast.POSITION.BOTTOM_RIGHT
         })
         navigate("/profile/studentClass")
     } catch (error) {
-        dispatch(createRegisterDemoCourseFailure())
-        console.log(error)
+        dispatch(registerCourseFailure())
+        console.log({error})
         toast.error(error.response.data,{
             position: toast.POSITION.BOTTOM_RIGHT
         })

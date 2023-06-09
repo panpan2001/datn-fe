@@ -14,15 +14,22 @@ const StudentDemoClassAccordion = ({ data }) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const register_date = new Date(data.createdAt).toLocaleString('en-US', { timeZone: 'Asia/Ho_Chi_Minh' });
-  let time = data.id_course.schedule.split(" - ")[0]
-  time = time.split(":")[0] < 12 ? time + " AM" : time + " PM"
-  const start_date = moment(data.id_course.start_date).format("DD/MM/YYYY")
-  const end_date = moment(data.id_course.end_date).format("DD/MM/YYYY")
-  const formatter = new Intl.NumberFormat({
+  let time=''
+  let start_date=''
+  let end_date=''
+  const  formatter = new Intl.NumberFormat({
     style: 'currency',
     currency: 'VND',
 
   });
+  if(data){
+     time = data.id_course.schedule.split(" - ")[0]
+    time = time.split(":")[0] < 12 ? time + " AM" : time + " PM"
+     start_date = moment(data.id_course.start_date).format("DD/MM/YYYY")
+     end_date = moment(data.id_course.end_date).format("DD/MM/YYYY")
+    
+  }
+  
   const [state, setState] = useState({ cardState: false });
   const toggleCardState = () => {
     setState({ cardState: !state.cardState });

@@ -4,7 +4,7 @@ const initialState= {
     officialCourse:{
         currentOfficialCourse: null,
         isFetching: false,
-        error: true
+        error: false
     }
 }
 

@@ -16,15 +16,21 @@ const StudentClassAccordion = ({ data }) => {
   const navigate = useNavigate()
   const register_date = moment(data.createdAt).format("DD/MM/YYYY HH:mm:ss a")
   // new Date(data.createdAt).toLocaleString('en-US', { timeZone: 'Asia/Ho_Chi_Minh' });
-  let time = data.id_course.schedule.split(" - ")[0]
-  time = time.split(":")[0] < 12 ? time + " am" : time + " pm"
-  const start_date = moment(data.id_course.start_date).format("DD/MM/YYYY")
-  const end_date = moment(data.id_course.end_date).format("DD/MM/YYYY")
-  const formatter = new Intl.NumberFormat({
+  let time=''
+  let start_date=''
+  let end_date=''
+  const  formatter = new Intl.NumberFormat({
     style: 'currency',
     currency: 'VND',
 
   });
+  if(data){
+     time = data.id_course.schedule.split(" - ")[0]
+    time = time.split(":")[0] < 12 ? time + " AM" : time + " PM"
+     start_date = moment(data.id_course.start_date).format("DD/MM/YYYY")
+     end_date = moment(data.id_course.end_date).format("DD/MM/YYYY")
+    
+  }
   const [state, setState] = useState({ cardState: false });
   const toggleCardState = () => {
     setState({ cardState: !state.cardState });
@@ -38,12 +44,12 @@ const StudentClassAccordion = ({ data }) => {
   const [show, setShow] = useState("none")
   const [warning, setWarning] = useState(false)
   const user = useSelector((state) => state.login.login?.currentUser)
-  console.log({user} )
+  // console.log({user} )
     const accessToken = user?.accessToken
     const axiosJWT= createAxiosJWT(dispatch,user,cancelRegisterCourseSuccess)
 
    
-    console.log({axiosJWT})
+    // console.log({axiosJWT})
   const handleOpenModal = () => {
     const checkTime = (Date.now() - new Date(data.createdAt)) / (1000 * 60 * 60 * 24)
     
