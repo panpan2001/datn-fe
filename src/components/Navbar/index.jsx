@@ -6,6 +6,8 @@ import logoutUser from '../../redux/actions/Auth/LogoutRequest'
 import createAxiosJWT from '../../utils/createInstance'
 import { logoutSuccess } from '../../redux/slices/Auth/logoutSlice'
 import { AiOutlineBell } from "react-icons/ai";
+// import '../../services/firebase';
+
 const Navbar = () => {
   const user = useSelector(state => state.login.login?.currentUser)
   const isLoggedIn = useSelector(state => state.login.login?.isLoggedIn)

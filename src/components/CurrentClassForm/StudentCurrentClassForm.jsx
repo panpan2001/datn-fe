@@ -3,10 +3,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import '../../assets/styles/StudentCurrentClassForm.css'
 import StudentClassCard from '../ClassCard/StudentClassCard'
-import { getDemoCourseByStudentIdStart, getDemoCourseByStudentIdSuccess } from '../../redux/slices/DemoCourse/getDemoCourseByStudentId'
+import { getDemoCourseByStudentIdStart, getDemoCourseByStudentIdSuccess } from '../../redux/slices/DemoCourseStudent/getDemoCourseByStudentId'
 import createAxiosJWT from '../../utils/createInstance'
-import getDemoCourseByStudentId from '../../redux/actions/DemoCourse/GetDemoCourseStudentByStudentId'
+import getDemoCourseByStudentId from '../../redux/actions/DemoCourseStudent/GetDemoCourseStudentByStudentId'
 import StudentClassAccordion from '../Accordion/StudentClassAccordion'
+import getCourseStudentByStudentId from '../../redux/actions/CourseStudent/GetCourseStudentByStudentId'
+import StudentDemoClassAccordion from '../Accordion/StudentDemoClassAccordion'
 
 function StudentCurrentClassForm() {
     const dispatch = useDispatch()
@@ -14,13 +16,15 @@ function StudentCurrentClassForm() {
     const user = useSelector((state) => state.login.login?.currentUser)
     const accessToken = user?.accessToken
     let axiosJWT = createAxiosJWT(dispatch, user, getDemoCourseByStudentIdSuccess)
-    const demoClasses = useSelector((state) => state.getDemoCourseByStudentId.demoCourse?.currentDemoCourse)
-    const officiaClasses = []
+  
     useEffect(() => {
         getDemoCourseByStudentId(studentPersonalInfo._id, dispatch, accessToken, axiosJWT)
+        getCourseStudentByStudentId(studentPersonalInfo._id, dispatch, accessToken, axiosJWT)
     }, [])
+    const demoClasses = useSelector((state) => state.getDemoCourseByStudentId.demoCourse?.currentDemoCourse)
+    const officiaClasses = useSelector((state) => state.getCourseStudentByStudentId.officialCourses?.currentCourse)
     console.log({ demoClasses })
-
+console.log({officiaClasses})
     return (
         <div className='current-class_container'>
          
@@ -31,7 +35,7 @@ function StudentCurrentClassForm() {
 
      {demoClasses &&
                 demoClasses.map((item) => (
-                    <StudentClassAccordion data={item} />
+                    <StudentDemoClassAccordion data={item} />
                 ))
     }
     <hr/>
@@ -47,7 +51,7 @@ function StudentCurrentClassForm() {
 </div>
 
           {demoClasses || officiaClasses? 
-          
+           <></>  :
           <div className='student-no-class_div'>
                     <img className="current-class_image" src={require('../../assets/images/no-class.jpg')} />
                     <strong className='is-size-5'>Bạn chưa có lớp học nào cả</strong>
@@ -55,8 +59,8 @@ function StudentCurrentClassForm() {
                         <button className='button is-primary'>Tìm kiếm </button>
                     </Link>
 
-                </div>:
-            <></>    
+                </div>
+             
             }     
 
             

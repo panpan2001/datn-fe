@@ -22,6 +22,11 @@ function ClassCard({ data }) {
 
      const start_date= moment(data.start_date).format("DD/MM/YYYY")
      const end_date= moment(data.end_date).format("DD/MM/YYYY") 
+     const formatter = new Intl.NumberFormat({
+          style: 'currency',
+          currency: 'VND',
+      
+        });
      const handledelete = () => {
 
      }
@@ -82,7 +87,7 @@ function ClassCard({ data }) {
                               <p><strong>Ngày kết thúc: </strong>{end_date}</p>
                          </div>
                          <div className="content">
-                              <p><strong>Giá tiền(VDN/ buổi): </strong>{data.cost}</p>
+                              <p><strong>Giá tiền(VDN/ buổi): </strong>{formatter.format(data.cost)}</p>
                          </div>
                          <div className="content">
                               <p><strong>Mô tả: </strong>{data.description}</p>

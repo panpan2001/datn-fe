@@ -17,7 +17,7 @@ function CreateClassPage() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   let teacher = useSelector(state => state.getTeacherByAccountId.teacher?.currentTeacher)
-  // console.log({teacher})
+  console.log({teacher})
   const user = useSelector((state) => state.login.login?.currentUser)
   const accessToken = user?.accessToken
   const id = user?._id
@@ -80,6 +80,7 @@ function CreateClassPage() {
       const course_category_id = courseCategories.filter(courseCategory => courseCategory.type === type && courseCategory.level === level)[0]?._id
       const checkDemoClass = values.isDemoClass == 'true'
       console.log(checkDemoClass)
+const cost= checkDemoClass == true ?  "50000" : values.cost
       // console.log(values)
       let value = {
         id_teacher: teacher._id,
@@ -88,7 +89,7 @@ function CreateClassPage() {
         number_of_student: values.number_of_student,
         time_per_lesson: values.time_per_lesson,
         learning_period: values.learning_period,
-        cost: values.cost,
+        cost: cost ,
         schedule: values.time + " - " + values.weekdays,
         start_date: values.start_date,
         end_date: values.end_date,
@@ -106,7 +107,7 @@ function CreateClassPage() {
     }
   })
 
-  console.log(formik.values)
+  // console.log(formik.values)
   return (
     <form className='create-class-page_container container  is-centered ' onSubmit={formik.handleSubmit}>
       <div className='create-class-page_form is-centered ' >
@@ -306,10 +307,13 @@ function CreateClassPage() {
                   placeholder="Giá tiền"
                   name="cost"
                   id='cost'
-                  value={formik.values.cost}
+                  value={formik.values.isDemoClass? formik.values.cost="50000":formik.values.cost}
                   onChange={formik.handleChange}
+                  // disabled={formik.values.isDemoClass? true:false}
                 />
-                {formik.errors.cost && <p className="help is-danger">{formik.errors.cost}</p>}
+                {formik.values.isDemoClass? "":
+                
+                formik.errors.cost && <p className="help is-danger">{formik.errors.cost}</p>}
               </div>
             </div>
 
@@ -366,7 +370,11 @@ function CreateClassPage() {
           </div>
         }
 
-        <p style={{ textAlign: "left" }}><strong>Lưu ý: </strong>Thời gian học tính bằng tháng với lớp học chính thức, tính bằng buổi với lớp học thử</p>
+        <p style={{ textAlign: "left" }}><strong>Lưu ý: </strong>
+        <br/>
+        - Thời gian học tính bằng tháng với lớp học chính thức, tính bằng buổi với lớp học thử <br/>
+        - Giá học thử cố định là 50.000 VND/buổi với mọi khóa học thử
+        </p>
 
         <div className="field is-grouped is-grouped-centered" id='signup_button'>
           <button className="button is-info" type='submit' disabled={url ? false : true}>Tạo lớp học</button>

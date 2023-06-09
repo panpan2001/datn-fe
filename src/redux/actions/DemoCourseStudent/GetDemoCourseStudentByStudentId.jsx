@@ -1,5 +1,5 @@
 import { DemoCourseStudentApi } from "../../../utils/BaseUrl"
-import { getDemoCourseByStudentIdFailure, getDemoCourseByStudentIdStart, getDemoCourseByStudentIdSuccess } from "../../slices/DemoCourse/getDemoCourseByStudentId"
+import { getDemoCourseByStudentIdFailure, getDemoCourseByStudentIdStart, getDemoCourseByStudentIdSuccess } from "../../slices/DemoCourseStudent/getDemoCourseByStudentId"
 
 
 const getDemoCourseByStudentId = async(id,dispatch,accessToken,axiosJWT)=>{

@@ -6,7 +6,7 @@ import DetailTeacherpage from './pages/DetailTeacherPage';
 import ImageInfo from './components/TeacherCompleteInfoForm/ImageInfo';
 import StudentJudgeForm from './components/StudentJudgeForm';
 import CreateClassPage from './pages/CreateClassPage';
-
+import '../src/services/firebase';
 function App() {
   
   return (

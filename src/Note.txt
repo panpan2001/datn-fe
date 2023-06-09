@@ -37,3 +37,6 @@ https://html.spec.whatwg.org/multipage/input.html
 multi-user trying to access one method  (put, post , patch,...)
 https://stackoverflow.com/questions/149055/how-to-format-numbers-as-currency-strings
 https://www.iban.com/currency-codes 
+
+https://firebase.google.com/docs/cloud-messaging/js/first-message 
+https://stackoverflow.com/questions/41144151/firebaseerror-we-are-unable-to-register-the-default-service-worker

@@ -5,9 +5,10 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useFormik } from 'formik'
 import * as Yup from "yup"
 import moment from 'moment'
-import { createRegisterDemoCourseStart, createRegisterDemoCourseSuccess } from '../../redux/slices/DemoCourse/createRegisterDemoCourse'
-import registerDemoCourse from '../../redux/actions/DemoCourse/RegisterDemoCourse'
+import { createRegisterDemoCourseStart, createRegisterDemoCourseSuccess } from '../../redux/slices/DemoCourseStudent/createRegisterDemoCourse'
+import registerDemoCourse from '../../redux/actions/DemoCourseStudent/RegisterDemoCourse'
 import createAxiosJWT from '../../utils/createInstance'
+import registerCourse from '../../redux/actions/CourseStudent/registerCourse'
 function RegisterCoursePage() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -22,9 +23,6 @@ const accessToken = user?.accessToken
     currency: 'VND',
 
   });
-  // const fee= parseInt(10000)
-  // let sum_price= parseInt(course.cost)+ parseInt(fee) 
-  // sum_price= formatter.format(sum_price) + " VNĐ"
   let time = course.schedule.split(" - ")[0]
   time = time.split(":")[0] < 12 ? time + " AM" : time + " PM"
   // console.log({course,teacher})
@@ -33,15 +31,6 @@ const accessToken = user?.accessToken
   const start_date = moment(course.start_date).format("DD/MM/YYYY")
   const end_date = moment(course.end_date).format("DD/MM/YYYY")
   
-// const handleSubmit = () => {
-//   const value={
-//     id_course: course._id,
-//     id_student: studentPersonalInfo._id,
-//     isDeleted:false
-
-//   }
-//   registerDemoCourse(value,dispatch,navigate,accessToken,axiosJWT)
-// }
 
 const formik=useFormik({
     initialValues:{
@@ -55,7 +44,12 @@ const formik=useFormik({
         registerDemoCourse(values,dispatch,navigate,accessToken,axiosJWT)
       }
       else {
-        console.log("cho tao lm da nha ")
+        const values={
+          id_course:course._id,
+          id_student:studentPersonalInfo._id,
+        }
+        console.log({values})
+        registerCourse(values,dispatch,navigate,accessToken,axiosJWT)
       }
     }
 })

@@ -4,13 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import getCourseCategoryById from "../../redux/CourseCategory/GetCourseCategoryById";
 import { BiChevronsUp, BiEditAlt, BiTrash } from "react-icons/bi";
 import '../../assets/styles/StudentClassAccordion.css'
+import cancelRegisterDemoCourse from "../../redux/actions/DemoCourseStudent/CancelRegisterDemoCourse";
 import createAxiosJWT from "../../utils/createInstance";
+import { cancelRegisterDemoCourseStart, cancelRegisterDemoCourseSuccess } from "../../redux/slices/DemoCourseStudent/cancelRegisterDemoCourse";
 import { useNavigate } from "react-router-dom";
-import cancelRegisterCourse from "../../redux/actions/CourseStudent/cancelRegisterCourse";
-import { cancelRegisterCourseSuccess } from "../../redux/slices/CourseStudent/cancelRegisterCourse";
 
 
-const StudentClassAccordion = ({ data }) => {
+const StudentDemoClassAccordion = ({ data }) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const register_date = new Date(data.createdAt).toLocaleString('en-US', { timeZone: 'Asia/Ho_Chi_Minh' });
@@ -37,7 +37,7 @@ const StudentClassAccordion = ({ data }) => {
   const [warning, setWarning] = useState(false)
   const user = useSelector((state) => state.login.login?.currentUser)
     const accessToken = user?.accessToken
-    let axiosJWT = createAxiosJWT(dispatch, user, cancelRegisterCourseSuccess)
+    let axiosJWT = createAxiosJWT(dispatch, user, cancelRegisterDemoCourseSuccess)
   const handleOpenModal = () => {
     const checkTime = (Date.now() - new Date(data.createdAt)) / (1000 * 60 * 60 * 24)
     
@@ -54,7 +54,7 @@ const StudentClassAccordion = ({ data }) => {
     }
   }
   const handleCancelCourse=()=>{
-    cancelRegisterCourse(data._id,dispatch,axiosJWT,accessToken,navigate)
+    cancelRegisterDemoCourse(data._id,dispatch,axiosJWT,accessToken,navigate)
     setShow("none")
   }
 
@@ -200,7 +200,7 @@ const StudentClassAccordion = ({ data }) => {
   );
 };
 
-export default StudentClassAccordion
+export default StudentDemoClassAccordion
 {/* <button className="button is-info">
             <BiEditAlt className="student-class_icon"
              style={{color:"rgb(89 178 236)"}}/>

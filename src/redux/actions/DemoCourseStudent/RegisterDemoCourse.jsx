@@ -1,5 +1,5 @@
 import { toast } from "react-toastify"
-import { createRegisterDemoCourseFailure, createRegisterDemoCourseStart, createRegisterDemoCourseSuccess } from "../../slices/DemoCourse/createRegisterDemoCourse"
+import { createRegisterDemoCourseFailure, createRegisterDemoCourseStart, createRegisterDemoCourseSuccess } from "../../slices/DemoCourseStudent/createRegisterDemoCourse"
 import axios from "axios"
 import { DemoCourseStudentApi } from "../../../utils/BaseUrl"
 
