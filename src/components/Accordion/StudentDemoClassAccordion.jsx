@@ -6,7 +6,7 @@ import { BiChevronsUp, BiEditAlt, BiTrash } from "react-icons/bi";
 import '../../assets/styles/StudentClassAccordion.css'
 import cancelRegisterDemoCourse from "../../redux/actions/DemoCourseStudent/CancelRegisterDemoCourse";
 import createAxiosJWT from "../../utils/createInstance";
-import { cancelRegisterDemoCourseStart, cancelRegisterDemoCourseSuccess } from "../../redux/slices/DemoCourseStudent/cancelRegisterDemoCourse";
+import { cancelRegisterDemoCourseSuccess } from "../../redux/slices/DemoCourseStudent/cancelRegisterDemoCourse";
 import { useNavigate } from "react-router-dom";
 
 

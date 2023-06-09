@@ -115,7 +115,7 @@ function DetailClassPage() {
                     style={{ gap: '2rem' }}
                 >
                     {currentUser ?
-                        (currentUser.role_name == "teacher" ?
+                        (currentUser.role_name == "teacher" ||  new Date(data.start_date).getTime() < new Date().getTime()  ?
                             <>
                             </> :
                             <>

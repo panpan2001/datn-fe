@@ -8,14 +8,16 @@ import createAxiosJWT from "../../utils/createInstance";
 import { useNavigate } from "react-router-dom";
 import cancelRegisterCourse from "../../redux/actions/CourseStudent/cancelRegisterCourse";
 import { cancelRegisterCourseSuccess } from "../../redux/slices/CourseStudent/cancelRegisterCourse";
-
+import cancelRegisterDemoCourse from "../../redux/actions/DemoCourseStudent/CancelRegisterDemoCourse";
+import { cancelRegisterDemoCourseSuccess } from "../../redux/slices/DemoCourseStudent/cancelRegisterDemoCourse";
 
 const StudentClassAccordion = ({ data }) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const register_date = new Date(data.createdAt).toLocaleString('en-US', { timeZone: 'Asia/Ho_Chi_Minh' });
+  const register_date = moment(data.createdAt).format("DD/MM/YYYY HH:mm:ss a")
+  // new Date(data.createdAt).toLocaleString('en-US', { timeZone: 'Asia/Ho_Chi_Minh' });
   let time = data.id_course.schedule.split(" - ")[0]
-  time = time.split(":")[0] < 12 ? time + " AM" : time + " PM"
+  time = time.split(":")[0] < 12 ? time + " am" : time + " pm"
   const start_date = moment(data.id_course.start_date).format("DD/MM/YYYY")
   const end_date = moment(data.id_course.end_date).format("DD/MM/YYYY")
   const formatter = new Intl.NumberFormat({
@@ -36,8 +38,12 @@ const StudentClassAccordion = ({ data }) => {
   const [show, setShow] = useState("none")
   const [warning, setWarning] = useState(false)
   const user = useSelector((state) => state.login.login?.currentUser)
+  console.log({user} )
     const accessToken = user?.accessToken
-    let axiosJWT = createAxiosJWT(dispatch, user, cancelRegisterCourseSuccess)
+    const axiosJWT= createAxiosJWT(dispatch,user,cancelRegisterCourseSuccess)
+
+   
+    console.log({axiosJWT})
   const handleOpenModal = () => {
     const checkTime = (Date.now() - new Date(data.createdAt)) / (1000 * 60 * 60 * 24)
     
@@ -54,8 +60,11 @@ const StudentClassAccordion = ({ data }) => {
     }
   }
   const handleCancelCourse=()=>{
-    cancelRegisterCourse(data._id,dispatch,axiosJWT,accessToken,navigate)
-    setShow("none")
+    
+      cancelRegisterCourse(data._id,dispatch,axiosJWT,accessToken,navigate)
+      setShow("none")
+ 
+    
   }
 
   return (

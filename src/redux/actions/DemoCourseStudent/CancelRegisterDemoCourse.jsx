@@ -3,7 +3,7 @@ import { DemoCourseStudentApi } from "../../../utils/BaseUrl"
 import { cancelRegisterDemoCourseFailure, cancelRegisterDemoCourseStart, cancelRegisterDemoCourseSuccess } from "../../slices/DemoCourseStudent/cancelRegisterDemoCourse"
 
 const cancelRegisterDemoCourse= async(id, dispatch, axiosJWT,accessToken,navigate)=>{
-    console.log("olala")
+    // console.log("olala cancel demo course action :",axiosJWT)
   dispatch(cancelRegisterDemoCourseStart())
     try {
         const res= await axiosJWT.delete(DemoCourseStudentApi+id,{
