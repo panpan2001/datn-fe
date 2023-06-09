@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import moment from 'moment'
 import { useDispatch, useSelector } from "react-redux";
-import getCourseCategoryById from "../../redux/CourseCategory/GetCourseCategoryById";
+import getCourseCategoryById from "../../redux/actions/CourseCategory/GetCourseCategoryById";
 import { BiChevronsUp, BiEditAlt, BiTrash } from "react-icons/bi";
 import '../../assets/styles/StudentClassAccordion.css'
 import cancelRegisterDemoCourse from "../../redux/actions/DemoCourseStudent/CancelRegisterDemoCourse";

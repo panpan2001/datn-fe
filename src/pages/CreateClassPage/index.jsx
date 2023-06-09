@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import '../../assets/styles/CreateClassPage.css'
 import { useDispatch, useSelector } from 'react-redux'
-import getCourseCategory from '../../redux/CourseCategory/GetCourseCategory'
+import getCourseCategory from '../../redux/actions/CourseCategory/GetCourseCategory'
 import uploadImage from '../../contexts/uploadImage'
 import { AiOutlineClose } from 'react-icons/ai'
 import { useFormik } from 'formik'

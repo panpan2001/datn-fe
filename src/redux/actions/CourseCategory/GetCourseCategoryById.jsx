@@ -1,6 +1,6 @@
 import axios from "axios"
-import { CourseCategoryApi } from "../../utils/BaseUrl"
-import { getCourseCategoryByIdFailure, getCourseCategoryByIdStart, getCourseCategoryByIdSuccess } from "../slices/CourseCategory/getCourseCategoryByIdSlice"
+import { CourseCategoryApi } from "../../../utils/BaseUrl"
+import { getCourseCategoryByIdFailure, getCourseCategoryByIdStart, getCourseCategoryByIdSuccess } from "../../slices/CourseCategory/getCourseCategoryByIdSlice"
 
 
 const getCourseCategoryById= async(id,dispatch)=>{

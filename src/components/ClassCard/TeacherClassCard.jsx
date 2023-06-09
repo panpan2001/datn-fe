@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import '../../assets/styles/ClassCard.css'
 import DetailClassModalForm from '../DetailClassModalForm'
 import { useDispatch, useSelector } from 'react-redux'
-import getCourseCategoryById from '../../redux/CourseCategory/GetCourseCategoryById'
+import getCourseCategoryById from '../../redux/actions/CourseCategory/GetCourseCategoryById'
 import moment from 'moment/moment'
 
 function ClassCard({ data }) {
