@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 const initialValues={
-    officialCourse:{
+    officialCourses:{
         currentCourse:null,
         isFetching:false,
         error:false
@@ -13,14 +13,20 @@ const cancelRegisterCourseSlice= createSlice({
     initialState:initialValues,
     reducers:{
         cancelRegisterCourseStart:(state,action)=>{
-            state.officialCourse.isFetching=true
-            
-        },
-        cancelRegisterCourseSuccess:(state,action)=>{
             return{
                 ...state,
-                officialCourse:{
-                    ...state.officialCourse,
+                officialCourses:{
+                    ...state.officialCourses,
+                    isFetching:true,
+                }
+            }
+        },
+        cancelRegisterCourseSuccess:(state,action)=>{
+         
+            return{
+                ...state,
+                officialCourses:{
+                    ...state.officialCourses,
                     currentCourse:action.payload,
                     isFetching:false,
                     error:false
@@ -31,8 +37,8 @@ const cancelRegisterCourseSlice= createSlice({
         cancelRegisterCourseFailure:(state,action)=>{
             return {
                 ...state,
-                officialCourse:{
-                    ...state.officialCourse,
+                officialCourses:{
+                    ...state.officialCourses,
                     isFetching:false,
                     error:true
                 }
