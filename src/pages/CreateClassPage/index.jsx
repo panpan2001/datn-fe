@@ -95,7 +95,6 @@ const cost= checkDemoClass == true ?  "50000" : values.cost
         end_date: values.end_date,
         description: values.description,
         image: url,
-        isDemoClass: checkDemoClass
       }
       console.log(value)
        createCourse(axiosJWT,accessToken, value,dispatch,navigate)
@@ -111,32 +110,11 @@ const cost= checkDemoClass == true ?  "50000" : values.cost
   return (
     <form className='create-class-page_container container  is-centered ' onSubmit={formik.handleSubmit}>
       <div className='create-class-page_form is-centered ' >
-        <strong className="is-size-5">Tạo khóa học</strong>
+        <strong className="is-size-5">Tạo khóa học chính thức</strong>
         {
           courseCategories &&
           <div className="columns is-centered  is-multiline">
-            <div className="column is-6">
-              <div className="field "  >
-                <label className="label">Nhãn lớp học</label>
-
-                <div className=" field select "
-                  placeholder="Nhãn lớp học"
-                  style={{ width: '100%' }}>
-                  <select
-                    style={{ width: '100%' }}
-                    id="isDemoClass"
-                    name="isDemoClass"
-                    value={formik.values.isDemoClass}
-                    onChange={formik.handleChange}
-                  >
-                    <option >Học thử/ Học chính thức</option>
-                    <option id="true" name='true' value={true}>Học thử</option>
-                    <option id="false" name='false' value={false}>Học chính thức</option>
-                  </select>
-                  {formik.errors.isDemoClass && <p className="help is-danger">{formik.errors.isDemoClass}</p>}
-                </div>
-              </div>
-            </div>
+        
             <div className="column is-6">
               <div className="field">
                 <label className="label">Tên lớp học</label>
@@ -197,38 +175,60 @@ const cost= checkDemoClass == true ?  "50000" : values.cost
                 {formik.errors.number_of_student && <p className="help is-danger">{formik.errors.number_of_student}</p>}
               </div>
             </div>
-
+           
             <div className="column is-6">
               <div className="field">
-                <label className="label">Thời lượng buổi học(ph)</label>
+                <label className="label">Giá tiền(VND/buổi học) </label>
                 <input
                   className="input"
                   type="text"
-                  placeholder="Thời lượng buổi học(giờ)"
-                  name="time_per_lesson"
-                  id='time_per_lesson'
-                  value={formik.values.time_per_lesson}
+                  placeholder="Giá tiền"
+                  name="cost"
+                  id='cost'
+                  value={formik.values.isDemoClass? formik.values.cost="50000":formik.values.cost}
                   onChange={formik.handleChange}
+                  // disabled={formik.values.isDemoClass? true:false}
                 />
-                {formik.errors.time_per_lesson && <p className="help is-danger">{formik.errors.time_per_lesson}</p>}
+                {formik.values.isDemoClass? "":
+                
+                formik.errors.cost && <p className="help is-danger">{formik.errors.cost}</p>}
               </div>
             </div>
-
             <div className="column is-6">
               <div className="field">
-                <label className="label">Thời gian học (tháng hoặc buổi)</label>
+                <label className="label">Ngày bắt đầu</label>
                 <input
                   className="input"
-                  type="text"
-                  placeholder="Thời gian học (tháng)"
-                  name="learning_period"
-                  id='learning_period'
-                  value={formik.values.learning_period}
+                  type="date"
+                  placeholder="Ngày bắt đầu"
+                  name="start_date"
+                  id='start_date'
+                  min={new Date().toJSON().slice(0, 10)}
+                  value={formik.values.start_date}
                   onChange={formik.handleChange}
                 />
-                {formik.errors.learning_period && <p className="help is-danger">{formik.errors.learning_period}</p>}
+                {formik.errors.start_date && <p className="help is-danger">{formik.errors.start_date}</p>}
               </div>
             </div>
+            <div className="column is-6">
+              <div className="field">
+                <label className="label">Ngày kết thúc</label>
+                <input
+                  className="input"
+                  type="date"
+                  placeholder="Ngày kết thúc"
+                  name="end_date"
+                  id='end_date'
+                  // min={new Date().toJSON().slice(0, 10)}
+                  min={formik.values.start_date}
+                  value={formik.values.end_date}
+                  onChange={formik.handleChange}
+                />
+                {formik.errors.end_date && <p className="help is-danger">{formik.errors.end_date}</p>}
+              </div>
+            </div>
+            
+          
 
             <div className="column is-12">
               <div className="field schedule_weekdays_filed">
@@ -267,57 +267,55 @@ const cost= checkDemoClass == true ?  "50000" : values.cost
 
             <div className="column is-6">
               <div className="field">
-                <label className="label">Ngày bắt đầu</label>
-                <input
-                  className="input"
-                  type="date"
-                  placeholder="Ngày bắt đầu"
-                  name="start_date"
-                  id='start_date'
-                  min={new Date().toJSON().slice(0, 10)}
-                  value={formik.values.start_date}
-                  onChange={formik.handleChange}
-                />
-                {formik.errors.start_date && <p className="help is-danger">{formik.errors.start_date}</p>}
-              </div>
-            </div>
-            <div className="column is-6">
-              <div className="field">
-                <label className="label">Ngày kết thúc</label>
-                <input
-                  className="input"
-                  type="date"
-                  placeholder="Ngày kết thúc"
-                  name="end_date"
-                  id='end_date'
-                  // min={new Date().toJSON().slice(0, 10)}
-                  min={formik.values.start_date}
-                  value={formik.values.end_date}
-                  onChange={formik.handleChange}
-                />
-                {formik.errors.end_date && <p className="help is-danger">{formik.errors.end_date}</p>}
-              </div>
-            </div>
-            <div className="column is-6">
-              <div className="field">
-                <label className="label">Giá tiền(VND/buổi học) </label>
+                <label className="label">Thời lượng buổi học(ph)</label>
                 <input
                   className="input"
                   type="text"
-                  placeholder="Giá tiền"
-                  name="cost"
-                  id='cost'
-                  value={formik.values.isDemoClass? formik.values.cost="50000":formik.values.cost}
+                  placeholder="Thời lượng buổi học(giờ)"
+                  name="time_per_lesson"
+                  id='time_per_lesson'
+                  value={formik.values.time_per_lesson}
                   onChange={formik.handleChange}
-                  // disabled={formik.values.isDemoClass? true:false}
                 />
-                {formik.values.isDemoClass? "":
-                
-                formik.errors.cost && <p className="help is-danger">{formik.errors.cost}</p>}
+                {formik.errors.time_per_lesson && <p className="help is-danger">{formik.errors.time_per_lesson}</p>}
               </div>
             </div>
 
-            <div className="column is-6 mt-1  class-image-upload_column-is-5"
+            <div className="column is-6">
+              <div className="field">
+                <label className="label">Thời gian học (tháng)</label>
+                <input
+                  className="input"
+                  type="text"
+                  placeholder="Thời gian học (tháng)"
+                  name="learning_period"
+                  id='learning_period'
+                  value={formik.values.learning_period}
+                  onChange={formik.handleChange}
+                />
+                {formik.errors.learning_period && <p className="help is-danger">{formik.errors.learning_period}</p>}
+              </div>
+            </div>
+           
+            
+            <div className="column is-12 tooltip_column">
+              <div className="field tooltip">
+                <label className="label" style={{ display: "flex" }}>Mô tả lớp học </label>
+                <textarea
+
+                  className="textarea is-info"
+                  placeholder="Mô tả lớp học"
+                  id='description'
+                  name='description'
+                  value={formik.values.description}
+                  onChange={formik.handleChange}
+                ></textarea>
+                {formik.errors.description && <p className="help is-danger">{formik.errors.description}</p>}
+                {/* <span class="tooltiptext">Tooltip text</span> */}
+              </div>
+
+            </div>
+            <div className="column is-12 mt-1  class-image-upload_column-is-5"
               style={{ width: "50%" }}>
               <div className="field class-image-upload_field " >
                 <label className="label">Ảnh đại diện</label>
@@ -348,33 +346,14 @@ const cost= checkDemoClass == true ?  "50000" : values.cost
                 {/* {url ? "": <p className="help is-danger">Bạn chưa chọn ảnh</p>} */}
               </div>
             </div>
-
-            <div className="column is-12 tooltip_column">
-              <div className="field tooltip">
-                <label className="label" style={{ display: "flex" }}>Mô tả lớp học </label>
-                <textarea
-
-                  className="textarea is-info"
-                  placeholder="Mô tả lớp học"
-                  id='description'
-                  name='description'
-                  value={formik.values.description}
-                  onChange={formik.handleChange}
-                ></textarea>
-                {formik.errors.description && <p className="help is-danger">{formik.errors.description}</p>}
-                {/* <span class="tooltiptext">Tooltip text</span> */}
-              </div>
-
-            </div>
-
           </div>
         }
 
-        <p style={{ textAlign: "left" }}><strong>Lưu ý: </strong>
+        {/* <p style={{ textAlign: "left" }}><strong>Lưu ý: </strong>
         <br/>
         - Thời gian học tính bằng tháng với lớp học chính thức, tính bằng buổi với lớp học thử <br/>
         - Giá học thử cố định là 50.000 VND/buổi với mọi khóa học thử
-        </p>
+        </p> */}
 
         <div className="field is-grouped is-grouped-centered" id='signup_button'>
           <button className="button is-info" type='submit' disabled={url ? false : true}>Tạo lớp học</button>
@@ -430,3 +409,25 @@ const handleDelWeekday = (e) => {
                   id='time'
                 />
                     </div>  */}
+                        {/* <div className="column is-6">
+              <div className="field "  >
+                <label className="label">Nhãn lớp học</label>
+
+                <div className=" field select "
+                  placeholder="Nhãn lớp học"
+                  style={{ width: '100%' }}>
+                  <select
+                    style={{ width: '100%' }}
+                    id="isDemoClass"
+                    name="isDemoClass"
+                    value={formik.values.isDemoClass}
+                    onChange={formik.handleChange}
+                  >
+                    <option >Học thử/ Học chính thức</option>
+                    <option id="true" name='true' value={true}>Học thử</option>
+                    <option id="false" name='false' value={false}>Học chính thức</option>
+                  </select>
+                  {formik.errors.isDemoClass && <p className="help is-danger">{formik.errors.isDemoClass}</p>}
+                </div>
+              </div>
+            </div> */}

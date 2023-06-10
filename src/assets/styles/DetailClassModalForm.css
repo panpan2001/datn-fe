@@ -1,5 +1,11 @@
 @import './RootStyle.css';
 
+.detail-class_wrap {
+border: 1px solid var(--border-color);
+border-radius: 10px ;
+padding: 1rem ;
+box-shadow: 0 0 8px 0 var(--border-color);
+}
 #detail-class_modal{
     background-color: white;
     border: none;
@@ -11,9 +17,9 @@
     box-shadow: none !important;
 }
 
-.detail-class_columns{
+/* .detail-class_columns{
     width: 50% !important;
-}
+} */
 .detail-class-name{
     display: flex !important;
     justify-content: center;

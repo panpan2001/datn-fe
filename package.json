@@ -43,6 +43,7 @@
     "react-toastify": "^9.1.2",
     "redux": "^4.2.1",
     "redux-persist": "^6.0.0",
+    "reduxjs-toolkit-persist": "^7.2.1",
     "web-vitals": "^2.1.4",
     "yup": "^1.1.1"
   },

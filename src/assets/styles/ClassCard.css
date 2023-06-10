@@ -36,6 +36,7 @@
 .content{
     display: flex !important;
     margin-bottom: .5rem !important;
+    text-align: left;
 }
 
 .card-footer{

@@ -4,7 +4,10 @@ import { Link } from 'react-router-dom'
 import { BsCurrencyDollar, BsFillStarFill } from 'react-icons/bs'
 function TeacherShortInfoRight({ data }) {
   return (
+    
     <div className="card">
+      {data &&
+      <>
       <div className="card-image">
         <figure className="image "
           style={{
@@ -51,6 +54,10 @@ function TeacherShortInfoRight({ data }) {
           </Link>
         </div>
       </div>
+      </>
+       }
+      
+      
     </div>
   )
 }

@@ -71,42 +71,39 @@ function DetailClassPage() {
                 <div className="detail-class-name ">
                     <strong className='is-size-5'>{data.name} </strong>
 
-                    {data.isDemoClass ?
-                        <button className="button course_label is-warning ml-3">Học thử</button> :
-                        <button className="button course_label is-primary ml-3">Học chính thức</button>
-                    }
+                  
                 </div>
-                <div className="columns detail-class_columns is-multiline is-centered">
+                <div className="columns detail-class_columns is-multiline is-centered mr-3 ml-3">
 
 
-                    <div className="content column detail-class_content is-6">
+                    <div className="content column detail-class_content is-4">
                         <p><strong>Loại: </strong>{data.category_id.type}</p>
                     </div>
-                    <div className="content column detail-class_content is-6">
+                    <div className="content column detail-class_content is-4">
                         <p><strong>Cấp độ: </strong>{data.category_id.level}</p>
                     </div>
-                    <div className="content column detail-class_content is-6">
+                    <div className="content column detail-class_content is-4">
                         <p><strong>Số lượng học viên: </strong>{data.number_of_student}</p>
                     </div>
-                    <div className="content column detail-class_content is-6">
+                    <div className="content column detail-class_content is-4">
                         <p><strong>Thời lượng buổi học(ph): </strong>{data.time_per_lesson}</p>
                     </div>
-                    <div className="content column detail-class_content is-6">
+                    <div className="content column detail-class_content is-4">
                         <p> <strong>Thời gian học: </strong>{data.learning_period} {data.isDemoClass ? 'buổi' : 'tháng'}</p>
                     </div>
-                    <div className="content column detail-class_content is-6">
+                    <div className="content column detail-class_content is-4">
                         <p><strong>Lịch học: </strong>{time} - {data.schedule.split(" - ")[1]}</p>
                     </div>
-                    <div className="content column detail-class_content is-6">
+                    <div className="content column detail-class_content is-4">
                         <p><strong>Ngày bắt đầu: </strong>{start_date}</p>
                     </div>
-                    <div className="content column detail-class_content is-6">
+                    <div className="content column detail-class_content is-4">
                         <p><strong>Ngày kết thúc: </strong>{end_date}</p>
                     </div>
-                    <div className="content column detail-class_content is-6">
+                    <div className="content column detail-class_content is-4">
                         <p><strong>Giá tiền(VDN/ buổi): </strong>{formatter.format(data.cost)}</p>
                     </div>
-                    <div className="content column detail-class_content is-6">
+                    <div className="content column detail-class_content is-12">
                         <p><strong>Mô tả: </strong>{data.description}</p>
                     </div>
                 </div>
@@ -119,14 +116,13 @@ function DetailClassPage() {
                             <>
                             </> :
                             <>
-                                {data.isDemoClass ?
                                     <Link to={`/registerCourse/${idClass}`}>
                                         <button className="button is-primary">Học thử </button>
-                                    </Link> :
+                                    </Link> 
                                     <Link to={`/registerCourse/${idClass}`}>
                                         <button className="button is-info">Đăng kí  </button>
                                     </Link>
-                                }
+                                
 
                             </>
                         ) :
@@ -200,3 +196,8 @@ export default DetailClassPage
 {/* <p
                     style={{ textAlign: "left" }}
                 ><strong>Mô tả: </strong>{data.description}</p> */}
+
+                  {/* {data.isDemoClass ?
+                        <button className="button course_label is-warning ml-3">Học thử</button> :
+                        <button className="button course_label is-primary ml-3">Học chính thức</button>
+                    } */}

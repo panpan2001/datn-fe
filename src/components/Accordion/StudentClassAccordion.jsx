@@ -88,12 +88,12 @@ const StudentClassAccordion = ({ data }) => {
           <p className="card-header-title"
             style={{ alignItems: "baseline" }}
           >{data.id_course.name}
-            <div class="content column is-6">
+            {/* <div class="content column is-6">
               {data.id_course.isDemoClass ?
                 <button className="button course_label is-warning ml-3">Học thử</button> :
                 <button className="button course_label is-primary ml-3">Học chính thức</button>
               }
-            </div>
+            </div> */}
           </p>
 
           <div className="card-header-icon student-class_group-icon"

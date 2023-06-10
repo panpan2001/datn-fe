@@ -51,12 +51,7 @@ setShow("none")
 
 
                          </div>
-                         <div class="content">
-                              {data.isDemoClass ?
-                                   <button className="button course_label is-warning mr-3">Học thử</button> :
-                                   <button className="button course_label is-primary mr-3">Học chính thức</button>
-                              }
-                         </div>
+                        
                          <div class="content">
 
                               <p><strong>Loại: </strong>{data.category_id.type}</p>
@@ -137,3 +132,9 @@ export default ClassCard
 
 {/* </footer> */ }
 {/* <DetailClassModalForm data={data} show={show} setShow={setShow}/> */ }
+ {/* <div class="content">
+                              {data.isDemoClass ?
+                                   <button className="button course_label is-warning mr-3">Học thử</button> :
+                                   <button className="button course_label is-primary mr-3">Học chính thức</button>
+                              }
+                         </div> */}

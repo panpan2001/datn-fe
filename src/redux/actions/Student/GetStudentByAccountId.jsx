@@ -5,10 +5,10 @@ import axios from "axios"
 
 
 const getStudentByAccountId = async ( dispatch,account_id) => {
-    
+    console.log("tao dang get may do ")
     dispatch(getStudentByAccountIdStart())
     try {
-        console.log("tao dang get may do ")
+       
         const res= await axios.get(StudentApi+'account/'+account_id)
         console.table("student info ",res.data)
         dispatch(getStudentByAccountIdSuccess(res.data))

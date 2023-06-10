@@ -11,7 +11,7 @@ function PersonalInfo() {
   
   return (
     <div>
-     {user.role_name=='student'?
+     {user.role_name=='student'|| user.role_name=='admin'?
      <StudentProfileForm user={user}/>:
      (user.role_name=='teacher'?
      <TeacherProfileForm user={user}/>:<></>) 

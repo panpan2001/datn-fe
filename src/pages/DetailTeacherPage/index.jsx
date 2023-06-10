@@ -41,12 +41,12 @@ function DetailTeacherpage() {
                             <strong className='is-size-6'>Về giáo viên</strong>
                             <hr />
 
-                            <div className="columns " style={{ width: "100%" }}>
+                            <div className="is-multiline " style={{ width: "100%" }}>
                                 {/* <div className="column is-3 info-teacher_image-button">
                                     <ImageItem image={teacher.personal_image} />
 
                                 </div> */}
-                                <div className="column is-10 info-teacher-detail ">
+                                <div className="column  info-teacher-detail ">
                                     <p class="title is-6 columns info-teacher-detail_p ">
                                         <div className="column mt-1">{teacher.account_id.full_name}</div>
                                         {teacher.id_academic.degree_status ?
@@ -83,11 +83,11 @@ function DetailTeacherpage() {
                                     </div>
                                     <p className="teacher-description_paragraph"><strong>Email:</strong> {teacher.account_id.email}</p>
                                     <p className="teacher-description_paragraph"><strong>Số điện thoại:</strong> {teacher.account_id.phone_number}</p>
-                                    <p className="teacher-description_paragraph"><strong>Giới thiệu:</strong>
-                                        {teacher.personal_description.split("." || "\n").map((item, index) => {
+                                    <p className="teacher-description_paragraph"><strong>Giới thiệu: </strong>
+                                        {/* {teacher.personal_description.split("." || "\n").map((item, index) => {
                                             return <p key={index}>{item}</p>
-                                        })}
-
+                                        })} */}
+{teacher.personal_description}
                                     </p>
 
                                 </div>
@@ -153,7 +153,7 @@ function DetailTeacherpage() {
                             <table class="table is-fullwidth is-hoverable">
                                 <thead>
                                     <tr>
-                                        <th></th>
+                                        {/* <th></th> */}
                                         <th>Tên khóa học</th>
                                         <th>Cấp độ</th>
                                         <th>Số lượng (học sinh)</th>
@@ -167,12 +167,12 @@ function DetailTeacherpage() {
                                     {classes && classes.map((item) => (
                                         <>
                                             <tr key={item._id}>
-                                                <td>       
+                                                {/* <td>       
                                                 {item.isDemoClass? 
                               <button className="button course_label is-warning mr-3">Học thử</button>:
                               <button className="button course_label is-primary mr-3">Học chính thức</button>
                               }
-                                                </td>
+                                                </td> */}
                                                 <td>{item.name}</td>
                                                 <td>{item.category_id.level}</td>
                                                 <td>{item.number_of_student} </td>

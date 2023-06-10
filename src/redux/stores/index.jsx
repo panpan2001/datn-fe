@@ -33,12 +33,12 @@ import registerCourseReducer from "../slices/CourseStudent/registerCourse";
 import getCourseStudentByStudentIdReducer from "../slices/CourseStudent/getCourseStudentByStudentId";
 import cancelRegisterCourseReducer from "../slices/CourseStudent/cancelRegisterCourse";
 import deleteCourseReducer from "../slices/Course/deleteCourse";
-
+import storageSession from 'redux-persist/lib/storage/session'
 
 const persistConfig = {
     key:'root',
     version:1,
-    storage
+    storage:storageSession,
 
 }
 
@@ -94,3 +94,5 @@ const store= configureStore({
 
 export const persistor=persistStore(store)
 export default store
+
+// https://stackoverflow.com/questions/72687210/redux-toolkit-persisting-data-in-session-storage 
