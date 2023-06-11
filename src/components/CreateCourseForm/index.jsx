@@ -12,7 +12,7 @@ import createCourse from '../../redux/actions/Course/CreateCourse'
 import { useNavigate } from 'react-router-dom'
 import updateTeacher from '../../redux/actions/Teacher/UpdateTeacher'
 
-function CreateClassPage() {
+function CreateCourseForm() {
   const weekdaysTags = ["Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "CN"]
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -97,7 +97,7 @@ const cost= checkDemoClass == true ?  "50000" : values.cost
         image: url,
       }
       console.log(value)
-       createCourse(axiosJWT,accessToken, value,dispatch,navigate)
+       createCourse(axiosJWT,accessToken, value,dispatch,navigate,id)
       // .then((res) => {
       //   console.log("res createCourse in create class page:",res,typeof res)
       //    updateTeacher( teacher._id,res,dispatch,axiosJWT,accessToken)
@@ -300,7 +300,7 @@ const cost= checkDemoClass == true ?  "50000" : values.cost
             
             <div className="column is-12 tooltip_column">
               <div className="field tooltip">
-                <label className="label" style={{ display: "flex" }}>Mô tả lớp học </label>
+                <label className="label" style={{ display: "flex" }}>Mô tả khóa học </label>
                 <textarea
 
                   className="textarea is-info"
@@ -356,7 +356,7 @@ const cost= checkDemoClass == true ?  "50000" : values.cost
         </p> */}
 
         <div className="field is-grouped is-grouped-centered" id='signup_button'>
-          <button className="button is-info" type='submit' disabled={url ? false : true}>Tạo lớp học</button>
+          <button className="button is-info" type='submit' disabled={url ? false : true}>Tạo khóa học</button>
         </div>
       </div>
 
@@ -364,7 +364,7 @@ const cost= checkDemoClass == true ?  "50000" : values.cost
   )
 }
 
-export default CreateClassPage
+export default CreateCourseForm 
 
 // { <div className="column is-6">
 // <div className="field">

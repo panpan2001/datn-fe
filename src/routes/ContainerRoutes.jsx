@@ -26,7 +26,7 @@ const PersonalInfo = React.lazy(() => import('../components/PersonalInfo'))
 const StudentCompleteInfoPage = React.lazy(() => import('../pages/CompleteInfoPage/Student'))
 const TeacherCompleteInfoPage = React.lazy(() => import('../pages/CompleteInfoPage/Teacher'))
 const DetailTeacherPage = React.lazy(() => import('../pages/DetailTeacherPage'))
-const CreateClassPage = React.lazy(() => import('../pages/CreateClassPage'))
+const CreateCoursePage = React.lazy(() => import('../pages/CreateCoursePage'))
 const DetailClassPage= React.lazy(() => import('../pages/DetailClassPage'))
 const RegisterCoursePage= React.lazy(() => import('../pages/RegisterCoursePage'))
 
@@ -92,7 +92,7 @@ function ContainerRoutes() {
               {
                 currentUSer.role_name && currentUSer.role_name == 'teacher' &&
                 <>
-                  <Route path='/createClass' element={<CreateClassPage />} />
+                  <Route path='/createClass' element={<CreateCoursePage />} />
                 </>
               }
             </>

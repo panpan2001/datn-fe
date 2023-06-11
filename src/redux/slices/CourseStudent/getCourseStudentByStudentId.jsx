@@ -17,6 +17,7 @@ const getCourseStudentByStudentIdSlice = createSlice({
             state.officialCourses.isFetching = true
         },
         getCourseStudentByStudentIdSuccess: (state, action) => {
+            // console.log({state},{action})
             return {
                 ...state,
                 officialCourses: {

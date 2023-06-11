@@ -17,8 +17,8 @@ const StudentProfileForm = () => {
     
     useEffect(() => {
         // console.log("h get student by account id ne :")
-      
-            getStudentByAccountId(dispatch, account_id) 
+      user.role_name==="student" ? 
+            getStudentByAccountId(dispatch, account_id) :
             getAccountById(dispatch, account_id)
     }, [account_id])
 

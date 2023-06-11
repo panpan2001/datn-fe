@@ -9,6 +9,7 @@ import getDemoCourseByStudentId from '../../redux/actions/DemoCourseStudent/GetD
 import StudentClassAccordion from '../Accordion/StudentClassAccordion'
 import getCourseStudentByStudentId from '../../redux/actions/CourseStudent/GetCourseStudentByStudentId'
 import StudentDemoClassAccordion from '../Accordion/StudentDemoClassAccordion'
+import { getCourseStudentByStudentIdSuccess } from '../../redux/slices/CourseStudent/getCourseStudentByStudentId'
 
 function StudentCurrentClassForm() {
     const dispatch = useDispatch()
@@ -22,9 +23,9 @@ function StudentCurrentClassForm() {
         getCourseStudentByStudentId(studentPersonalInfo._id, dispatch, accessToken, axiosJWT)
     }, [])
     const demoClasses = useSelector((state) => state.getDemoCourseByStudentId.demoCourse?.currentDemoCourse)
-    const officiaClasses = useSelector((state) => state.getCourseStudentByStudentId.officialCourses?.currentCourse)
-    console.log({ demoClasses })
-console.log({officiaClasses})
+    let officiaClasses = useSelector((state) => state.getCourseStudentByStudentId.officialCourses?.currentCourse)
+    // const demoClasses2 = useSelector((state) => state.cancelRegisterCourse.demoCourse?.currentDemoCourse)
+   
     return (
         <div className='current-class_container'>
          

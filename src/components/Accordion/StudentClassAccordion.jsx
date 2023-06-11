@@ -16,20 +16,20 @@ const StudentClassAccordion = ({ data }) => {
   const navigate = useNavigate()
   const register_date = moment(data.createdAt).format("DD/MM/YYYY HH:mm:ss a")
   // new Date(data.createdAt).toLocaleString('en-US', { timeZone: 'Asia/Ho_Chi_Minh' });
-  let time=''
-  let start_date=''
-  let end_date=''
-  const  formatter = new Intl.NumberFormat({
+  let time = ''
+  let start_date = ''
+  let end_date = ''
+  const formatter = new Intl.NumberFormat({
     style: 'currency',
     currency: 'VND',
 
   });
-  if(data){
-     time = data.id_course.schedule.split(" - ")[0]
+  if (data) {
+    time = data.id_course.schedule.split(" - ")[0]
     time = time.split(":")[0] < 12 ? time + " AM" : time + " PM"
-     start_date = moment(data.id_course.start_date).format("DD/MM/YYYY")
-     end_date = moment(data.id_course.end_date).format("DD/MM/YYYY")
-    
+    start_date = moment(data.id_course.start_date).format("DD/MM/YYYY")
+    end_date = moment(data.id_course.end_date).format("DD/MM/YYYY")
+
   }
   const [state, setState] = useState({ cardState: false });
   const toggleCardState = () => {
@@ -45,32 +45,32 @@ const StudentClassAccordion = ({ data }) => {
   const [warning, setWarning] = useState(false)
   const user = useSelector((state) => state.login.login?.currentUser)
   // console.log({user} )
-    const accessToken = user?.accessToken
-    const axiosJWT= createAxiosJWT(dispatch,user,cancelRegisterCourseSuccess)
+  const accessToken = user?.accessToken
+  const axiosJWT = createAxiosJWT(dispatch, user, cancelRegisterCourseSuccess)
+  const id = user?._id
 
-   
-    // console.log({axiosJWT})
+  // console.log({axiosJWT})
   const handleOpenModal = () => {
     const checkTime = (Date.now() - new Date(data.createdAt)) / (1000 * 60 * 60 * 24)
-    
+
     if (checkTime < 1) {
-      
+
       setShow("block")
       setWarning(true)
-      
+
     }
     else {
       setShow("block")
       setWarning(false)
-      
+
     }
   }
-  const handleCancelCourse=()=>{
-    
-      cancelRegisterCourse(data._id,dispatch,axiosJWT,accessToken,navigate)
-      setShow("none")
- 
-    
+  const handleCancelCourse = () => {
+
+    cancelRegisterCourse(data._id, dispatch, axiosJWT, accessToken, id)
+    setShow("none")
+
+
   }
 
   return (
@@ -156,7 +156,7 @@ const StudentClassAccordion = ({ data }) => {
             <div className=" column is-6">
               <p><strong>Giá tiền(VDN/ buổi): </strong>{formatter.format(data.id_course.cost)}</p>
             </div>
-           
+
             <div className=" column is-16">
               <p><strong>Đăng kí lúc: </strong>{register_date}</p>
             </div>

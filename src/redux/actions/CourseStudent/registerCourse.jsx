@@ -3,12 +3,13 @@ import { CourseStudentApi } from "../../../utils/BaseUrl"
 import { registerCourseFailure, registerCourseStart, registerCourseSuccess } from "../../slices/CourseStudent/registerCourse"
 
 
-const registerCourse=async (value,dispatch,navigate,accessToken,axiosJWT)=>{
+const registerCourse=async (value,dispatch,navigate,accessToken,axiosJWT,account_id)=>{
     dispatch(registerCourseStart())
     try {
         const res= await  axiosJWT.post(CourseStudentApi,value,{
             headers:{
-                token: `Bearer ${accessToken}`
+                token: `Bearer ${accessToken}`,
+                account_id:account_id
             }
         })
         dispatch(registerCourseSuccess(res.data))

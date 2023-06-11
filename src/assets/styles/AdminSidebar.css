@@ -1,4 +1,7 @@
 @import  './RootStyle.css';
+
+
+
 .profile-page_container_columns{
     width: 100%;
     min-height: 100vh;
@@ -26,6 +29,7 @@
     /* display: none; */
     /* width: 5rem; */
     /* width: 14rem; */
+    position: fixed;
     min-height: 95vh;
     justify-content: start;
     align-items: start;

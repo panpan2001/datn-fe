@@ -3,7 +3,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import '../../assets/styles/AdminSidebar.css'
 import { GiHamburgerMenu } from 'react-icons/gi'
 import Item from '../Item'
-import { AiOutlineLogout, AiOutlineHome, AiOutlineTeam, AiOutlineUser, AiOutlineSolution } from 'react-icons/ai'
+import { AiOutlineLogout, AiOutlineHome, AiOutlineTeam, AiOutlineUser, AiOutlineSolution, AiOutlineMacCommand } from 'react-icons/ai'
+import { BiExit } from 'react-icons/bi'
 function AdminSidebar() {
   const navigate = useNavigate()
   return (
@@ -89,12 +90,24 @@ function AdminSidebar() {
       <div className="group">
         
         <Item className='admin-sidebar_item' icon={<AiOutlineHome />} name={"Tổng quan"} navigate={'/admin'} />
-      
+      <Item icon={<AiOutlineMacCommand/>} name={"Tài khoản"} navigate={'/admin/account'}/>
         <Item icon={< AiOutlineTeam />} name={"Học viên"} navigate={'/admin/student'} />
         <Item icon={< AiOutlineUser />} name={"Giáo viên"} navigate={'/admin/teacher'}/>
-        <Item icon={< AiOutlineSolution  />} name={"Lớp học"} navigate={'/admin/course'} />
+        <Item icon={< AiOutlineSolution  />} name={"Khóa học"} navigate={'/admin/course'} />
       </div>
     </div>
+    <Link to='/profile'>
+    <BiExit style={{
+      display: "block",
+      bottom: "2rem",
+      left: "4.5rem",
+      position: "absolute",
+      margin: "auto",
+      color: "var(--toastify-color-info)",
+      width: "2rem",
+      height: "2rem",
+    }}/>
+    </Link>
     
   </div>
   )

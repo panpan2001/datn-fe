@@ -17,6 +17,7 @@ function RegisterCoursePage() {
   const studentPersonalInfo = useSelector((state) => state.getStudentByAccountId.students?.infoStudent)
   const user= useSelector((state) => state.login.login?.currentUser)
 const accessToken = user?.accessToken
+const account_id= user?._id
  let axiosJWT = createAxiosJWT(dispatch, user, createRegisterDemoCourseSuccess)
   const formatter = new Intl.NumberFormat({
     style: 'currency',
@@ -49,7 +50,7 @@ const formik=useFormik({
           id_student:studentPersonalInfo._id,
         }
         console.log({values})
-        registerCourse(values,dispatch,navigate,accessToken,axiosJWT)
+        registerCourse(values,dispatch,navigate,accessToken,axiosJWT,account_id)
       }
     }
 })

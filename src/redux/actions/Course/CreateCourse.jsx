@@ -3,12 +3,17 @@ import { createCourseFailure, createCourseStart, createCourseSuccess } from "../
 import { CourseApi } from "../../../utils/BaseUrl"
 import updateTeacher from "../Teacher/UpdateTeacher"
 
-const createCourse=async(axiosJWT,accessToken, value,dispatch,navigate)=>{
+const createCourse=async(axiosJWT,accessToken, value,dispatch,navigate,id)=>{
     dispatch(createCourseStart())
     try {
+        // console.log("tao dang create course:",id)
         const res= await axiosJWT.post(CourseApi,value,
             {
-            headers:{token: `Bearer ${accessToken}`}
+            headers:{
+                token: `Bearer ${accessToken}`,
+                account_id:id
+            },
+            
         })
         dispatch(createCourseSuccess(res.data))
         console.log("action create course: ",res.data)

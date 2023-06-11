@@ -34,10 +34,10 @@ const ProfileSideBar = () => {
             <Item icon={<AiOutlineDatabase />} name={"Quản lí"} navigate={'/admin'} /> :
             (currentUser.role_name == 'student' ?
               <>
-                <Item icon={<AiOutlineBook />} name={"Lớp học của tôi"} navigate={'/profile/studentClass'} />
+                <Item icon={<AiOutlineBook />} name={"Khóa học của tôi"} navigate={'/profile/studentClass'} />
                 {/* <Item icon={< AiOutlineEdit />} name={"Đánh giá giáo viên"} navigate={'/profile/judgeTeacher'} /> */}
               </> : 
-               <Item icon={< AiOutlineBook />} name={"Lớp học của tôi"} navigate={'/profile/teacherClass'} />
+               <Item icon={< AiOutlineBook />} name={"Khóa học của tôi"} navigate={'/profile/teacherClass'} />
 
             )
           }

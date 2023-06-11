@@ -5,6 +5,7 @@ function DashboardPage() {
     <div className='dashboard-page_container container-fluid'>
         {/* <AdminManagementLayout/> */}
         <p>DashboardPage</p>
+        
     </div>
   )
 }

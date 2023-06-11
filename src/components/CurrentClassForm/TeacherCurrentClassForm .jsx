@@ -25,7 +25,7 @@ function TeacherCurrentClassForm() {
     
     return (
         <div className='current-class_container container-fluid '>
-            <strong className='is-size-4 is-centered'>Lớp học của tôi</strong>
+            <strong className='is-size-4 is-centered'>Khóa học của tôi</strong>
 
             {/* <hr /> */}
             {classes ?

@@ -2,10 +2,6 @@ import React, { useState } from 'react';
 import './assets/styles/App.css';
 import ContainerRoutes from './routes/ContainerRoutes';
 import { ToastContainer } from 'react-toastify';
-import DetailTeacherpage from './pages/DetailTeacherPage';
-import ImageInfo from './components/TeacherCompleteInfoForm/ImageInfo';
-import StudentJudgeForm from './components/StudentJudgeForm';
-import CreateClassPage from './pages/CreateClassPage';
 import '../src/services/firebase';
 function App() {
   
@@ -14,7 +10,6 @@ function App() {
             
       <ContainerRoutes/>
     <ToastContainer/>
-{/* <CreateClassPage/> */}
   
       </div>
   );

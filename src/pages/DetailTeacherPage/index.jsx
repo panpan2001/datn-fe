@@ -150,6 +150,7 @@ function DetailTeacherpage() {
                         <div className="teacher-schedule  ">
                             <strong className='is-size-6'>Các khóa học</strong>
                             <hr />
+                            {/* <button className="button course_label is-primary mr-3">Khóa chính thức</button> */}
                             <table class="table is-fullwidth is-hoverable">
                                 <thead>
                                     <tr>
@@ -198,6 +199,7 @@ function DetailTeacherpage() {
                                     ))}
                                 </tbody>
                             </table>
+                           
                         </div>
                     </div>
                     <div className="teacher_aside colunm is-3 is-multiline ">
