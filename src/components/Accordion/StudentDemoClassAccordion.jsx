@@ -8,9 +8,11 @@ import cancelRegisterDemoCourse from "../../redux/actions/DemoCourseStudent/Canc
 import createAxiosJWT from "../../utils/createInstance";
 import { cancelRegisterDemoCourseSuccess } from "../../redux/slices/DemoCourseStudent/cancelRegisterDemoCourse";
 import { useNavigate } from "react-router-dom";
+import getCoursebyId from "../../redux/actions/Course/GetCoursebyId";
 
 
-const StudentDemoClassAccordion = ({ data }) => {
+const StudentDemoClassAccordion = ({ data,color }) => {
+  console.log({data})
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const register_date = new Date(data.createdAt).toLocaleString('en-US', { timeZone: 'Asia/Ho_Chi_Minh' });
@@ -23,10 +25,10 @@ const StudentDemoClassAccordion = ({ data }) => {
 
   });
   if(data){
-     time = data.id_course.schedule.split(" - ")[0]
+     time = data.id_demo_course.schedule.split(" - ")[0]
     time = time.split(":")[0] < 12 ? time + " AM" : time + " PM"
-     start_date = moment(data.id_course.start_date).format("DD/MM/YYYY")
-     end_date = moment(data.id_course.end_date).format("DD/MM/YYYY")
+     start_date = moment(data.id_demo_course.start_date).format("DD/MM/YYYY")
+     end_date = moment(data.id_demo_course.end_date).format("DD/MM/YYYY")
     
   }
   
@@ -36,10 +38,11 @@ const StudentDemoClassAccordion = ({ data }) => {
   };
   const { cardState } = state;
   useEffect(() => {
-    getCourseCategoryById(data.id_course.category_id, dispatch)
+    getCoursebyId(data.id_demo_course.id_course, dispatch)
   }, [])
   const category = useSelector((state) => state.getCourseById.course?.currentCourse)
   // console.log({category},category.type,category.level)
+  const course= useSelector((state) => state.getCourseById.course?.currentCourse)
   const [show, setShow] = useState("none")
   const [warning, setWarning] = useState(false)
   const user = useSelector((state) => state.login.login?.currentUser)
@@ -69,7 +72,8 @@ const StudentDemoClassAccordion = ({ data }) => {
     <div className="column ">
       <div className="card "
         style={{
-          backgroundColor: " rgb(167 235 246)",
+          // backgroundColor: " rgb(167 235 246)",
+          backgroundColor:`${color }`
         }}
       >
         <header
@@ -79,14 +83,7 @@ const StudentDemoClassAccordion = ({ data }) => {
         >
           <p className="card-header-title"
             style={{ alignItems: "baseline" }}
-          >{data.id_course.name}
-            <div class="content column is-6">
-              {data.id_course.isDemoClass ?
-                <button className="button course_label is-warning ml-3">Học thử</button> :
-                <button className="button course_label is-primary ml-3">Học chính thức</button>
-              }
-            </div>
-          </p>
+          >{course.name}</p>
 
           <div className="card-header-icon student-class_group-icon"
           >
@@ -126,18 +123,11 @@ const StudentDemoClassAccordion = ({ data }) => {
                   <p><strong>Cấp độ: </strong>{category.category_id.level}</p>
                 </div>
               </>}
-
             <div className=" column is-6">
-              <p><strong>Số lượng học viên: </strong>{data.id_course.number_of_student}</p>
+              <p> <strong>Thời gian học (buổi): </strong>{data.id_demo_course.learning_period} </p>
             </div>
             <div className=" column is-6">
-              <p><strong>Thời lượng buổi học(ph): </strong>{data.id_course.time_per_lesson}</p>
-            </div>
-            <div className=" column is-6">
-              <p> <strong>Thời gian học: </strong>{data.id_course.learning_period} {data.id_course.isDemoClass ? 'buổi' : 'tháng'}</p>
-            </div>
-            <div className=" column is-6">
-              <p><strong>Lịch học: </strong>{time} - {data.id_course.schedule.split(" - ")[1]}</p>
+              <p><strong>Lịch học: </strong>{time} - {data.id_demo_course.schedule.split(" - ")[1]}</p>
             </div>
             <div className=" column is-6">
               <p><strong>Ngày bắt đầu: </strong>{start_date}</p>
@@ -146,7 +136,7 @@ const StudentDemoClassAccordion = ({ data }) => {
               <p><strong>Ngày kết thúc: </strong>{end_date}</p>
             </div>
             <div className=" column is-6">
-              <p><strong>Giá tiền(VDN/ buổi): </strong>{formatter.format(data.id_course.cost)}</p>
+              <p><strong>Giá tiền(VDN/ buổi): </strong>{formatter.format(data.id_demo_course.cost)}</p>
             </div>
            
             <div className=" column is-16">

@@ -2,9 +2,12 @@ import React, { useEffect, useState } from 'react'
 import '../../assets/styles/ClassCard.css'
 import moment from 'moment/moment'
 import '../../assets/styles/TeacherDemoClassCard.css'
+import { useDispatch, useSelector } from 'react-redux'
+import getDemoCourseStudentByDemoCourseId from '../../redux/actions/DemoCourseStudent/GetDemoCourseStudentByDemoCourseId'
 
 function TeacherDemoClassCard({ item }) {
-
+     console.log("item id course",item.id_course._id )
+     const dispatch = useDispatch()
 
      let time = item.schedule.split(" - ")[0]
      time = time.split(":")[0] < 12 ? time + " AM" : time + " PM"
@@ -16,7 +19,11 @@ function TeacherDemoClassCard({ item }) {
           currency: 'VND',
 
      });
-
+useEffect(() => {
+     getDemoCourseStudentByDemoCourseId(item.id_course._id, dispatch)
+},[])
+const DemoCourseStudent= useSelector((state) => state.getDemoCourseStudentByDemoCourseId?.demoCourses?.currentCourse)
+console.log("DemoCourseStudent",{DemoCourseStudent})
      return (
           <div className= 'teacher-demo-class_card'>
                <div className="content_container columns is-multiline">
@@ -41,7 +48,7 @@ function TeacherDemoClassCard({ item }) {
                          <p><strong>Giá tiền(VDN/ buổi): </strong>{formatter.format(item.cost)}</p>
                     </div>
                     <div className="content  column is-12">
-                         <p><strong>Số lượng đăng kí: </strong></p>
+                         <p><strong>Số lượng đăng kí: </strong>{DemoCourseStudent && DemoCourseStudent.length }</p>
                     </div>
                     <div className="content  column is-12">
                          <p><strong>Link video: </strong>{item.link_video}</p>

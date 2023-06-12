@@ -13,6 +13,7 @@ import VerifyStatusButton from '../../components/Button/VerifyStatusButton'
 import DetailTeacherCard from '../../components/DetailTeacherCard'
 import DetailClassModalForm from '../../components/DetailClassModalForm'
 import getAllCourseByIdTeacher from '../../redux/actions/Course/GetAllCourseByIdTeacher'
+import getAllDemoCourseByTeacherId from '../../redux/actions/DemoCourse/GetAllDemoCourseByTeacherId'
 function DetailTeacherpage() {
     const dispatch = useDispatch()
     const { id } = useParams()
@@ -21,15 +22,18 @@ function DetailTeacherpage() {
         getTeacherById(id, dispatch)
     }, [id])
     const teacher = useSelector(state => state.getTeacherById.teacher?.currentTeacher)
-
+const user= useSelector((state) => state.login.login?.currentUser)
     console.table("teacher:", teacher)
     const [show, setShow] = useState("none")
     useEffect(() => {
         getAllCourseByIdTeacher(id, dispatch)
+        getAllDemoCourseByTeacherId(id, dispatch)
     }, [id])
 
-    const classes = useSelector((state) => state.getAllCourseByIdTeacher.courses?.currentCourses)
+    const classes = useSelector((state) => state.getAllCourseByIdTeacher?.courses?.currentCourses)
+    const demoCourses= useSelector((state) => state.getAllDemoCourseByTeacherId?.demoCourses?.currentCourse)
     console.log({ classes })
+    console.log({ demoCourses })
     /// 
     return (
         < >
@@ -87,7 +91,7 @@ function DetailTeacherpage() {
                                         {/* {teacher.personal_description.split("." || "\n").map((item, index) => {
                                             return <p key={index}>{item}</p>
                                         })} */}
-{teacher.personal_description}
+                                        {teacher.personal_description}
                                     </p>
 
                                 </div>
@@ -150,37 +154,30 @@ function DetailTeacherpage() {
                         <div className="teacher-schedule  ">
                             <strong className='is-size-6'>Các khóa học</strong>
                             <hr />
-                            {/* <button className="button course_label is-primary mr-3">Khóa chính thức</button> */}
                             <table class="table is-fullwidth is-hoverable">
                                 <thead>
                                     <tr>
-                                        {/* <th></th> */}
+                                        <th></th>
                                         <th>Tên khóa học</th>
                                         <th>Cấp độ</th>
                                         <th>Số lượng (học sinh)</th>
                                         <th>Đã đăng kí </th>
-                                        <th>Thời lượng (ph)</th>
                                         <th></th>
-                                        
+
                                     </tr>
                                 </thead>
                                 <tbody style={{ textAlign: "left" }}>
                                     {classes && classes.map((item) => (
                                         <>
                                             <tr key={item._id}>
-                                                {/* <td>       
-                                                {item.isDemoClass? 
-                              <button className="button course_label is-warning mr-3">Học thử</button>:
-                              <button className="button course_label is-primary mr-3">Học chính thức</button>
-                              }
-                                                </td> */}
+                                                <td>
+                                                    <button className="button course_label is-primary mr-3">Học chính thức</button>
+                                                </td>
                                                 <td>{item.name}</td>
                                                 <td>{item.category_id.level}</td>
                                                 <td>{item.number_of_student} </td>
-                                                <td>{}</td>
-                                                <td>{item.time_per_lesson} </td>
-                                                {/* <td>{item.learning_period} </td>
-                                            <td>{item.schedule} </td> */}
+                                                <td>{ }</td>
+
                                                 <td>
                                                     {/* <button className="button is-link" onClick={() => setShow("block")}>Chi tiết </button> */}
                                                     <Link to={`/detailTeacher/${teacher._id}/detailClass/${item._id}`}>
@@ -197,9 +194,40 @@ function DetailTeacherpage() {
                                             {/* <DetailClassModalForm id={item._id} data={item} show={show} setShow={setShow} /> */}
                                         </>
                                     ))}
+                                     {demoCourses && demoCourses.map((item) => (
+                                        <>
+                                            <tr key={item._id}>
+                                                <td>
+                                                    <button className="button course_label is-warning mr-3">Học thử</button>
+                                                </td>
+                                                <td>{item.id_course.name}</td>
+                                                <td>{ }</td>
+                                                <td>{ }</td>
+                                                <td>{ }</td>
+                                                {/* { user ?
+                                             (user.role_name !== "teacher" &&
+                                                new Date(item.start_date+ " " + item.time).getTime() < new Date().getTime() &&
+                                                <td>
+                                                    <Link to={`/registerDemoCourse/${item._id}`}>
+                                                        <button className="button is-primary">Học thử </button>
+                                                    </Link>
+                                                </td>):
+                                                <></>
+                                                
+                                                } */}
+                                                <td>
+                                                    <Link to={`/detailTeacher/${teacher._id}/detailClass/${item.id_course._id}`}>
+                                                    <button className="button is-link" >Chi tiết </button>
+                                                    </Link>
+                                                   
+                                                </td>
+                                                
+                                            </tr>
+                                        </>
+                                    ))}
                                 </tbody>
                             </table>
-                           
+
                         </div>
                     </div>
                     <div className="teacher_aside colunm is-3 is-multiline ">

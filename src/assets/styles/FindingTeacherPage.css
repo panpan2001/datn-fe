@@ -14,3 +14,9 @@ hr{
     justify-content: center;
 
 }
+.filter_container{
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    left: 3rem;
+}

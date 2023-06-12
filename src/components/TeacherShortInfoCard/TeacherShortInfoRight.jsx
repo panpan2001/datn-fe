@@ -2,10 +2,10 @@ import React from 'react'
 import '../../assets/styles/TeacherShortInfoRight.css'
 import { Link } from 'react-router-dom'
 import { BsCurrencyDollar, BsFillStarFill } from 'react-icons/bs'
-function TeacherShortInfoRight({ data }) {
+function TeacherShortInfoRight({ data,color }) {
   return (
     
-    <div className="card">
+    <div className="card teacher-short-info-right_card" style={{backgroundColor:`${color}`}}>
       {data &&
       <>
       <div className="card-image">

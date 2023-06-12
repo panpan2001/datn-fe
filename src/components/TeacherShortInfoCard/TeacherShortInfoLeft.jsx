@@ -6,13 +6,13 @@ import RegisterButton from '../GroupButton/RegisterButton'
 import ImageItem from '../ImageItem'
 import { Link } from 'react-router-dom'
 
-function TeacherShortInfoLeft({ data }) {
+function TeacherShortInfoLeft({ data,color }) {
     // console.log("elo: ",data.personal_description.split("\n"))
     return (
         <div className="card teacher-short-info-left_card"
             style={{
                 // backgroundColor: "#c2f8ff",
-                backgroundColor: "rgb(189 238 245 / 35%)"
+                backgroundColor: `${color}`
             }}
         >
             <div className="card-content teacher-short-info-left_card-content">

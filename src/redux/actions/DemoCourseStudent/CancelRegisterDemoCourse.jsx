@@ -1,6 +1,7 @@
 import { toast } from "react-toastify"
 import { DemoCourseStudentApi } from "../../../utils/BaseUrl"
 import { cancelRegisterDemoCourseFailure, cancelRegisterDemoCourseStart, cancelRegisterDemoCourseSuccess } from "../../slices/DemoCourseStudent/cancelRegisterDemoCourse"
+import { getDemoCourseByStudentIdSuccess } from "../../slices/DemoCourseStudent/getDemoCourseByStudentId"
 
 const cancelRegisterDemoCourse= async(id, dispatch, axiosJWT,accessToken,navigate)=>{
     // console.log("olala cancel demo course action :",axiosJWT)
@@ -12,7 +13,7 @@ const cancelRegisterDemoCourse= async(id, dispatch, axiosJWT,accessToken,navigat
             }
         })
 
-        dispatch(cancelRegisterDemoCourseSuccess(res.data))
+        dispatch(getDemoCourseByStudentIdSuccess(res.data))
         navigate('/profile/studentClass')
     } catch (error) {
         dispatch(cancelRegisterDemoCourseFailure(error))

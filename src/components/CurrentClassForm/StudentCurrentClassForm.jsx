@@ -36,7 +36,7 @@ function StudentCurrentClassForm() {
 
      {demoClasses &&
                 demoClasses.map((item) => (
-                    <StudentDemoClassAccordion data={item} />
+                    <StudentDemoClassAccordion color={"#B2FFDA"} data={item} />
                 ))
     }
     <hr/>

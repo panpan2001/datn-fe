@@ -28,60 +28,54 @@ const FindingTeacherPage = () => {
                         <p> <strong className='is-size-3'>Tìm kiếm giáo viên tiếng Anh <br />và bắt đầu hành trình tuyệt vời của riêng bạn</strong> </p>
                         <br />
                         <SearchBar width={'50rem'} />
-                        <br />
-                        <div className="columns is-multiline">
-                            <FilterCategory />
-                            <FilterCategory />
-                            <FilterCategory />
-                            <FilterCategory />
-                        </div>
+                   
+                        
                     </div>
                     <div className="column is-4">
                         <img className='finding-teacher_image ' src={require('../../assets/images/12.jpg')} alt="" />
                     </div>
                 </div>
             </div>
-            <hr />
+            {/* <hr /> */}
+            <br />
+            <br />
+            <br />
             <br />
             {teachers &&
             <>
-             <section className="finding-teacher-page_section-1 is-centered show-teacher ">
-                {/* <br /> */}
-                <strong className='is-size-4'>Tất cả giáo viên </strong>
-                <br />
-                <br />
+             <section className="finding-teacher-page_section-1 container is-centered show-teacher ">
+              
+                {/* <strong className='is-size-4'>Tất cả giáo viên </strong> */}
+                {/* <br />
+                <br /> */}
+                <div className="columns is-multiline ">
+                    <div className="column is-3">
+                    
+                   <div className="columns is-multiline filter_container mb-6">
+                            <FilterCategory title={'Điểm đánh giá'}/>
+                            <FilterCategory title={'Hạng mục'} />
 
-                <div className="columns is-centered">
-                    <div className="column is-10 ml-3">
+                        </div>
+                    </div>
+                    <div className="column is-8 ml-6 ">
                         {teachers && teachers.map((teacher) =>
                             <>
-                                <TeacherShortInfoLeft data={teacher} />
+                                <TeacherShortInfoLeft  color="#b5e5ff" data={teacher} />
                                 <br />
                                 <br />
                             </>
                         )}
+                          <Pagination />
                     </div>
 
-                    {/* <div className="column is-3">
-                        {teachers.map((teacher) => 
-                            <>
-                            <TeacherShortInfoRight data={teacher} />
-
-                            <br />
-                            <br />
-                        </>      
-                        )}
-                        <br />
-                        <br />
-                       
-                    </div> */}
-
+                  
+                  
                 </div>
-                <Pagination />
+               
             </section>
             <hr />
 
-            <section className="finding-teacher-page_section-2">
+            <section className="finding-teacher-page_section-2 container">
                 <br />
                 <strong className='is-size-4'>Giáo viên nổi bật</strong>
                 <br />
@@ -90,7 +84,7 @@ const FindingTeacherPage = () => {
                     <div className="columns is-multiline">
 
                         <div className="column is-3">
-                            <TeacherShortInfoRight data={teachers[0]} />
+                            <TeacherShortInfoRight  data={teachers[0]} />
                         </div>
 
                         <div className="column is-3">
@@ -192,3 +186,16 @@ export default FindingTeacherPage
 <button onClick={()=>{handleDelete(account._id)}}>delete</button>
             </>
             )} */}
+              {/* <div className="column is-3">
+                        {teachers.map((teacher) => 
+                            <>
+                            <TeacherShortInfoRight data={teacher} />
+
+                            <br />
+                            <br />
+                        </>      
+                        )}
+                        <br />
+                        <br />
+                       
+                    </div> */}

@@ -26,11 +26,13 @@ const StudentCompleteInfoPage = React.lazy(() => import('../pages/CompleteInfoPa
 const TeacherCompleteInfoPage = React.lazy(() => import('../pages/CompleteInfoPage/Teacher'))
 const DetailTeacherPage = React.lazy(() => import('../pages/DetailTeacherPage'))
 const CreateCoursePage = React.lazy(() => import('../pages/CreateCoursePage'))
-const DetailClassPage= React.lazy(() => import('../pages/DetailClassPage'))
-const RegisterCoursePage= React.lazy(() => import('../pages/RegisterCoursePage'))
+const DetailClassPage = React.lazy(() => import('../pages/DetailClassPage'))
+const RegisterCoursePage = React.lazy(() => import('../pages/RegisterCoursePage'))
+const RegisterDemoCoursePage = React.lazy(() => import('../pages/RegisterDemoCoursePage'))
+
 
 const DashboardPage = React.lazy(() => import('../pages/DasboardPage'));
-const AccountManagementPage= React.lazy(() => import('../pages/AccountManagementPage'));
+const AccountManagementPage = React.lazy(() => import('../pages/AccountManagementPage'));
 const StudentManagementPage = React.lazy(() => import('../pages/StudentManagementPage'));
 const CourseManagementPage = React.lazy(() => import('../pages/CourseManagementPage'));
 const TeacherManagementPage = React.lazy(() => import('../pages/TeacherManagementPage'));
@@ -46,7 +48,7 @@ function ContainerRoutes() {
   return (
     <BrowserRouter>
       <Routes>
-      <Route path='/' element={<UserLayout />} >
+        <Route path='/' element={<UserLayout />} >
           {/* user vs non-user can access */}
           <Route index element={<LandingPage />} />
           <Route path="*" element={<NotFound />} />
@@ -55,19 +57,20 @@ function ContainerRoutes() {
           <Route path="/signup" element={<SignUpPage />} />
           <Route path='/findingTeacher' element={<FindingTeacherPage />} />
           <Route path='/detailTeacher/:id' element={<DetailTeacherPage />} />
-            <Route path='/detailTeacher/:id/detailClass/:idClass' element={<DetailClassPage />} />
-            <Route path='/registerCourse/:idClass' element={<RegisterCoursePage />} />
+          <Route path='/detailTeacher/:id/detailClass/:idClass' element={<DetailClassPage />} />
+          <Route path='/registerCourse/:idClass' element={<RegisterCoursePage />} />
+          <Route path='/registerDemoCourse/:idDemoCourse' element={<RegisterDemoCoursePage />} />
 
           {/* <Route path='/findingCourse' element={<FindingCoursePage />} /> */}
           {/* user can access */}
           {isRegister && <>
 
-          <Route path='/completeInfoStudent' element={<StudentCompleteInfoPage />} />
-          <Route path='/completeInfoTeacher' element={<TeacherCompleteInfoPage />} >
-            <Route index element={<AcademicInfo />} />
-            <Route path='/completeInfoTeacher/degree' element={<DegreeInfo />} />
-            <Route path='/completeInfoTeacher/description' element={<ImageInfo />} />
-          </Route>
+            <Route path='/completeInfoStudent' element={<StudentCompleteInfoPage />} />
+            <Route path='/completeInfoTeacher' element={<TeacherCompleteInfoPage />} >
+              <Route index element={<AcademicInfo />} />
+              <Route path='/completeInfoTeacher/degree' element={<DegreeInfo />} />
+              <Route path='/completeInfoTeacher/description' element={<ImageInfo />} />
+            </Route>
           </>}
           {isLoggedIn &&
             <>
@@ -98,21 +101,23 @@ function ContainerRoutes() {
             </>
           }
         </Route>
-        
-        {/* {isLoggedIn &&currentUSer.role_name && currentUSer.role_name == 'admin' && */}
-                {/* // just  admin can access */}
-                <Route path='/admin' element={<AdminManagementLayout />}>
-                  <Route index element={<DashboardPage />} />
-                  <Route path='/admin/account' element={<AccountManagementPage />} />
-                  <Route path='/admin/student' element={<StudentManagementPage />} />
-                  <Route path='/admin/teacher' element={<TeacherManagementPage />} />
-                  <Route path='/admin/course' element={<CourseManagementPage />} />
-                  <Route path="/admin/*" element={<NotFound />} />
-                </Route>
-              {/* } */}
+
+        {isLoggedIn && currentUSer.role_name && currentUSer.role_name == 'admin' &&
+          // just  admin can access */ 
+
+          < Route path='/admin' element={<AdminManagementLayout />}>
+            <Route index element={<DashboardPage />} />
+            <Route path='/admin/account' element={<AccountManagementPage />} />
+            <Route path='/admin/student' element={<StudentManagementPage />} />
+            <Route path='/admin/teacher' element={<TeacherManagementPage />} />
+            <Route path='/admin/course' element={<CourseManagementPage />} />
+            <Route path="/admin/*" element={<NotFound />} />
+          </Route>
+
+        }
 
       </Routes>
-    </BrowserRouter>
+    </BrowserRouter >
   )
 }
 

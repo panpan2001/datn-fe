@@ -138,7 +138,7 @@ const StudentProfileForm = () => {
                                      />
                                 </div>
                             </div> */}
-                    {studentPersonalInfo ?
+                    {user.role_name=="student" && studentPersonalInfo ?
                         <>
                             <div className="column is-6">
                                 <div className="field">
@@ -166,7 +166,7 @@ const StudentProfileForm = () => {
 
                 </div>
             </>}
-
+P
 
         </div  >
     )

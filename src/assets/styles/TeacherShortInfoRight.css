@@ -5,3 +5,9 @@
     width:".5rem" !important;
     height:".5rem" !important
 }
+.teacher-short-info-right_card{
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    left: 3rem;
+}

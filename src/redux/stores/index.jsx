@@ -37,6 +37,8 @@ import storageSession from 'redux-persist/lib/storage/session'
 import createDemoCourseReducer from "../slices/DemoCourse/createDemoCourse";
 import getAllDemoCourseByTeacherIdReducer from "../slices/DemoCourse/getAllDemoCourseByTeacherId";
 import getAllDemoCourseByCourseIdReducer from "../slices/DemoCourse/getAllDemoCourseByCourseId";
+import getDemoCourseByIdReducer from "../slices/DemoCourse/getDemoCourseById";
+import getDemoCourseStudentByCourseIdReducer from "../slices/DemoCourseStudent/getDemoCourseStudentByCourseId";
 
 const persistConfig = {
     key:'root',
@@ -79,7 +81,9 @@ const rootReducer= combineReducers({
     deleteCourse:deleteCourseReducer,
     createDemoCourse:createDemoCourseReducer,
     getAllDemoCourseByTeacherId:getAllDemoCourseByTeacherIdReducer,
-    getAllDemoCourseByCourseId:getAllDemoCourseByCourseIdReducer
+    getAllDemoCourseByCourseId:getAllDemoCourseByCourseIdReducer,
+    getDemoCourseById:getDemoCourseByIdReducer,
+    getDemoCourseStudentByCourseId: getDemoCourseStudentByCourseIdReducer
 })
 const persistedReducer=persistReducer(persistConfig,rootReducer)
 

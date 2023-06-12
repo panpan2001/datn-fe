@@ -89,6 +89,12 @@ const Navbar = () => {
                       </div>
                     </div>
                   </div>
+                  {user.role_name == 'admin' &&
+                   <Link className="button  ml-4 log_in is-link" to='/admin'>
+                   Quản lí
+                 </Link>
+                  }
+                 
                   <Link className="button  ml-4 log_in is-light" onClick={handleLogout}>
                     Đăng xuất
                   </Link>

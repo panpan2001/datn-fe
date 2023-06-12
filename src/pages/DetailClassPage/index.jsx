@@ -6,6 +6,7 @@ import axios from 'axios'
 import { CourseApi } from '../../utils/BaseUrl'
 import getCoursebyId from '../../redux/actions/Course/GetCoursebyId'
 import moment from 'moment'
+import getAllDemoCourseByCourseId from '../../redux/actions/DemoCourse/GetAllDemoCourseByCourseId'
 
 function DetailClassPage() {
     let weekdays = ""
@@ -14,13 +15,20 @@ function DetailClassPage() {
     let end_date = ""
     const currentUser = useSelector((state) => state.login.login?.currentUser)
     const { idClass } = useParams()
+    const { id } = useParams()
     const dispatch = useDispatch()
     const navigate = useNavigate()
     console.log(idClass)
     useEffect(() => {
         getCoursebyId(idClass, dispatch)
+        getAllDemoCourseByCourseId(idClass, dispatch)
+
     }, [])
     const data = useSelector((state) => state.getCourseById.course?.currentCourse)
+    const demoCourse = useSelector((state) => state.getAllDemoCourseByCourseId?.demoCourses?.currentCourse)
+    const checkRegister=(a,b)=>{
+return new Date(a + " " + b).getTime() > new Date().getTime()
+    } 
     const formatter = new Intl.NumberFormat({
         style: 'currency',
         currency: 'VND',
@@ -34,7 +42,6 @@ function DetailClassPage() {
         start_date = moment(data.start_date).format("DD/MM/YYYY")
         end_date = moment(data.end_date).format("DD/MM/YYYY")
     }
-
 
     return (
         <div className="container " style={{
@@ -71,7 +78,7 @@ function DetailClassPage() {
                 <div className="detail-class-name ">
                     <strong className='is-size-5'>{data.name} </strong>
 
-                  
+
                 </div>
                 <div className="columns detail-class_columns is-multiline is-centered mr-3 ml-3">
 
@@ -106,31 +113,81 @@ function DetailClassPage() {
                     <div className="content column detail-class_content is-12">
                         <p><strong>Mô tả: </strong>{data.description}</p>
                     </div>
+                    <div className="content column detail-class_content is-12">
+                        <p><strong>Các lớp học thử </strong></p>
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Tên khóa học thử</th>
+                                <th>Ngày bắt đầu</th>
+                                <th>Ngày kết thúc</th>
+                                <th>Thời gian học</th>
+                                <th>Giờ bắt đầu</th>
+                                <th>Thứ</th>
+                                <th>Giá tiền<br />(VND/buổi)</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {demoCourse && demoCourse.map((item) => (
+                                <tr className='mb-2'>
+                                    <>
+                                        <th>{demoCourse.indexOf(item) + 1}</th>
+                                        <td>{item.id_course.name}</td>
+                                        <td>{moment(item.start_date).format("DD/MM/YYYY")}</td>
+                                        <td>{moment(item.end_date).format("DD/MM/YYYY")}</td>
+                                        <td>{item.learning_period}</td>
+                                        <td>{parseInt(item.schedule.split(" - ")[0]) < 12 ?
+                                            item.schedule.split(" - ")[0] + ' AM' :
+                                            item.schedule.split(" - ")[0] + ' PM'}
+                                        </td>
+                                        <td>{item.schedule.split(" - ")[1]}</td>
+                                        <td>{formatter.format(item.cost)}</td>
+                                      
+                                        {currentUser ?
+                                            (currentUser.role_name == "student"  &&
+                                            checkRegister(item.start_date,item.schedule.split(" - ")[0])
+                                                // (new Date(item.start_date + " " + item.schedule.split(" - ")[0]).getTime() > new Date().getTime())
+                                                 &&
+                                                <td>
+                                                    <Link to={`/registerDemoCourse/${item._id}`}>
+                                                        <button className="button is-primary">Học thử </button>
+                                                    </Link>
+                                                </td>) :
+                                            <Link to={`/login`}>
+                                                <button className="button is-primary">Học thử </button>
+                                            </Link>
+
+                                        }
+                                    </>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
                 </div>
                 <div className="buttons is-centered"
                     id='detail-class_modal'
                     style={{ gap: '2rem' }}
                 >
+                   
                     {currentUser ?
-                        (currentUser.role_name == "teacher" ||  new Date(data.start_date).getTime() < new Date().getTime()  ?
-                            <>
-                            </> :
-                            <>
-                                    <Link to={`/registerCourse/${idClass}`}>
-                                        <button className="button is-primary">Học thử </button>
-                                    </Link> 
-                                    <Link to={`/registerCourse/${idClass}`}>
-                                        <button className="button is-info">Đăng kí  </button>
-                                    </Link>
-                                
-
-                            </>
+                        (currentUser.role_name == "student" && 
+                        // (new Date(data.start_date + " " + data.schedule.split(" - ")[0]).getTime() > new Date().getTime()) 
+                        checkRegister(data.start_date,data.schedule.split(" - ")[0])
+                        ?
+                       
+                           <Link to={`/registerCourse/${idClass}`}>
+                                <button className="button is-info">Đăng kí  </button>
+                            </Link> 
+                           :<></>
                         ) :
 
                         (<>
-                            <Link to='/login'>
+                            {/* <Link to='/login'>
                                 <button className="button is-primary">Học thử </button>
-                            </Link>
+                            </Link> */}
                             <Link to='/login'>
                                 <button className="button is-info">Đăng kí  </button>
                             </Link>
@@ -197,7 +254,7 @@ export default DetailClassPage
                     style={{ textAlign: "left" }}
                 ><strong>Mô tả: </strong>{data.description}</p> */}
 
-                  {/* {data.isDemoClass ?
+{/* {data.isDemoClass ?
                         <button className="button course_label is-warning ml-3">Học thử</button> :
                         <button className="button course_label is-primary ml-3">Học chính thức</button>
                     } */}

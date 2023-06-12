@@ -31,7 +31,7 @@ const account_id= user?._id
 
   const start_date = moment(course.start_date).format("DD/MM/YYYY")
   const end_date = moment(course.end_date).format("DD/MM/YYYY")
-  
+  const sum_price= formatter.format(parseFloat(course.cost)*course.learning_period*4*course.schedule.split(" - ")[1].split(",").length)
 
 const formik=useFormik({
     initialValues:{
@@ -65,7 +65,7 @@ const formik=useFormik({
           <strong className="is-size-5 ">Giáo viên của bạn</strong>
           <div className="columns info-teacher_section-column mt-1 ml-1">
             <div className="mr-3 info-teacher_section-left">
-              <img src={teacher.personal_image} />
+              <img src={teacher.personal_image} style={{height:"10rem"}} />
             </div>
             <div className="column is-9 info-teacher_section-right">
               <div className="column is-12 ">
@@ -118,7 +118,7 @@ const formik=useFormik({
           <strong className="is-size-5">Khóa học bạn chọn</strong>
           <div className="columns is-multiline info-course_section-column mt-1 ml-1">
 
-            <div className="column is-12">
+            <div className="column is-6">
               <div className="field register-course_field">
                 <label className="label">Tên lớp học</label>
                 <input
@@ -174,7 +174,20 @@ const formik=useFormik({
                 />
               </div>
             </div>
-
+            <div className="column is-6">
+              <div className="field register-course_field">
+                <label className="label">Thời gian học (tháng)</label>
+                <input
+                  className="input"
+                  type="text"
+                  placeholder="Thời gian học"
+                  name="learning_period"
+                  id="learning_period"
+                  disabled={true}
+                  value={course.learning_period}
+                />
+              </div>
+            </div>
             <div className="column is-6">
               <div className="field register-course_field">
                 <label className="label">Lịch học</label>
@@ -221,7 +234,7 @@ const formik=useFormik({
                   id="sum_price"
                   disabled={true}
                   // value={sum_price}
-                  value={formatter.format(course.cost)}
+                  value={sum_price}
                 />
               </div>
             </div>

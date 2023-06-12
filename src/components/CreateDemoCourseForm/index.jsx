@@ -70,8 +70,13 @@ function CreateDemoCourseForm() {
       createDemoCourse(id, value, dispatch, axiosJWT, accessToken,navigate)
     }
   })
+  var st=[]
+  useEffect(() => {
+     st= courses.filter(course=>course._id==formik.values.id_course)
+console.log("st",st[0])
+  },[formik.values.id_course])
 
-  console.log(formik.values)
+  // console.log(formik.values)
   return (
     <form className='create-class-page_container container  is-centered '
     onSubmit={formik.handleSubmit}
@@ -125,6 +130,7 @@ function CreateDemoCourseForm() {
                   name="start_date"
                   id='start_date'
                   min={new Date().toJSON().slice(0, 10)}
+                  // max={st!= 0 && new Date(st.start_date).toJSON().slice(0, 10)  }//formik.values.id_course.start_date
                 value={formik.values.start_date}
                 onChange={formik.handleChange}
                 />
@@ -140,9 +146,9 @@ function CreateDemoCourseForm() {
                   placeholder="Ngày kết thúc"
                   name="end_date"
                   id='end_date'
-                // min={new Date().toJSON().slice(0, 10)}
-                min={formik.values.start_date}
-                value={formik.values.end_date}
+                // min={formik.values.start_date}
+                min={new Date().toJSON().slice(0, 10)}
+                // max={st!= 0 && new Date(st.start_date).toJSON().slice(0, 10)  }
                 onChange={formik.handleChange}
                 />
                 {formik.errors.end_date && <p className="help is-danger">{formik.errors.end_date}</p>}
