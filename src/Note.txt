@@ -40,3 +40,59 @@ https://www.iban.com/currency-codes
 
 https://firebase.google.com/docs/cloud-messaging/js/first-message 
 https://stackoverflow.com/questions/41144151/firebaseerror-we-are-unable-to-register-the-default-service-worker
+
+
+
+
+ <Route path='/' element={<UserLayout />} >
+          {/* user vs non-user can access */}
+          <Route index element={<LandingPage />} />
+          <Route path="*" element={<NotFound />} />
+          <Route path="/login" element={<LoginPage children={<LoginForm />} />} />
+          {/* <Route path="/forgotPassword" element={<LoginPage children={<ForgotPasswordForm />} />} /> */}
+          <Route path="/signup" element={<SignUpPage />} />
+          <Route path='/findingTeacher' element={<FindingTeacherPage />} />
+          <Route path='/detailTeacher/:id' element={<DetailTeacherPage />} />
+            <Route path='/detailTeacher/:id/detailClass/:idClass' element={<DetailClassPage />} />
+            <Route path='/registerCourse/:idClass' element={<RegisterCoursePage />} />
+
+          {/* <Route path='/findingCourse' element={<FindingCoursePage />} /> */}
+          {/* user can access */}
+          {isRegister && <>
+
+          <Route path='/completeInfoStudent' element={<StudentCompleteInfoPage />} />
+          <Route path='/completeInfoTeacher' element={<TeacherCompleteInfoPage />} >
+            <Route index element={<AcademicInfo />} />
+            <Route path='/completeInfoTeacher/degree' element={<DegreeInfo />} />
+            <Route path='/completeInfoTeacher/description' element={<ImageInfo />} />
+          </Route>
+          </>}
+          {isLoggedIn &&
+            <>
+              <Route path='/profile' element={<ProfilePage />}>
+                <Route index element={<PersonalInfo />} />
+                {
+                  currentUSer.role_name && currentUSer.role_name == 'student' &&
+                  <>
+                    <Route path='/profile/myclass' element={<PersonalInfo />} />
+                    <Route path='/profile/studentClass' element={<StudentCurrentClassForm />} />
+                    <Route path='/profile/judgeTeacher' element={<StudentJudgeForm />} />
+                  </>
+                }
+                {
+                  currentUSer.role_name && currentUSer.role_name == 'teacher' &&
+                  <>
+                    <Route path='/profile/teacherClass' element={<TeacherCurrentClassForm />} />
+                  </>
+                }
+
+              </Route>
+              {
+                currentUSer.role_name && currentUSer.role_name == 'teacher' &&
+                <>
+                  <Route path='/createClass' element={<CreateCoursePage />} />
+                </>
+              }
+            </>
+          }
+        </Route>

@@ -1,20 +1,51 @@
+@import './RootStyle.css';
 .admin-management-layout_container{
     min-height: 100vh;
-    background-color: white;
+    background-color:var(--background-color);
     /* margin: 2rem; */
     /* opacity: .5; */
     /* border-radius: 30px; */
 }
 .admin-management-display_container{
-    background-color: white !important;
+    background-color: var(--background-color) !important;
 }
 
 .admin-management-sidebar_container{
     border-radius: 0 30px 30px 0;
     /* border: 1px solid #72b0d9; */
     /* border-right-width: 1px; */
-    background-color: var(--background-color);
+    /* background-color: var(--background-color); */
     padding: 1rem ;
     margin-top: .75rem;
     margin-left: 0;
+    min-height: 100vh;
+    
+}
+
+.admin-management-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+align-items: center;
+/* background-color: #e7e1e13d; */
+/* background-color:#dff4ff; */
+background-color: white;
+padding: 1rem;
+border-radius: 10px;
+margin-right: 2rem;
+margin-top: 1rem;
+margin-bottom: 2rem;
+border:1px solid var(--border-color)
+}
+
+.admin-management-header_right{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap:1rem;
+}
+
+.admin-management-header_left{
+text-align: left;
 }

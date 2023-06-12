@@ -18,7 +18,6 @@ const LandingPage = React.lazy(() => import('../pages/LandingPage'));
 const LoginPage = React.lazy(() => import('../pages/LoginPage'));
 const NotFound = React.lazy(() => import('../pages/NotFound'));
 const SignUpPage = React.lazy(() => import('../pages/SignUpPage'));
-const DashboardPage = React.lazy(() => import('../pages/DasboardPage'));
 const FindingTeacherPage = React.lazy(() => import("../pages/FindingTeacherPage"));
 const FindingCoursePage = React.lazy(() => import("../pages/FindingCoursePage"));
 const ProfilePage = React.lazy(() => import('../pages/ProfilePage'))
@@ -30,7 +29,8 @@ const CreateCoursePage = React.lazy(() => import('../pages/CreateCoursePage'))
 const DetailClassPage= React.lazy(() => import('../pages/DetailClassPage'))
 const RegisterCoursePage= React.lazy(() => import('../pages/RegisterCoursePage'))
 
-
+const DashboardPage = React.lazy(() => import('../pages/DasboardPage'));
+const AccountManagementPage= React.lazy(() => import('../pages/AccountManagementPage'));
 const StudentManagementPage = React.lazy(() => import('../pages/StudentManagementPage'));
 const CourseManagementPage = React.lazy(() => import('../pages/CourseManagementPage'));
 const TeacherManagementPage = React.lazy(() => import('../pages/TeacherManagementPage'));
@@ -46,7 +46,7 @@ function ContainerRoutes() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<UserLayout />} >
+      <Route path='/' element={<UserLayout />} >
           {/* user vs non-user can access */}
           <Route index element={<LandingPage />} />
           <Route path="*" element={<NotFound />} />
@@ -98,16 +98,18 @@ function ContainerRoutes() {
             </>
           }
         </Route>
-        {/* {isLoggedIn &&currentUSer.role_name && currentUSer.role_name == 'admin' &&
-                // just  admin can access
+        
+        {/* {isLoggedIn &&currentUSer.role_name && currentUSer.role_name == 'admin' && */}
+                {/* // just  admin can access */}
                 <Route path='/admin' element={<AdminManagementLayout />}>
                   <Route index element={<DashboardPage />} />
+                  <Route path='/admin/account' element={<AccountManagementPage />} />
                   <Route path='/admin/student' element={<StudentManagementPage />} />
                   <Route path='/admin/teacher' element={<TeacherManagementPage />} />
                   <Route path='/admin/course' element={<CourseManagementPage />} />
                   <Route path="/admin/*" element={<NotFound />} />
                 </Route>
-              } */}
+              {/* } */}
 
       </Routes>
     </BrowserRouter>

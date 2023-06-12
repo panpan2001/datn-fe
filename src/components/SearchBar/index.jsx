@@ -1,11 +1,11 @@
 import React from 'react'
 import { BsSearch } from 'react-icons/bs'
 
-function SearchBar() {
+function SearchBar({width}) {
     return (
         <div className="search-bar_container"
        style={{
-           width: '50rem',
+           width: `${width}`,
            display:'flex',
            flexDirection:"row",
            gap:"2rem"

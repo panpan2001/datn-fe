@@ -27,7 +27,7 @@ const FindingTeacherPage = () => {
                     <div className="column is-8 is-centered finding-teacher-page_hero-left">
                         <p> <strong className='is-size-3'>Tìm kiếm giáo viên tiếng Anh <br />và bắt đầu hành trình tuyệt vời của riêng bạn</strong> </p>
                         <br />
-                        <SearchBar />
+                        <SearchBar width={'50rem'} />
                         <br />
                         <div className="columns is-multiline">
                             <FilterCategory />

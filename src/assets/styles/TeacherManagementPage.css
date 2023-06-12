@@ -1,0 +1,9 @@
+@import './RootStyle.css';
+
+.teacher-management_table {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+}

@@ -7,13 +7,15 @@ import moment from 'moment/moment'
 import deleteCourse from '../../redux/actions/Course/DeleteCourse'
 import createAxiosJWT from '../../utils/createInstance'
 import { deleteCourseSuccess } from '../../redux/slices/Course/deleteCourse'
+import { getAllDemoCourseByCourseIdFailure } from '../../redux/slices/DemoCourse/getAllDemoCourseByCourseId'
+import getAllDemoCourseByCourseId from '../../redux/actions/DemoCourse/GetAllDemoCourseByCourseId'
 
 function ClassCard({ data }) {
      console.log({ data })
      const [show, setShow] = useState("none")
      const dispatch = useDispatch()
      const user = useSelector((state) => state.login.login?.currentUser)
-const axiosJWT= createAxiosJWT(dispatch, user, deleteCourseSuccess)
+     const axiosJWT = createAxiosJWT(dispatch, user, deleteCourseSuccess)
      let time = data.schedule.split(" - ")[0]
      time = time.split(":")[0] < 12 ? time + " AM" : time + " PM"
 
@@ -24,77 +26,97 @@ const axiosJWT= createAxiosJWT(dispatch, user, deleteCourseSuccess)
           currency: 'VND',
 
      });
+
+     useEffect(() => {
+          getAllDemoCourseByCourseId(data?._id, dispatch)
+     }, [])
+     const demoCourse = useSelector(state => state.getAllDemoCourseByCourseId.demoCourses?.currentCourse)
+     console.log({ demoCourse })
      const handledelete = () => {
-          console.log({user})
+          console.log({ user })
           console.log(data._id, user._id)
-deleteCourse(data._id,user._id, dispatch, axiosJWT, user.accessToken)
-setShow("none")
+          deleteCourse(data._id, user._id, dispatch, axiosJWT, user.accessToken)
+          setShow("none")
      }
      return (
           <div className="column is-12 mb-2">
                <div className='class-card_container' >
-                    <div className='class-card_left column is-5'>
+                    {/* <div className='class-card_left  '>
 
-                         <figure class="image class-card_image is-16by9">
-                              <img src={data.image} alt="Placeholder image" />
-                         </figure>
-                         <div className="group-buttons mt-2">
-                              <button type='button' class="button is-link" >Edit</button>
-                              <button type='button' class="button is-danger" onClick={() => setShow("block")}>Delete</button>
-
-                         </div>
-                    </div>
-
-                    <div class="card-content class-card column">
-                         <div class="content">
-                              <strong className='is-size-5'>{data.name} </strong>
-
-
-                         </div>
                         
-                         <div class="content">
+                      
+                    </div> */}
 
-                              <p><strong>Loại: </strong>{data.category_id.type}</p>
-                              {/* <p><strong>Loại: </strong>{category && category.type}</p> */}
-                         </div>
-                         <div class="content">
+                    <div className="card-content class-card columns is-multiline">
 
-                              <p><strong>Cấp độ: </strong>{data.category_id.level}</p>
+                         <img className="image class-card_image column is-5 is-16by9"
+                              src={data.image} alt="Placeholder image"
+                              style={{ paddingTop: "0" }}
+                         />
 
-                              {/* <p><strong>Cấp độ: </strong>{category && category.level}</p> */}
+                         <div className="content header">
+                              <strong className='is-size-5'>{data.name} </strong>
                          </div>
-                         <div className="content">
-                              <p><strong>Số lượng học viên: </strong>{data.number_of_student}</p>
-                         </div>
-                         <div className="content">
-                              <p><strong>Thời lượng buổi học(ph): </strong>{data.time_per_lesson}</p>
-                         </div>
-                         <div className="content">
-                              <p> <strong>Thời gian học: </strong>{data.learning_period} {data.isDemoClass ? 'buổi' : 'tháng'}</p>
-                         </div>
-                         <div className="content">
-                              <p><strong>Lịch học: </strong>{time} - {data.schedule.split(" - ")[1]}</p>
-                         </div>
-                         <div className="content">
-                              <p><strong>Ngày bắt đầu: </strong>{start_date}</p>
-                         </div>
-                         <div className="content">
-                              <p><strong>Ngày kết thúc: </strong>{end_date}</p>
-                         </div>
-                         <div className="content">
-                              <p><strong>Giá tiền(VDN/ buổi): </strong>{formatter.format(data.cost)}</p>
-                         </div>
-                         <div className="content">
-                              <p><strong>Mô tả: </strong>{data.description}</p>
-                         </div>
+                         <div className="content_container columns is-multiline">
 
+                              <div className="content  column is-6">
+
+                                   <p><strong>Loại: </strong>{data.category_id.type}</p>
+                              </div>
+                              <div className="content  column is-6">
+                                   <p><strong>Cấp độ: </strong>{data.category_id.level}</p>
+                              </div>
+                              <div className="content  column is-6">
+                                   <p><strong>Số lượng học viên: </strong>{data.number_of_student}</p>
+                              </div>
+                              <div className="content  column is-6">
+                                   <p><strong>Thời lượng buổi học(ph): </strong>{data.time_per_lesson}</p>
+                              </div>
+                              <div className="content  column is-6">
+                                   <p> <strong>Thời gian học: </strong>{data.learning_period} {data.isDemoClass ? 'buổi' : 'tháng'}</p>
+                              </div>
+                              <div className="content  column is-6">
+                                   <p><strong>Lịch học: </strong>{time} - {data.schedule.split(" - ")[1]}</p>
+                              </div>
+                              <div className="content  column is-6">
+                                   <p><strong>Ngày bắt đầu: </strong>{start_date}</p>
+                              </div>
+                              <div className="content  column is-6">
+                                   <p><strong>Ngày kết thúc: </strong>{end_date}</p>
+                              </div>
+                              <div className="content  column is-6">
+                                   <p><strong>Giá tiền(VDN/ buổi): </strong>{formatter.format(data.cost)}</p>
+                              </div>
+                              <div className="content  column is-6">
+                                   <p><strong>Số lượng đăng kí: </strong></p>
+                              </div>
+                              <div className="content  column is-12">
+                                   <p><strong>Link video: </strong>{data.link_video}</p>
+                              </div>
+                              <div className="content  column is-12">
+                                   <p><strong>Link meeting: </strong>{data.link_meeting}</p>
+                              </div>
+                              <div className="content  column is-12">
+                                   <p><strong>Mô tả: </strong>{data.description}</p>
+                              </div>
+                         </div>
+                         {/* <div className="content  column is-12">
+                                   <p><strong>Các lớp học thử </strong></p>
+                              </div>
+                         */}
+                         <div className="group-buttons mt-2">
+                              <button type='button' className="button is-link" >Chỉnh sửa</button>
+                              <button type='button' className="button is-danger" onClick={() => setShow("block")}>Xóa</button>
+
+                         </div>
+                    
                     </div>
-                    <div class="modal " style={{
+                    <div className="modal " style={{
                          display: `${show}`,
                     }}>
-                         <div class="modal-background"></div>
+                         <div className="modal-background"></div>
 
-                         <div class="modal-content is-centered"
+                         <div className="modal-content is-centered"
                               style={{
                                    margin: "30vh auto auto",
                                    display: "flex",
@@ -106,9 +128,9 @@ setShow("none")
                                    padding: "1rem",
                               }}
                          >
-                              <header class="modal-card-head">
-                                   <p class="modal-card-title">Cảnh báo</p>
-                                   <button class="modal-close is-large" aria-label="close" onClick={() => setShow("none")}></button>
+                              <header className="modal-card-head">
+                                   <p className="modal-card-title">Cảnh báo</p>
+                                   <button className="modal-close is-large" aria-label="close" onClick={() => setShow("none")}></button>
 
                               </header>
                               <strong className='is-size-5'>Bạn chắc chắn muốn xóa khóa học này chứ? </strong> :
@@ -127,12 +149,12 @@ setShow("none")
 }
 
 export default ClassCard
-{/* <footer class="card-footer"> */ }
-{/* <button type='button' class="card-footer-item">Save</button> */ }
+{/* <footer className="card-footer"> */ }
+{/* <button type='button' className="card-footer-item">Save</button> */ }
 
 {/* </footer> */ }
 {/* <DetailClassModalForm data={data} show={show} setShow={setShow}/> */ }
- {/* <div class="content">
+{/* <div className="content  column is-6">
                               {data.isDemoClass ?
                                    <button className="button course_label is-warning mr-3">Học thử</button> :
                                    <button className="button course_label is-primary mr-3">Học chính thức</button>

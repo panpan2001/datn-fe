@@ -15,7 +15,7 @@ const CourseCategoryApi = BASE_URL + "/courseCategories/"
 const CourseApi = BASE_URL + "/courses/"
 const DemoCourseStudentApi= BASE_URL + "/demoCourseStudents/"
 const CourseStudentApi= BASE_URL + "/courseStudents/"
-
+const DemoCourseApi= BASE_URL+"/demoCourses/"
 
 export {
    UPLOAD_IMG_URL,
@@ -31,5 +31,6 @@ export {
    CourseCategoryApi,
    CourseApi,
    DemoCourseStudentApi,
-   CourseStudentApi
+   CourseStudentApi,
+   DemoCourseApi
 }

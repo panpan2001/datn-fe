@@ -1,0 +1,14 @@
+@import './RootStyle.css';
+
+.teacher-demo-class_card{
+    background-color:  #C2E7FF;
+    color: black !important;
+    padding:1rem;
+    border-radius: 10px;
+    border: 1px solid  #7fc6f6;
+}
+/* .teacher-demo-class_card:hover{
+    box-shadow: 0 8px 0   #aad8f7;
+    
+   
+} */

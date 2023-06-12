@@ -1,0 +1,52 @@
+@import './RootStyle.css';
+
+.dashboard-page_container{
+    /* background-color: white; */
+    margin-right: 2rem;
+    /* border: 1px solid var(--border-color); */
+    /* border-radius: 20px; */
+    padding: 1rem;
+}
+
+section[class^="dashboard_section-"]{
+    margin-top:1rem;
+    /* background-color: white; */
+    /* border-radius: 10px; */
+    /* padding: 1rem; */
+    /* border: 1px solid var(--border-color); */
+}
+
+div[class^="dashboard-section-1_column"]{
+    border-radius:10px ;
+    display: flex;
+    justify-content: flex-start;
+    padding:1rem;
+    flex-direction: column;
+    gap:1rem;
+    text-align: left;
+}
+.dashboard-section-1_icon {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    justify-content: flex-start;
+    align-items: center;
+   
+}
+
+.dashboard-section-1_column1{
+    background-color: #C2E7FF;
+}
+.dashboard-section-1_column2{
+background-color: #FFC67E;
+}
+.dashboard-section-1_column3{
+    background-color: #9095FE;
+}
+.dashboard-section-1_column4{
+    background-color:#B2FFDA;
+}
+
+.dashboard-section-1_column5{
+    background-color: #ff9aa7;
+}

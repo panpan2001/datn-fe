@@ -42,6 +42,7 @@ flex-direction: column;
 background: rgba(255, 255, 255, 0.3);
 box-shadow: 0 8px 8px 0 var(--border-color);
 border-radius: 10px;
+background-color: white;
 }
 /* line-icon */
 .lines_icon{
