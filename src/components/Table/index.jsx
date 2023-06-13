@@ -1,9 +1,9 @@
 import React from 'react'
 
 function Table({thead,data}) {
-    console.log({thead})
+    // console.log({thead})
   return (
-    <table class="table">
+    <table className="table">
   <thead>
     <tr>
     <th>STT</th>

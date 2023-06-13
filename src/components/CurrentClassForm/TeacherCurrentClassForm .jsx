@@ -22,7 +22,7 @@ function TeacherCurrentClassForm() {
     const classes = useSelector((state) => state.getAllCourseByIdTeacher.courses?.currentCourses)
     const demoCourse= useSelector((state) => state.getAllDemoCourseByTeacherId?.demoCourses?.currentCourse)
     // console.log("classes:", classes)
-    // console.log("demo classes:", demoCourse)
+    console.log("demo classes:", demoCourse)
     const formatter = new Intl.NumberFormat({
         style: 'currency',
         currency: 'VND',

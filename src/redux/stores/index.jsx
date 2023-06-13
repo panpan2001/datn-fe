@@ -38,7 +38,12 @@ import createDemoCourseReducer from "../slices/DemoCourse/createDemoCourse";
 import getAllDemoCourseByTeacherIdReducer from "../slices/DemoCourse/getAllDemoCourseByTeacherId";
 import getAllDemoCourseByCourseIdReducer from "../slices/DemoCourse/getAllDemoCourseByCourseId";
 import getDemoCourseByIdReducer from "../slices/DemoCourse/getDemoCourseById";
-import getDemoCourseStudentByCourseIdReducer from "../slices/DemoCourseStudent/getDemoCourseStudentByCourseId";
+import getDemoCourseStudentByDemoCourseIdReducer from "../slices/DemoCourseStudent/getDemoCourseStudentByCourseId";
+import getAllDemoCourseStudentReducer from "../slices/DemoCourseStudent/getAllDemoCourseStudent";
+import getAllCourseStudentReducer from "../slices/CourseStudent/getAllCourseStudent";
+import deleteDemoCourseReducer from "../slices/DemoCourse/deleteDemoCourse";
+import getAllCoursesReducer from "../slices/Course/getAllCourse";
+import getAllDemoCoursesReducer from "../slices/DemoCourse/getAllDemoCourseSlice";
 
 const persistConfig = {
     key:'root',
@@ -70,6 +75,7 @@ const rootReducer= combineReducers({
     getCourseCategory: getCourseCategoryReducer,
     getCourseCategoryById: getCourseCategoryByIdReducer,
     createCourse: createCourseReducer,
+    getAllCourses:getAllCoursesReducer,
     getAllCourseByIdTeacher: getAllCourseByIdTeacherReducer,
     getCourseById: getCourseByIdReducer,
     createRegisterDemoCourse:createRegisterDemoCourseReducer,
@@ -80,10 +86,14 @@ const rootReducer= combineReducers({
     cancelRegisterCourse:cancelRegisterCourseReducer,
     deleteCourse:deleteCourseReducer,
     createDemoCourse:createDemoCourseReducer,
+    getAllDemoCourse:getAllDemoCoursesReducer,
     getAllDemoCourseByTeacherId:getAllDemoCourseByTeacherIdReducer,
     getAllDemoCourseByCourseId:getAllDemoCourseByCourseIdReducer,
     getDemoCourseById:getDemoCourseByIdReducer,
-    getDemoCourseStudentByCourseId: getDemoCourseStudentByCourseIdReducer
+    getDemoCourseStudentByDemoCourseId: getDemoCourseStudentByDemoCourseIdReducer,
+    getAllDemoCourseStudent:getAllDemoCourseStudentReducer,
+    getAllCourseStudent:getAllCourseStudentReducer,
+    deleteDemoCourse:deleteDemoCourseReducer
 })
 const persistedReducer=persistReducer(persistConfig,rootReducer)
 

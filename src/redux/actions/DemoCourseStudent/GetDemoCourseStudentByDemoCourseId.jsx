@@ -1,16 +1,17 @@
 import axios from "axios"
-import { getDemoCourseStudentByCourseIdFailure, getDemoCourseStudentByCourseIdStart, getDemoCourseStudentByCourseIdSuccess } from "../../slices/DemoCourseStudent/getDemoCourseStudentByCourseId"
 import { DemoCourseStudentApi } from "../../../utils/BaseUrl"
+import { getDemoCourseStudentByDemoCourseIdFailure, getDemoCourseStudentByDemoCourseIdStart, getDemoCourseStudentByDemoCourseIdSuccess } from "../../slices/DemoCourseStudent/getDemoCourseStudentByCourseId"
 
 
 const getDemoCourseStudentByDemoCourseId = async(id,dispatch)=>{
     console.log("id",{id})
-    dispatch(getDemoCourseStudentByCourseIdStart())
+    dispatch(getDemoCourseStudentByDemoCourseIdStart())
     try {
         const res = await axios.get(DemoCourseStudentApi+ 'demoCourse/'+id)
-        dispatch(getDemoCourseStudentByCourseIdSuccess(res.data))
+        dispatch(getDemoCourseStudentByDemoCourseIdSuccess(res.data))
+        console.log("demo course student of: ",id,res.data)
     } catch (error) {
-        dispatch(getDemoCourseStudentByCourseIdFailure(error))
+        dispatch(getDemoCourseStudentByDemoCourseIdFailure(error))
         console.log(error)
     }
 }

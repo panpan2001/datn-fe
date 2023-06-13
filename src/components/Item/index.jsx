@@ -3,7 +3,7 @@ import '../../assets/styles/Item.css'
 import { motion } from 'framer-motion'
 import { GiHamburgerMenu } from 'react-icons/gi'
 import { useNavigate } from 'react-router-dom'
-function Item({ icon, name ,navigate}) {
+function Item({ icon, name ,navigate,color }) {
 
    const directTo=useNavigate()
 //    const handleNavigate=()=>{
@@ -13,7 +13,9 @@ function Item({ icon, name ,navigate}) {
         <motion.div className='item'
         onClick={()=>directTo(navigate)}
         >
-            <motion.div className="icon">
+            <motion.div className="icon"
+            style={{color: `${color}`}}
+            >
                 {icon}
             </motion.div>
             <motion.p className='item-name'

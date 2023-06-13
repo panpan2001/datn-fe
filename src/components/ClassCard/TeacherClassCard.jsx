@@ -9,9 +9,10 @@ import createAxiosJWT from '../../utils/createInstance'
 import { deleteCourseSuccess } from '../../redux/slices/Course/deleteCourse'
 import { getAllDemoCourseByCourseIdFailure } from '../../redux/slices/DemoCourse/getAllDemoCourseByCourseId'
 import getAllDemoCourseByCourseId from '../../redux/actions/DemoCourse/GetAllDemoCourseByCourseId'
+import getAllCourseStudent from '../../redux/actions/CourseStudent/GetAllCourseStudent'
 
 function ClassCard({ data }) {
-     console.log({ data })
+     // console.log({ data })
      const [show, setShow] = useState("none")
      const dispatch = useDispatch()
      const user = useSelector((state) => state.login.login?.currentUser)
@@ -28,13 +29,19 @@ function ClassCard({ data }) {
      });
 
      useEffect(() => {
+          getAllCourseStudent(dispatch)
           getAllDemoCourseByCourseId(data?._id, dispatch)
+          // console.log("aaaaaaaaaaaaaaaaaa")
+         
      }, [])
-     const demoCourse = useSelector(state => state.getAllDemoCourseByCourseId.demoCourses?.currentCourse)
-     console.log({ demoCourse })
+     const demoCourse = useSelector(state => state.getAllDemoCourseByCourseId?.demoCourses?.currentCourse)
+     const courseStudent= useSelector(state => state.getAllCourseStudent?.courseStudents?.currentCourseStudent)
+     // console.log({ courseStudent })
+     
+     const number_register=  courseStudent.filter(item => item.id_course._id=== data._id).length
+     // console.log({number_register})
      const handledelete = () => {
-          console.log({ user })
-          console.log(data._id, user._id)
+        
           deleteCourse(data._id, user._id, dispatch, axiosJWT, user.accessToken)
           setShow("none")
      }
@@ -88,7 +95,10 @@ function ClassCard({ data }) {
                                    <p><strong>Giá tiền(VDN/ buổi): </strong>{formatter.format(data.cost)}</p>
                               </div>
                               <div className="content  column is-6">
-                                   <p><strong>Số lượng đăng kí: </strong></p>
+                                   <p><strong>Số lượng học viên: </strong>{data.number_of_student}</p>
+                              </div>
+                              <div className="content  column is-12">
+                                   <p><strong>Số lượng đăng kí: </strong>{number_register}</p>
                               </div>
                               <div className="content  column is-12">
                                    <p><strong>Link video: </strong>{data.link_video}</p>
@@ -133,13 +143,21 @@ function ClassCard({ data }) {
                                    <button className="modal-close is-large" aria-label="close" onClick={() => setShow("none")}></button>
 
                               </header>
-                              <strong className='is-size-5'>Bạn chắc chắn muốn xóa khóa học này chứ? </strong> :
+                              {number_register == 0 ?<>
+                                   <strong className='is-size-5'>Bạn chắc chắn muốn xóa khóa học này chứ? </strong> 
                               <div >
                                    <button className="button is-warning mr-6" onClick={handledelete}>Xóa  </button>
                                    <button className="button is-danger" onClick={() => setShow("none")}>Thoát  </button>
                               </div >
-                              {/* } */}
 
+                              </>:
+                              <>
+                              <strong className='is-size-5'>Khóa học này đã có người đăng kí. Bạn không thể xóa </strong> 
+                              <div >
+                                   <button className="button is-danger" onClick={() => setShow("none")}>Thoát  </button>
+                              </div >
+                              </>
+}
                          </div>
                     </div>
 

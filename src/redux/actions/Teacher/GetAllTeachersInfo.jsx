@@ -10,6 +10,7 @@ const getAllTeachers= async(dispatch)=>{
     try {
         const res= await axios.get(TeacherApi)
         dispatch(getAllTeacherSuccess(res.data))
+        console.log("teacher get all action:",res.data)
     } catch (error) {
         dispatch(getAllTeacherFailure(error))
         toast.error('Ôi lỗi rồi !', {

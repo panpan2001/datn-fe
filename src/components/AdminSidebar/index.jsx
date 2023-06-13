@@ -76,7 +76,7 @@ function AdminSidebar() {
     //   </footer>
 
     // </section>
-    <div className="admin-sidebar">
+    <div className="admin-sidebar" style={{ backgroundColor: 'var(--background-color)' }}>
     <div className='profile'>
       <Link to='/profile'>
       <img id='admin_profile_img'

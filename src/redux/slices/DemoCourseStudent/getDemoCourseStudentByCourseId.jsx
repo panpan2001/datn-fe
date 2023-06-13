@@ -9,14 +9,14 @@ const initialState={
     }
 }
 
-const getDemoCourseStudentByCourseIdSlice = createSlice({
+const getDemoCourseStudentByDemoCourseIdSlice = createSlice({
     name: "getDemoCourseStudentByCourseId",
     initialState: initialState,
     reducers: {
-        getDemoCourseStudentByCourseIdStart: (state, action) => {
+        getDemoCourseStudentByDemoCourseIdStart: (state, action) => {
             state.demoCourses.isFetching = true
         },
-        getDemoCourseStudentByCourseIdSuccess: (state, action) => {
+        getDemoCourseStudentByDemoCourseIdSuccess: (state, action) => {
             return {
                 ...state,
                 demoCourses: {
@@ -27,7 +27,7 @@ const getDemoCourseStudentByCourseIdSlice = createSlice({
                 }
             }
         },
-        getDemoCourseStudentByCourseIdFailure: (state, action) => {
+        getDemoCourseStudentByDemoCourseIdFailure: (state, action) => {
             return {
                 ...state,
                 demoCourses: {
@@ -40,6 +40,6 @@ const getDemoCourseStudentByCourseIdSlice = createSlice({
     }
 })
 
-export const { getDemoCourseStudentByCourseIdStart, getDemoCourseStudentByCourseIdSuccess, getDemoCourseStudentByCourseIdFailure } = getDemoCourseStudentByCourseIdSlice.actions
-const getDemoCourseStudentByCourseIdReducer = getDemoCourseStudentByCourseIdSlice.reducer
-export default getDemoCourseStudentByCourseIdReducer
+export const { getDemoCourseStudentByDemoCourseIdStart, getDemoCourseStudentByDemoCourseIdSuccess, getDemoCourseStudentByDemoCourseIdFailure} = getDemoCourseStudentByDemoCourseIdSlice.actions
+const getDemoCourseStudentByDemoCourseIdReducer = getDemoCourseStudentByDemoCourseIdSlice.reducer
+export default getDemoCourseStudentByDemoCourseIdReducer

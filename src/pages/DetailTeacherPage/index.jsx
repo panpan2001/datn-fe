@@ -14,6 +14,7 @@ import DetailTeacherCard from '../../components/DetailTeacherCard'
 import DetailClassModalForm from '../../components/DetailClassModalForm'
 import getAllCourseByIdTeacher from '../../redux/actions/Course/GetAllCourseByIdTeacher'
 import getAllDemoCourseByTeacherId from '../../redux/actions/DemoCourse/GetAllDemoCourseByTeacherId'
+import getAllCourseStudent from '../../redux/actions/CourseStudent/GetAllCourseStudent'
 function DetailTeacherpage() {
     const dispatch = useDispatch()
     const { id } = useParams()
@@ -28,10 +29,14 @@ const user= useSelector((state) => state.login.login?.currentUser)
     useEffect(() => {
         getAllCourseByIdTeacher(id, dispatch)
         getAllDemoCourseByTeacherId(id, dispatch)
+        getAllCourseStudent(dispatch)
     }, [id])
 
     const classes = useSelector((state) => state.getAllCourseByIdTeacher?.courses?.currentCourses)
     const demoCourses= useSelector((state) => state.getAllDemoCourseByTeacherId?.demoCourses?.currentCourse)
+    const courseStudent= useSelector((state) => state.getAllCourseStudent?.courseStudents?.currentCourseStudent)
+    const DemoCourseStudent= useSelector((state) => state.getAllDemoCourseStudent?.demoCourseStudents?.currentDemoCourseStudent)
+   
     console.log({ classes })
     console.log({ demoCourses })
     /// 
@@ -176,7 +181,7 @@ const user= useSelector((state) => state.login.login?.currentUser)
                                                 <td>{item.name}</td>
                                                 <td>{item.category_id.level}</td>
                                                 <td>{item.number_of_student} </td>
-                                                <td>{ }</td>
+                                                <td>{ courseStudent.filter(i => i.id_course._id=== item._id).length}</td>
 
                                                 <td>
                                                     {/* <button className="button is-link" onClick={() => setShow("block")}>Chi tiết </button> */}
@@ -202,8 +207,8 @@ const user= useSelector((state) => state.login.login?.currentUser)
                                                 </td>
                                                 <td>{item.id_course.name}</td>
                                                 <td>{ }</td>
-                                                <td>{ }</td>
-                                                <td>{ }</td>
+                                                <td>{ item.id_course.number_of_student}</td>
+                                                <td>{DemoCourseStudent.filter((i) => i.id_demo_course._id === item._id).length }</td>
                                                 {/* { user ?
                                              (user.role_name !== "teacher" &&
                                                 new Date(item.start_date+ " " + item.time).getTime() < new Date().getTime() &&
