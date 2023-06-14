@@ -37,8 +37,9 @@ const user= useSelector((state) => state.login.login?.currentUser)
     const courseStudent= useSelector((state) => state.getAllCourseStudent?.courseStudents?.currentCourseStudent)
     const DemoCourseStudent= useSelector((state) => state.getAllDemoCourseStudent?.demoCourseStudents?.currentDemoCourseStudent)
    
-    console.log({ classes })
-    console.log({ demoCourses })
+    // console.log({ classes })
+    // console.log({ demoCourses })
+    // console.log(teacher.personal_description.split('\n'))
     /// 
     return (
         < >
@@ -93,10 +94,13 @@ const user= useSelector((state) => state.login.login?.currentUser)
                                     <p className="teacher-description_paragraph"><strong>Email:</strong> {teacher.account_id.email}</p>
                                     <p className="teacher-description_paragraph"><strong>Số điện thoại:</strong> {teacher.account_id.phone_number}</p>
                                     <p className="teacher-description_paragraph"><strong>Giới thiệu: </strong>
-                                        {/* {teacher.personal_description.split("." || "\n").map((item, index) => {
-                                            return <p key={index}>{item}</p>
-                                        })} */}
-                                        {teacher.personal_description}
+                                        {teacher.personal_description.split("\n") &&
+                                        teacher.personal_description.split("\n").map((item, index) => 
+                                            <>
+                                             <p key={index}>{item}</p>
+                                            </>
+                                            
+                                        )}
                                     </p>
 
                                 </div>
@@ -129,7 +133,7 @@ const user= useSelector((state) => state.login.login?.currentUser)
                                             :
                                             <VerifyStatusButton
                                                 name="Đang xác minh"
-                                                color="white"
+                                                color="black"
                                                 backgroundColor="#ffe08a" />
                                         }
                                         </td>
@@ -147,7 +151,7 @@ const user= useSelector((state) => state.login.login?.currentUser)
                                             :
                                             <VerifyStatusButton
                                                 name="Đang xác minh"
-                                                color="white"
+                                                color="black"
                                                 backgroundColor="#ffe08a" />
                                         }
                                         </td>
@@ -181,7 +185,7 @@ const user= useSelector((state) => state.login.login?.currentUser)
                                                 <td>{item.name}</td>
                                                 <td>{item.category_id.level}</td>
                                                 <td>{item.number_of_student} </td>
-                                                <td>{ courseStudent.filter(i => i.id_course._id=== item._id).length}</td>
+                                                <td>{ courseStudent &&courseStudent.filter(i => i.id_course._id=== item._id).length}</td>
 
                                                 <td>
                                                     {/* <button className="button is-link" onClick={() => setShow("block")}>Chi tiết </button> */}
@@ -208,7 +212,7 @@ const user= useSelector((state) => state.login.login?.currentUser)
                                                 <td>{item.id_course.name}</td>
                                                 <td>{ }</td>
                                                 <td>{ item.id_course.number_of_student}</td>
-                                                <td>{DemoCourseStudent.filter((i) => i.id_demo_course._id === item._id).length }</td>
+                                                <td>{DemoCourseStudent && DemoCourseStudent.filter((i) => i.id_demo_course._id === item._id).length }</td>
                                                 {/* { user ?
                                              (user.role_name !== "teacher" &&
                                                 new Date(item.start_date+ " " + item.time).getTime() < new Date().getTime() &&

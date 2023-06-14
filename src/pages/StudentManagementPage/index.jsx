@@ -2,8 +2,13 @@ import React, { useEffect } from 'react'
 import getAllAccounts from '../../redux/actions/Account/GetAllAccounts'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import FilterCategory from '../../components/FilterCategory'
+import { CiCirclePlus } from 'react-icons/ci'
+import getAllStudents from '../../redux/actions/Student/GetAllStudent'
+import { AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai'
+import Item from '../../components/Item'
 
-const StudentManagementPage=()=> {
+const StudentManagementPage = () => {
   // const user= useSelector(state=>state.account.accounts)
   // console.log(user)
   // const students=user.map(student=>student.role_name=='student')
@@ -14,16 +19,135 @@ const StudentManagementPage=()=> {
   //   if(!user) navigate('/login')
   //   if(!user.accessToken) console.log("failed to load user access tokens ")
   //   if(user.accessToken) getAllAccounts(user.accessToken,dispatch)
-    
-  // },[])
 
+  // },[])
+  const dispatch = useDispatch()
+  useEffect(() => {
+    getAllStudents(dispatch)
+
+  }, [])
+  const student = useSelector((state) => state.getAllStudents?.students?.allStudents)
+  // console.log(student[0].account_id.full_name)
+  const handleShowModal = () => {
+    alert("hi")
+  }
+  if(!student) return null
+  else {
+console.table(student)
+  
   return (
-    <div className='student-management-page container'>StudentManagementPage
-{/* {user.map(user=><>
-{user.full_name}
-</>)} */}
+    <div className='student-management-page container'>
+      <div className="student-management-overview_div "
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "1rem",
+          marginBottom: "1rem",
+          marginTop: "1rem",
+          textAlign: "left"
+        }}
+      >
+        <div style={{
+          display: "flex",
+          flexDirection: "row",
+          gap: "2rem",
+          alignItems: "center",
+          justifyContent: "flex-end",
+          marginRight: "4rem"
+        }}>
+          <div className="filter-teacher">
+            <FilterCategory />
+
+          </div>
+          <button className="icon-teacher " type='button' onClick={handleShowModal}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              borderRadius: "50%",
+              marginTop: ".5rem",
+              cursor: "pointer",
+              border: "none",
+              backgroundColor: " #C2E7FF",
+              width: "3rem",
+              height: "3rem"
+            }}>
+            <CiCirclePlus style={{
+              width: "2rem",
+              height: "2rem",
+              fill: "#29A3F0",
+              // borderRadius: "50%",
+            }} />
+          </button>
+        </div>
+
+      </div>
+    
+        <div className='teacher-management_table is-centered mr-5 mt-3'>
+          <table className="table"
+            style={{
+              backgroundColor: "#85CEFE",
+              padding: "1rem",
+              borderRadius: "10px",
+              textAlign: "left",
+              boxShadow: "0px 0px 10px #ACEFF6"
+            }}>
+            <thead>
+              <tr>
+                <th>STT</th>
+                <th>Tên</th>
+                <th>Giới tính</th>
+                <th>Email</th>
+                <th>Số điện thoại</th>
+                <th>Địa chỉ</th>
+                <th>Họ tên phụ huynh</th>
+                <th>SDT phụ huynh</th>
+                <th></th>
+                <th></th>
+
+              </tr>
+            </thead>
+            <tbody>
+              { student.map((item) => (
+                <tr className='mb-2'>
+                  <th>{student.indexOf(item) + 1}</th>
+                  <td>{item.account_id.full_name}</td>
+                   <td>{item.account_id.gender}</td>
+                  <td>{item.account_id.email}</td>
+                  <td>{item.account_id.phone_number}</td>
+                   <td>{item.account_id.address}</td>
+                  <td>{item.parent_name}</td>
+                  <td>{item.parent_phone_number}</td>
+                  <td  >
+                      <AiOutlineEdit 
+                      style={{
+                        color:'#008947',
+                        cursor:'pointer',
+                        width:"1.5rem",
+                        height:"1.5rem",
+                        marginRight:".75rem",
+                        marginTop:".75rem"}} /> 
+                    </td>
+                    <td>
+                    < AiOutlineDelete onClick={handleShowModal}
+                      style={{
+                        color:'#ff357e',
+                        cursor:'pointer',
+                        width:"1.5rem",
+                        height:"1.5rem",
+                        marginTop:".75rem",
+                        marginRight:".75rem"}} /> 
+                    
+                    </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      
     </div>
   )
+}
 }
 
 export default StudentManagementPage

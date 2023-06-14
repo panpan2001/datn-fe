@@ -44,6 +44,7 @@ import getAllCourseStudentReducer from "../slices/CourseStudent/getAllCourseStud
 import deleteDemoCourseReducer from "../slices/DemoCourse/deleteDemoCourse";
 import getAllCoursesReducer from "../slices/Course/getAllCourse";
 import getAllDemoCoursesReducer from "../slices/DemoCourse/getAllDemoCourseSlice";
+import getAllStudentsReducer from "../slices/Student/getAllStudentSlice";
 
 const persistConfig = {
     key:'root',
@@ -59,6 +60,7 @@ const rootReducer= combineReducers({
     delAccount: delAccountReducer,
     logout: logoutReducer,
     createStudent:createStudentReducer,
+    getAllStudents: getAllStudentsReducer,
     getStudentByAccountId: getStudentByAccountIdReducer,
     getStudentById: getStudentByIdReducer,
     getAccountById: getAccountReducer,

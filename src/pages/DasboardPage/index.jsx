@@ -41,7 +41,6 @@ function DashboardPage() {
   }
   return (
     <div className='dashboard-page_container container-fluid'>
-      {/* <AdminManagementLayout/> */}
       {accounts && courses && demoCourses &&
 
         <section className="dashboard_section-1 mb-3">
@@ -105,7 +104,10 @@ function DashboardPage() {
       }
 
       <section className="dashboard_section-2 mb-3 mt-6">
-        <div className="table_container">
+       
+      </section>
+      <section className="dashboard_section-3 mb-3 mt-6">
+      <div className="table_container">
           <div className="table_header">
             <strong className='is-size-4 '>Học viên</strong>
             <Link to="/admin/student"
@@ -208,10 +210,117 @@ function DashboardPage() {
           }
         </div>
       </section>
-      <section className="dashboard_section-3 mb-3">
+      <section className="dashboard_section-4 mb-3 mt-6">
+      <div className="table_container">
+          <div className="table_header">
+            <strong className='is-size-4 '>Khóa học chính thức</strong>
+            <Link to="/admin/course"
+            style={{
+              display: "flex",
+              color: "#29A3F0",
+              cursor: "pointer",
+              gap: "0.5rem",
+            }}><p>Xem thêm </p>
+              <AiOutlineLogin style={{
+                width: "1.5rem", height: "1.5rem",
+                borderRadius: "50%",
+                fill: "#29A3F0",
+                boxShadow: "0 0 8px 0 var(--border-color)"
+              }} /> </Link>
 
+          </div>
+          {courses &&
+            <div className='teacher-management_table is-centered mr-5 mt-3'>
+              <table className="table"
+                style={{
+                  backgroundColor: "#FFEBB2",
+                  padding: "1rem",
+                  borderRadius: "10px",
+                  textAlign: "left",
+                  boxShadow: "0px 0px 10px #ACEFF6"
+                }}>
+                <thead>
+                  <tr>
+                    <th>STT</th>
+                    <th>Tên khóa học</th>
+                    <th>Số lượng học viên</th>
+                    <th>Lịch học</th>
+                    <th>Thời lượng buổi học (ph)</th>
+                    <th>Thời thời gian học (tháng)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {courses && courses.map((item) => (
+                    <tr className='mb-2'>
+                      <th>{courses.indexOf(item) + 1}</th>
+                      <td>{item.name}</td>
+                      <td>{item.number_of_student}</td>
+                      <td>{item.schedule}</td>
+                      <td>{item.time_per_lesson}</td>
+                      <td>{item.learning_period}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          }
+        </div>
+
+        <div className="table_container mt-6">
+          <div className="table_header">
+            <strong className='is-size-4 '>Khóa học thử</strong>
+            <Link to="/admin/course"
+            style={{
+              display: "flex",
+              color: "#29A3F0",
+              cursor: "pointer",
+              gap: "0.5rem",
+            }}><p>Xem thêm </p>
+              <AiOutlineLogin style={{
+                width: "1.5rem", height: "1.5rem",
+                borderRadius: "50%",
+                fill: "#29A3F0",
+                boxShadow: "0 0 8px 0 var(--border-color)"
+              }} /> </Link>
+
+          </div>
+          {demoCourses &&
+            <div className='teacher-management_table is-centered mr-5 mt-3'>
+              <table className="table"
+                style={{
+                  backgroundColor: "#FF9F7E",
+                  padding: "1rem",
+                  borderRadius: "10px",
+                  textAlign: "left",
+                  boxShadow: "0px 0px 10px #ACEFF6"
+                }}>
+                <thead>
+                  <tr>
+                    <th>STT</th>
+                    <th>Tên khóa học</th>
+                    <th>Số lượng học viên</th>
+                    <th>Lịch học</th>
+                    <th>Thời lượng buổi học (ph)</th>
+                    <th>Thời gian học (buổi)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {demoCourses && demoCourses.map((item) => (
+                    <tr className='mb-2'>
+                      <th>{demoCourses.indexOf(item) + 1}</th>
+                      <td>{item.id_course.name}</td>
+                      <td>{item.id_course.number_of_student}</td>
+                      <td>{item.schedule}</td>
+                      <td>{item.id_course.time_per_lesson}</td>
+                      <td>{item.learning_period}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          }
+        </div>
       </section>
-      <section className="dashboard_section-4 mb-3"></section>
       <section className="dashboard_section-5 mb-3"></section>
     </div>
   )

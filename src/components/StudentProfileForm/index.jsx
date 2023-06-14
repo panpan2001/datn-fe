@@ -126,18 +126,7 @@ const StudentProfileForm = () => {
                                 value={ user.phone_number} />
                         </div>
                     </div>
-                    {/* <div className="column is-6">
-                                <div className="field">
-                                    <label className="label">Mật khẩu </label>
-                                    <input className="input" 
-                                    type="text" 
-                                    placeholder="Mật khẩu"
-                                    disabled='true'
-                                     value={studentPersonalInfo.account_id.password}
-
-                                     />
-                                </div>
-                            </div> */}
+                  
                     {user.role_name=="student" && studentPersonalInfo ?
                         <>
                             <div className="column is-6">
@@ -166,7 +155,7 @@ const StudentProfileForm = () => {
 
                 </div>
             </>}
-P
+
 
         </div  >
     )
@@ -177,3 +166,15 @@ export default StudentProfileForm
 {/* <div className="field is-grouped is-grouped-centered" id='signup_button'>
                             <button className="button is-link" type="submit">Chỉnh sửa</button>
                         </div> */}
+  {/* <div className="column is-6">
+                                <div className="field">
+                                    <label className="label">Mật khẩu </label>
+                                    <input className="input" 
+                                    type="text" 
+                                    placeholder="Mật khẩu"
+                                    disabled='true'
+                                     value={studentPersonalInfo.account_id.password}
+
+                                     />
+                                </div>
+                            </div> */}
