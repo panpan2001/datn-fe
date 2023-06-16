@@ -18,7 +18,7 @@ const createCourse=async(axiosJWT,accessToken, value,dispatch,navigate,id)=>{
         dispatch(createCourseSuccess(res.data))
         console.log("action create course: ",res.data)
         // updateTeacher(value.id_teacher,res.data._id,dispatch,axiosJWT,accessToken)
-        navigate('/profile/teacherClass')
+        navigate('/profile/'+id+'/teacherClass')
         toast.success('Tạo lớp học thành công!', {
             position: toast.POSITION.BOTTOM_RIGHT
         });

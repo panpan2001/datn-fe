@@ -36,7 +36,7 @@ const Navbar = () => {
         <div className="navbar-menu">
           <div className="navbar-start">
             {isLoggedIn ?
-              <Link className="navbar-item" to='/profile'>
+              <Link className="navbar-item" to={`/profile/${id}`}>
                 Trang cá nhân
               </Link>
               :
@@ -62,11 +62,11 @@ const Navbar = () => {
               </Link>
             }
             {isLoggedIn && user.role_name == 'teacher' &&
-              <Link className="navbar-item" to="/createClass">
+              <Link className="navbar-item" to={`/${id}/createClass`}>
                 Tạo khóa học
               </Link>}
               {isLoggedIn && user.role_name == 'student' &&
-              <Link className="navbar-item" to="/profile/judgeTeacher">
+              <Link className="navbar-item" to={`/profile/${id}/judgeTeacher`}>
                 Đánh giá giáo viên 
               </Link>}
           </div>

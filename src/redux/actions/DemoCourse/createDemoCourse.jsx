@@ -15,7 +15,7 @@ const createDemoCourse= async(account_id,value,dispatch,axiosJWT,accessToken,nav
             
         })
         dispatch(createDemoCourseSuccess(res.data))
-        navigate('/profile/teacherClass')
+        navigate('/profile/'+account_id+'/teacherClass')
         toast.success('Tạo lớp học thành công!', {
             position: toast.POSITION.BOTTOM_RIGHT
         })

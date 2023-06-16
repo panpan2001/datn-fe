@@ -13,6 +13,7 @@ import TeacherAcademicDegreeInfoForm from '../components/TeacherCompleteInfoForm
 import CurrentClassForm from '../components/CurrentClassForm/StudentCurrentClassForm';
 import TeacherCurrentClassForm from '../components/CurrentClassForm/TeacherCurrentClassForm ';
 import StudentCurrentClassForm from '../components/CurrentClassForm/StudentCurrentClassForm';
+import EditTeacherForm from '../components/EditTeacherForm.jsx';
 
 const LandingPage = React.lazy(() => import('../pages/LandingPage'));
 const LoginPage = React.lazy(() => import('../pages/LoginPage'));
@@ -74,20 +75,20 @@ function ContainerRoutes() {
           </>}
           {isLoggedIn &&
             <>
-              <Route path='/profile' element={<ProfilePage />}>
+              <Route path='/profile/:idAccount' element={<ProfilePage />}>
                 <Route index element={<PersonalInfo />} />
                 {
                   currentUSer.role_name && currentUSer.role_name == 'student' &&
                   <>
-                    <Route path='/profile/myclass' element={<PersonalInfo />} />
-                    <Route path='/profile/studentClass' element={<StudentCurrentClassForm />} />
-                    <Route path='/profile/judgeTeacher' element={<StudentJudgeForm />} />
+                    <Route path='/profile/:idAccount/myclass' element={<PersonalInfo />} />
+                    <Route path='/profile/:idAccount/studentClass' element={<StudentCurrentClassForm />} />
+                    <Route path='/profile/:idAccount/judgeTeacher' element={<StudentJudgeForm />} />
                   </>
                 }
                 {
                   currentUSer.role_name && currentUSer.role_name == 'teacher' &&
                   <>
-                    <Route path='/profile/teacherClass' element={<TeacherCurrentClassForm />} />
+                    <Route path='/profile/:idAccount/teacherClass' element={<TeacherCurrentClassForm />} />
                   </>
                 }
 
@@ -95,7 +96,7 @@ function ContainerRoutes() {
               {
                 currentUSer.role_name && currentUSer.role_name == 'teacher' &&
                 <>
-                  <Route path='/createClass' element={<CreateCoursePage />} />
+                  <Route path='/:idAccount/createClass' element={<CreateCoursePage />} />
                 </>
               }
             </>
@@ -110,6 +111,7 @@ function ContainerRoutes() {
             <Route path='/admin/account' element={<AccountManagementPage />} />
             <Route path='/admin/student' element={<StudentManagementPage />} />
             <Route path='/admin/teacher' element={<TeacherManagementPage />} />
+            <Route path="/admin/teacher/:id" element={<EditTeacherForm />} />
             <Route path='/admin/course' element={<CourseManagementPage />} />
             <Route path="/admin/*" element={<NotFound />} />
           </Route>

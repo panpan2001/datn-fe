@@ -1,0 +1,48 @@
+@import './RootStyle.css';
+
+.edit-teacher-form_container{
+    display: flex;
+    flex-direction: column;
+    gap:1rem;
+
+    margin-right: 2rem;
+    margin-top: 2rem;
+}
+
+.detail-teacher-info_container{
+    display: flex;
+    flex-direction: column;
+    /* gap:1rem;
+    background-color: white;
+    border: 1px solid var(--border-color); */
+    margin-right: 1rem;
+    margin-top: 1rem;
+    border-radius: 10px;
+    /* justify-content: center; */
+    /* align-items: center; */
+}
+
+.content{
+    margin-right: 2rem;
+}
+.content-left, .content-right{
+    justify-content: center;
+    background-color: white;
+    border: 1px solid var(--border-color); 
+    border-radius: 10px;
+    padding-right: 1rem;
+    padding-bottom: 1rem;
+}
+
+.group-buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between !important;
+    margin: 1rem 3rem 
+}
+
+.button-right{
+    display: inherit;
+    flex-direction: inherit;
+    gap: 2rem ;
+}

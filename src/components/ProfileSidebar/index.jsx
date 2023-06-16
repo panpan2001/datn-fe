@@ -28,7 +28,7 @@ const ProfileSideBar = () => {
 
       <div className="groups">
         <div className="group">
-          <Item icon={<AiOutlineUser />} name={"Hồ sơ cá nhân"} navigate={'/profile'} />
+          <Item icon={<AiOutlineUser />} name={"Hồ sơ cá nhân"} navigate={'/profile/'+currentUser._id} />
           {currentUser.role_name &&
             currentUser.role_name == 'admin' ?
             // <Item icon={<AiOutlineDatabase />} name={"Quản lí"} navigate={'/admin'} />
@@ -36,10 +36,10 @@ const ProfileSideBar = () => {
              :
             (currentUser.role_name == 'student' ?
               <>
-                <Item icon={<AiOutlineBook />} name={"Khóa học của tôi"} navigate={'/profile/studentClass'} />
+                <Item icon={<AiOutlineBook />} name={"Khóa học của tôi"} navigate={`/profile/${currentUser._id}/studentClass`} />
                 {/* <Item icon={< AiOutlineEdit />} name={"Đánh giá giáo viên"} navigate={'/profile/judgeTeacher'} /> */}
               </> : 
-               <Item icon={< AiOutlineBook />} name={"Khóa học của tôi"} navigate={'/profile/teacherClass'} />
+               <Item icon={< AiOutlineBook />} name={"Khóa học của tôi"} navigate={`/profile/${currentUser._id}/teacherClass`} />
 
             )
           }

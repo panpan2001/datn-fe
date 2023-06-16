@@ -22,6 +22,13 @@ function AccountManagementPage() {
   const handleShowModal=()=>{
     alert("hi")
   }
+  const checkColor=(role)=>{
+    if(role=="admin"){
+      return " #ff9aa7"
+    }
+    else if(role=="teacher")return  "#C2E7FF"
+    else return "#B2FFDA"
+      }
   return (
     <div className='account-management-page container'>
       <div className="account-management-overview_div "
@@ -76,13 +83,18 @@ function AccountManagementPage() {
    <div className='teacher-management_table is-centered mr-5 mt-3'>
      <table className="table"
        style={{
-         backgroundColor: "#B2FFDA",
+        //  backgroundColor: "#B2FFDA",
          padding: "1rem",
          borderRadius: "10px",
          textAlign: "left",
          boxShadow: "0px 0px 10px #ACEFF6"
        }}>
-       <thead>
+       <thead  
+      //  style={{backgroundColor:"white",
+      //   borderTopRightRadius:"10px",
+      //   borderTopLeftRadius:"10px"
+      //   }}
+        >
          <tr>
            <th>STT</th>
            <th>Tên</th>
@@ -90,14 +102,15 @@ function AccountManagementPage() {
            <th>Ngày sinh</th>
            <th>Email</th>
            <th>Số điện thoại</th>
-           <th></th>
+           <th>Vai trò </th>
+           <th>Ngày tạo</th>
            <th></th>
            <th></th>
          </tr>
        </thead>
        <tbody>
          {accounts && accounts.map((item) => (
-           <tr className='mb-2'>
+           <tr className='mb-2' style={{background:`${checkColor(item.role_name)}`}}>
              <th>{accounts.indexOf(item) + 1}</th>
              <td>{item.full_name}</td>
              <td>{item.gender}</td>
@@ -105,6 +118,7 @@ function AccountManagementPage() {
              <td>{item.email}</td>
              <td>{item.phone_number}</td>
              <td>{item.role_name}</td>
+             <td>{moment(item.createAt).format('DD/MM/YYYY')}</td>
              <td  >
                       <AiOutlineEdit 
                       style={{

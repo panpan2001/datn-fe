@@ -38,12 +38,16 @@ function ClassCard({ data }) {
      const courseStudent= useSelector(state => state.getAllCourseStudent?.courseStudents?.currentCourseStudent)
      // console.log({ courseStudent })
      
-     const number_register=  courseStudent.filter(item => item.id_course._id=== data._id).length
      // console.log({number_register})
      const handledelete = () => {
         
           deleteCourse(data._id, user._id, dispatch, axiosJWT, user.accessToken)
           setShow("none")
+     }
+     let number_register = null
+     if(courseStudent){
+          number_register =  courseStudent.filter(item => item.id_course._id=== data._id).length
+
      }
      return (
           <div className="column is-12 mb-2">
@@ -61,56 +65,56 @@ function ClassCard({ data }) {
                               style={{ paddingTop: "0" }}
                          />
 
-                         <div className="content header">
+                         <div className=" teacher_class_card_content column header">
                               <strong className='is-size-5'>{data.name} </strong>
                          </div>
-                         <div className="content_container columns is-multiline">
+                         <div className="content_container  columns is-multiline">
 
-                              <div className="content  column is-6">
+                              <div className=" teacher_class_card_content column  is-6">
 
                                    <p><strong>Loại: </strong>{data.category_id.type}</p>
                               </div>
-                              <div className="content  column is-6">
+                              <div className=" teacher_class_card_content column  is-6">
                                    <p><strong>Cấp độ: </strong>{data.category_id.level}</p>
                               </div>
-                              <div className="content  column is-6">
+                              <div className=" teacher_class_card_content column  is-6">
                                    <p><strong>Số lượng học viên: </strong>{data.number_of_student}</p>
                               </div>
-                              <div className="content  column is-6">
+                              <div className=" teacher_class_card_content column  is-6">
                                    <p><strong>Thời lượng buổi học(ph): </strong>{data.time_per_lesson}</p>
                               </div>
-                              <div className="content  column is-6">
+                              <div className=" teacher_class_card_content column  is-6">
                                    <p> <strong>Thời gian học: </strong>{data.learning_period} {data.isDemoClass ? 'buổi' : 'tháng'}</p>
                               </div>
-                              <div className="content  column is-6">
+                              <div className=" teacher_class_card_content column  is-6">
                                    <p><strong>Lịch học: </strong>{time} - {data.schedule.split(" - ")[1]}</p>
                               </div>
-                              <div className="content  column is-6">
+                              <div className=" teacher_class_card_content column  is-6">
                                    <p><strong>Ngày bắt đầu: </strong>{start_date}</p>
                               </div>
-                              <div className="content  column is-6">
+                              <div className=" teacher_class_card_content column  is-6">
                                    <p><strong>Ngày kết thúc: </strong>{end_date}</p>
                               </div>
-                              <div className="content  column is-6">
+                              <div className=" teacher_class_card_content column  is-6">
                                    <p><strong>Giá tiền(VDN/ buổi): </strong>{formatter.format(data.cost)}</p>
                               </div>
-                              <div className="content  column is-6">
+                              <div className=" teacher_class_card_content column  is-6">
                                    <p><strong>Số lượng học viên: </strong>{data.number_of_student}</p>
                               </div>
-                              <div className="content  column is-12">
+                              <div className=" teacher_class_card_content column  is-12">
                                    <p><strong>Số lượng đăng kí: </strong>{number_register}</p>
                               </div>
-                              <div className="content  column is-12">
+                              <div className=" teacher_class_card_content column  is-12">
                                    <p><strong>Link video: </strong>{data.link_video}</p>
                               </div>
-                              <div className="content  column is-12">
+                              <div className=" teacher_class_card_content column  is-12">
                                    <p><strong>Link meeting: </strong>{data.link_meeting}</p>
                               </div>
-                              <div className="content  column is-12">
+                              <div className=" teacher_class_card_content column  is-12">
                                    <p><strong>Mô tả: </strong>{data.description}</p>
                               </div>
                          </div>
-                         {/* <div className="content  column is-12">
+                         {/* <div className=" teacher_class_card_content column column is-12">
                                    <p><strong>Các lớp học thử </strong></p>
                               </div>
                          */}
@@ -172,7 +176,7 @@ export default ClassCard
 
 {/* </footer> */ }
 {/* <DetailClassModalForm data={data} show={show} setShow={setShow}/> */ }
-{/* <div className="content  column is-6">
+{/* <div className=" teacher_class_card_content column column is-6">
                               {data.isDemoClass ?
                                    <button className="button course_label is-warning mr-3">Học thử</button> :
                                    <button className="button course_label is-primary mr-3">Học chính thức</button>

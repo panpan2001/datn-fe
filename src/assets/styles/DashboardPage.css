@@ -11,10 +11,11 @@
 
 section[class^="dashboard_section-"]{
     margin-top:1rem;
-    /* background-color: white; */
-    /* border-radius: 10px; */
-    /* padding: 1rem; */
-    /* border: 1px solid var(--border-color); */
+  
+    background-color: white;
+    padding: 1rem;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
 }
 
 div[class^="dashboard-section-1_column"]{
@@ -54,18 +55,18 @@ background-color: #FFC67E;
     background-color: #ff9aa7;
 }
 
-.dashboard_section-3,.dashboard-section-4{
+.dashboard_section-2,.dashboard_section-3,.dashboard-section-4,.dashboard-section-5{
     display: flex !important;
     flex-direction: row;
     gap: 1rem;
     margin-top: 2rem;
 }
 
-.dashboard_section-2{
+/* .dashboard_section-2{
     display: flex ;
     flex-direction: column;
     text-align: left !important;
-}
+} */
 
 .table_container{
     text-align: left;

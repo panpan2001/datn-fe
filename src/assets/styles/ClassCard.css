@@ -26,6 +26,7 @@
     justify-content: center;
     align-items: center;
     margin: 0 1rem !important;
+    width: 100%;
 }
 .class-card_left{
     display: flex !important;
@@ -43,9 +44,9 @@
     gap: 0;
 
 }
-.content{
+.teacher_demo_class_cars_content,.teacher_class_card_content {
     display: flex !important;
-    margin-bottom: 0rem !important;
+    margin: 0rem !important;
     text-align: left;
 }
 

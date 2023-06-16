@@ -13,7 +13,7 @@ const loginUser = async (user, dispatch, navigate) => {
         dispatch(loginSuccess(res.data))
         await console.log("login: data id ",res.data._id)
 
-navigate("/profile")
+navigate("/profile/"+res.data._id)
         toast.success('Đăng nhập thành công!', {
             position: toast.POSITION.BOTTOM_RIGHT
         });

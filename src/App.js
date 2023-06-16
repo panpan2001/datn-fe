@@ -1,16 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './assets/styles/App.css';
 import ContainerRoutes from './routes/ContainerRoutes';
 import { ToastContainer } from 'react-toastify';
 import '../src/services/firebase';
+import { requestPermission } from '../src/services/firebase';
+import firebase from '../src/services/firebase';
+
 function App() {
-  
+  // useEffect(() => {
+  //   requestPermission()
+  // }, [])
   return (
     <div className="App">
             
       <ContainerRoutes/>
-    <ToastContainer/>
-  
+    
+  {/* <p>helko</p> */}
+  <ToastContainer/>
       </div>
   );
 }

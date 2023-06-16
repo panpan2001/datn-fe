@@ -48,8 +48,10 @@ const account_id = user?._id
 
         }
         console.log(values)
-
-        createTeacher(dispatch,values,navigate)
+if(url){
+  createTeacher(dispatch,values,navigate)
+}
+        
     
     }
   })

@@ -28,7 +28,7 @@ const DemoCourseStudent= useSelector((state) => state.getAllDemoCourseStudent?.d
 
 let number_register
 if(!DemoCourseStudent) number_register= 0
-  else number_register= DemoCourseStudent.filter((i) => i.id_demo_course._id === item._id).length
+  
 //   console.log("number_register",number_register)
 const [show, setShow] = useState("none")
 const dispatch = useDispatch()
@@ -38,39 +38,41 @@ const handleDelete=()=>{
      deleteDemoCourse(item._id, user._id, dispatch, axiosJWT, user.accessToken)
      setShow("none")
 }
+if(DemoCourseStudent){
+     number_register= DemoCourseStudent.filter((i) => i.id_demo_course._id === item._id).length
      return (
           <div className= 'teacher-demo-class_card'>
                <div className="content_container columns is-multiline">
 
-                    <div className="content  column is-6">
+                    <div className=" teacher_demo_class_cars_content column column is-6">
 
                          <p><strong>Tên khóa học thử: </strong>{item.id_course.name}</p>
                     </div>
-                    <div className="content  column is-6">
+                    <div className=" teacher_demo_class_cars_content column column is-6">
                          <p> <strong>Thời gian học: </strong>{item.learning_period} buổi</p>
                     </div>
-                    <div className="content  column is-6">
+                    <div className=" teacher_demo_class_cars_content column column is-6">
                          <p><strong>Lịch học: </strong>{time} - {item.schedule.split(" - ")[1]}</p>
                     </div>
-                    <div className="content  column is-6">
+                    <div className=" teacher_demo_class_cars_content column column is-6">
                          <p><strong>Ngày bắt đầu: </strong>{start_date}</p>
                     </div>
-                    <div className="content  column is-6">
+                    <div className=" teacher_demo_class_cars_content column column is-6">
                          <p><strong>Ngày kết thúc: </strong>{end_date}</p>
                     </div>
-                    <div className="content  column is-6">
+                    <div className=" teacher_demo_class_cars_content column column is-6">
                          <p><strong>Giá tiền(VDN/ buổi): </strong>{formatter.format(item.cost)}</p>
                     </div>
-                    <div className="content  column is-6">
+                    <div className=" teacher_demo_class_cars_content column column is-6">
                          <p><strong>Số lượng học viên: </strong>{item.id_course.number_of_student}</p>
                     </div>
-                    <div className="content  column is-6">
+                    <div className=" teacher_demo_class_cars_content column column is-6">
                          <p><strong>Số lượng đăng kí: </strong>{number_register}</p>
                     </div>
-                    <div className="content  column is-12">
+                    <div className=" teacher_demo_class_cars_content column column is-12">
                          <p><strong>Link video: </strong>{item.link_video}</p>
                     </div>
-                    <div className="content  column is-12">
+                    <div className=" teacher_demo_class_cars_content column column is-12">
                          <p><strong>Link meeting: </strong>{item.link_meeting}</p>
                     </div>
                </div>
@@ -127,6 +129,8 @@ const handleDelete=()=>{
           </div>
 
      )
+}
+   
 }
 
 export default TeacherDemoClassCard

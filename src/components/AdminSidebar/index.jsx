@@ -5,8 +5,10 @@ import { GiHamburgerMenu } from 'react-icons/gi'
 import Item from '../Item'
 import { AiOutlineLogout, AiOutlineHome, AiOutlineTeam, AiOutlineUser, AiOutlineSolution, AiOutlineMacCommand } from 'react-icons/ai'
 import { BiExit } from 'react-icons/bi'
+import { useSelector } from 'react-redux'
 function AdminSidebar() {
   const navigate = useNavigate()
+  const user= useSelector((state) => state.login.login?.currentUser)
   return (
     // <section className='admin-side-bar_section container'>
     //   <header>
@@ -96,7 +98,7 @@ function AdminSidebar() {
         <Item icon={< AiOutlineSolution  />} name={"Khóa học"} navigate={'/admin/course'} />
       </div>
     </div>
-    <Link to='/profile'>
+    <Link to={'/profile/'+user._id}>
     <BiExit style={{
       display: "block",
       bottom: "2rem",

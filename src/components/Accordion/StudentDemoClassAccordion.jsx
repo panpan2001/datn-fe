@@ -83,7 +83,7 @@ const StudentDemoClassAccordion = ({ data,color }) => {
         >
           <p className="card-header-title"
             style={{ alignItems: "baseline" }}
-          >{course.name}</p>
+          >{course &&course.name}</p>
 
           <div className="card-header-icon student-class_group-icon"
           >

@@ -45,6 +45,8 @@ import deleteDemoCourseReducer from "../slices/DemoCourse/deleteDemoCourse";
 import getAllCoursesReducer from "../slices/Course/getAllCourse";
 import getAllDemoCoursesReducer from "../slices/DemoCourse/getAllDemoCourseSlice";
 import getAllStudentsReducer from "../slices/Student/getAllStudentSlice";
+import deleteTeacherReducer from "../slices/Teacher/DeleteTeacherSlice";
+import updateteacherAcademicReducer from "../slices/TeacherAcademic/updateTeacherAcademicStatusSl";
 
 const persistConfig = {
     key:'root',
@@ -71,9 +73,11 @@ const rootReducer= combineReducers({
     getTeacherAcademic: getTeacherAcademicReducer,
     createTeacherAcademic: createTeacherAcademicReducer,
     getTeacherAcademicById: getTeacherAcademicByIdReducer,
+    updateTeacherAcademic: updateteacherAcademicReducer,
     createTeacherDegree: createTeacherDegreeReducer,
     getTeacherDegreeById: getTeacherDegreeByIdReducer,
     createTeacher: createTeacherReducer,
+    deleteTeacher: deleteTeacherReducer,
     getCourseCategory: getCourseCategoryReducer,
     getCourseCategoryById: getCourseCategoryByIdReducer,
     createCourse: createCourseReducer,
