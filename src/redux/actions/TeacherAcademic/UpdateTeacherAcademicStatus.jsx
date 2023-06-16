@@ -2,8 +2,9 @@ import { toast } from "react-toastify"
 import { TeacherAcademicApi } from "../../../utils/BaseUrl"
 import { getAllTeacherSuccess } from "../../slices/Teacher/GetAllTeachersSlice"
 import { updateteacherAcademicFailure, updateteacherAcademicStart, updateteacherAcademicSuccess } from "../../slices/TeacherAcademic/updateTeacherAcademicStatusSl"
+import { getTeacherAcademicByIdSuccess } from "../../slices/TeacherAcademic/getTeacherAcademicByIdSlice"
 
-const updateTeacherAcademic = async (account_id, teacher_id,status, dispatch, accessToken, axiosJWT) => {
+const updateTeacherAcademicStatus = async (account_id, teacher_id,status, dispatch, accessToken, axiosJWT) => {
     dispatch(updateteacherAcademicStart())
          
     try {
@@ -15,11 +16,13 @@ const updateTeacherAcademic = async (account_id, teacher_id,status, dispatch, ac
                 account_id:account_id
             },
         })
-        dispatch(updateteacherAcademicSuccess(res.data))
+        // dispatch(updateteacherAcademicSuccess(res.data)) 
+        // tui sua day nha, ti chAY XEM DC KO 
+        dispatch(getTeacherAcademicByIdSuccess(res.data))
         console.log('update  teacher academic action  success', res.data)
-        toast.success("Cap nhat giao vien thanh cong", {
-            position: toast.POSITION.BOTTOM_RIGHT
-        })
+        // toast.success("Cap nhat giao vien thanh cong", {
+        //     position: toast.POSITION.BOTTOM_RIGHT
+        // })
     } catch (error) {
         dispatch(updateteacherAcademicFailure())
         console.log(error)
@@ -29,4 +32,4 @@ const updateTeacherAcademic = async (account_id, teacher_id,status, dispatch, ac
     }
 }
 
-export default updateTeacherAcademic
+export default updateTeacherAcademicStatus

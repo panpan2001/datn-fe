@@ -95,7 +95,7 @@ function AdminSidebar() {
       <Item icon={<AiOutlineMacCommand/>} name={"Tài khoản"} navigate={'/admin/account'}/>
         <Item icon={< AiOutlineTeam />} name={"Học viên"} navigate={'/admin/student'} />
         <Item icon={< AiOutlineUser />} name={"Giáo viên"} navigate={'/admin/teacher'}/>
-        <Item icon={< AiOutlineSolution  />} name={"Khóa học"} navigate={'/admin/course'} />
+        <Item icon={< AiOutlineSolution  />} name={"Khóa học "} navigate={'/admin/course'} />
       </div>
     </div>
     <Link to={'/profile/'+user._id}>

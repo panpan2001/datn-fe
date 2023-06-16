@@ -9,18 +9,22 @@ import { AiOutlineDelete, AiOutlineEdit, AiOutlineLogin } from 'react-icons/ai'
 import { getAccountSuccess } from '../../redux/slices/Account/GetAccountSlice'
 import moment from 'moment/moment'
 import Item from '../../components/Item'
+import { delAccountSuccess } from '../../redux/slices/Account/DeleteAccountSlice'
+import DelAccounts from '../../redux/actions/Account/DelAccounts'
 function AccountManagementPage() {
   const user = useSelector((state) => state.login.login?.currentUser)
   const dispatch = useDispatch()
   const accessToken = user?.accessToken
   const axiosJWT = createAxiosJWT(dispatch, user, getAccountSuccess)
+  const axiosJWTDel = createAxiosJWT(dispatch, user, delAccountSuccess)
+  const id= user?._id
   useEffect(() => {
     getAllAccounts(accessToken, dispatch, axiosJWT)
    
   }, [])
   const accounts = useSelector((state) => state.getAccount?.accounts?.allAccounts)
-  const handleShowModal=()=>{
-    alert("hi")
+  const handleDelete=(id )=>{
+    DelAccounts(accessToken,dispatch,id,axiosJWTDel)
   }
   const checkColor=(role)=>{
     if(role=="admin"){
@@ -53,7 +57,7 @@ function AccountManagementPage() {
             <FilterCategory/> 
             
           </div>
-          <button className="icon-teacher " type='button'  onClick={handleShowModal}
+          <button className="icon-teacher " type='button'  
           style={{
             display:"flex",
             alignItems:"center",
@@ -130,7 +134,7 @@ function AccountManagementPage() {
                         marginTop:".75rem"}} /> 
                     </td>
                     <td>
-                    < AiOutlineDelete onClick={handleShowModal}
+                    < AiOutlineDelete onClick={()=>handleDelete(item._id)}
                       style={{
                         color:'#ff357e',
                         cursor:'pointer',

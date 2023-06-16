@@ -7,6 +7,9 @@ import { CiCirclePlus } from 'react-icons/ci'
 import getAllStudents from '../../redux/actions/Student/GetAllStudent'
 import { AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai'
 import Item from '../../components/Item'
+import deleteStudent from '../../redux/actions/Student/DeleteStudent'
+import { deleteStudentSuccess } from '../../redux/slices/Student/deleteStudentSlice'
+import createAxiosJWT from '../../utils/createInstance'
 
 const StudentManagementPage = () => {
   // const user= useSelector(state=>state.account.accounts)
@@ -21,19 +24,23 @@ const StudentManagementPage = () => {
   //   if(user.accessToken) getAllAccounts(user.accessToken,dispatch)
 
   // },[])
+  const user = useSelector((state) => state.login.login?.currentUser)
   const dispatch = useDispatch()
+  const accessToken = user?.accessToken
+  const axiosJWT = createAxiosJWT(dispatch, user, deleteStudentSuccess)
+  const account_id= user?._id
   useEffect(() => {
     getAllStudents(dispatch)
 
   }, [])
   const student = useSelector((state) => state.getAllStudents?.students?.allStudents)
-  // console.log(student[0].account_id.full_name)
-  const handleShowModal = () => {
-    alert("hi")
+  // console.log("student trang management ",student)
+  const handleShowModal = (id) => {
+    deleteStudent(account_id,id,accessToken,dispatch,axiosJWT)
   }
   if(!student) return null
   else {
-console.table(student)
+// console.table(student)
   
   return (
     <div className='student-management-page container'>
@@ -108,14 +115,14 @@ console.table(student)
               </tr>
             </thead>
             <tbody>
-              { student.map((item) => (
+            {student && student.map((item) => (
                 <tr className='mb-2'>
                   <th>{student.indexOf(item) + 1}</th>
-                  <td>{item.account_id.full_name}</td>
-                   <td>{item.account_id.gender}</td>
-                  <td>{item.account_id.email}</td>
-                  <td>{item.account_id.phone_number}</td>
-                   <td>{item.account_id.address}</td>
+                  <td>{item.account_id && item.account_id.full_name}</td>
+                   <td>{item.account_id && item.account_id.gender}</td>
+                  <td>{item.account_id && item.account_id.email}</td>
+                  <td>{item.account_id && item.account_id.phone_number}</td>
+                   <td>{item.account_id && item.account_id.address}</td>
                   <td>{item.parent_name}</td>
                   <td>{item.parent_phone_number}</td>
                   <td  >
@@ -129,7 +136,7 @@ console.table(student)
                         marginTop:".75rem"}} /> 
                     </td>
                     <td>
-                    < AiOutlineDelete onClick={handleShowModal}
+                    < AiOutlineDelete onClick={()=>handleShowModal(item._id)}
                       style={{
                         color:'#ff357e',
                         cursor:'pointer',

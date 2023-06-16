@@ -7,10 +7,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import deleteTeacher from '../../redux/actions/Teacher/DeleteTeacher'
 import createAxiosJWT from '../../utils/createInstance'
 import { deleteTeacherSuccess } from '../../redux/slices/Teacher/DeleteTeacherSlice'
-import CryptoJS from 'crypto-js'
 import VerifyStatusButton from '../Button/VerifyStatusButton'
-import updateTeacherAcademic from '../../redux/actions/TeacherAcademic/UpdateTeacherAcademic'
+import updateTeacherAcademicStatus from '../../redux/actions/TeacherAcademic/UpdateTeacherAcademicStatus'
 import { updateteacherAcademicSuccess } from '../../redux/slices/TeacherAcademic/updateTeacherAcademicStatusSl'
+import updateTeacherDegreeStatus from '../../redux/actions/TeacherDegree/UpdateteacherDegreeStatus'
+import { updateTeacherDegreeSuccess } from '../../redux/slices/TeacherDegree/upadateTeacherDegreeStatus'
 
 function EditTeacherForm() {
     const navigate = useNavigate()
@@ -21,17 +22,19 @@ function EditTeacherForm() {
     const access_token = user?.accessToken
     const axiosJWT = createAxiosJWT(dispatch, user, deleteTeacherSuccess)
     const axiosJWTAcademic = createAxiosJWT(dispatch, user, updateteacherAcademicSuccess)
+    const axiosJWTDegree = createAxiosJWT(dispatch, user, updateTeacherDegreeSuccess)
     const handleShowModal = () => {
         alert("hi")
     }
     useEffect(() => {
         getTeacherById(id, dispatch)
+        
     }, [])
     const teacher = useSelector(state => state.getTeacherById?.teacher?.currentTeacher)
     // console.log({teacher})
     const [image, setImages] = useState("")
     const valueGender = ['nam', 'nữ', 'khác']
-  
+
     const handleBack = () => {
         navigate(-1)
     }
@@ -39,39 +42,42 @@ function EditTeacherForm() {
         deleteTeacher(account_id, id, dispatch, access_token, axiosJWT, navigate)
 
     }
-    const [checked, setChecked] = useState(teacher.id_academic.academic_status)
-    const [checked2, setChecked2] = useState(teacher.id_degree.degree_status)
-
-    if (teacher) {
-        
+    const [checkedAcademicStatus, setCheckedAcademicStatus] = useState("")
+    const [checkedDegreeStatus, setCheckedDegreeStatus] = useState("")
+    let checked = ""
+    let checked2 = ""
+    if (teacher.id_academic && teacher.id_degree) {
+        checked = teacher.id_academic.academic_status
+        checked2= teacher.id_degree.degree_status
+        console.log("checked", checked)
+        console.log("checked 2", checked2)
         const handleChangeAcademicStatus = (e) => {
-            e = e== "true" ? true : false
-            setChecked(!checked)
-            // console.log("e1",e, typeof e)
-            
+            e = e == "true" ? true : false
+            setCheckedAcademicStatus(e)
+            // console.log("e1", e, typeof e)
+
         }
         const handleChangeDegreeStatus = (e) => {
-            e = e== "true" ? true : false
+            e = e == "true" ? true : false
             // console.log("e2",e)
-            setChecked2(!checked2)
+            setCheckedDegreeStatus(e)
         }
-      const   handleSave = () => {
-        if(checked != teacher.id_academic.academic_status ){
-            console.log("academic status changed:",checked, typeof checked)
-            // account_id, teacher_id, dispatch, accessToken, axiosJWT
-            
-            updateTeacherAcademic(account_id, teacher.id_academic._id,checked, dispatch, access_token, axiosJWTAcademic)
-        } else{
-            console.log("academic status not changed")
+        const handleSave = () => {
+            if (checkedAcademicStatus != "") {
+                console.log("academic status changed:", checkedAcademicStatus, typeof checkedAcademicStatus)
+                updateTeacherAcademicStatus(account_id, teacher.id_academic._id, checkedAcademicStatus, dispatch, access_token, axiosJWTAcademic)
+            } else {
+                console.log("academic status not changed")
+            }
+
+            if (checkedDegreeStatus != "") {
+                console.log("degree status changed",checkedDegreeStatus, typeof checkedDegreeStatus)
+                updateTeacherDegreeStatus(account_id, teacher.id_degree._id, checkedDegreeStatus, dispatch, access_token, axiosJWTDegree)
+            } else console.log("degree status not changed")
+
+
+            navigate(-1)
         }
-         
-        if(checked2 != teacher.id_degree.degree_status ){
-            console.log("degree status changed")
-        } else console.log("degree status not changed")
-        
-        
-        navigate(-1)
-    }
         return (
             <div className='edit-teacher-form_container container is-centered'>
                 <strong className='is-size-4'>Chỉnh sửa thông tin giáo viên</strong>
@@ -206,10 +212,10 @@ function EditTeacherForm() {
                                     flexDirection: "row",
                                     justifyContent: 'flex-start',
                                     alignItems: 'center',
-                                    gap:"2rem",
-                                    marginLeft:"-.75rem"
+                                    gap: "2rem",
+                                    marginLeft: "-.75rem"
                                 }}>
-                                    <label className="label" style={{marginBottom: "0"}}>Xác thực học vấn: </label>
+                                    <label className="label" style={{ marginBottom: "0" }}>Xác thực học vấn: </label>
                                     <div className="control"
                                         style={{
                                             display: "flex",
@@ -219,12 +225,14 @@ function EditTeacherForm() {
                                             marginTop: ".25rem"
                                         }}>
                                         <label className="radio" style={{
-                                            display:"flex", gap:"1rem"
+                                            display: "flex", gap: "1rem"
                                         }}>
                                             <input
                                                 type="radio"
                                                 name="type_of_course"
-                                                checked={checked}
+                                                id='academic_status_true'
+                                                defaultChecked={checked ? true : false}
+                                                // checked={checked=='true'? true : false}
                                                 value={true}
                                                 onChange={(e) => handleChangeAcademicStatus(e.target.value)}
                                             />
@@ -233,12 +241,14 @@ function EditTeacherForm() {
                                                 color="white"
                                                 backgroundColor="#00d1b2" />
                                         </label>
-                                        <label className="radio ml-6"  style={{
-                                            display:"flex", gap:"1rem"
+                                        <label className="radio ml-6" style={{
+                                            display: "flex", gap: "1rem"
                                         }}>
                                             <input type="radio"
                                                 name="type_of_course"
-                                                checked={!checked}
+                                                id="academic_status_false"
+                                                // checked={checked?  false: true}
+                                                defaultChecked={checked ? false : true}
                                                 value={false}
                                                 onChange={(e) => handleChangeAcademicStatus(e.target.value)}
                                             />
@@ -324,10 +334,10 @@ function EditTeacherForm() {
                                     flexDirection: "row",
                                     justifyContent: 'flex-start',
                                     alignItems: 'center',
-                                    gap:"2rem",
-                                    marginLeft:"-.75rem"
+                                    gap: "2rem",
+                                    marginLeft: "-.75rem"
                                 }}>
-                                    <label className="label" style={{marginBottom: "0"}}>Xác thực chứng chỉ: </label>
+                                    <label className="label" style={{ marginBottom: "0" }}>Xác thực chứng chỉ: </label>
                                     <div className="control"
                                         style={{
                                             display: "flex",
@@ -337,26 +347,29 @@ function EditTeacherForm() {
                                             marginTop: ".25rem"
                                         }}>
                                         <label className="radio" style={{
-                                            display:"flex", gap:"1rem"
+                                            display: "flex", gap: "1rem"
                                         }}>
                                             <input
                                                 type="radio"
                                                 name="degree_status"
-                                                checked={checked2}
+                                                id="degree_status"
+                                                // checked={checkedDegreeStatus}
+                                                defaultChecked={checked2? true : false}
                                                 value={true}
                                                 onChange={(e) => handleChangeDegreeStatus(e.target.value)}
                                             />
                                             <VerifyStatusButton
                                                 name="Đã xác minh"
+                                                id="degree_status"
                                                 color="white"
                                                 backgroundColor="#00d1b2" />
                                         </label>
-                                        <label className="radio ml-6"  style={{
-                                            display:"flex", gap:"1rem"
+                                        <label className="radio ml-6" style={{
+                                            display: "flex", gap: "1rem"
                                         }}>
                                             <input type="radio"
                                                 name="degree_status"
-                                                checked={!checked2}
+                                                defaultChecked={checked2? false : true}
                                                 value={false}
                                                 onChange={(e) => handleChangeDegreeStatus(e.target.value)}
                                             />
@@ -468,7 +481,7 @@ function EditTeacherForm() {
                                 Xóa</button>
                         </div>
                         <div className="button-right">
-                            <button className="button is-primary" onClick={()=>handleSave()}>
+                            <button className="button is-primary" onClick={() => handleSave()}>
                                 <AiOutlineCheck style={{
                                     cursor: 'pointer',
                                     width: "1.5rem",
