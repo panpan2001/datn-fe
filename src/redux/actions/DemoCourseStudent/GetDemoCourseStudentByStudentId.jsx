@@ -12,6 +12,7 @@ const getDemoCourseByStudentId = async(id,dispatch,accessToken,axiosJWT)=>{
             }
         })
         dispatch(getDemoCourseByStudentIdSuccess(res.data))
+        console.log("getDemoCourseByStudentIdSuccess",res.data)
 
     } catch (error) {
         dispatch(getDemoCourseByStudentIdFailure())

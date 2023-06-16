@@ -28,11 +28,13 @@ function EditTeacherForm() {
     }
     useEffect(() => {
         getTeacherById(id, dispatch)
-        
+
     }, [])
     const teacher = useSelector(state => state.getTeacherById?.teacher?.currentTeacher)
     // console.log({teacher})
     const [image, setImages] = useState("")
+    const [imageAcademic, setImagesAcademic] = useState("")
+    const [imageDegree, setImagesDegree] = useState("")
     const valueGender = ['nam', 'nữ', 'khác']
 
     const handleBack = () => {
@@ -46,37 +48,48 @@ function EditTeacherForm() {
     const [checkedDegreeStatus, setCheckedDegreeStatus] = useState("")
     let checked = ""
     let checked2 = ""
-    if (teacher.id_academic && teacher.id_degree) {
+    if (teacher) {
         checked = teacher.id_academic.academic_status
-        checked2= teacher.id_degree.degree_status
+        checked2 = teacher.id_degree.degree_status
         console.log("checked", checked)
         console.log("checked 2", checked2)
         const handleChangeAcademicStatus = (e) => {
             e = e == "true" ? true : false
             setCheckedAcademicStatus(e)
-            // console.log("e1", e, typeof e)
+            console.log("e1", e, typeof e)
 
         }
-        const handleChangeDegreeStatus = (e) => {
-            e = e == "true" ? true : false
-            // console.log("e2",e)
-            setCheckedDegreeStatus(e)
+        const handleChangeDegreeStatus = (e2) => {
+            e2 = e2 == "true" ? true : false
+            console.log("e2", e2)
+            setCheckedDegreeStatus(e2)
         }
         const handleSave = () => {
-            if (checkedAcademicStatus != "") {
-                console.log("academic status changed:", checkedAcademicStatus, typeof checkedAcademicStatus)
+            if (checkedAcademicStatus !== checked && typeof checkedAcademicStatus !== "string") {
+                console.log("academic status changed from :", checked, typeof checked, "to", checkedAcademicStatus, typeof checkedAcademicStatus)
                 updateTeacherAcademicStatus(account_id, teacher.id_academic._id, checkedAcademicStatus, dispatch, access_token, axiosJWTAcademic)
             } else {
                 console.log("academic status not changed")
             }
 
-            if (checkedDegreeStatus != "") {
-                console.log("degree status changed",checkedDegreeStatus, typeof checkedDegreeStatus)
+            if (checkedDegreeStatus !== checked2 && typeof checkedDegreeStatus !== "string") {
+                console.log("degree status changed from :", checked2, typeof checked2, "to", checkedDegreeStatus, typeof checkedDegreeStatus)
                 updateTeacherDegreeStatus(account_id, teacher.id_degree._id, checkedDegreeStatus, dispatch, access_token, axiosJWTDegree)
             } else console.log("degree status not changed")
 
 
             navigate(-1)
+        }
+        const hadleChangeImage = (e, setImg) => {
+            // console.log(setImg)
+            // var reader = new FileReader()
+            // reader.readAsDataURL(e)
+            // reader.onloadend = () => {
+            //     console.log(reader.result)
+            //     setImg(reader.result)
+            // }
+            e && setImg(URL.createObjectURL(e))
+            e && console.log(URL.createObjectURL(e))
         }
         return (
             <div className='edit-teacher-form_container container is-centered'>
@@ -206,60 +219,65 @@ function EditTeacherForm() {
                             <hr />
 
                             <strong className='is-size-5 mt-3 mb-3'>Thông tin học vấn </strong>
-                            <div className="column is-12">
-                                <div className="field" style={{
-                                    display: "flex",
-                                    flexDirection: "row",
-                                    justifyContent: 'flex-start',
-                                    alignItems: 'center',
-                                    gap: "2rem",
-                                    marginLeft: "-.75rem"
-                                }}>
-                                    <label className="label" style={{ marginBottom: "0" }}>Xác thực học vấn: </label>
-                                    <div className="control"
-                                        style={{
-                                            display: "flex",
-                                            flexDirection: "row",
-                                            justifyContent: 'center',
-                                            alignItems: 'center',
-                                            marginTop: ".25rem"
-                                        }}>
-                                        <label className="radio" style={{
-                                            display: "flex", gap: "1rem"
-                                        }}>
-                                            <input
-                                                type="radio"
-                                                name="type_of_course"
-                                                id='academic_status_true'
-                                                defaultChecked={checked ? true : false}
-                                                // checked={checked=='true'? true : false}
-                                                value={true}
-                                                onChange={(e) => handleChangeAcademicStatus(e.target.value)}
-                                            />
-                                            <VerifyStatusButton
-                                                name="Đã xác minh"
-                                                color="white"
-                                                backgroundColor="#00d1b2" />
-                                        </label>
-                                        <label className="radio ml-6" style={{
-                                            display: "flex", gap: "1rem"
-                                        }}>
-                                            <input type="radio"
-                                                name="type_of_course"
-                                                id="academic_status_false"
-                                                // checked={checked?  false: true}
-                                                defaultChecked={checked ? false : true}
-                                                value={false}
-                                                onChange={(e) => handleChangeAcademicStatus(e.target.value)}
-                                            />
-                                            <VerifyStatusButton
-                                                name="Đang xác minh"
-                                                color="black"
-                                                backgroundColor="#ffe08a" />
-                                        </label>
+                            {
+                                teacher.id_academic &&
+                                <div className="column is-12" key={teacher.id_academic._id}>
+                                    <div className="field" style={{
+                                        display: "flex",
+                                        flexDirection: "row",
+                                        justifyContent: 'flex-start',
+                                        alignItems: 'center',
+                                        gap: "2rem",
+                                        marginLeft: "-.75rem"
+                                    }}>
+
+                                        <label className="label" style={{ marginBottom: "0" }}>Xác thực học vấn: </label>
+                                        <div className="control"
+                                            style={{
+                                                display: "flex",
+                                                flexDirection: "row",
+                                                justifyContent: 'center',
+                                                alignItems: 'center',
+                                                marginTop: ".25rem"
+                                            }}>
+                                            <label className="radio" style={{
+                                                display: "flex", gap: "1rem"
+                                            }}>
+                                                <input
+                                                    type="radio"
+                                                    name="type_of_course"
+                                                    id='academic_status_true'
+                                                    defaultChecked={checked ? true : false}
+                                                    // checked={checked=='true'? true : false}
+                                                    value={true}
+                                                    onChange={(e) => handleChangeAcademicStatus(e.target.value)}
+                                                />
+                                                <VerifyStatusButton
+                                                    name="Đã xác minh"
+                                                    color="white"
+                                                    backgroundColor="#00d1b2" />
+                                            </label>
+                                            <label className="radio ml-6" style={{
+                                                display: "flex", gap: "1rem"
+                                            }}>
+                                                <input type="radio"
+                                                    name="type_of_course"
+                                                    id="academic_status_false"
+                                                    // checked={checked?  false: true}
+                                                    defaultChecked={checked ? false : true}
+                                                    value={false}
+                                                    onChange={(e) => handleChangeAcademicStatus(e.target.value)}
+                                                />
+                                                <VerifyStatusButton
+                                                    name="Đang xác minh"
+                                                    color="black"
+                                                    backgroundColor="#ffe08a" />
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            }
+
                             <div className="columns is-multiline">
                                 <div className="column is-6">
                                     <div className="field">
@@ -309,7 +327,26 @@ function EditTeacherForm() {
                                     
                                     value={teacher.id_academic.academic_evidence}
                                 /> */}
-                                        <img src={teacher.id_academic.academic_evidence} />
+                                        <div>
+                                            <img src={imageAcademic ? imageAcademic : teacher.id_academic.academic_evidence} />
+                                            <button
+                                                type='button'
+                                                className='button is-primary'
+                                                id="choose-academic_image_button"
+                                                style={{ display: "block", margin: "auto" }}
+                                            >
+                                                <p id='upload-teacher-image_p' style={{ marginBottom: "0" , left: "37%"}}>Chọn ảnh</p>
+                                                <input className="file-input"
+                                                    webkitdirectory
+                                                    type="file"
+                                                    multiple accept="image/*"
+                                                    name="image"
+                                                    onChange={(e) => {
+                                                        hadleChangeImage(e.target.files[0], setImagesAcademic)
+                                                    }}
+                                                />
+                                            </button>
+                                        </div>
 
                                     </div>
                                 </div>
@@ -328,7 +365,7 @@ function EditTeacherForm() {
                             </div>
                             <hr />
                             <strong className='is-size-5 mt-3 mb-3'>Thông tin chứng chỉ </strong>
-                            <div className="column is-12">
+                            <div className="column is-12" key={teacher.id_degree._id}>
                                 <div className="field" style={{
                                     display: "flex",
                                     flexDirection: "row",
@@ -354,7 +391,7 @@ function EditTeacherForm() {
                                                 name="degree_status"
                                                 id="degree_status"
                                                 // checked={checkedDegreeStatus}
-                                                defaultChecked={checked2? true : false}
+                                                defaultChecked={checked2 ? true : false}
                                                 value={true}
                                                 onChange={(e) => handleChangeDegreeStatus(e.target.value)}
                                             />
@@ -369,7 +406,7 @@ function EditTeacherForm() {
                                         }}>
                                             <input type="radio"
                                                 name="degree_status"
-                                                defaultChecked={checked2? false : true}
+                                                defaultChecked={checked2 ? false : true}
                                                 value={false}
                                                 onChange={(e) => handleChangeDegreeStatus(e.target.value)}
                                             />
@@ -426,7 +463,27 @@ function EditTeacherForm() {
                                     placeholder="Minh chứng chứng chỉ"
                                     
                                     value={teacher.id_degree.degree_evidence} /> */}
-                                        <img src={teacher.id_degree.degree_evidence} />
+                                    <div>
+                                    <img src={imageDegree? imageDegree :teacher.id_degree.degree_evidence} />
+
+                                    <button
+                                                type='button'
+                                                className='button is-primary'
+                                                id="choose-academic_image_button"
+                                                style={{ display: "block", margin: "auto" }}
+                                            >
+                                                <p id='upload-teacher-image_p' style={{ marginBottom: "0" , left: "37%"}}>Chọn ảnh</p>
+                                                <input className="file-input"
+                                                    webkitdirectory
+                                                    type="file"
+                                                    multiple accept="image/*"
+                                                    name="image"
+                                                    onChange={(e) => {
+                                                        hadleChangeImage(e.target.files[0], setImagesDegree)
+                                                    }}
+                                                />
+                                            </button>
+                                    </div>
                                     </div>
 
                                 </div>
@@ -444,20 +501,30 @@ function EditTeacherForm() {
                             </div>
                         </div>
                         <div className=" column is-3 is-centered  ">
-                            <div className=" mt-2 mb-2  content-right">
-                                <img className=" mt-2 mb-2" src={teacher.personal_image} />
+                            <div className="   content-right" style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                gap: "1rem",
+                                padding: "1rem",
+                            }}>
+                                <img src={image ? image : teacher.personal_image} />
                                 <button
-                                    type='button ml-6 mb-4'
+                                    type='button'
                                     className='button is-primary'
                                     id="choose-image_button"
                                     style={{ display: "block", margin: "auto" }}
                                 >
                                     <p id='upload-teacher-image_p' style={{ marginBottom: "0" }}>Chọn ảnh</p>
                                     <input className="file-input"
+                                        webkitdirectory
                                         type="file"
                                         multiple accept="image/*"
-                                        name=""
-                                        onChange={(e) => setImages(e.target.files)}
+                                        name="image"
+                                        onChange={(e) => {
+                                            hadleChangeImage(e.target.files[0], setImages)
+                                        }}
                                     />
                                 </button>
                             </div>
@@ -524,3 +591,6 @@ export default EditTeacherForm
                                         />
                                     </div>
                                 </div> */}
+
+// https://stackoverflow.com/questions/51421348/how-to-get-the-path-of-an-uploaded-file-in-reactjs
+// https://stackoverflow.com/questions/61667999/how-to-get-uploaded-file-local-path-in-react-js-using-hooks

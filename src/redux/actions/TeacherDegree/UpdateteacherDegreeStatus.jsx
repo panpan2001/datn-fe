@@ -3,11 +3,11 @@ import { TeacherDegreeApi } from "../../../utils/BaseUrl"
 import { getTeacherDegreeByIdSuccess } from "../../slices/TeacherDegree/getTeacherDegreeByIdSlice"
 import { updateTeacherDegreeFailure, updateTeacherDegreeStart } from "../../slices/TeacherDegree/upadateTeacherDegreeStatus"
 
-const updateTeacherDegreeStatus= async (account_id, teacher_id,status, dispatch, accessToken, axiosJWT) => {
+const updateTeacherDegreeStatus= async (account_id, id,status, dispatch, accessToken, axiosJWT) => {
     dispatch(updateTeacherDegreeStart())
           
     try {
-        const res = await axiosJWT.patch(TeacherDegreeApi + teacher_id,
+        const res = await axiosJWT.patch(TeacherDegreeApi + id,
             {
                 degree_status:status
             }, 

@@ -12,6 +12,7 @@ const getAllAccounts = async (accessToken, dispatch, axiosJWT) => {
             }
         )
         dispatch(getAccountSuccess(res.data))
+        console.log("getAccountSuccess action ", res.data)
     } catch (error) {
         dispatch(getAccountFailure(error))
         console.log(error)

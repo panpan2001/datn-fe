@@ -46,13 +46,13 @@ if(role=="admin"){
 else if(role=="teacher")return  "#C2E7FF"
 else return "#B2FFDA"
   }
-  if (accounts && teacher) {
+  if (accounts && teacher && student && courses && demoCourses) {
     some_accounts= accounts.slice(0,5)
     numnber_of_student = student.length
     numnber_of_teacher = teacher.length
     return (
       <div className='dashboard-page_container container-fluid'>
-        {accounts && teacher && student&& courses && demoCourses &&
+     
   
           <section className="dashboard_section-1 mb-3">
             <strong className='is-size-4'>Tổng quan</strong>
@@ -112,7 +112,7 @@ else return "#B2FFDA"
               </div>
             </div>
           </section>
-        }
+        
   
         <section className="dashboard_section-2 mb-3 mt-6">
         <div className="table_container ">
@@ -321,7 +321,7 @@ else return "#B2FFDA"
                     </tr>
                   </thead>
                   <tbody>
-                    {courses && courses.map((item) => (
+                    {courses && courses.slice(0,5).map((item) => (
                       <tr className='mb-2'>
                         <th>{courses.indexOf(item) + 1}</th>
                         <td>{item.name}</td>
@@ -379,7 +379,7 @@ else return "#B2FFDA"
                     </tr>
                   </thead>
                   <tbody>
-                    {demoCourses && demoCourses.map((item) => (
+                    {demoCourses && demoCourses.slice(0,5).map((item) => (
                       <tr className='mb-2'>
                         <th>{demoCourses.indexOf(item) + 1}</th>
                         <td>{item.id_course.name}</td>

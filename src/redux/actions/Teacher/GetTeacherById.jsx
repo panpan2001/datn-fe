@@ -5,15 +5,14 @@ import { getTeacherByIdFailure, getTeacherByIdStart, getTeacherByIdSuccess } fro
 
 const getTeacherById= async(id,dispatch)=>{
     dispatch(getTeacherByIdStart())
-    console.log("getTeacher by Id action :",id)
-    await axios.get(TeacherApi+id)
-    .then(res=>{
+    try {
+        const res= await axios.get(TeacherApi+id)
         dispatch(getTeacherByIdSuccess(res.data))
-    })
-    .catch(err=>{
-        dispatch(getTeacherByIdFailure(err))
-        console.log(err)
-    })
+        console.log("getTeacherByIdSuccess action ",res.data)
+    }catch (error) {
+        dispatch(getTeacherByIdFailure(error))
+        console.log(error)
+    }
 }
 
 export default getTeacherById

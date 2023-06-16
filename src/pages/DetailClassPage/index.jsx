@@ -22,6 +22,7 @@ function DetailClassPage() {
     useEffect(() => {
         getCoursebyId(idClass, dispatch)
         getAllDemoCourseByCourseId(idClass, dispatch)
+        // getDemoCourseStudentByDemoCourseId()
 
     }, [])
     const data = useSelector((state) => state.getCourseById.course?.currentCourse)
@@ -123,14 +124,14 @@ return new Date(a + " " + b).getTime() > new Date().getTime()
                                 <th>Tên khóa học thử</th>
                                 <th>Ngày bắt đầu</th>
                                 <th>Ngày kết thúc</th>
-                                <th>Thời gian học</th>
+                                <th>Thời gian học(buổi)</th>
                                 <th>Giờ bắt đầu</th>
                                 <th>Thứ</th>
                                 <th>Giá tiền<br />(VND/buổi)</th>
                                 <th></th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody style={{ textAlign: "left" }}>
                             {demoCourse && demoCourse.map((item) => (
                                 <tr className='mb-2'>
                                     <>

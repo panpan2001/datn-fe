@@ -12,7 +12,7 @@ import getCoursebyId from "../../redux/actions/Course/GetCoursebyId";
 
 
 const StudentDemoClassAccordion = ({ data,color }) => {
-  console.log({data})
+  // console.log("demo class",{data})
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const register_date = new Date(data.createdAt).toLocaleString('en-US', { timeZone: 'Asia/Ho_Chi_Minh' });
@@ -24,7 +24,7 @@ const StudentDemoClassAccordion = ({ data,color }) => {
     currency: 'VND',
 
   });
-  if(data){
+  if(data ){
      time = data.id_demo_course.schedule.split(" - ")[0]
     time = time.split(":")[0] < 12 ? time + " AM" : time + " PM"
      start_date = moment(data.id_demo_course.start_date).format("DD/MM/YYYY")
@@ -37,12 +37,12 @@ const StudentDemoClassAccordion = ({ data,color }) => {
     setState({ cardState: !state.cardState });
   };
   const { cardState } = state;
-  useEffect(() => {
-    getCoursebyId(data.id_demo_course.id_course, dispatch)
-  }, [])
-  const category = useSelector((state) => state.getCourseById.course?.currentCourse)
+  // useEffect(() => {
+  //   getCoursebyId(data.id_demo_course.id_course, dispatch)
+  // }, [])
+  // const category = useSelector((state) => state.getCourseById.course?.currentCourse)
   // console.log({category},category.type,category.level)
-  const course= useSelector((state) => state.getCourseById.course?.currentCourse)
+  // const course= useSelector((state) => state.getCourseById.course?.currentCourse)
   const [show, setShow] = useState("none")
   const [warning, setWarning] = useState(false)
   const user = useSelector((state) => state.login.login?.currentUser)
@@ -83,7 +83,7 @@ const StudentDemoClassAccordion = ({ data,color }) => {
         >
           <p className="card-header-title"
             style={{ alignItems: "baseline" }}
-          >{course &&course.name}</p>
+          >{data && data.id_demo_course.id_course.name}</p>
 
           <div className="card-header-icon student-class_group-icon"
           >
@@ -114,20 +114,20 @@ const StudentDemoClassAccordion = ({ data,color }) => {
           >
 
 
-            {category &&
-              <>
+           
+              
                 <div class=" column is-6">
-                  <p><strong>Loại: </strong>{category.category_id.type}</p>
+                  <p><strong>Loại: </strong>{data.id_demo_course.id_course.category_id.type}</p>
                 </div>
                 <div class=" column is-6">
-                  <p><strong>Cấp độ: </strong>{category.category_id.level}</p>
+                  <p><strong>Cấp độ: </strong>{data.id_demo_course.id_course.category_id.level}</p>
                 </div>
-              </>}
+              
             <div className=" column is-6">
-              <p> <strong>Thời gian học (buổi): </strong>{data.id_demo_course.learning_period} </p>
+              <p> <strong>Thời gian học (buổi): </strong>{ data.id_demo_course.learning_period} </p>
             </div>
             <div className=" column is-6">
-              <p><strong>Lịch học: </strong>{time} - {data.id_demo_course.schedule.split(" - ")[1]}</p>
+              <p><strong>Lịch học: </strong>{time} - { data.id_demo_course.schedule.split(" - ")[1]}</p>
             </div>
             <div className=" column is-6">
               <p><strong>Ngày bắt đầu: </strong>{start_date}</p>
@@ -212,3 +212,5 @@ export default StudentDemoClassAccordion
             </div>
           
           */}
+
+          //https://stackoverflow.com/questions/12821596/multiple-populates-mongoosejs 

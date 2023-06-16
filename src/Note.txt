@@ -47,6 +47,10 @@ https://w3crm.dexignzone.com/xhtml/manage-client.html
 https://preview.themeforest.net/item/skola-lms-online-courses-html-template/full_screen_preview/34107079 
 http://preview.themeforest.net/item/elstar-react-tailwind-admin-template/full_screen_preview/39768117 
 
+
+
+https://stackoverflow.com/questions/12821596/multiple-populates-mongoosejs 
+
  <Route path='/' element={<UserLayout />} >
           {/* user vs non-user can access */}
           <Route index element={<LandingPage />} />

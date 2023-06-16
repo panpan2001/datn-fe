@@ -143,7 +143,7 @@ const user= useSelector((state) => state.login.login?.currentUser)
                                         <td>{teacher.id_degree.degree_name}</td>
                                         <td>{teacher.id_degree.degree_level}</td>
                                         <td>{teacher.id_degree.degree_period}</td>
-                                        <td>{teacher.id_academic.degree_status ?
+                                        <td>{teacher.id_degree.degree_status ?
                                             <VerifyStatusButton
                                                 name="Đã xác minh"
                                                 color="white"

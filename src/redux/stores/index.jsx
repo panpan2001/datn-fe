@@ -49,6 +49,8 @@ import deleteTeacherReducer from "../slices/Teacher/DeleteTeacherSlice";
 import updateteacherAcademicReducer from "../slices/TeacherAcademic/updateTeacherAcademicStatusSl";
 import updateTeacherDegreeStatusReducer from "../slices/TeacherDegree/upadateTeacherDegreeStatus";
 import deleteStudentReducer from "../slices/Student/deleteStudentSlice";
+import adminDelCourseReducer from "../slices/Course/adminDelCourse";
+import adminDelDemoCourseReducer from "../slices/DemoCourse/adminDelDemoCourse";
 
 const persistConfig = {
     key:'root',
@@ -95,6 +97,7 @@ const rootReducer= combineReducers({
     getCourseStudentByStudentId: getCourseStudentByStudentIdReducer,
     cancelRegisterCourse:cancelRegisterCourseReducer,
     deleteCourse:deleteCourseReducer,
+    adminDelCourse: adminDelCourseReducer,
     createDemoCourse:createDemoCourseReducer,
     getAllDemoCourse:getAllDemoCoursesReducer,
     getAllDemoCourseByTeacherId:getAllDemoCourseByTeacherIdReducer,
@@ -103,7 +106,8 @@ const rootReducer= combineReducers({
     getDemoCourseStudentByDemoCourseId: getDemoCourseStudentByDemoCourseIdReducer,
     getAllDemoCourseStudent:getAllDemoCourseStudentReducer,
     getAllCourseStudent:getAllCourseStudentReducer,
-    deleteDemoCourse:deleteDemoCourseReducer
+    deleteDemoCourse:deleteDemoCourseReducer,
+    adminDelDemoCourse:adminDelDemoCourseReducer
 })
 const persistedReducer=persistReducer(persistConfig,rootReducer)
 
