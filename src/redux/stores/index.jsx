@@ -51,6 +51,7 @@ import updateTeacherDegreeStatusReducer from "../slices/TeacherDegree/upadateTea
 import deleteStudentReducer from "../slices/Student/deleteStudentSlice";
 import adminDelCourseReducer from "../slices/Course/adminDelCourse";
 import adminDelDemoCourseReducer from "../slices/DemoCourse/adminDelDemoCourse";
+import addLinkVideoCourseReducer from "../slices/Course/addLinkVideoCourse";
 
 const persistConfig = {
     key:'root',
@@ -107,7 +108,8 @@ const rootReducer= combineReducers({
     getAllDemoCourseStudent:getAllDemoCourseStudentReducer,
     getAllCourseStudent:getAllCourseStudentReducer,
     deleteDemoCourse:deleteDemoCourseReducer,
-    adminDelDemoCourse:adminDelDemoCourseReducer
+    adminDelDemoCourse:adminDelDemoCourseReducer,
+    addLinkVideoCourse:addLinkVideoCourseReducer
 })
 const persistedReducer=persistReducer(persistConfig,rootReducer)
 

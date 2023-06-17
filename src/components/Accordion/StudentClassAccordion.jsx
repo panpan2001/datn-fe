@@ -160,7 +160,11 @@ const StudentClassAccordion = ({ data }) => {
             <div className=" column is-16">
               <p><strong>Đăng kí lúc: </strong>{register_date}</p>
             </div>
+            <div className="  column  is-12">
+            <p><strong>Link meeting: </strong>{data.link_meeting}</p>
           </div>
+          </div>
+         
           <div className="student-class_button"
             style={{
               display: "flex",

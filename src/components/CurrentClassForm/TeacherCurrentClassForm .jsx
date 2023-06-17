@@ -88,7 +88,7 @@ function TeacherCurrentClassForm() {
             //             ))}
             //         </tbody>
             //    </table>
-<TeacherDemoClassCard item={item} />
+<TeacherDemoClassCard  key={item._id} item={item} />
             ))
             }
             <hr/>
@@ -101,7 +101,7 @@ function TeacherCurrentClassForm() {
                 <div className="current-class_form columns is-centered is-multiline ">
 
                     {classes.map((item) => (
-                        <ClassCard data={item}  />
+                        <ClassCard key={item._id} data={item}  />
                     ))}
                 </div> :
                 <>

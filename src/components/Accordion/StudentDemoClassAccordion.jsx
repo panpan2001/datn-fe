@@ -11,27 +11,27 @@ import { useNavigate } from "react-router-dom";
 import getCoursebyId from "../../redux/actions/Course/GetCoursebyId";
 
 
-const StudentDemoClassAccordion = ({ data,color }) => {
+const StudentDemoClassAccordion = ({ data, color }) => {
   // console.log("demo class",{data})
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const register_date = new Date(data.createdAt).toLocaleString('en-US', { timeZone: 'Asia/Ho_Chi_Minh' });
-  let time=''
-  let start_date=''
-  let end_date=''
-  const  formatter = new Intl.NumberFormat({
+  let time = ''
+  let start_date = ''
+  let end_date = ''
+  const formatter = new Intl.NumberFormat({
     style: 'currency',
     currency: 'VND',
 
   });
-  if(data ){
-     time = data.id_demo_course.schedule.split(" - ")[0]
+  if (data) {
+    time = data.id_demo_course.schedule.split(" - ")[0]
     time = time.split(":")[0] < 12 ? time + " AM" : time + " PM"
-     start_date = moment(data.id_demo_course.start_date).format("DD/MM/YYYY")
-     end_date = moment(data.id_demo_course.end_date).format("DD/MM/YYYY")
-    
+    start_date = moment(data.id_demo_course.start_date).format("DD/MM/YYYY")
+    end_date = moment(data.id_demo_course.end_date).format("DD/MM/YYYY")
+
   }
-  
+
   const [state, setState] = useState({ cardState: false });
   const toggleCardState = () => {
     setState({ cardState: !state.cardState });
@@ -46,25 +46,25 @@ const StudentDemoClassAccordion = ({ data,color }) => {
   const [show, setShow] = useState("none")
   const [warning, setWarning] = useState(false)
   const user = useSelector((state) => state.login.login?.currentUser)
-    const accessToken = user?.accessToken
-    let axiosJWT = createAxiosJWT(dispatch, user, cancelRegisterDemoCourseSuccess)
+  const accessToken = user?.accessToken
+  let axiosJWT = createAxiosJWT(dispatch, user, cancelRegisterDemoCourseSuccess)
   const handleOpenModal = () => {
     const checkTime = (Date.now() - new Date(data.createdAt)) / (1000 * 60 * 60 * 24)
-    
+
     if (checkTime < 1) {
-      
+
       setShow("block")
       setWarning(true)
-      
+
     }
     else {
       setShow("block")
       setWarning(false)
-      
+
     }
   }
-  const handleCancelCourse=()=>{
-    cancelRegisterDemoCourse(data._id,dispatch,axiosJWT,accessToken,navigate)
+  const handleCancelCourse = () => {
+    cancelRegisterDemoCourse(data._id, dispatch, axiosJWT, accessToken, navigate)
     setShow("none")
   }
 
@@ -73,7 +73,7 @@ const StudentDemoClassAccordion = ({ data,color }) => {
       <div className="card "
         style={{
           // backgroundColor: " rgb(167 235 246)",
-          backgroundColor:`${color }`
+          backgroundColor: `${color}`
         }}
       >
         <header
@@ -114,20 +114,20 @@ const StudentDemoClassAccordion = ({ data,color }) => {
           >
 
 
-           
-              
-                <div class=" column is-6">
-                  <p><strong>Loại: </strong>{data.id_demo_course.id_course.category_id.type}</p>
-                </div>
-                <div class=" column is-6">
-                  <p><strong>Cấp độ: </strong>{data.id_demo_course.id_course.category_id.level}</p>
-                </div>
-              
+
+
+            <div class=" column is-6">
+              <p><strong>Loại: </strong>{data.id_demo_course.id_course.category_id.type}</p>
+            </div>
+            <div class=" column is-6">
+              <p><strong>Cấp độ: </strong>{data.id_demo_course.id_course.category_id.level}</p>
+            </div>
+
             <div className=" column is-6">
-              <p> <strong>Thời gian học (buổi): </strong>{ data.id_demo_course.learning_period} </p>
+              <p> <strong>Thời gian học (buổi): </strong>{data.id_demo_course.learning_period} </p>
             </div>
             <div className=" column is-6">
-              <p><strong>Lịch học: </strong>{time} - { data.id_demo_course.schedule.split(" - ")[1]}</p>
+              <p><strong>Lịch học: </strong>{time} - {data.id_demo_course.schedule.split(" - ")[1]}</p>
             </div>
             <div className=" column is-6">
               <p><strong>Ngày bắt đầu: </strong>{start_date}</p>
@@ -138,11 +138,18 @@ const StudentDemoClassAccordion = ({ data,color }) => {
             <div className=" column is-6">
               <p><strong>Giá tiền(VDN/ buổi): </strong>{formatter.format(data.id_demo_course.cost)}</p>
             </div>
-           
+
             <div className=" column is-16">
               <p><strong>Đăng kí lúc: </strong>{register_date}</p>
             </div>
+
+            <div className="  column  is-12">
+            <p><strong>Link meeting: </strong>{data.link_meeting}</p>
           </div>
+          </div>
+
+         
+
           <div className="student-class_button"
             style={{
               display: "flex",

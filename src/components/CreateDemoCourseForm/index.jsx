@@ -146,8 +146,7 @@ console.log("st",st[0])
                   placeholder="Ngày kết thúc"
                   name="end_date"
                   id='end_date'
-                // min={formik.values.start_date}
-                min={new Date().toJSON().slice(0, 10)}
+                min={formik.values.start_date}
                 // max={st!= 0 && new Date(st.start_date).toJSON().slice(0, 10)  }
                 onChange={formik.handleChange}
                 />
