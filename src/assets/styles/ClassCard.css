@@ -6,9 +6,9 @@
     justify-content: start;
     align-content: flex-start;
     /* background-color: #B2FFDA; */
-    background-color: #7EFEC0;
+    background-color: #FFFAF4;
     /* border:1px solid #73f7b7; */
-    border:1px solid #16e681;
+    border:1px solid #ebba7f;
     border-radius: 10px;
     color: black !important;
 }
@@ -50,6 +50,11 @@
     display: flex !important;
     margin: 0rem !important;
     text-align: left;
+}
+
+
+.teacher_demo_class_cars_content{
+    flex-direction: column;
 }
 
 .card-footer{
@@ -101,7 +106,7 @@ width: 100%;
 }
 
 .link-video-from-db_div{
-    background-color: #80FFC2 ;
+    /* background-color: #FFC67E; */
     display: flex !important;
     justify-content: space-between;
     margin-bottom: .25rem;
@@ -132,10 +137,10 @@ width: 100%;
     width: 2rem !important;
     height: 2rem !important;
     cursor: pointer;
-    background-color:#F4FFFA ;
+    background-color:#FFDDB2 ;
     /* fill:#52FDAB; */
     /* background-color: #B2FFDA; */
-    fill: #73f7b7;
+    fill:#FFC67E;
     border-radius: 50%;
 }
 
@@ -143,16 +148,16 @@ width: 100%;
     width: 2.5rem !important;
     height: 2rem !important;
     cursor: pointer;
-    background-color:#F4FFFA ;
+    background-color:#FFDDB2 ;
     /* fill:#52FDAB; */
     /* background-color: #B2FFDA; */
-    fill: #73f7b7;
+    fill: #FFC67E ;
     border-radius: 50%;
 }
 
 .add-link-video_icon-plus:hover,
 .add-link-video_icon-remove:hover{
-/* box-shadow: 0 0 8px 0 #d2d5d4; */
+box-shadow: 0 0 8px 2px #FFDDB2 ;
 border-color: #b5b5b5;
     color: #363636;
 }
@@ -172,11 +177,11 @@ border-color: #b5b5b5;
 width: 2.5rem !important;
 height: 2rem !important;
 cursor: pointer;
-/* background-color:#F4FFFA ; */
+background-color:#FFDDB2 ;
 /* fill:#52FDAB; */
 border-radius: 50%;
 /* background-color: #B2FFDA; */
-fill: #73f7b7;
+fill:#FFC67E;
 }
 
 .up-link-video_group-buttons{

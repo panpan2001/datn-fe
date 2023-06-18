@@ -18,7 +18,6 @@ import { getCourseByIdSuccess } from '../../redux/slices/Course/getCourseById'
 function ClassCard({ data }) {
      console.log({ data })
      const [show, setShow] = useState("none")
-     const [showComponent, setShowComponent] = useState("none")
      const dispatch = useDispatch()
      const user = useSelector((state) => state.login.login?.currentUser)
      // console.log(user.accessToken)
@@ -53,6 +52,7 @@ function ClassCard({ data }) {
      }
      const [inputValue, setInputValue] = useState("")
      const [showIconAdd, setShowIconAdd] = useState("block")
+     const [showComponent, setShowComponent] = useState("none")
 
 
      // -----------------link video action ! --------------///
@@ -62,18 +62,20 @@ function ClassCard({ data }) {
      const handleAddLink = () => {
           console.log("link video", linkVideo)
           setInputValue("")
-          if(linkVideo) {
-               setDataLinkVideo([...data_link_videos, linkVideo])
-          console.log("data_link video", data_link_videos)
-          }
-          else{
+          if (linkVideo) {
+               const addLink = linkVideo.split()
+               const newListlink = [...data_link_videos, addLink]
+               setDataLinkVideo(newListlink)
                console.log("data_link video", data_link_videos)
           }
-          
+          else {
+               console.log("data_link video", data_link_videos)
+          }
+
      }
      const handleDeleteLink = (item) => {
-          // setShowComponent("block")
-          // setShowIconAdd('none')
+          setShowComponent("block")
+          setShowIconAdd('none')
           console.log(item, data_link_videos[item])
           let del = data_link_videos.splice(item, 1).toString()
           const check = [...data.link_video].includes(del)
@@ -82,7 +84,8 @@ function ClassCard({ data }) {
                setDataLinkVideo([...data_link_videos])
           }
           else {
-               setDelLinkVideo(delLinkVideo.add(del))
+               const linkDelAdd=delLinkVideo.add(del)
+               setDelLinkVideo(linkDelAdd)
                // console.log(del)
                // console.log({ delLinkVideo }, typeof (delLinkVideo))
                setDataLinkVideo([...data_link_videos])
@@ -166,27 +169,25 @@ function ClassCard({ data }) {
 
                               </div>
                               <div className=" teacher_class_card_content column  is-12" style={{ paddingRight: "2rem" }}>
-                              <p><strong>Link video: </strong></p>
+                                   <p><strong>Link video: </strong></p>
                                    <div className="link-video_container">
-                                        <div className='link-video-add-more_div'>
-                                             {
-                                                  data_link_videos.length > 0
-                                                  && data_link_videos.map((item) =>
-                                                       <div id={item} key={data_link_videos.indexOf(item)} className='link-video-add-more-show_div'>
-                                                            <p className='link-add_p ' key={data_link_videos.indexOf(item)} id={item}>{item}</p>
-                                                            <button
-                                                                 className='button delete-link_button '
-                                                                 id={item}
-                                                                 key={data_link_videos.indexOf(item)}
-                                                                 onClick={() => handleDeleteLink(data_link_videos.indexOf(item))}>
-                                                                 <IoIosCloseCircleOutline className='add-link-video_icon-remove' />
+                                        {/* <div className='link-video-add-more_div'> */}
+                                        {data_link_videos.map((item) =>
+                                             <div id={item} key={data_link_videos.indexOf(item)} className='link-video-add-more-show_div'>
+                                                  <p className='link-add_p ' key={data_link_videos.indexOf(item)} id={item}>{item}</p>
+                                                  <button
+                                                       className='button delete-link_button '
+                                                       id={item}
+                                                       key={data_link_videos.indexOf(item)}
+                                                       onClick={() => handleDeleteLink(data_link_videos.indexOf(item))}>
+                                                       <IoIosCloseCircleOutline className='add-link-video_icon-remove' />
 
-                                                            </button>
+                                                  </button>
 
-                                                       </div >
-                                                  )
-                                             }
-                                        </div>
+                                             </div >
+                                        )
+                                        }
+                                        {/* </div> */}
                                    </div>
                                    <div className='add-link-video_div-wrap'>
                                         <AiOutlinePlusCircle className='add-link-video_icon-plus' onClick={() => {
@@ -205,11 +206,7 @@ function ClassCard({ data }) {
 
                                              style={{
                                                   display: `${showComponent}`,
-                                                  width: "3rem !important",
-                                                  height: "3rem !important",
                                                   cursor: "pointer",
-                                                  backgroundColor: "#F4FFFA",
-                                                  fill: "#52FDAB",
                                                   borderRadius: "50%",
 
                                              }} />
