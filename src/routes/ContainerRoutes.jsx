@@ -14,6 +14,7 @@ import CurrentClassForm from '../components/CurrentClassForm/StudentCurrentClass
 import TeacherCurrentClassForm from '../components/CurrentClassForm/TeacherCurrentClassForm ';
 import StudentCurrentClassForm from '../components/CurrentClassForm/StudentCurrentClassForm';
 import EditTeacherForm from '../components/EditTeacherForm.jsx';
+import DetailStudentJudgepage from '../pages/DetailStudenJudgePage';
 
 const LandingPage = React.lazy(() => import('../pages/LandingPage'));
 const LoginPage = React.lazy(() => import('../pages/LoginPage'));
@@ -37,7 +38,7 @@ const AccountManagementPage = React.lazy(() => import('../pages/AccountManagemen
 const StudentManagementPage = React.lazy(() => import('../pages/StudentManagementPage'));
 const CourseManagementPage = React.lazy(() => import('../pages/CourseManagementPage'));
 const TeacherManagementPage = React.lazy(() => import('../pages/TeacherManagementPage'));
-
+const StudentJudgePage = React.lazy(() => import('../pages/StudentJudgePage'));
 
 function ContainerRoutes() {
   const isLoggedIn = useSelector((state) => state.login.login?.isLoggedIn)
@@ -82,9 +83,9 @@ function ContainerRoutes() {
                   <>
                     <Route path='/profile/:idAccount/myclass' element={<PersonalInfo />} />
                     <Route path='/profile/:idAccount/studentClass' element={<StudentCurrentClassForm />} />
-                    <Route path='/profile/:idAccount/judgeTeacher' element={<StudentJudgeForm />} />
                   </>
                 }
+
                 {
                   currentUSer.role_name && currentUSer.role_name == 'teacher' &&
                   <>
@@ -93,12 +94,21 @@ function ContainerRoutes() {
                 }
 
               </Route>
+              {currentUSer.role_name && currentUSer.role_name == 'student' &&
+              <>
+              <Route path='/profile/:idAccount/judgeTeacher' element={<StudentJudgePage />} />
+                                               <Route path='/profile/:idAccount/judgeTeacher/:idTeacher'  element={<DetailStudentJudgepage />} />
+              </>
+                                              
+                                              
+              }
               {
                 currentUSer.role_name && currentUSer.role_name == 'teacher' &&
                 <>
                   <Route path='/:idAccount/createClass' element={<CreateCoursePage />} />
                 </>
               }
+
             </>
           }
         </Route>

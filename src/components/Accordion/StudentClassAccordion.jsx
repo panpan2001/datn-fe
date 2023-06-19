@@ -51,7 +51,7 @@ const StudentClassAccordion = ({ data }) => {
 
   // console.log({axiosJWT})
   const handleOpenModal = () => {
-    const checkTime = (Date.now() - new Date(data.createdAt)) / (1000 * 60 * 60 * 24)
+    const checkTime = (Date.now() - new Date(data.id_course.start_date +" "+data.id_course.schedule.split(" - ")[0])) / (1000 * 60 * 60 * 24)
 
     if (checkTime < 1) {
 
@@ -194,11 +194,18 @@ const StudentClassAccordion = ({ data }) => {
                   <button class="modal-close is-large" aria-label="close" onClick={() => setShow("none")}></button>
 
                 </header>
-                {warning ?
-                  <strong className='is-size-5'>Bạn chắc chắn muốn hủy khóa học này chứ? </strong> :
-                  <strong className='is-size-5'>Đã quá 24h kể từ lúc đăng kí, bạn không thể hủy khóa học này! </strong>
+                { new Date (data.id_course.end_date).getTime() > Date.now()? 
+                (warning ?
 
+                
+                <strong className='is-size-5'>Bạn chắc chắn muốn hủy khóa học này chứ? </strong> :
+                  <strong className='is-size-5'>Hạn cuối để hủy khóa học là 24h trước khi khóa học bắt đầu. Hiện tại, bạn không thể hủy khóa học này! </strong>
 
+                )
+              :(<>
+                                <strong className='is-size-5'>Khóa học đã kết thúc. Bạn không thể hủy khóa học này! </strong>
+
+              </>)
                 }
                 <div >
                   {warning ?

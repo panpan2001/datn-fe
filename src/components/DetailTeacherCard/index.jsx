@@ -5,7 +5,7 @@ import { BsCurrencyDollar, BsFillStarFill } from 'react-icons/bs'
 import RegisterButton from '../GroupButton/RegisterButton'
 
 
-function DetailTeacherCard({ data }) {
+function DetailTeacherCard({ data, rating_avg_teacher }) {
     return (
         <div className="card "
             style={{
@@ -50,17 +50,17 @@ function DetailTeacherCard({ data }) {
                                     fill: "yellow",
 
                                 }} />
-                            <p className='is-size-6 mt-1'>5</p>
+                            <p className='is-size-6 mt-1'>{rating_avg_teacher}/5</p>
 
                         </div>
-                        <div className="sub-title-right">
+                        {/* <div className="sub-title-right">
                             <BsCurrencyDollar className='sub-title-right_icon'
                                 style={{
                                     fill: "#00c4a7",
                                     marginTop: ".25rem"
                                 }} />
                             <p className='is-size-6 mt-1'>5-15/ 1.5 tiếng</p>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
 

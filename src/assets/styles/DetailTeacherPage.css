@@ -113,8 +113,9 @@ align-items: center !important;
 .detail-info-left,
 .detail-info-right {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 0.25rem;
+  margin-left: .5rem;
 }
 
 .teacher-description_paragraph {

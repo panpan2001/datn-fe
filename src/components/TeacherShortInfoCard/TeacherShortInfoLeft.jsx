@@ -6,7 +6,10 @@ import RegisterButton from '../GroupButton/RegisterButton'
 import ImageItem from '../ImageItem'
 import { Link } from 'react-router-dom'
 
-function TeacherShortInfoLeft({ data,color }) {
+function TeacherShortInfoLeft({ studentRating,data,color }) {
+const rating_avg_teacher=studentRating.map(i=>i.rating_avg_teacher)
+const avg= rating_avg_teacher.reduce((a, b) => a + b, 0)
+// console.log("TeacherShortInfoLeft",data.account_id.full_name,{avg})
     // console.log("elo: ",data.personal_description.split("\n"))
     return (
         <div className="card teacher-short-info-left_card"
@@ -31,13 +34,13 @@ function TeacherShortInfoLeft({ data,color }) {
                         <div className="columns ml-1  subtitle teacher-short-info-left_sub-title">
                             <div className="sub-title-left">
                                 <BsFillStarFill className='sub-title-right_icon' style={{ fill: "yellow" }} />
-                                <p>5</p>
+                                <p>{avg}/5  ({studentRating.length} đánh giá)</p>
 
                             </div>
-                            <div className="sub-title-right">
+                            {/* <div className="sub-title-right">
                                 <BsCurrencyDollar className='sub-title-right_icon' style={{ fill: "#00c4a7" }} />
                                 <p>5-15/ 1.5 tiếng</p>
-                            </div>
+                            </div> */}
                         </div>
                         <p id='teacher-short-info-left_p'
                         >

@@ -9,16 +9,18 @@ import HowFTWorkAccordion from '../../components/Accordion/HowFTWorkAccordion'
 import Pagination from '../../components/Pagination'
 import getAllTeachers from '../../redux/actions/Teacher/GetAllTeachersInfo'
 import axios from 'axios'
+import getStudentRating from '../../redux/actions/StudentRating/GetStudentRating'
 const FindingTeacherPage = () => {
     // console.table(teachers)
     const dispatch = useDispatch()
     useEffect(() => {
         getAllTeachers(dispatch)
-
+        getStudentRating(dispatch)
     }, [])
     const teachers = useSelector(state => state.getAllTeachers.teachers?.infoTeacher)
+    const studentRating = useSelector(state => state.getStudentRating?.studentRatings?.currentRating)
 
-
+    console.log("finding teacher ", { studentRating })
 
     return (
         <div className='finding-teacher-page_container container'>
@@ -28,8 +30,8 @@ const FindingTeacherPage = () => {
                         <p> <strong className='is-size-3'>Tìm kiếm giáo viên tiếng Anh <br />và bắt đầu hành trình tuyệt vời của riêng bạn</strong> </p>
                         <br />
                         <SearchBar width={'50rem'} />
-                   
-                        
+
+
                     </div>
                     <div className="column is-4">
                         <img className='finding-teacher_image ' src={require('../../assets/images/12.jpg')} alt="" />
@@ -42,68 +44,82 @@ const FindingTeacherPage = () => {
             <br />
             <br />
             {teachers &&
-            <>
-             <section className="finding-teacher-page_section-1 container is-centered show-teacher ">
-              
-                {/* <strong className='is-size-4'>Tất cả giáo viên </strong> */}
-                {/* <br />
+                <>
+                    <section className="finding-teacher-page_section-1 container is-centered show-teacher ">
+
+                        {/* <strong className='is-size-4'>Tất cả giáo viên </strong> */}
+                        {/* <br />
                 <br /> */}
-                <div className="columns is-multiline ">
-                    <div className="column is-3">
-                    
-                   <div className="columns is-multiline filter_container mb-6">
-                            <FilterCategory title={'Điểm đánh giá'}/>
-                            <FilterCategory title={'Hạng mục'} />
+                        <div className="columns is-multiline ">
+                            <div className="column is-3">
+
+                                <div className="columns is-multiline filter_container mb-6">
+                                    <FilterCategory title={'Điểm đánh giá'} />
+                                    <FilterCategory title={'Hạng mục'} />
+
+                                </div>
+                            </div>
+                            <div className="column is-8 ml-6 ">
+                                {teachers && teachers.map((teacher) =>
+                                    <>
+                                        <TeacherShortInfoLeft
+                                            studentRating={studentRating && studentRating.filter(item => item.id_teacher == teacher._id)}
+                                            color="#b5e5ff" data={teacher} />
+                                        <br />
+                                        <br />
+                                    </>
+                                )}
+                                <Pagination />
+                            </div>
+
+
 
                         </div>
-                    </div>
-                    <div className="column is-8 ml-6 ">
-                        {teachers && teachers.map((teacher) =>
-                            <>
-                                <TeacherShortInfoLeft  color="#b5e5ff" data={teacher} />
-                                <br />
-                                <br />
-                            </>
-                        )}
-                          <Pagination />
-                    </div>
 
-                  
-                  
-                </div>
-               
-            </section>
-            <hr />
+                    </section>
+                    <hr />
 
-            <section className="finding-teacher-page_section-2 container">
-                <br />
-                <strong className='is-size-4'>Giáo viên nổi bật</strong>
-                <br />
-                <br />
-             
-                    <div className="columns is-multiline">
+                    <section className="finding-teacher-page_section-2 container">
+                        <br />
+                        <strong className='is-size-4'>Giáo viên nổi bật</strong>
+                        <br />
+                        <br />
 
-                        <div className="column is-3">
-                            <TeacherShortInfoRight  data={teachers[0]} />
+                        <div className="columns is-multiline">
+
+                            <div className="column is-3">
+                                <TeacherShortInfoRight
+                                    studentRating={studentRating && studentRating.filter(item => item.id_teacher == teachers[0]._id)}
+
+                                    data={teachers[0]} />
+                            </div>
+
+                            <div className="column is-3">
+                                <TeacherShortInfoRight
+                                    studentRating={studentRating && studentRating.filter(item => item.id_teacher == teachers[1]._id)}
+
+                                    data={teachers[1]} />
+                            </div>
+                            <div className="column is-3">
+                                <TeacherShortInfoRight
+                                    studentRating={studentRating && studentRating.filter(item => item.id_teacher == teachers[2]._id)}
+
+                                    data={teachers[2]} />
+                            </div>
+                            <div className="column is-3">
+                                <TeacherShortInfoRight
+                                    studentRating={studentRating && studentRating.filter(item => item.id_teacher == teachers[3]._id)}
+
+                                    data={teachers[3]} />
+                            </div>
                         </div>
 
-                        <div className="column is-3">
-                            <TeacherShortInfoRight data={teachers[1]} />
-                        </div>
-                        <div className="column is-3">
-                            <TeacherShortInfoRight data={teachers[2]} />
-                        </div>
-                        <div className="column is-3">
-                            <TeacherShortInfoRight data={teachers[3]} />
-                        </div>
-                    </div>
-                
 
 
-            </section>
-            </>
-           
-                }
+                    </section>
+                </>
+
+            }
             <br />
             <hr />
             <section className="finding-teacher-page_section-3">
@@ -186,7 +202,7 @@ export default FindingTeacherPage
 <button onClick={()=>{handleDelete(account._id)}}>delete</button>
             </>
             )} */}
-              {/* <div className="column is-3">
+{/* <div className="column is-3">
                         {teachers.map((teacher) => 
                             <>
                             <TeacherShortInfoRight data={teacher} />
