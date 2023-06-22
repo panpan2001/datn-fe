@@ -137,10 +137,8 @@ width: 100%;
     width: 2rem !important;
     height: 2rem !important;
     cursor: pointer;
-    background-color:#FFDDB2 ;
-    /* fill:#52FDAB; */
-    /* background-color: #B2FFDA; */
-    fill:#FFC67E;
+    fill: #23A9F1;
+    background-color: #FFFCF3;
     border-radius: 50%;
 }
 
@@ -148,16 +146,14 @@ width: 100%;
     width: 2.5rem !important;
     height: 2rem !important;
     cursor: pointer;
-    background-color:#FFDDB2 ;
-    /* fill:#52FDAB; */
-    /* background-color: #B2FFDA; */
-    fill: #FFC67E ;
+    fill: #23A9F1;
+    background-color: #FFFCF3;
     border-radius: 50%;
 }
 
 .add-link-video_icon-plus:hover,
 .add-link-video_icon-remove:hover{
-box-shadow: 0 0 8px 2px #FFDDB2 ;
+box-shadow: 0 0 8px 2px #8dcced ;
 border-color: #b5b5b5;
     color: #363636;
 }
@@ -177,11 +173,8 @@ border-color: #b5b5b5;
 width: 2.5rem !important;
 height: 2rem !important;
 cursor: pointer;
-background-color:#FFDDB2 ;
-/* fill:#52FDAB; */
-border-radius: 50%;
-/* background-color: #B2FFDA; */
-fill:#FFC67E;
+fill: #23A9F1;
+    background-color: #FFFCF3;
 }
 
 .up-link-video_group-buttons{

@@ -87,7 +87,7 @@ const SignUpForm = () => {
                                     onChange={formik.handleChange} />
                                 <label className="radio is-size-5 ">Giáo viên</label>
                             </div>
-                            <div id="role-3">
+                            {/* <div id="role-3">
                                 <input
                                     type="radio"
                                     name="role_name"
@@ -95,7 +95,7 @@ const SignUpForm = () => {
                                     value={'admin'}
                                     onChange={formik.handleChange} />
                                 <label className="radio is-size-5">Quản trị viên </label>
-                            </div>
+                            </div> */}
                         </div>
                         {formik.errors.role_name && <p className="help is-danger">{formik.errors.role_name}</p>}
 

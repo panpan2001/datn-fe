@@ -20,144 +20,105 @@ function StudentJudgePage() {
     const user = useSelector((state) => state.login.login?.currentUser)
     // console.log({user} )
     const accessToken = user?.accessToken
-    const axiosJWT= createAxiosJWT(dispatch, user, getStudentRatingByStudentIdSuccess)
+    const axiosJWT = createAxiosJWT(dispatch, user, getStudentRatingByStudentIdSuccess)
     const axiosJWTDemoCourse = createAxiosJWT(dispatch, user, getDemoCourseByStudentIdSuccess)
     const axiosJWTCourse = createAxiosJWT(dispatch, user, getCourseStudentByStudentIdSuccess)
     const account_id = user?._id
     useEffect(() => {
         getDemoCourseByStudentId(student._id, dispatch, accessToken, axiosJWTDemoCourse)
         getCourseStudentByStudentId(student._id, dispatch, accessToken, axiosJWTCourse)
-        getStudentRatingByStudentId(student._id,account_id,dispatch,axiosJWT,accessToken)
+        getStudentRatingByStudentId(student._id, account_id, dispatch, axiosJWT, accessToken)
     }, [])
     const demoClasses = useSelector((state) => state.getDemoCourseByStudentId.demoCourse?.currentDemoCourse)
     const officiaClasses = useSelector((state) => state.getCourseStudentByStudentId.officialCourses?.currentCourse)
     console.log({ demoClasses }, { officiaClasses })
     const studentRating = useSelector((state) => state.getStudentRatingByStudentId?.studentRating?.currentRating)
-console.log({studentRating})
-    if(!demoClasses && !officiaClasses) return null
-    else{
-        // let teacherdemoClasses = demoClasses?.map((item) => item.id_demo_course.id_course.id_teacher)
-        // let teacherofficialClasses = officiaClasses?.map((item) => item.id_course.id_teacher)
-        // console.log({teacherdemoClasses}, {teacherofficialClasses})
-        // let teacher=[...teacherdemoClasses,...teacherofficialClasses]
-        // teacher=[...new Map(teacher.map(v => [JSON.stringify(v), v])).values()]
-        // console.log({teacher})
-      
+    console.log({ studentRating })
+    if (!demoClasses && !officiaClasses) return null
+    else {
+        let teacherofficialClasses = null
+        let teacherdemoClasses = null
+        if (demoClasses) teacherdemoClasses = demoClasses?.map((item) => item.id_demo_course.id_course.id_teacher)
+        else teacherdemoClasses = teacherdemoClasses
+        if (officiaClasses) teacherofficialClasses = officiaClasses?.map((item) => item.id_course.id_teacher)
+        else teacherofficialClasses = teacherdemoClasses
+        console.log({ teacherdemoClasses }, { teacherofficialClasses })
+        let teacher = [...teacherdemoClasses, ...teacherofficialClasses]
+        teacher = [...new Map(teacher.map(v => [JSON.stringify(v), v])).values()]
+        console.log({ teacher })
+
         return (
             <div className='student-judge-page_container container-fluid columns' style={{ minHeight: "60vh" }}>
-                                <strong className='is-size-4'>Danh sách giáo viên</strong>
-                {demoClasses || officiaClasses ? 
-                <div className="all-teachers_table"style={{padding:"0 3rem 0 3rem "}}>
-                <table class="table is-fullwidth is-hoverable" style={{backgroundColor:"#B2FFDA"}}>
-                    <thead>
-                        <tr>
-                            <th>STT</th>
-                            {/* <th></th> */}
-                            <th>Tên giáo viên</th>
-                            <th>Tên lớp học</th>
+                <strong className='is-size-4'>Danh sách giáo viên</strong>
+                {demoClasses || officiaClasses ?
+                    <div className="all-teachers_table" style={{ padding: "0 3rem 0 3rem " }}>
+                        <table class="table is-fullwidth " style={{ backgroundColor: "#B2FFDA" }}>
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    {/* <th></th> */}
+                                    <th>Tên giáo viên</th>
+                                    {/* <th>Tên lớp học</th>
                             <th>Loại lớp học</th>
                             <th>Hạng mục</th>
-                            <th>Cấp độ </th>
-                            <th>Ngày đánh giá </th>
-                            <th>Đánh giá </th>
-                        </tr>
-                    </thead>
-                    <tbody style={{ textAlign: "left" }}>
-                        <>
-                            { demoClasses && demoClasses.map((item) =>
-                                <tr key={item._id}>
-    
-                                    <td>
-                                        {demoClasses.indexOf(item) + 1}
-                                    </td>
-                                    {/* <td>{item.account_id.full_name}</td> */}
-                                    <td>{item.id_demo_course.id_course.id_teacher.account_id.full_name}</td>
-                                    <td>{item.id_demo_course.id_course.name}</td>
-    
-                                    <td>Lớp học thử </td>
-                                    <td>{item.id_demo_course.id_course.category_id.type}</td>
-                                    <td>{item.id_demo_course.id_course.category_id.level}</td>
-    
-                                    
-                                    {studentRating &&   studentRating.filter(i=>i.id_teacher==item.id_demo_course.id_course.id_teacher._id && i.isDemo==true )?
+                            <th>Cấp độ </th> */}
+                                    <th>Ngày đánh giá </th>
+                                    <th>Đánh giá </th>
+                                </tr>
+                            </thead>
+                            <tbody style={{ textAlign: "left" }}>
                                 <>
-                                <td>{moment(studentRating.createdAt).format("DD/MM/YYYY")} </td>
-                                <td>Đã đánh giá </td>
-                                </>   :
-                                <>
-                                <td> </td>
-                                <td>
-                                <Link to={`/profile/${account_id}/judgeTeacher/${item.id_demo_course.id_course.id_teacher._id}`}>Đánh giá </Link>
+                                    {teacher && teacher?.map((item) =>
+                                        <tr key={item._id}>
 
-                                     </td>
-                                </> 
-                                }
-                                    <td>
-                                        {/* {Date.now()>= new Date(item.id_demo_course.end_date+" "+ item.id_demo_course.schedule.split(" - ")[0]).getTime()?
+                                            <td>
+                                                {teacher.indexOf(item) + 1}
+                                            </td>
+                                            <td>{item.account_id.full_name}</td>
+                                            <td>
+
+                                            {studentRating &&
+                                                studentRating.filter(i => i.id_teacher == item._id).map(i => <p>{moment(i.createdAt).format('DD/MM/YYYY HH:mm')}</p>)}
+                                            </td>
+                                           
+                                            <td>
+                                           
+                                                {/* {Date.now()>= new Date(item.id_demo_course.end_date+" "+ item.id_demo_course.schedule.split(" - ")[0]).getTime()?
                                          <Link to={`/profile/${account_id}/judgeTeacher/${item.id_demo_course.id_course._id}`}>Đánh giá </Link>:<p>Đánh giá</p>
                                         } */}
-                                   {/* <Link to={`/profile/${account_id}/judgeTeacher/${item._id}`}>Đánh giá </Link> */}
-                                          </td>
-                                </tr>
-                            )}
-    
-                        </>
-    
-                        {officiaClasses&& officiaClasses.map((item) =>
-    
-                            <tr key={item._id}>
-    
-                                <td>
-                                    {demoClasses? (officiaClasses.indexOf(item) + 1 + demoClasses.length): (officiaClasses.indexOf(item) + 1)}
-                                </td>
-                                <td>{item.id_course.id_teacher.account_id.full_name}</td>
-                                <td>{item.id_course.name}</td>
-    
-                                <td>Lớp học chính thức </td>
-                                <td>{item.id_course.category_id.type}</td>
-                                <td>{item.id_course.category_id.level}</td>
-    
-                                {studentRating && studentRating.isDemo==false &&  studentRating.filter(i=>i.id_teacher==item.id_course.id_teacher._id)?
-                                <>
-                               
-                                <td>{moment(studentRating.createdAt).format("DD/MM/YYYY")} </td>
-                                <td>Đã đánh giá  </td>
-                                </>   :
-                                <>
-                                <td> </td>
-                                <td>
-                                <Link to={`/profile/${account_id}/judgeTeacher/${item.id_course.id_teacher._id}`}>Đánh giá </Link>
+                                                <Link to={`/profile/${account_id}/judgeTeacher/${item._id}`}>Đánh giá </Link>
+                                            </td>
+                                            
+                                        </tr>
+                                    )}
 
-                                     </td>
-                                </> 
-                                }
-                            </tr>
-    
-    )}
-                    </tbody>
-                </table>
-    
-            </div>
-            
-            :<>
-            <strong className='is-size-6'>Bạn không có giáo viên nào để đánh giá. Hãy tìm kiếm giáo viên và đăng kí học trước khi đánh giá nha!</strong>
-            <Link to='/findingTeacher'>
-            <button className='button is-primary'>Tìm kiếm giáo viên</button>
-    
-            </Link>
-            </>
-            }
-                
-    
-    
-    
-    <Outlet />
-    
+                                </>
+
+
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                    : <>
+                        <strong className='is-size-6'>Bạn không có giáo viên nào để đánh giá. Hãy tìm kiếm giáo viên và đăng kí học trước khi đánh giá nha!</strong>
+                        <Link to='/findingTeacher'>
+                            <button className='button is-primary'>Tìm kiếm giáo viên</button>
+
+                        </Link>
+                    </>
+                }
+
+
+
+
+                <Outlet />
+
             </div>
         )
     }
-   
-   
+
+
 }
 
 export default StudentJudgePage
@@ -193,12 +154,12 @@ export default StudentJudgePage
 //                         <td>{item.id_demo_course.id_course.category_id.level}</td>
 
 //                         <td>Ngày đánh giá </td>
-                        
+
 //                         <td>
 //                             {Date.now()>= new Date(item.id_demo_course.end_date+" "+ item.id_demo_course.schedule.split(" - ")[0]).getTime()?
 //                              <Link to={`/profile/${account_id}/judgeTeacher/${item.id_demo_course.id_course.id_teacher._id}`}>Đánh giá </Link>:<p>Đánh giá</p>
 //                             }
-                       
+
 //                               </td>
 //                     </tr>
 //                 )}
@@ -232,3 +193,57 @@ export default StudentJudgePage
 //     </table>
 
 // </div>
+
+{/* <td>{item.id_demo_course.id_course.id_teacher.account_id.full_name}</td>
+                                    <td>{item.id_demo_course.id_course.name}</td>
+    
+                                    <td>Lớp học thử </td>
+                                    <td>{item.id_demo_course.id_course.category_id.type}</td>
+                                    <td>{item.id_demo_course.id_course.category_id.level}</td> */}
+
+
+{/* {studentRating.length >0 &&   studentRating.filter(i=>i.id_teacher==item.id_demo_course.id_course.id_teacher._id && i.isDemo==true )? */ }
+{/* <>
+                                <td>{moment(studentRating.createdAt).format("DD/MM/YYYY")} </td>
+                                <td>Đã đánh giá </td>
+                                </>   : */}
+{/* <>
+                                <td> </td>
+                                <td>
+                                <Link to={`/profile/${account_id}/judgeTeacher/${item.id_demo_course.id_course.id_teacher._id}`}>Đánh giá </Link>
+
+                                     </td>
+                                </>  */}
+{/* } */ }
+
+{/* {officiaClasses&& officiaClasses.map((item) =>
+    
+                            <tr key={item._id}>
+    
+                                <td>
+                                    {demoClasses? (officiaClasses.indexOf(item) + 1 + demoClasses.length): (officiaClasses.indexOf(item) + 1)}
+                                </td>
+                                <td>{item.id_course.id_teacher.account_id.full_name}</td>
+                                <td>{item.id_course.name}</td>
+    
+                                <td>Lớp học chính thức </td>
+                                <td>{item.id_course.category_id.type}</td>
+                                <td>{item.id_course.category_id.level}</td>
+    
+                                {studentRating.length>0 && studentRating.isDemo==false &&  studentRating.filter(i=>i.id_teacher==item.id_course.id_teacher._id)?
+                                <>
+                               
+                                <td>{moment(studentRating.createdAt).format("DD/MM/YYYY")} </td>
+                                <td>Đã đánh giá  </td>
+                                </>   :
+                                <>
+                                <td> </td>
+                                <td>
+                                <Link to={`/profile/${account_id}/judgeTeacher/${item.id_course.id_teacher._id}`}>Đánh giá </Link>
+
+                                     </td>
+                                </> 
+                                }
+                            </tr>
+    
+    )} */}

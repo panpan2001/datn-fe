@@ -6,9 +6,18 @@ import RegisterButton from '../GroupButton/RegisterButton'
 import ImageItem from '../ImageItem'
 import { Link } from 'react-router-dom'
 
-function TeacherShortInfoLeft({ studentRating,data,color }) {
-const rating_avg_teacher=studentRating.map(i=>i.rating_avg_teacher)
-const avg= rating_avg_teacher.reduce((a, b) => a + b, 0)
+function TeacherShortInfoLeft({ studentRating,data,color , setTeacherRating }) {
+    // console.log({studentRating})
+if(  studentRating !== null ){
+    let  avg= 0
+
+    const rating_avg_teacher=studentRating?.map(i=>i.rating_avg_teacher)
+    console.log({rating_avg_teacher})
+    if (rating_avg_teacher.length>0)  avg=(rating_avg_teacher?.reduce((a, b) => a + b, 0)/rating_avg_teacher.length).toFixed(2) 
+    else  avg=0
+
+
+// setTeacherRating(a=>[...a,avg])
 // console.log("TeacherShortInfoLeft",data.account_id.full_name,{avg})
     // console.log("elo: ",data.personal_description.split("\n"))
     return (
@@ -27,24 +36,28 @@ const avg= rating_avg_teacher.reduce((a, b) => a + b, 0)
                         <div className="title is-4 columns ">
                             <div className="column ">{data.account_id.full_name}</div>
                             {/* <div className="column"> */}
-                            <BsFillCheckCircleFill
+                            {/* <BsFillCheckCircleFill
                             className="teacher-short-nffo-left_icon-verified "/>
-                              
+                               */}
                         </div>
+                        
                         <div className="columns ml-1  subtitle teacher-short-info-left_sub-title">
-                            <div className="sub-title-left">
+                        
+                            <div className="sub-title-left mt-4">
                                 <BsFillStarFill className='sub-title-right_icon' style={{ fill: "yellow" }} />
-                                <p>{avg}/5  ({studentRating.length} đánh giá)</p>
+                                <p>{avg }/5  ({studentRating && studentRating.length ||0} đánh giá)</p>
 
                             </div>
-                            {/* <div className="sub-title-right">
-                                <BsCurrencyDollar className='sub-title-right_icon' style={{ fill: "#00c4a7" }} />
-                                <p>5-15/ 1.5 tiếng</p>
-                            </div> */}
+                            <div className="sub-title-left">
+                              
+                            </div>
                         </div>
+                        <p><strong>Chuyên ngành:</strong>{data.id_academic.academic_major}  </p>
+                        <p><strong>Trường:</strong>{data.id_academic.university_name}</p>
+                                <p><strong>Chứng chỉ: </strong>{data.id_degree.degree_level}</p>
                         <p id='teacher-short-info-left_p'
                         >
-                            {data.personal_description}
+                           <strong>Giới thiệu:</strong> {data.personal_description}
                         </p>
                         
                         <Link to={`/detailTeacher/${data._id}`}>
@@ -69,6 +82,7 @@ const avg= rating_avg_teacher.reduce((a, b) => a + b, 0)
             </div>
         </div>
     )
+}
 }
 
 export default TeacherShortInfoLeft

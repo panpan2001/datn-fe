@@ -63,7 +63,7 @@ const StudentManagementPage = () => {
           marginRight: "4rem"
         }}>
           <div className="filter-teacher">
-            <FilterCategory />
+            {/* <FilterCategory /> */}
 
           </div>
           <button className="icon-teacher " type='button' onClick={handleShowModal}

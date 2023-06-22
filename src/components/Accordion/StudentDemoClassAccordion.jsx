@@ -12,7 +12,7 @@ import getCoursebyId from "../../redux/actions/Course/GetCoursebyId";
 
 
 const StudentDemoClassAccordion = ({ data, color }) => {
-  // console.log("demo class",{data})
+  console.log("demo class",{data})
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const register_date = new Date(data.createdAt).toLocaleString('en-US', { timeZone: 'Asia/Ho_Chi_Minh' });

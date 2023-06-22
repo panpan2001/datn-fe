@@ -3,8 +3,9 @@ import '../../assets/styles/TeacherShortInfoRight.css'
 import { Link } from 'react-router-dom'
 import { BsCurrencyDollar, BsFillStarFill } from 'react-icons/bs'
 function TeacherShortInfoRight({ studentRating, data,color }) {
+  if(studentRating === null) return null
   const rating_avg_teacher=studentRating.map(i=>i.rating_avg_teacher)
-const avg= rating_avg_teacher.reduce((a, b) => a + b, 0)
+  const avg= (rating_avg_teacher.reduce((a, b) => a + b, 0)/rating_avg_teacher.length).toFixed(2) ||0
   return (
     
     <div className="card teacher-short-info-right_card" style={{backgroundColor:`${color}`}}>

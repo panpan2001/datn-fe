@@ -63,7 +63,7 @@ function CourseManagementPage() {
             flexDirection: "row",
             alignItems: 'center'
           }}>
-            <FilterCategory />
+            {/* <FilterCategory /> */}
             <button className="icon-teacher " type='button'
               style={{
                 display: "flex",
@@ -177,7 +177,7 @@ function CourseManagementPage() {
             flexDirection: "row",
             alignItems: 'center'
           }}>
-            <FilterCategory />
+            {/* <FilterCategory /> */}
             <button className="icon-teacher " type='button'
               style={{
                 display: "flex",

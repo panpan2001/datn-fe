@@ -12,6 +12,7 @@ import cancelRegisterDemoCourse from "../../redux/actions/DemoCourseStudent/Canc
 import { cancelRegisterDemoCourseSuccess } from "../../redux/slices/DemoCourseStudent/cancelRegisterDemoCourse";
 
 const StudentClassAccordion = ({ data }) => {
+  console.log("data StudentClassAccordion", {data})
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const register_date = moment(data.createdAt).format("DD/MM/YYYY HH:mm:ss a")
@@ -25,8 +26,8 @@ const StudentClassAccordion = ({ data }) => {
 
   });
   if (data) {
-    time = data.id_course.schedule.split(" - ")[0]
-    time = time.split(":")[0] < 12 ? time + " AM" : time + " PM"
+    // time = data.id_course.schedule.split(" - ")[0]
+    // time = time.split(":")[0] < 12 ? time + " AM" : time + " PM"
     start_date = moment(data.id_course.start_date).format("DD/MM/YYYY")
     end_date = moment(data.id_course.end_date).format("DD/MM/YYYY")
 
@@ -36,9 +37,9 @@ const StudentClassAccordion = ({ data }) => {
     setState({ cardState: !state.cardState });
   };
   const { cardState } = state;
-  useEffect(() => {
-    getCourseCategoryById(data.id_course.category_id, dispatch)
-  }, [])
+  // useEffect(() => {
+  //   getCourseCategoryById(data.id_course.category_id._id, dispatch)
+  // }, [])
   const category = useSelector((state) => state.getCourseById.course?.currentCourse)
   // console.log({category},category.type,category.level)
   const [show, setShow] = useState("none")
@@ -72,7 +73,7 @@ const StudentClassAccordion = ({ data }) => {
 
 
   }
-
+if(data){
   return (
     <div className="column ">
       <div className="card "
@@ -128,10 +129,10 @@ const StudentClassAccordion = ({ data }) => {
             {category &&
               <>
                 <div class=" column is-6">
-                  <p><strong>Loại: </strong>{category.category_id.type}</p>
+                  <p><strong>Loại: </strong>{data.id_course.category_id.type}</p>
                 </div>
                 <div class=" column is-6">
-                  <p><strong>Cấp độ: </strong>{category.category_id.level}</p>
+                  <p><strong>Cấp độ: </strong>{data.id_course.category_id.level}</p>
                 </div>
               </>}
 
@@ -145,7 +146,8 @@ const StudentClassAccordion = ({ data }) => {
               <p> <strong>Thời gian học: </strong>{data.id_course.learning_period} {data.id_course.isDemoClass ? 'buổi' : 'tháng'}</p>
             </div>
             <div className=" column is-6">
-              <p><strong>Lịch học: </strong>{time} - {data.id_course.schedule.split(" - ")[1]}</p>
+              <p><strong>Lịch học: </strong>{data.id_course.schedule.split(" - ")[0].split(":")[0] < 12 ? time + " AM" : time + " PM"} 
+              - {data.id_course.schedule.split(" - ")[1]}</p>
             </div>
             <div className=" column is-6">
               <p><strong>Ngày bắt đầu: </strong>{start_date}</p>
@@ -224,6 +226,8 @@ const StudentClassAccordion = ({ data }) => {
     </div>
 
   );
+}
+ 
 };
 
 export default StudentClassAccordion

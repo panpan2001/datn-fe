@@ -25,7 +25,7 @@ function StudentCurrentClassForm() {
     const demoClasses = useSelector((state) => state.getDemoCourseByStudentId.demoCourse?.currentDemoCourse)
     let officiaClasses = useSelector((state) => state.getCourseStudentByStudentId.officialCourses?.currentCourse)
     // const demoClasses2 = useSelector((state) => state.cancelRegisterCourse.demoCourse?.currentDemoCourse)
-   
+   console.log("officiaClasses",{officiaClasses})
     return (
         <div className='current-class_container'>
          
@@ -36,7 +36,7 @@ function StudentCurrentClassForm() {
 
      {demoClasses &&
                 demoClasses.map((item) => (
-                    <StudentDemoClassAccordion color={"#B2FFDA"} data={item} />
+                    <StudentDemoClassAccordion key={item._id} color={"#B2FFDA"} data={item} />
                 ))
     }
     <hr/>
@@ -44,7 +44,7 @@ function StudentCurrentClassForm() {
      <strong className='is-size-5 current-class_title mt-4 mb-2'>Khóa học chính thức</strong>
      {officiaClasses && 
                 officiaClasses.map((item) => (
-                    <StudentClassAccordion data={item} />
+                    <StudentClassAccordion key={item._id} data={item} />
                 ))
                
     }

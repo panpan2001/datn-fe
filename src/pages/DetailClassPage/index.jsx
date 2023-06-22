@@ -27,9 +27,11 @@ function DetailClassPage() {
     }, [])
     const data = useSelector((state) => state.getCourseById.course?.currentCourse)
     const demoCourse = useSelector((state) => state.getAllDemoCourseByCourseId?.demoCourses?.currentCourse)
-    const checkRegister=(a,b)=>{
-return new Date(a + " " + b).getTime() > new Date().getTime()
-    } 
+    const checkRegister = (a, b) => {
+        console.log("checkRegister", a, b, new Date(a + " " + b).getTime() > Date.now())
+
+        return new Date(a + " " + b).getTime() > Date.now()
+    }
     const formatter = new Intl.NumberFormat({
         style: 'currency',
         currency: 'VND',
@@ -146,12 +148,12 @@ return new Date(a + " " + b).getTime() > new Date().getTime()
                                         </td>
                                         <td>{item.schedule.split(" - ")[1]}</td>
                                         <td>{formatter.format(item.cost)}</td>
-                                      
+
                                         {currentUser ?
-                                            (currentUser.role_name == "student"  &&
-                                            checkRegister(item.start_date,item.schedule.split(" - ")[0])
-                                                // (new Date(item.start_date + " " + item.schedule.split(" - ")[0]).getTime() > new Date().getTime())
-                                                 &&
+
+                                            (currentUser.role_name == "student" &&
+                                                checkRegister(item.start_date, item.schedule.split(" - ")[0])
+                                                &&
                                                 <td>
                                                     <Link to={`/registerDemoCourse/${item._id}`}>
                                                         <button className="button is-primary">Học thử </button>
@@ -172,17 +174,17 @@ return new Date(a + " " + b).getTime() > new Date().getTime()
                     id='detail-class_modal'
                     style={{ gap: '2rem' }}
                 >
-                   
+
                     {currentUser ?
-                        (currentUser.role_name == "student" && 
-                        // (new Date(data.start_date + " " + data.schedule.split(" - ")[0]).getTime() > new Date().getTime()) 
-                        checkRegister(data.start_date,data.schedule.split(" - ")[0])
-                        ?
-                       
-                           <Link to={`/registerCourse/${idClass}`}>
+                        (currentUser.role_name == "student" &&
+                            // (new Date(data.start_date + " " + data.schedule.split(" - ")[0]).getTime() > new Date().getTime()) 
+                            checkRegister(data.start_date, data.schedule.split(" - ")[0])
+                            ?
+
+                            <Link to={`/registerCourse/${idClass}`}>
                                 <button className="button is-info">Đăng kí  </button>
-                            </Link> 
-                           :<></>
+                            </Link>
+                            : <></>
                         ) :
 
                         (<>

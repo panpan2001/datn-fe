@@ -229,7 +229,7 @@ function TeacherDemoClassCard({ item }) {
                                         onClick={() => {
                                              setShowComponent("none")
                                              setShowIconAdd("block")
-                                             setDataLinkVideo([])
+                                             // setDataLinkVideo([])
                                              setInputValue("")
                                         }}
 
@@ -273,7 +273,7 @@ function TeacherDemoClassCard({ item }) {
                                         onClick={() => {
                                              setShowComponent("none")
                                              setShowIconAdd("block")
-                                             setDataLinkVideo([])
+                                             // setDataLinkVideo([])
                                              setInputValue("")
                                         }}>Hủy</button>
                               </div>

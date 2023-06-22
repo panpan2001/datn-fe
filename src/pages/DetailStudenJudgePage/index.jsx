@@ -35,9 +35,8 @@ function DetailStudentJudgepage() {
     }, [])
     const demoClasses = useSelector((state) => state.getDemoCourseByStudentId.demoCourse?.currentDemoCourse)
     const officiaClasses = useSelector((state) => state.getCourseStudentByStudentId.officialCourses?.currentCourse)
-        const teacher = useSelector((state) => state.getTeacherById?.teacher?.currentTeacher)
- 
-        
+    const teacher = useSelector((state) => state.getTeacherById?.teacher?.currentTeacher)
+    
     const [value1, setValue1] = useState(0)
     const [value2, setValue2] = useState(0)
     const [value3, setValue3] = useState(0)
@@ -87,16 +86,21 @@ function DetailStudentJudgepage() {
                 rating_content_4: value4 / (arr4.length).toFixed(2),
                 comment: formik.values.comment,
                 // id_course: course._id,
-                isDemo: formik.values.isDemo==="true"?true:false
+                isDemo: formik.values.isDemo === "true" ? true : false
             }
             console.log("danh gia (tren giao dien)", { value })
             createStudentRating(account_id, value, dispatch, axiosJWT, accessToken, navigate)
         }
 
-    })
-    
+    }) 
+
     if (!teacher) return null;
-    return (
+    if(teacher){
+        const filter_demo_course= demoClasses?.filter((item) => item.id_demo_course.id_course.id_teacher._id === idTeacher)
+        console.log({filter_demo_course})
+       const filter_course= officiaClasses?.filter((item) => item.id_course.id_teacher._id === idTeacher)
+       console.log({filter_course})
+       return (
         <div className='judge-teacher-container' style={{ display: "flex", flexDirection: "column", margin: '1rem' }}>
             <nav class="breadcrumb ml-4" aria-label="breadcrumbs" style={{ marginBottom: "0" }}>
                 <ul>
@@ -107,53 +111,57 @@ function DetailStudentJudgepage() {
                 </ul>
             </nav>
             <div className="create-class-select-option"
+                style={{
+                    display: 'flex',
+                    flexDirection: "row",
+                    gap: "1rem",
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                }}>
+                <strong className="is-size-5">Bạn muốn: </strong>
+                <div className="control"
                     style={{
-                        display: 'flex',
+                        display: "flex",
                         flexDirection: "row",
-                        gap: "1rem",
                         justifyContent: 'center',
                         alignItems: 'center',
+                        marginTop: ".25rem"
                     }}>
-                    <strong className="is-size-5">Bạn muốn: </strong>
-                    <div className="control"
-                        style={{
-                            display: "flex",
-                            flexDirection: "row",
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            marginTop: ".25rem"
-                        }}>
-                            {demoClasses.filter(item=>item.id_demo_course.id_course.id_teacher._id== idTeacher) && 
-                             <label className="radio">
-                             <input
-                                 type="radio"
-                                 name="isDemo"
-                                 id="false"
-                                 // defaultChecked={true}
-                                 value={"false"}
-                                 onChange={formik.handleChange}
-                             />
-                             Đánh giá khóa học chính thức
-                         </label>
-                            }
-                       {officiaClasses.filter(item=>item.id_course.id_teacher._id== idTeacher) &&
-                       <label className="radio ml-6">
-                       <input type="radio"
-                           name="isDemo"
-                           id="true"
-                           // checked={!checked}
-                           value={"true"}
-                           onChange={formik.handleChange}
-                       />
-                       Đánh giá khóa học thử
-                   </label>
-                       }
-                        
-                        {formik.errors.isDemo && <div className="help is-danger is-size-6 ml-4">{formik.errors.isDemo}</div> }
-                    </div>
+                    {filter_course.length >0  &&
+                        <label className="radio">
+                            <input
+                                type="radio"
+                                name="isDemo"
+                                id="false"
+                                // defaultChecked={true}
+                                value={"false"}
+                                onChange={formik.handleChange}
+                            />
+                            Đánh giá khóa học chính thức
+                        </label>
+                    }
+                    {filter_demo_course.length >0 && 
+                        <label className="radio ml-6">
+                            <input type="radio"
+                                name="isDemo"
+                                id="true"
+                                // checked={!checked}
+                                value={"true"}
+                                onChange={formik.handleChange}
+                            />
+                            Đánh giá khóa học thử
+                        </label>
+                    }
+
+                    {formik.errors.isDemo && <div className="help is-danger is-size-6 ml-4">{formik.errors.isDemo}</div>}
                 </div>
+            </div>
+            <div>
+                {filter_demo_course && filter_demo_course.map((item, index) => <p>{item.id_demo_course.id_course.name}</p>)}
+                {filter_course && filter_course.map((item, index) => <p>{item.id_course.name}</p>)}
+            </div>
             <div style={{ display: "flex", flexDirection: "row", margin: '0 1rem', paddingBottom: "2rem" }}>
-               
+
                 <div className="column is-3 teacher-short-info pr-4">
                     <div class="card teacher-short-info_judge-card" style={{ position: "sticky", top: "2rem" }}>
                         <div class="card-image">
@@ -180,51 +188,6 @@ function DetailStudentJudgepage() {
                 <form className="column is-9 teacher-judge-form pl-6 " onSubmit={formik.handleSubmit}>
 
 
-                    {/* <div className="all-teachers_table">
-                        <label className='label is-size-5'>{JudgeFormNames[0]}</label>
-                        <table class="table is-fullwidth is-hoverable"
-                            style={{
-                                backgroundColor: "#B7E3FF",
-                                borderRadius: "10px"
-                            }}>
-                            <thead>
-                                <tr>
-                                    <th>STT</th>
-                                    <th>Tên tiêu chí</th>
-                                    <th>Số điểm </th>
-                                </tr>
-                            </thead>
-                            <tbody style={{ textAlign: "left" }}>
-                                {TeachingAbilityNames.map((formName, index) => (
-                                    <tr>
-                                        <th>{TeachingAbilityNames.indexOf(formName) + 1}</th>
-                                        <th>{formName}</th>
-                                        <td>
-                                            <input
-                                                id={formName.split(":")[0]}
-                                                name={TeachingAbilityNames[0] + " " + formName.split(":")[0]}
-                                                type="number"
-                                                min={1}
-                                                max={5}
-                                                // valueAdd, arr, setValue,setArr,index
-                                                onChange={(e) => handleAddValue(e.target.value, arr1, setValue1,setArr1, TeachingAbilityNames.indexOf(formName))}
-                                            />
-                                        </td>
-                                    </tr>
-
-                                ))}
-                                <tr>
-                                    <th></th>
-                                    <th><strong>Tổng điểm</strong></th>
-                                    <td>
-                                        <strong>{value1}</strong>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                    </div> */}
-                    {/* backgroundColor,table_label,judge_content,handleAddValue,arr1,setValue1,setArr1,value1 */}
                     <StudentJudgeCategoryForm
                         backgroundColor={"#B7E3FF"}
                         table_label={JudgeFormNames[0]}
@@ -329,6 +292,55 @@ function DetailStudentJudgepage() {
 
         </div>
     )
+    }
+  
 }
 
 export default DetailStudentJudgepage
+
+
+                    {/* <div className="all-teachers_table">
+                        <label className='label is-size-5'>{JudgeFormNames[0]}</label>
+                        <table class="table is-fullwidth is-hoverable"
+                            style={{
+                                backgroundColor: "#B7E3FF",
+                                borderRadius: "10px"
+                            }}>
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Tên tiêu chí</th>
+                                    <th>Số điểm </th>
+                                </tr>
+                            </thead>
+                            <tbody style={{ textAlign: "left" }}>
+                                {TeachingAbilityNames.map((formName, index) => (
+                                    <tr>
+                                        <th>{TeachingAbilityNames.indexOf(formName) + 1}</th>
+                                        <th>{formName}</th>
+                                        <td>
+                                            <input
+                                                id={formName.split(":")[0]}
+                                                name={TeachingAbilityNames[0] + " " + formName.split(":")[0]}
+                                                type="number"
+                                                min={1}
+                                                max={5}
+                                                // valueAdd, arr, setValue,setArr,index
+                                                onChange={(e) => handleAddValue(e.target.value, arr1, setValue1,setArr1, TeachingAbilityNames.indexOf(formName))}
+                                            />
+                                        </td>
+                                    </tr>
+
+                                ))}
+                                <tr>
+                                    <th></th>
+                                    <th><strong>Tổng điểm</strong></th>
+                                    <td>
+                                        <strong>{value1}</strong>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div> */}
+                    {/* backgroundColor,table_label,judge_content,handleAddValue,arr1,setValue1,setArr1,value1 */}

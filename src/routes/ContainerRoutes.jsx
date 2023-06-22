@@ -95,12 +95,12 @@ function ContainerRoutes() {
 
               </Route>
               {currentUSer.role_name && currentUSer.role_name == 'student' &&
-              <>
-              <Route path='/profile/:idAccount/judgeTeacher' element={<StudentJudgePage />} />
-                                               <Route path='/profile/:idAccount/judgeTeacher/:idTeacher'  element={<DetailStudentJudgepage />} />
-              </>
-                                              
-                                              
+                <>
+                  <Route path='/profile/:idAccount/judgeTeacher' element={<StudentJudgePage />} />
+                  <Route path='/profile/:idAccount/judgeTeacher/:idTeacher' element={<DetailStudentJudgepage />} />
+                </>
+
+
               }
               {
                 currentUSer.role_name && currentUSer.role_name == 'teacher' &&

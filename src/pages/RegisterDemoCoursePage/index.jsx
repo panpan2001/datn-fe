@@ -43,7 +43,7 @@ function RegisterDemoCoursePage() {
         time = time.split(":")[0] < 12 ? time + " AM" : time + " PM"
         start_date = moment(demoCourse.start_date).format("DD/MM/YYYY")
         end_date = moment(demoCourse.end_date).format("DD/MM/YYYY")
-        sum_price = formatter.format(parseFloat(demoCourse.cost) * demoCourse.learning_period * 4 * demoCourse.schedule.split(" - ")[1].split(",").length)
+        sum_price = formatter.format(parseFloat(demoCourse.cost) * demoCourse.learning_period )
 
     }
     const formik = useFormik({
@@ -156,7 +156,7 @@ function RegisterDemoCoursePage() {
 
                             <div className="column is-6">
                                 <div className="field register-course_field">
-                                    <label className="label">Lịch học</label>
+                                    <label className="label">Ngày học</label>
                                     <input
                                         className="input"
                                         type="text"
