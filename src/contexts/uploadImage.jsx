@@ -6,6 +6,7 @@ const uploadImage= async(image)=>{
         formData.append('file', image[0])
         formData.append('upload_preset', 'DATN_FE')
         formData.append('cloud_name', 'djt76m22x')
+        // formData.append('folder', 'DATN_FE')
         try {
           const res= await axios.post(UPLOAD_IMG_URL, formData,{
             header:{

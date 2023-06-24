@@ -13,6 +13,7 @@ import DetailStudentJudgepage from '../DetailStudenJudgePage';
 import getStudentRatingByStudentId from '../../redux/actions/StudentRating/GetStudentRatingByIdStudent';
 import { getStudentRatingByStudentIdSuccess } from '../../redux/slices/StudentRating/getStudentRatingByStudentIdSlice';
 import moment from 'moment';
+import { AiOutlineCheckCircle } from 'react-icons/ai';
 function StudentJudgePage() {
 
     const dispatch = useDispatch()
@@ -36,16 +37,16 @@ function StudentJudgePage() {
     console.log({ studentRating })
     if (!demoClasses && !officiaClasses) return null
     else {
-        let teacherofficialClasses = null
-        let teacherdemoClasses = null
-        if (demoClasses) teacherdemoClasses = demoClasses?.map((item) => item.id_demo_course.id_course.id_teacher)
-        else teacherdemoClasses = teacherdemoClasses
-        if (officiaClasses) teacherofficialClasses = officiaClasses?.map((item) => item.id_course.id_teacher)
-        else teacherofficialClasses = teacherdemoClasses
-        console.log({ teacherdemoClasses }, { teacherofficialClasses })
-        let teacher = [...teacherdemoClasses, ...teacherofficialClasses]
-        teacher = [...new Map(teacher.map(v => [JSON.stringify(v), v])).values()]
-        console.log({ teacher })
+        // let teacherofficialClasses = null
+        // let teacherdemoClasses = null
+        // if (demoClasses) teacherdemoClasses = demoClasses?.map((item) => item.id_demo_course.id_course.id_teacher)
+        // else teacherdemoClasses = teacherdemoClasses
+        // if (officiaClasses) teacherofficialClasses = officiaClasses?.map((item) => item.id_course.id_teacher)
+        // else teacherofficialClasses = teacherdemoClasses
+        // console.log({ teacherdemoClasses }, { teacherofficialClasses })
+        // let teacher = [...teacherdemoClasses, ...teacherofficialClasses]
+        // teacher = [...new Map(teacher.map(v => [JSON.stringify(v), v])).values()]
+        // console.log({ teacher })
 
         return (
             <div className='student-judge-page_container container-fluid columns' style={{ minHeight: "60vh" }}>
@@ -58,38 +59,133 @@ function StudentJudgePage() {
                                     <th>STT</th>
                                     {/* <th></th> */}
                                     <th>Tên giáo viên</th>
-                                    {/* <th>Tên lớp học</th>
-                            <th>Loại lớp học</th>
-                            <th>Hạng mục</th>
-                            <th>Cấp độ </th> */}
+                                    <th>Tên lớp học</th>
+                                    <th>Loại lớp học</th>
+                                    <th>Hạng mục</th>
+                                    <th>Cấp độ </th>
                                     <th>Ngày đánh giá </th>
-                                    <th>Đánh giá </th>
+                                    <th>Đã đánh giá </th>
+                                    <th> </th>
                                 </tr>
                             </thead>
                             <tbody style={{ textAlign: "left" }}>
                                 <>
-                                    {teacher && teacher?.map((item) =>
+                                    {demoClasses && demoClasses.map((item) =>
+
                                         <tr key={item._id}>
 
                                             <td>
-                                                {teacher.indexOf(item) + 1}
+                                                {demoClasses.indexOf(item) + 1}
                                             </td>
-                                            <td>{item.account_id.full_name}</td>
-                                            <td>
+                                            <td>{item.id_demo_course.id_course.id_teacher.account_id.full_name}</td>
+                                            <td>{item.id_demo_course.id_course.name}</td>
 
-                                            {studentRating &&
-                                                studentRating.filter(i => i.id_teacher == item._id).map(i => <p>{moment(i.createdAt).format('DD/MM/YYYY HH:mm')}</p>)}
-                                            </td>
-                                           
-                                            <td>
-                                           
-                                                {/* {Date.now()>= new Date(item.id_demo_course.end_date+" "+ item.id_demo_course.schedule.split(" - ")[0]).getTime()?
-                                         <Link to={`/profile/${account_id}/judgeTeacher/${item.id_demo_course.id_course._id}`}>Đánh giá </Link>:<p>Đánh giá</p>
-                                        } */}
-                                                <Link to={`/profile/${account_id}/judgeTeacher/${item._id}`}>Đánh giá </Link>
-                                            </td>
-                                            
+                                            <td>Lớp học thử </td>
+                                            <td>{item.id_demo_course.id_course.category_id.type}</td>
+                                            <td>{item.id_demo_course.id_course.category_id.level}</td>
+                                            {item.isJudged ?
+                                                (<>
+                                                    <td>
+                                                    {studentRating && studentRating.length > 0 &&
+                                                        studentRating
+                                                        .filter(i => i.id_teacher._id == item.id_demo_course.id_course.id_teacher._id
+                                                            && i.id_course._id == item.id_demo_course.id_course._id)
+                                                            .filter(i => i.isDemo == true)
+                                                            .map(i =>
+                                                                    <p>{moment(i.createdAt).format("DD/MM/YYYY")} </p>
+                                                               )
+                                                    }
+                                                    </td>
+                                                    
+                                                    <td>
+                                                                        <AiOutlineCheckCircle style={{
+                                                                            color: "green",
+                                                                            cursor: "pointer",
+                                                                            width: "1.5rem",
+                                                                            height: "1rem",
+                                                                        }} />
+                                                                    </td>
+                                                </>) :
+                                                (<>
+                                                    <td></td>
+                                                    <td>
+                                                        <Link to={`/profile/${account_id}/judgeTeacher/${item.id_demo_course.id_course._id}`}>Đánh giá </Link>
+
+                                                    </td>
+                                                </>)
+                                            }
                                         </tr>
+
+                                    )}
+                                    {officiaClasses && officiaClasses.map((item) =>
+
+                                        <tr key={item._id}>
+
+                                            <td>
+                                                {demoClasses ? (officiaClasses.indexOf(item) + 1 + demoClasses.length) : (officiaClasses.indexOf(item) + 1)}
+                                            </td>
+                                            <td>{item.id_course.id_teacher.account_id.full_name}</td>
+                                            <td>{item.id_course.name}</td>
+
+                                            <td>Lớp học chính thức </td>
+                                            <td>{item.id_course.category_id.type}</td>
+                                            <td>{item.id_course.category_id.level}</td>
+                                            {item.isJudged ?
+                                                (<>
+                                                    <td>
+                                                        {studentRating && studentRating.length > 0 &&
+                                                            studentRating.filter(i => i.id_teacher._id == item.id_course.id_teacher._id
+                                                                && i.id_course == item.id_course._id)
+                                                                .filter(i => i.isDemo == false)
+                                                                .map(i =>
+                                                                    
+                                                                        <p>{moment(i.createdAt).format("DD/MM/YYYY")} </p>
+
+                                                                   )
+                                                        }
+                                                    </td>
+
+                                                    <td>
+                                                        <AiOutlineCheckCircle style={{
+                                                            color: "green",
+                                                            cursor: "pointer",
+                                                            width: "1.5rem",
+                                                            height: "1rem",
+                                                        }} />
+                                                    </td>
+                                                </>) :
+                                                (<>
+                                                    {/* <td> Chưa đánh giá </td> */}
+                                                    <td></td>
+                                                    <td>
+                                                        <Link to={`/profile/${account_id}/judgeTeacher/${item.id_course._id}`}>Đánh giá </Link>
+
+                                                    </td>
+                                                </>)
+                                            }
+                                            {/* <td>{item.isJudged? "Đã đánh giá" : "Chưa đánh giá"}</td>
+                                            {studentRating &&
+                                              studentRating.filter(i => i.id_teacher == item.id_course.id_teacher._id).length >0?
+                                              studentRating.filter(i => i.id_teacher == item.id_course.id_teacher._id)
+                                              .filter(i => i.isDemo==false)
+                                              .map(i=>
+                                                <>
+                                                    <td>{moment(i.createdAt).format("DD/MM/YYYY")} </td>
+                                                    <td>Đã đánh giá  </td>
+                                                </>)
+                                                :
+                                                <>
+                                                <td> </td>
+                                                <td>
+                                                    <Link to={`/profile/${account_id}/judgeTeacher/${item.id_course.id_teacher._id}`}>Đánh giá </Link>
+
+                                                </td>
+                                            </>
+                                                
+                                                 
+                                            } */}
+                                        </tr>
+
                                     )}
 
                                 </>

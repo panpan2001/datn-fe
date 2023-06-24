@@ -15,6 +15,9 @@ import TeacherCurrentClassForm from '../components/CurrentClassForm/TeacherCurre
 import StudentCurrentClassForm from '../components/CurrentClassForm/StudentCurrentClassForm';
 import EditTeacherForm from '../components/EditTeacherForm.jsx';
 import DetailStudentJudgepage from '../pages/DetailStudenJudgePage';
+import EditCourseForm from '../components/EditCourseForm/EditCourseForm';
+import EditDemoCourseForm from '../components/EditCourseForm/EditDemoCourseForm';
+import StudentRatingDetailForm from '../components/StudentRatingDetailForm';
 
 const LandingPage = React.lazy(() => import('../pages/LandingPage'));
 const LoginPage = React.lazy(() => import('../pages/LoginPage'));
@@ -39,7 +42,7 @@ const StudentManagementPage = React.lazy(() => import('../pages/StudentManagemen
 const CourseManagementPage = React.lazy(() => import('../pages/CourseManagementPage'));
 const TeacherManagementPage = React.lazy(() => import('../pages/TeacherManagementPage'));
 const StudentJudgePage = React.lazy(() => import('../pages/StudentJudgePage'));
-
+const StudentJudgeManagementPage = React.lazy(() => import('../pages/StudentJudgeManagementPage'));
 function ContainerRoutes() {
   const isLoggedIn = useSelector((state) => state.login.login?.isLoggedIn)
   const currentUSer = useSelector((state) => state.login.login?.currentUser)
@@ -123,6 +126,11 @@ function ContainerRoutes() {
             <Route path='/admin/teacher' element={<TeacherManagementPage />} />
             <Route path="/admin/teacher/:id" element={<EditTeacherForm />} />
             <Route path='/admin/course' element={<CourseManagementPage />} />
+            <Route path='/admin/studentJudge' element={<StudentJudgeManagementPage />} />
+            <Route path='/admin/studentJudge/:idRating' element={<StudentRatingDetailForm />}  />
+
+              <Route path='/admin/course/:idCourse' element={<EditCourseForm />} />
+              <Route path='/admin/course/demo/:idDemoCourse' element={<EditDemoCourseForm />} />
             <Route path="/admin/*" element={<NotFound />} />
           </Route>
 

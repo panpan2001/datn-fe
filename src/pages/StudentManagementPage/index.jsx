@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import getAllAccounts from '../../redux/actions/Account/GetAllAccounts'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -10,6 +10,9 @@ import Item from '../../components/Item'
 import deleteStudent from '../../redux/actions/Student/DeleteStudent'
 import { deleteStudentSuccess } from '../../redux/slices/Student/deleteStudentSlice'
 import createAxiosJWT from '../../utils/createInstance'
+import { contextProvider } from '../../layouts/ParentLayouts/AdminManagementLayout'
+import toLowerCaseNonAccentVietnamese from '../../contexts/toLowerCaseNonAccentVietnamese'
+import moment from 'moment'
 
 const StudentManagementPage = () => {
   // const user= useSelector(state=>state.account.accounts)
@@ -24,6 +27,8 @@ const StudentManagementPage = () => {
   //   if(user.accessToken) getAllAccounts(user.accessToken,dispatch)
 
   // },[])
+  const searchValue= useContext(contextProvider)
+
   const user = useSelector((state) => state.login.login?.currentUser)
   const dispatch = useDispatch()
   const accessToken = user?.accessToken
@@ -38,12 +43,37 @@ const StudentManagementPage = () => {
   const handleShowModal = (id) => {
     deleteStudent(account_id,id,accessToken,dispatch,axiosJWT)
   }
+
+  const handleSearch = (e) => {
+    return searchValue== 0 ? e :
+    (
+      toLowerCaseNonAccentVietnamese(e.account_id.full_name)
+    .includes(toLowerCaseNonAccentVietnamese(searchValue))?
+    e :
+    (toLowerCaseNonAccentVietnamese(e.account_id.email).includes(toLowerCaseNonAccentVietnamese(searchValue))?
+    e :
+    (
+      moment(e.createdAt).format('DD/MM/YYYY').toString().includes(searchValue) ? e :(
+        toLowerCaseNonAccentVietnamese(e.account_id.phone_number)
+    .includes(toLowerCaseNonAccentVietnamese(searchValue))?
+    e:(
+      (e.account_id.phone_number).includes(searchValue)?
+    e:null
+    )
+      ) 
+    )
+    )
+    )
+  }
+
   if(!student) return null
   else {
 // console.table(student)
   
   return (
     <div className='student-management-page container'>
+              <strong className="is-size-3">Quản lí học viên</strong>
+
       <div className="student-management-overview_div "
         style={{
           display: "flex",
@@ -115,7 +145,9 @@ const StudentManagementPage = () => {
               </tr>
             </thead>
             <tbody>
-            {student && student.map((item) => (
+            {student && student
+            .filter((item)=>handleSearch(item))
+            .map((item) => (
                 <tr className='mb-2'>
                   <th>{student.indexOf(item) + 1}</th>
                   <td>{item.account_id && item.account_id.full_name}</td>

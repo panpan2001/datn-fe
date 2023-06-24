@@ -5,7 +5,9 @@ import { BsCurrencyDollar, BsFillStarFill } from 'react-icons/bs'
 function TeacherShortInfoRight({ studentRating, data,color }) {
   if(studentRating === null) return null
   const rating_avg_teacher=studentRating.map(i=>i.rating_avg_teacher)
-  const avg= (rating_avg_teacher.reduce((a, b) => a + b, 0)/rating_avg_teacher.length).toFixed(2) ||0
+  let  avg= (rating_avg_teacher.reduce((a, b) => a + b, 0)/rating_avg_teacher.length).toFixed(2) 
+  // console.log({avg}, )
+  if(avg=="NaN") avg=0
   return (
     
     <div className="card teacher-short-info-right_card" style={{backgroundColor:`${color}`}}>
@@ -39,7 +41,7 @@ function TeacherShortInfoRight({ studentRating, data,color }) {
                style={{ fill: "yellow",
               
                }} />
-              <p className='is-size-5 mt-1'>{avg}/5</p>
+              <p className='is-size-5 mt-1'>{avg }/5</p>
 
             </div>
             {/* <div className="sub-title-right">

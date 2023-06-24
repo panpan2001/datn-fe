@@ -38,10 +38,10 @@ const FindingTeacherPage = () => {
         return str;
     }
     const [search, setSearch] = useState("")
-const handleSearch = (item) => {
-    return search === "" ? item :
+    const handleSearch = (item) => {
+        return search === "" ? item :
             toLowerCaseNonAccentVietnamese(item.account_id.full_name.toLowerCase()).includes(toLowerCaseNonAccentVietnamese(search))
-}
+    }
     const [filterGender, setFilterGender] = useState("")
     // const [filterMajor, setFilterMajor] = useState("")
     // const [filterUniversity, setFilterUniversity] = useState("")
@@ -65,7 +65,7 @@ const handleSearch = (item) => {
         { value: 0, name: "IELTS 6.5" },
     ]
     const listGender = [
-       
+
         { value: 2, name: "Nam" },
         { value: 1, name: "Nữ" },
 
@@ -73,32 +73,49 @@ const handleSearch = (item) => {
     const handleFilterRating = (item) => {
 
         if (filterRating == "") return item
+        else if (parseInt(filterRating.split(" - ")[0]) == 0) {
+            const condition1 = parseInt(filterRating.split(" - ")[0])
+            const condition2 = parseInt(filterRating.split(" - ")[1])
+            let a = studentRating
+                .filter(i => i.id_teacher._id == item._id)
+            if (a.length == 0) return item
+            else {
+                let b = studentRating
+                    .filter(i => i.id_teacher._id == item._id)
+                    .map(i => i.rating_avg_teacher)
+                b = b.reduce((a, b) => a + b, 0) / a.length
+                return b > condition1 && b <= condition2 ? item : null
+            }
+        }
         else {
-            let dup = []
             console.log("filterRating", parseInt(filterRating.split(" - ")[0]))
             const condition1 = parseInt(filterRating.split(" - ")[0])
             const condition2 = parseInt(filterRating.split(" - ")[1])
-            const a = studentRating.filter(j => j.rating_avg_teacher >= condition1 && 
-                j.rating_avg_teacher <= condition2)
-                .map(i => i.id_teacher)
-            console.log({ a })
-            for (let i = 0; i < a.length; i++) {
-                const f = teachers.filter(j => j._id == a[i])
-                dup = [...dup, ...f]
+            let a = studentRating
+                .filter(i => i.id_teacher._id == item._id)
+                .map(i => i.rating_avg_teacher)
+            // console.log("a chua tinh", { a })
+            if (a.length > 0) {
+                a = a.reduce((a, b) => a + b, 0) / a.length
+                // console.log("a tinh", { a })
+                return a > condition1 && a <= condition2 ? item : null
             }
-            console.log({ dup })
-            return dup
+            else {
+                return null
+            }
+
         }
 
 
     }
-const handleFilterDegree = (item) => {
-   
-    return filterDegree == "" ? item : item.id_degree.degree_level == filterDegree.trim()
-}
-const handleFilterGender = (item) => {
-    return filterGender == "" ? item : item.account_id.gender == filterGender.trim().toLowerCase()
-}
+    const handleFilterDegree = (item) => {
+        //    console.log("FilterDegree",filterDegree == "" ? item : item.id_degree.degree_level == filterDegree.trim())
+        return filterDegree == "" ? item : item.id_degree.degree_level == filterDegree.trim()
+    }
+    const handleFilterGender = (item) => {
+        // console.log("FilterGender",filterGender == "" ? item : item.account_id.gender == filterGender.trim().toLowerCase())
+        return filterGender == "" ? item : item.account_id.gender == filterGender.trim().toLowerCase()
+    }
 
     return (
         <div className='finding-teacher-page_container container'>
@@ -107,7 +124,13 @@ const handleFilterGender = (item) => {
                     <div className="column is-8 is-centered finding-teacher-page_hero-left">
                         <p> <strong className='is-size-3'>Tìm kiếm giáo viên tiếng Anh <br />và bắt đầu hành trình tuyệt vời của riêng bạn</strong> </p>
                         <br />
-                        <SearchBar width={'50rem'} search={search} setSearch={setSearch} name="Tìm kiếm giáo viên" />
+                        <SearchBar
+                            width={'45rem'}
+                            search={search}
+                            setSearch={setSearch}
+                            name="Tìm kiếm giáo viên"
+                            marginTop={'.25rem'}
+                            marginLeft={"-2.5rem"} />
 
 
 
@@ -128,21 +151,27 @@ const handleFilterGender = (item) => {
                         <div className="columns is-multiline ">
                             <div className="column is-3">
 
-                                <div className="columns is-multiline filter_container mb-6">
+                                <div className="columns is-multiline filter_container mb-6"
+                                    style={{ display: 'flex', flexDirection: 'column', }}>
 
                                     <FilterCategory
+                                        // styles={{minHeight: '30vh'}}
                                         title={'Điểm đánh giá'}
                                         filter={filterRating}
                                         setFilter={setFilterRating}
                                         list={listRating}
                                     />
                                     <FilterCategory
+                                        // styles={{minHeight: '30vh'}}
+
                                         title={'Chứng chỉ'}
                                         filter={filterDegree}
                                         setFilter={setFilterDegree}
                                         list={listDegree}
                                     />
                                     <FilterCategory
+                                        // styles={{minHeight: '30vh'}}
+
                                         title={'Giới tính'}
                                         filter={filterGender}
                                         setFilter={setFilterGender}
@@ -152,15 +181,15 @@ const handleFilterGender = (item) => {
                             </div>
                             <div className="column is-8 ml-6 ">
                                 {
-                                    teachers.filter((item) =>handleSearch(item))
-                                       
-                                        .filter((item)=>handleFilterRating(item))
-                                         .filter((item) => handleFilterDegree(item))
-                                         .filter((item) => handleFilterGender(item))
+                                    teachers.filter((item) => handleSearch(item))
+
+                                        .filter((item) => handleFilterRating(item))
+                                        .filter((item) => handleFilterDegree(item))
+                                        .filter((item) => handleFilterGender(item))
                                         .map((teacher) =>
                                             <>
                                                 <TeacherShortInfoLeft
-                                                    studentRating={studentRating && studentRating.filter(item => item.id_teacher == teacher._id)}
+                                                    studentRating={studentRating && studentRating.filter(item => item.id_teacher._id == teacher._id)}
                                                     color="#b5e5ff" data={teacher} />
                                                 <br />
                                                 <br />

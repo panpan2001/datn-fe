@@ -31,7 +31,7 @@ function EditTeacherForm() {
 
     }, [])
     const teacher = useSelector(state => state.getTeacherById?.teacher?.currentTeacher)
-    // console.log({teacher})
+    console.log({teacher})
     const [image, setImages] = useState("")
     const [imageAcademic, setImagesAcademic] = useState("")
     const [imageDegree, setImagesDegree] = useState("")

@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import '../../assets/styles/AdminSidebar.css'
 import { GiHamburgerMenu } from 'react-icons/gi'
 import Item from '../Item'
-import { AiOutlineLogout, AiOutlineHome, AiOutlineTeam, AiOutlineUser, AiOutlineSolution, AiOutlineMacCommand } from 'react-icons/ai'
+import { AiOutlineLogout, AiOutlineHome, AiOutlineTeam, AiOutlineUser, AiOutlineSolution, AiOutlineMacCommand, AiOutlineForm } from 'react-icons/ai'
 import { BiExit } from 'react-icons/bi'
 import { useSelector } from 'react-redux'
 function AdminSidebar() {
@@ -96,6 +96,8 @@ function AdminSidebar() {
         <Item icon={< AiOutlineTeam />} name={"Học viên"} navigate={'/admin/student'} />
         <Item icon={< AiOutlineUser />} name={"Giáo viên"} navigate={'/admin/teacher'}/>
         <Item icon={< AiOutlineSolution  />} name={"Khóa học "} navigate={'/admin/course'} />
+        <Item icon={< AiOutlineForm  />} name={"Đánh giá "} navigate={'/admin/studentJudge'} />
+
       </div>
     </div>
     <Link to={'/profile/'+user._id}>

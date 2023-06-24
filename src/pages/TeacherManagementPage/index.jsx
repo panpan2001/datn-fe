@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Table from '../../components/Table'
 import '../../assets/styles/TeacherManagementPage.css'
 import getAllTeachers from '../../redux/actions/Teacher/GetAllTeachersInfo'
@@ -15,12 +15,13 @@ import createAxiosJWT from '../../utils/createInstance'
 import { deleteTeacherSuccess } from '../../redux/slices/Teacher/DeleteTeacherSlice'
 import deleteTeacher from '../../redux/actions/Teacher/DeleteTeacher'
 import NotFound from '../NotFound'
-
-
+import { contextProvider } from '../../layouts/ParentLayouts/AdminManagementLayout'
+import toLowerCaseNonAccentVietnamese from '../../contexts/toLowerCaseNonAccentVietnamese'
 
 
 function TeacherManagementPage() {
-  
+  const searchValue= useContext(contextProvider)
+
   useEffect(() => {
     getAllTeachers(dispatch)
   }, [])
@@ -42,6 +43,20 @@ function TeacherManagementPage() {
     // console.log({id},{account_id})
     deleteTeacher(account_id, id, dispatch, access_token, axiosJWT,navigate)
    
+  }
+  const handleSearch = (e) => {
+    return searchValue== 0 ? e :
+    (
+      toLowerCaseNonAccentVietnamese(e.account_id.full_name)
+    .includes(toLowerCaseNonAccentVietnamese(searchValue))?
+    e :
+    (toLowerCaseNonAccentVietnamese(e.account_id.email).includes(toLowerCaseNonAccentVietnamese(searchValue))?
+    e :(
+      moment(e.createdAt).format('DD/MM/YYYY').toString().includes(searchValue) ? e :null 
+    )
+    
+    )
+    )
   }
   if(!teacher) return (<NotFound/>)
   else {
@@ -113,7 +128,9 @@ function TeacherManagementPage() {
               </thead>
   
               <tbody>
-              {teacher && teacher.map((item) => (
+              {teacher && teacher
+              .filter((item) => handleSearch(item))
+              .map((item) => (
       <>
         <tr className='mb-2'>
           <>

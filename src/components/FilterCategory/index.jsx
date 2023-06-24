@@ -4,7 +4,7 @@ function FilterCategory({ title, filter, setFilter, list }) {
 
   return (
     <div className="column "
-      style={{ display: "flex", flexDirection: 'column' }}
+      style={{ display: "flex", flexDirection: 'column' , minHeight: '20vh'}}
     >
       <strong className='is-size-5 mb-2' style={{ textAlign: "left" }}>{title}</strong>
       <div className=" field select ">

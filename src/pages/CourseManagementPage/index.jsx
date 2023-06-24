@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import getAllDemoCourses from '../../redux/actions/DemoCourse/GetAllDemoCourses'
 import getAllCourses from '../../redux/actions/Course/GetAllCourses'
 import { useDispatch, useSelector } from 'react-redux'
@@ -11,13 +11,19 @@ import { getAllCoursesSuccess } from '../../redux/slices/Course/getAllCourse'
 import { getAllDemoCoursesSuccess } from '../../redux/slices/DemoCourse/getAllDemoCourseSlice'
 import adminDelCourse from '../../redux/actions/Course/AdminDelCourse'
 import adminDelDemoCourse from '../../redux/actions/DemoCourse/adminDelDemoCourse'
+import { useNavigate } from 'react-router-dom'
+import { contextProvider } from '../../layouts/ParentLayouts/AdminManagementLayout'
+import toLowerCaseNonAccentVietnamese from '../../contexts/toLowerCaseNonAccentVietnamese'
 function CourseManagementPage() {
+  const searchValue= useContext(contextProvider)
+
   const user = useSelector((state) => state.login.login?.currentUser)
   const dispatch = useDispatch()
   const accessToken = user?.accessToken
   const axiosJWTCourse = createAxiosJWT(dispatch, user, getAllCoursesSuccess)
   const axiosJWTDemoCourse = createAxiosJWT(dispatch, user, getAllDemoCoursesSuccess)
   const account_id = user?._id
+  const navigate=useNavigate()
   useEffect(() => {
     getAllDemoCourses(dispatch)
     getAllCourses(dispatch)
@@ -32,10 +38,35 @@ function CourseManagementPage() {
   const handleDeleteDemoCourse = (id) => {
     adminDelDemoCourse(id, account_id, dispatch, axiosJWTDemoCourse, accessToken)
   }
-
+const handleGoToDetailCourse = (id) => {
+  console.log("id course ",id)
+  navigate(`/admin/course/${id}`)
+}
+const handleGoToDetailDemoCourse = (id) => {
+  console.log("id demo ",id)
+  navigate(`/admin/course/demo/${id}`)
+}
+const handleSearchCourse = (e) => {
+  return searchValue== 0 ? e : 
+  (toLowerCaseNonAccentVietnamese(e.name)
+  .includes(toLowerCaseNonAccentVietnamese(searchValue))?
+  e :
+  null
+    ) 
+  
+  
+}
+const handleSearchDemoCourse = (e) => {
+  return searchValue== 0 ? e : 
+  (toLowerCaseNonAccentVietnamese(e.id_course.name)
+  .includes(toLowerCaseNonAccentVietnamese(searchValue))?
+  e :
+  null
+    )
+}
   return (
     <div className='course-management-page container'>
-      <strong className='is-size-4'>Quản lí khóa học</strong>
+      <strong className='is-size-3'>Quản lí khóa học</strong>
 
       <div className="course-management-overview_div "
         style={{
@@ -114,7 +145,9 @@ function CourseManagementPage() {
                 </tr>
               </thead>
               <tbody>
-                {courses && courses.map((item) => (
+                {courses && courses
+                .filter(item=>handleSearchCourse(item))
+                .map((item) => (
                   <tr className='mb-2'>
                     <th>{courses.indexOf(item) + 1}</th>
                     <td>{item.name}</td>
@@ -123,7 +156,7 @@ function CourseManagementPage() {
                     <td>{item.time_per_lesson}</td>
                     <td>{item.learning_period}</td>
                     <td>
-                      <AiOutlineEdit
+                      <AiOutlineEdit onClick={() => handleGoToDetailCourse(item._id)}
                         style={{
                           color: '#008947',
                           cursor: 'pointer',
@@ -227,7 +260,9 @@ function CourseManagementPage() {
                 </tr>
               </thead>
               <tbody>
-                {demoCourses && demoCourses.map((item) => (
+                {demoCourses && demoCourses
+                .filter(item=>handleSearchDemoCourse(item))
+                .map((item) => (
                   <tr className='mb-2'>
                     <th>{demoCourses.indexOf(item) + 1}</th>
                     <td>{item.id_course&& item.id_course.name}</td>
@@ -236,7 +271,7 @@ function CourseManagementPage() {
                     <td>{item.id_course&&item.id_course.time_per_lesson}</td>
                     <td>{item.learning_period}</td>
                     <td>
-                      <AiOutlineEdit
+                      <AiOutlineEdit onClick={()=>handleGoToDetailDemoCourse(item._id)}
                         style={{
                           color: '#008947',
                           cursor: 'pointer',

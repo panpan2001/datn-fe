@@ -12,7 +12,7 @@ if(  studentRating !== null ){
     let  avg= 0
 
     const rating_avg_teacher=studentRating?.map(i=>i.rating_avg_teacher)
-    console.log({rating_avg_teacher})
+    // console.log({rating_avg_teacher})
     if (rating_avg_teacher.length>0)  avg=(rating_avg_teacher?.reduce((a, b) => a + b, 0)/rating_avg_teacher.length).toFixed(2) 
     else  avg=0
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { CiCirclePlus } from 'react-icons/ci'
 import FilterCategory from '../../components/FilterCategory'
 import { useDispatch, useSelector } from 'react-redux'
@@ -11,10 +11,13 @@ import moment from 'moment/moment'
 import Item from '../../components/Item'
 import { delAccountSuccess } from '../../redux/slices/Account/DeleteAccountSlice'
 import DelAccounts from '../../redux/actions/Account/DelAccounts'
+import toLowerCaseNonAccentVietnamese from '../../contexts/toLowerCaseNonAccentVietnamese'
 
-
-
+import { contextProvider } from '../../layouts/ParentLayouts/AdminManagementLayout'
 function AccountManagementPage() {
+  const searchValue= useContext(contextProvider)
+  console.log("search in account management",searchValue)
+
   const user = useSelector((state) => state.login.login?.currentUser)
   const dispatch = useDispatch()
   const accessToken = user?.accessToken
@@ -36,8 +39,29 @@ function AccountManagementPage() {
     else if (role == "teacher") return "#C2E7FF"
     else return "#B2FFDA"
   }
+// console.log({accounts})
+  const handleSearch = (e) => {
+    return searchValue== 0 ? e : 
+    (toLowerCaseNonAccentVietnamese(e.full_name)
+    .includes(toLowerCaseNonAccentVietnamese(searchValue))?
+    e :
+    (toLowerCaseNonAccentVietnamese(e.email)
+    .includes(toLowerCaseNonAccentVietnamese(searchValue)))?
+    e :
+    (moment(e.date_of_birth).format('DD/MM/YYYY').toString().includes(searchValue) ? e :
+    moment(e.createdAt).format('DD/MM/YYYY').toString().includes(searchValue) ? e :
+    (
+        (e.phone_number).includes(searchValue)?
+    e:null
+      ) 
+    ) 
+    )
+    
+  }
   return (
     <div className='account-management-page container'>
+              <strong className="is-size-3">Quản lí tài khoản</strong>
+
       <div className="account-management-overview_div "
         style={{
           display: "flex",
@@ -113,7 +137,9 @@ function AccountManagementPage() {
                 </tr>
               </thead>
               <tbody>
-                { accounts.map((item) => (
+                { accounts.
+                filter(item=>handleSearch(item))
+                .map((item) => (
                   <>
                    <tr className='mb-2' key={item._id} style={{ background: `${checkColor(item.role_name)}` }}>
                     <th>{accounts.indexOf(item) + 1}</th>

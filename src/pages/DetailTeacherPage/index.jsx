@@ -51,6 +51,7 @@ function DetailTeacherpage() {
 
     if (studentRating && teacher) {
         studentRating = studentRating.filter(item => item.id_teacher == teacher._id)
+        console.log({ studentRating })
         const rating_avg_teacher = studentRating.map(i => i.rating_avg_teacher)
         let avg = 0
         let rating_content_1 = 0

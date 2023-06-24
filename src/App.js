@@ -5,6 +5,8 @@ import { ToastContainer } from 'react-toastify';
 import '../src/services/firebase';
 import { requestPermission } from '../src/services/firebase';
 import firebase from '../src/services/firebase';
+import VideoMeetingPage from './pages/VideoMeetingPage';
+
 
 function App() {
   // useEffect(() => {
@@ -17,6 +19,7 @@ function App() {
     
   {/* <p>helko</p> */}
   <ToastContainer/>
+  {/* <VideoMeetingPage/> */}
       </div>
   );
 }
