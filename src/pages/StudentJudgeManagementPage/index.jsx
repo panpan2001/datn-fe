@@ -86,7 +86,7 @@ function StudentJudgeManagementPage() {
                     display: "flex",
                     flexDirection: "row",
                     gap: "2rem",
-                    alignItems: "flex-end",
+                    alignItems: "center",
                     justifyContent: "flex-end",
                     marginRight: "4rem"
                 }}>
@@ -113,7 +113,8 @@ function StudentJudgeManagementPage() {
                             alignItems: "center",
                             justifyContent: "center",
                             borderRadius: "50%",
-                            marginTop: "-1.5rem",
+                            marginTop: ".5rem",
+                            marginRight: ".5rem",
                             cursor: "pointer",
                             border: "none",
                             backgroundColor: " #C2E7FF",

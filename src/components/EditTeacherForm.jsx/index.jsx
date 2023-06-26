@@ -96,7 +96,12 @@ function EditTeacherForm() {
                 <strong className='is-size-4'>Chỉnh sửa thông tin giáo viên</strong>
                 <div className="detail-teacher-info_container">
                     <div className="content columns">
-                        <div className="column is-8 content-left mr-6">
+                        <div className="column is-8 content-left "
+                        style={{
+                            padding: "2rem",
+                            margin:"auto",
+                            marginTop:"1rem"
+                        }}>
                             <strong className='is-size-5 '>Thông tin cá nhân</strong>
                             <div className="columns is-multiline ">
                                 <div className="column is-6">

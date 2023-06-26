@@ -124,7 +124,8 @@ else return "#B2FFDA"
                 color: "#29A3F0",
                 cursor: "pointer",
                 gap: "0.5rem",
-              }}><p>Xem thêm </p>
+              }}>
+                <p style={{ fontSize: "1.25rem" }}>Xem thêm </p>
                 <AiOutlineLogin style={{
                   width: "1.5rem", height: "1.5rem",
                   borderRadius: "50%",
@@ -187,7 +188,8 @@ else return "#B2FFDA"
                 color: "#29A3F0",
                 cursor: "pointer",
                 gap: "0.5rem",
-              }}><p>Xem thêm </p>
+              }}>
+                <p style={{ fontSize: "1.25rem" }}>Xem thêm </p>
                 <AiOutlineLogin style={{
                   width: "1.5rem", height: "1.5rem",
                   borderRadius: "50%",
@@ -239,7 +241,8 @@ else return "#B2FFDA"
                 color: "#29A3F0",
                 cursor: "pointer",
                 gap: "0.5rem",
-              }}><p>Xem thêm </p>
+              }}>
+                <p style={{ fontSize: "1.25rem" }}>Xem thêm </p>
                 <AiOutlineLogin style={{
                   width: "1.5rem", height: "1.5rem",
                   borderRadius: "50%",
@@ -291,7 +294,8 @@ else return "#B2FFDA"
                 color: "#29A3F0",
                 cursor: "pointer",
                 gap: "0.5rem",
-              }}><p>Xem thêm </p>
+              }}>
+                <p style={{ fontSize: "1.25rem" }}>Xem thêm </p>
                 <AiOutlineLogin style={{
                   width: "1.5rem", height: "1.5rem",
                   borderRadius: "50%",
@@ -349,7 +353,8 @@ else return "#B2FFDA"
                 color: "#29A3F0",
                 cursor: "pointer",
                 gap: "0.5rem",
-              }}><p>Xem thêm </p>
+              }}>
+                <p style={{ fontSize: "1.25rem" }}>Xem thêm </p>
                 <AiOutlineLogin style={{
                   width: "1.5rem", height: "1.5rem",
                   borderRadius: "50%",
