@@ -17,7 +17,7 @@ function CreateCourseForm() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   let teacher = useSelector(state => state.getTeacherByAccountId.teacher?.currentTeacher)
-  console.log({teacher})
+  console.log({ teacher })
   const user = useSelector((state) => state.login.login?.currentUser)
   const accessToken = user?.accessToken
   const id = user?._id
@@ -26,21 +26,27 @@ function CreateCourseForm() {
   const [url, setUrl] = useState('')
   // console.log({user})
 
+  // useEffect(() => {
+
+  //   getCourseCategory(dispatch)
+  //   uploadImage(images).then((res) => {
+  //     setUrl(res)
+  //   }).catch((err) => {
+  //     console.log(err)
+  //   })
+  // }, [images])
+
+
   useEffect(() => {
 
     getCourseCategory(dispatch)
-    uploadImage(images).then((res) => {
-      setUrl(res)
-    }).catch((err) => {
-      console.log(err)
-    })
-  }, [images])
+  }, [])
   const courseCategories = useSelector(state => state.getCourseCategory.courseCategories?.categories)
 
   console.log({ courseCategories })
   const formik = useFormik({
     initialValues: {
-      id_teacher: '',
+      id_teacher: "",
       name: '',
       category_id: '',
       number_of_student: '',
@@ -80,8 +86,8 @@ function CreateCourseForm() {
       const course_category_id = courseCategories.filter(courseCategory => courseCategory.type === type && courseCategory.level === level)[0]?._id
       const checkDemoClass = values.isDemoClass == 'true'
       console.log(checkDemoClass)
-const cost= checkDemoClass == true ?  "50000" : values.cost
-      // console.log(values)
+      const cost = checkDemoClass == true ? "30000" : values.cost
+      console.log(values)
       let value = {
         id_teacher: teacher._id,
         name: values.name,
@@ -89,15 +95,15 @@ const cost= checkDemoClass == true ?  "50000" : values.cost
         number_of_student: values.number_of_student,
         time_per_lesson: values.time_per_lesson,
         learning_period: values.learning_period,
-        cost: cost ,
+        cost: cost,
         schedule: values.time + " - " + values.weekdays,
         start_date: values.start_date,
         end_date: values.end_date,
         description: values.description,
-        image: url,
+        // image: url,
       }
       console.log(value)
-       createCourse(axiosJWT,accessToken, value,dispatch,navigate,id)
+      createCourse(axiosJWT, accessToken, value, dispatch, navigate, id)
       // .then((res) => {
       //   console.log("res createCourse in create class page:",res,typeof res)
       //    updateTeacher( teacher._id,res,dispatch,axiosJWT,accessToken)
@@ -106,7 +112,7 @@ const cost= checkDemoClass == true ?  "50000" : values.cost
     }
   })
 
-  // console.log(formik.values)
+  console.log(formik.values)
   return (
     <form className='create-class-page_container container  is-centered ' onSubmit={formik.handleSubmit}>
       <div className='create-class-page_form is-centered ' >
@@ -114,7 +120,7 @@ const cost= checkDemoClass == true ?  "50000" : values.cost
         {
           courseCategories &&
           <div className="columns is-centered  is-multiline">
-        
+
             <div className="column is-6">
               <div className="field">
                 <label className="label">Tên lớp học</label>
@@ -175,7 +181,7 @@ const cost= checkDemoClass == true ?  "50000" : values.cost
                 {formik.errors.number_of_student && <p className="help is-danger">{formik.errors.number_of_student}</p>}
               </div>
             </div>
-           
+
             <div className="column is-6">
               <div className="field">
                 <label className="label">Giá tiền(VND/buổi học) </label>
@@ -185,13 +191,13 @@ const cost= checkDemoClass == true ?  "50000" : values.cost
                   placeholder="Giá tiền"
                   name="cost"
                   id='cost'
-                  value={formik.values.isDemoClass? formik.values.cost="50000":formik.values.cost}
+                  value={formik.values.isDemoClass ? formik.values.cost = "50000" : formik.values.cost}
                   onChange={formik.handleChange}
-                  // disabled={formik.values.isDemoClass? true:false}
+                // disabled={formik.values.isDemoClass? true:false}
                 />
-                {formik.values.isDemoClass? "":
-                
-                formik.errors.cost && <p className="help is-danger">{formik.errors.cost}</p>}
+                {formik.values.isDemoClass ? "" :
+
+                  formik.errors.cost && <p className="help is-danger">{formik.errors.cost}</p>}
               </div>
             </div>
             <div className="column is-6">
@@ -227,43 +233,40 @@ const cost= checkDemoClass == true ?  "50000" : values.cost
                 {formik.errors.end_date && <p className="help is-danger">{formik.errors.end_date}</p>}
               </div>
             </div>
-            
-          
 
-            <div className="column is-12">
-              <div className="field schedule_weekdays_filed">
-                {/* <label className="label">Lịch học </label> */}
-                <div className="schedule_weekdays_container">
-                  <div className="schedule_weekdays_item column is-12">
-                    <label className="label">Thứ </label>
-                    <input className=" input"
-                      type="text"
-                      placeholder={[...weekdaysTags]}
-                      name="weekdays"
-                      id='weekdays'
-                      value={formik.values.weekdays}
-                      onChange={formik.handleChange}
-                    />
-                    {formik.errors.weekdays && <p className="help is-danger">{formik.errors.weekdays}</p>}
-                  </div>
-                  <div className="schedule_weekdays_item column is-12 ">
-                    <label className="label">Giờ bắt đầu </label>
-                    <input
-                      className="  input"
-                      type="time"
-                      placeholder="Giờ vào "
-                      min="06:00" max="22:00"
-                      pattern="/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/"
-                      name="time"
-                      id='time'
-                      value={formik.values.time}
-                      onChange={formik.handleChange}
-                    />
-                    {formik.errors.time && <p className="help is-danger">{formik.errors.time}</p>}
-                  </div>
-                </div>
+            <div className=" column is-6">
+              <div className="field">
+                <label className="label">Thứ </label>
+                <input className=" input"
+                  type="text"
+                  placeholder={[...weekdaysTags]}
+                  name="weekdays"
+                  id='weekdays'
+                  value={formik.values.weekdays}
+                  onChange={formik.handleChange}
+                />
+                {formik.errors.weekdays && <p className="help is-danger">{formik.errors.weekdays}</p>}
               </div>
             </div>
+
+            <div className=" column is-6 " id='schedule_weekdays_item-2'>
+              <div className="field">
+                <label className="label">Giờ bắt đầu </label>
+                <input
+                  className="  input"
+                  type="time"
+                  placeholder="Giờ vào "
+                  min="06:00" max="22:00"
+                  pattern="/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/"
+                  name="time"
+                  id='time'
+                  value={formik.values.time}
+                  onChange={formik.handleChange}
+                />
+                {formik.errors.time && <p className="help is-danger">{formik.errors.time}</p>}
+              </div>
+            </div>
+
 
             <div className="column is-6">
               <div className="field">
@@ -296,8 +299,8 @@ const cost= checkDemoClass == true ?  "50000" : values.cost
                 {formik.errors.learning_period && <p className="help is-danger">{formik.errors.learning_period}</p>}
               </div>
             </div>
-           
-            
+
+
             <div className="column is-12 tooltip_column">
               <div className="field tooltip">
                 <label className="label" style={{ display: "flex" }}>Mô tả khóa học </label>
@@ -315,7 +318,7 @@ const cost= checkDemoClass == true ?  "50000" : values.cost
               </div>
 
             </div>
-            <div className="column is-12 mt-1  class-image-upload_column-is-5"
+            {/* <div className="column is-12 mt-1  class-image-upload_column-is-5"
               style={{ width: "50%" }}>
               <div className="field class-image-upload_field " >
                 <label className="label">Ảnh đại diện</label>
@@ -343,9 +346,9 @@ const cost= checkDemoClass == true ?  "50000" : values.cost
                     name='personal_image'
                   >{images && (images[0] ? images[0].name : '')}</p>
                 </div>
-                {/* {url ? "": <p className="help is-danger">Bạn chưa chọn ảnh</p>} */}
+                {url ? "": <p className="help is-danger">Bạn chưa chọn ảnh</p>}
               </div>
-            </div>
+            </div> */}
           </div>
         }
 
@@ -356,7 +359,9 @@ const cost= checkDemoClass == true ?  "50000" : values.cost
         </p> */}
 
         <div className="field is-grouped is-grouped-centered" id='signup_button'>
-          <button className="button is-info" type='submit' disabled={url ? false : true}>Tạo khóa học</button>
+          <button className="button is-info" type='submit'
+          //  disabled={url ? false : true}
+           >Tạo khóa học</button>
         </div>
       </div>
 
@@ -364,7 +369,7 @@ const cost= checkDemoClass == true ?  "50000" : values.cost
   )
 }
 
-export default CreateCourseForm 
+export default CreateCourseForm
 
 // { <div className="column is-6">
 // <div className="field">
@@ -409,7 +414,7 @@ const handleDelWeekday = (e) => {
                   id='time'
                 />
                     </div>  */}
-                        {/* <div className="column is-6">
+{/* <div className="column is-6">
               <div className="field "  >
                 <label className="label">Nhãn lớp học</label>
 

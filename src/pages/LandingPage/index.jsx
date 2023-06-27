@@ -25,7 +25,7 @@ const LandingPage = () => {
                             </button>
                         </Link>
                         {/* <br/> Hành trình chinh phục tiếng Anh của bạn luôn có chúng tôi  dong hanh  cung */}
-                        <div className="columns is-multiline is-centered">
+                        <div className="columns is-multiline is-centered" style={{width:"35rem"}}>
                             <div className="column">
                                 <p>IELTS</p>
                             </div>
@@ -127,7 +127,7 @@ const LandingPage = () => {
             <section className="landing-page_section-2 container-fluid">
 
                 <div className="columns is-centered landing-page_section-2-columns">
-                    <div className="column is-6 landing-page_section-2-columns-left">
+                    <div className="column is-6 landing-page_section-2-columns-left mb-3">
                         <div className="columns landing-page_section-2-columns-left-columns ml-3 mt-3">
 
                             <strong className="is-size-4 landing-page_section-2-strong ">Gia nhập đội ngũ giáo viên tiếng Anh của chúng tôi</strong>

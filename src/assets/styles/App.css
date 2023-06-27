@@ -5,6 +5,10 @@
   font-family: var(--font-family-app);
   font-size: var(--font-size-normal);
   background-color: var(--background-color);
+  /* overflow-y: hidden; */
+  /* overflow-x: hidden; */
+  /* min-height: 100vh; */
+
 }
 
 @layer {

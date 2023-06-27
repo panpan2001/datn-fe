@@ -69,7 +69,7 @@ function StudentJudgeManagementPage() {
         navigate(`/admin/studentJudge/${id}`)
     }
     return (
-        <div className='student-management-page container'>
+        <div className='student-management-page container mb-6'>
             <strong className="is-size-4">Đánh giá của học viên</strong>
 
             <div className="student-management-overview_div "

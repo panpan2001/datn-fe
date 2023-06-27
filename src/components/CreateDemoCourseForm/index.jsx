@@ -72,8 +72,8 @@ function CreateDemoCourseForm() {
   })
   var st=[]
   useEffect(() => {
-     st= courses.filter(course=>course._id==formik.values.id_course)
-console.log("st",st[0])
+    //  st= courses.filter(course=>course._id==formik.values.id_course)
+// console.log("st",st[0])
   },[formik.values.id_course])
 
   // console.log(formik.values)
@@ -153,15 +153,9 @@ console.log("st",st[0])
                 {formik.errors.end_date && <p className="help is-danger">{formik.errors.end_date}</p>}
               </div>
             </div>
-
-
-
-            <div className="column is-12">
-              <div className="field schedule_weekdays_filed">
-                {/* <label className="label">Lịch học </label> */}
-                <div className="schedule_weekdays_container">
-                  <div className="schedule_weekdays_item column is-12">
-                    <label className="label">Thứ </label>
+            <div className="column is-6">
+              <div className="field">
+              <label className="label">Thứ </label>
                     <input className=" input"
                       type="text"
                       placeholder={[...weekdaysTags]}
@@ -171,9 +165,13 @@ console.log("st",st[0])
                     onChange={formik.handleChange}
                     />
                     {formik.errors.weekdays && <p className="help is-danger">{formik.errors.weekdays}</p>}
-                  </div>
-                  <div className="schedule_weekdays_item column is-12 ">
-                    <label className="label">Giờ bắt đầu </label>
+                  
+              </div>
+            </div>
+
+            <div className="column is-6">
+              <div className="field">
+              <label className="label">Giờ bắt đầu </label>
                     <input
                       className="  input"
                       type="time"
@@ -186,11 +184,10 @@ console.log("st",st[0])
                     onChange={formik.handleChange}
                     />
                     {formik.errors.time && <p className="help is-danger">{formik.errors.time}</p>}
-                  </div>
-                </div>
+                
               </div>
             </div>
-
+         
          
             <div className="column is-6">
               <div className="field">

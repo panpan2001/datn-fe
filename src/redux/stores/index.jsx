@@ -56,6 +56,9 @@ import createStudentRatingReducer from "../slices/StudentRating/createStudentRat
 import getStudentRatingReducer from "../slices/StudentRating/getAllStudentRating";
 import getStudentRatingByStudentIdReducer from "../slices/StudentRating/getStudentRatingByStudentIdSlice";
 import getStudentRatingByIdReducer from "../slices/StudentRating/géttudentratingByIdSlice";
+import addVideoDemoCourseReducer from "../slices/DemoCourse/addVideoDemoCourse";
+import addLinkMeetingReducer from "../slices/Course/addLinkMeetingSlice";
+import addLinkMeetingDemoCourseReducer from "../slices/DemoCourse/addLinkMeetingDemoCourseSlice";
 
 const persistConfig = {
     key:'root',
@@ -117,7 +120,10 @@ const rootReducer= combineReducers({
     createStudentRating:createStudentRatingReducer,
     getStudentRatingByStudentId:getStudentRatingByStudentIdReducer,
     getStudentRating:getStudentRatingReducer,
-    getStudentRatingById: getStudentRatingByIdReducer
+    getStudentRatingById: getStudentRatingByIdReducer,
+    addVideoDemoCourse:addVideoDemoCourseReducer,
+    addLinkMeeting:addLinkMeetingReducer,
+    addLinkMeetingDemoCourse:addLinkMeetingDemoCourseReducer
 })
 const persistedReducer=persistReducer(persistConfig,rootReducer)
 

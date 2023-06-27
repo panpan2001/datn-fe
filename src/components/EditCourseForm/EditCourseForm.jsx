@@ -31,10 +31,10 @@ const [images, setImages] = useState("")
     console.log({course})
     // setImages(course.image)
     return (
-        <form className='detail-class-page_container   is-centered ' >
-        <div className='detail-class-page_form is-centered ' style={{margin:"auto 2rem"}}>
+        <form className='edit-class-page_container   is-centered ' >
+        <div className='edit-class-page_form is-centered ' style={{margin:"auto 2rem"}}>
           <strong className="is-size-4"> Khóa học chính thức</strong>
-          <div className="column is-12 mt-1  class-image-upload_column-is-5"
+          {/* <div className="column is-12 mt-1  class-image-upload_column-is-5"
                 style={{ width: "100%" }}>
                 <div className="field class-image-upload_field " >
                   <label className="label">Ảnh đại diện</label>
@@ -67,7 +67,7 @@ const [images, setImages] = useState("")
                     ></p>
                   </div>
                 </div>
-              </div>
+              </div> */}
             <div className="columns is-centered  is-multiline">
             
             <div className="column is-6">
@@ -188,14 +188,12 @@ const [images, setImages] = useState("")
             
     
               <div className="column is-6">
-                <div className="field schedule_weekdays_filed">
+                <div className="field schedule_filed">
                   <label className="label">Lịch học </label>
-              
-                   
                       <input className=" input"
                         type="text"
-                        name="weekdays"
-                        id='weekdays'
+                        name="schedule"
+                        id='schedule'
                         value={course.schedule}
                       />
                 </div>

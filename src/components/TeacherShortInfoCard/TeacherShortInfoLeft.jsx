@@ -15,7 +15,7 @@ if(  studentRating !== null ){
     // console.log({rating_avg_teacher})
     if (rating_avg_teacher.length>0)  avg=(rating_avg_teacher?.reduce((a, b) => a + b, 0)/rating_avg_teacher.length).toFixed(2) 
     else  avg=0
-
+ 
 
 // setTeacherRating(a=>[...a,avg])
 // console.log("TeacherShortInfoLeft",data.account_id.full_name,{avg})

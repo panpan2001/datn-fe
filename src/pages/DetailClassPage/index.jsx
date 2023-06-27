@@ -62,7 +62,7 @@ function DetailClassPage() {
                     gap: "1rem",
                 }}
             >
-                <header className="modal-card-head"
+                {/* <header className="modal-card-head"
                     style={{ width: "100%", }}
                 >
                     <p className="modal-card-title">Chi tiết khóa học</p>
@@ -76,7 +76,7 @@ function DetailClassPage() {
                         margin: 'auto',
                         display: 'block'
                     }}
-                />
+                /> */}
 
                 <div className="detail-class-name ">
                     <strong className='is-size-5'>{data.name} </strong>
@@ -149,21 +149,47 @@ function DetailClassPage() {
                                         <td>{item.schedule.split(" - ")[1]}</td>
                                         <td>{formatter.format(item.cost)}</td>
 
-                                        {currentUser ?
+                                        {/* {currentUser && 
+                                         checkRegister(item.start_date, item.schedule.split(" - ")[0])
+                                                ?
 
                                             (currentUser.role_name == "student" &&
-                                                checkRegister(item.start_date, item.schedule.split(" - ")[0])
-                                                &&
+                                                
                                                 <td>
                                                     <Link to={`/registerDemoCourse/${item._id}`}>
                                                         <button className="button is-primary">Học thử </button>
                                                     </Link>
                                                 </td>) :
-                                            <Link to={`/login`}>
+                                           ( 
+                                           
+                                           <Link to={`/login`}>
                                                 <button className="button is-primary">Học thử </button>
-                                            </Link>
+                                            </Link>)
 
+                                        } */}
+                                        {checkRegister(item.start_date, item.schedule.split(" - ")[0])
+                                            ?
+                                            (currentUser ?
+
+                                                (currentUser.role_name == "student" ?
+                                                    <td>
+                                                        <Link to={`/registerDemoCourse/${item._id}`}>
+                                                            <button className="button is-primary">Học thử </button>
+                                                        </Link>
+                                                    </td>
+                                                    : <></>
+                                                ) : <td>
+                                                    <Link to={`/login`}>
+                                                        <button className="button is-primary">Học thử </button>
+                                                    </Link>
+                                                </td>
+
+                                            )
+                                            :
+                                            <></>
                                         }
+
+
                                     </>
                                 </tr>
                             ))}
@@ -175,27 +201,29 @@ function DetailClassPage() {
                     style={{ gap: '2rem' }}
                 >
 
-                    {currentUser ?
-                        (currentUser.role_name == "student" &&
-                            // (new Date(data.start_date + " " + data.schedule.split(" - ")[0]).getTime() > new Date().getTime()) 
-                            checkRegister(data.start_date, data.schedule.split(" - ")[0])
-                            ?
+                   
+                    {checkRegister(data.start_date, data.schedule.split(" - ")[0])
+                        ?
+                        (currentUser ?
 
-                            <Link to={`/registerCourse/${idClass}`}>
-                                <button className="button is-info">Đăng kí  </button>
-                            </Link>
-                            : <></>
-                        ) :
+                            (currentUser.role_name == "student" ?
+                                <td>
+                                    <Link to={`/registerCourse/${idClass}`}>
+                                        <button className="button is-info">Đăng kí  </button>
+                                    </Link>
+                                </td>
+                                : <></>
+                            ) : <td>
+                                <Link to={`/login`}>
+                                    <button className="button is-info">Đăng kí </button>
+                                </Link>
+                            </td>
 
-                        (<>
-                            {/* <Link to='/login'>
-                                <button className="button is-primary">Học thử </button>
-                            </Link> */}
-                            <Link to='/login'>
-                                <button className="button is-info">Đăng kí  </button>
-                            </Link>
-                        </>)
+                        )
+                        :
+                        <></>
                     }
+
                     <button className="button is-danger" onClick={() => navigate(-1)}>Thoát  </button>
 
                 </div>

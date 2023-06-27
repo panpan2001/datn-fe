@@ -62,7 +62,7 @@ function TeacherManagementPage() {
   else {
     console.log({teacher})
     return (
-      <div className='teacher-management-page_container container is-centered'>
+      <div className='teacher-management-page_container container is-centered mb-6'>
         <strong className="is-size-3">Quản lí giáo viên</strong>
   
         <div className="teacher-management-overview_div ">

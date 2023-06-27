@@ -59,7 +59,7 @@ function AccountManagementPage() {
     
   }
   return (
-    <div className='account-management-page container'>
+    <div className='account-management-page container mb-6'>
               <strong className="is-size-3">Quản lí tài khoản</strong>
 
       <div className="account-management-overview_div "

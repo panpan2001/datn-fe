@@ -116,6 +116,18 @@ const FindingTeacherPage = () => {
         // console.log("FilterGender",filterGender == "" ? item : item.account_id.gender == filterGender.trim().toLowerCase())
         return filterGender == "" ? item : item.account_id.gender == filterGender.trim().toLowerCase()
     }
+    // let [teacherCopy, setTeacherCopy] = useState([...teachers])
+   
+    
+    const handleResetFilter=()=>{
+        console.log("reset")
+        // const newTeachers = [...teachers]
+    //    setTeacherCopy(teachers)
+       setFilterRating('')
+       setFilterDegree('')
+       setFilterGender('')
+       setSearch("")
+    }
 
     return (
         <div className='finding-teacher-page_container container'>
@@ -151,8 +163,11 @@ const FindingTeacherPage = () => {
                         <div className="columns is-multiline ">
                             <div className="column is-3">
 
-                                <div className="columns is-multiline filter_container mb-6"
-                                    style={{ display: 'flex', flexDirection: 'column', }}>
+                                <div className=" filter_container is-multiline "
+                                    style={{ display: 'flex',
+                                     flexDirection: 'column', 
+                                    gap:"1rem"
+                                     }}>
 
                                     <FilterCategory
                                         // styles={{minHeight: '30vh'}}
@@ -177,15 +192,20 @@ const FindingTeacherPage = () => {
                                         setFilter={setFilterGender}
                                         list={listGender}
                                     />
+                                    <button className='button '
+                                        onClick={() => handleResetFilter()}
+                                    >Đặt lại </button>
                                 </div>
                             </div>
                             <div className="column is-8 ml-6 ">
                                 {
-                                    teachers.filter((item) => handleSearch(item))
+                                   teachers.filter((item) => handleSearch(item))
 
                                         .filter((item) => handleFilterRating(item))
                                         .filter((item) => handleFilterDegree(item))
                                         .filter((item) => handleFilterGender(item))
+                                        // .filter((item) => handleResetFilter(item))
+                                        // .slice(0, 2)
                                         .map((teacher) =>
                                             <>
                                                 <TeacherShortInfoLeft
@@ -195,7 +215,7 @@ const FindingTeacherPage = () => {
                                                 <br />
                                             </>
                                         )}
-                                <Pagination />
+                                {/* <Pagination /> */}
                             </div>
 
 
@@ -215,26 +235,26 @@ const FindingTeacherPage = () => {
 
                             <div className="column is-3">
                                 <TeacherShortInfoRight
-                                    studentRating={studentRating && studentRating.filter(item => item.id_teacher == teachers[0]._id)}
+                                    studentRating={studentRating && studentRating.filter(item => item.id_teacher._id == teachers[0]._id)}
 
                                     data={teachers[0]} />
                             </div>
 
                             <div className="column is-3">
                                 <TeacherShortInfoRight
-                                    studentRating={studentRating && studentRating.filter(item => item.id_teacher == teachers[1]._id)}
+                                    studentRating={studentRating && studentRating.filter(item => item.id_teacher._id == teachers[1]._id)}
 
                                     data={teachers[1]} />
                             </div>
                             <div className="column is-3">
                                 <TeacherShortInfoRight
-                                    studentRating={studentRating && studentRating.filter(item => item.id_teacher == teachers[2]._id)}
+                                    studentRating={studentRating && studentRating.filter(item => item.id_teacher._id == teachers[2]._id)}
 
                                     data={teachers[2]} />
                             </div>
                             <div className="column is-3">
                                 <TeacherShortInfoRight
-                                    studentRating={studentRating && studentRating.filter(item => item.id_teacher == teachers[3]._id)}
+                                    studentRating={studentRating && studentRating.filter(item => item.id_teacher._id == teachers[3]._id)}
 
                                     data={teachers[3]} />
                             </div>

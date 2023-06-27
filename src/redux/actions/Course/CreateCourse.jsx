@@ -6,7 +6,7 @@ import updateTeacher from "../Teacher/UpdateTeacher"
 const createCourse=async(axiosJWT,accessToken, value,dispatch,navigate,id)=>{
     dispatch(createCourseStart())
     try {
-        // console.log("tao dang create course:",id)
+        console.log("tao dang create course:",id)
         const res= await axiosJWT.post(CourseApi,value,
             {
             headers:{

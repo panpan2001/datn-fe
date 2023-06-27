@@ -47,7 +47,7 @@ function AdminManagementLayout({ children }) {
                         </header>
                         <contextProvider.Provider value={search}  styles={{width:"30rem"}}>
 
-                            <Outlet search={search} />
+                            <Outlet  search={search} />
                         </contextProvider.Provider>
 
                     </div>

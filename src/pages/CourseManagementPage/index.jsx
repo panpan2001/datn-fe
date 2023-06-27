@@ -65,7 +65,7 @@ const handleSearchDemoCourse = (e) => {
     )
 }
   return (
-    <div className='course-management-page container'>
+    <div className='course-management-page container mt-6'>
       <strong className='is-size-3'>Quản lí khóa học</strong>
 
       <div className="course-management-overview_div "

@@ -3,6 +3,7 @@ import '../../assets/styles/TeacherShortInfoRight.css'
 import { Link } from 'react-router-dom'
 import { BsCurrencyDollar, BsFillStarFill } from 'react-icons/bs'
 function TeacherShortInfoRight({ studentRating, data,color }) {
+  console.log({studentRating})
   if(studentRating === null) return null
   const rating_avg_teacher=studentRating.map(i=>i.rating_avg_teacher)
   let  avg= (rating_avg_teacher.reduce((a, b) => a + b, 0)/rating_avg_teacher.length).toFixed(2) 
@@ -31,17 +32,31 @@ function TeacherShortInfoRight({ studentRating, data,color }) {
           />
         </figure>
       </div>
-      <div className="card-content">
-        <div className="media-content mb-6">
+      <div className="card-content" style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}>
+        <div className="media-content ">
           <p className="title is-4">{data.account_id.full_name}</p>
           <p className="subtitle is-6">{data.account_id.email}</p>
-          <div className="columns ml-3  subtitle teacher-short-info-left_sub-title" style={{paddingLeft:"25%"}}>
-            <div className="sub-title-left">
+          <div className="  subtitle teacher-short-info-left_sub-title" style={{
+            // paddingLeft:"25%",
+            marginBottom:".5rem"
+}}>
+            <div className="sub-title-left"
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              width: "100%",
+            }}
+            >
               <BsFillStarFill className='sub-title-right_icon'
                style={{ fill: "yellow",
               
                }} />
-              <p className='is-size-5 mt-1'>{avg }/5</p>
+              <p className='is-size-5 '>{avg }/5</p>
 
             </div>
             {/* <div className="sub-title-right">

@@ -208,7 +208,7 @@ function RegisterDemoCoursePage() {
 
                     <div className="register-course-group-buttons mt-6">
                         <button className="button is-primary" type='submit'  >Đăng kí</button>
-                        <button className="button is-danger" onClick={() => navigate('/findingTeacher')}>Hủy</button>
+                        <button className="button is-danger" onClick={() => navigate(`/detailTeacher/${teacher._id}`)}>Hủy</button>
                     </div>
                 </div>
 

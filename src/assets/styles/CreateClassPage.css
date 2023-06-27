@@ -87,17 +87,23 @@
   .schedule_weekday{
     display: flex !important;
   }
-
-  .schedule_weekdays_filed{
+/* 
+  #schedule_weekdays_filed{
     display: flex !important;
     flex-direction: column;
     align-items: flex-start;
 
-  }
+  } */
 
-  .schedule_weekdays_item{
+  /* .schedule_weekdays_item{
     display: flex !important;
     flex-direction: column;
     align-items: flex-start;
     padding: 0 !important;
   }
+  #schedule_weekdays_item-2{
+    display: flex !important;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 !important;
+  } */

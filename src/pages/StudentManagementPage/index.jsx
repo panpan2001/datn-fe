@@ -71,7 +71,7 @@ const StudentManagementPage = () => {
 // console.table(student)
   
   return (
-    <div className='student-management-page container'>
+    <div className='student-management-page container mb-6'>
               <strong className="is-size-3">Quản lí học viên</strong>
 
       <div className="student-management-overview_div "
