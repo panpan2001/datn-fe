@@ -23,7 +23,7 @@ navigate("/profile/"+res.data._id)
         console.log("login failure")
         dispatch(loginFailure(err))
         console.log(err)
-        toast.error('Đăng nhập thất bại !', {
+        toast.error(err.response.data, {
             position: toast.POSITION.BOTTOM_RIGHT
         });
     }

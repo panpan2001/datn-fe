@@ -14,6 +14,11 @@ import DelAccounts from '../../redux/actions/Account/DelAccounts'
 import toLowerCaseNonAccentVietnamese from '../../contexts/toLowerCaseNonAccentVietnamese'
 
 import { contextProvider } from '../../layouts/ParentLayouts/AdminManagementLayout'
+import { getAllStudentsSuccess } from '../../redux/slices/Student/getAllStudentSlice'
+import updateAccountStatus from '../../redux/actions/Account/UpdateAccountStatus'
+
+
+
 function AccountManagementPage() {
   const searchValue= useContext(contextProvider)
   console.log("search in account management",searchValue)
@@ -58,6 +63,14 @@ function AccountManagementPage() {
     )
     
   }
+
+  // const axiosJWTUpdateAccountStatus = createAxiosJWT(dispatch, user, getAccountSuccess)
+// const [show, setShow] = useState("none")
+  const handleChangeAccountStatus = (item) => {
+    // dispatch,id,axiosJWT,accessToken,success,account_id
+    updateAccountStatus(dispatch,item._id,item.is_deleted,axiosJWT,accessToken,getAccountSuccess,user?._id)
+  }
+
   return (
     <div className='account-management-page container mb-6'>
               <strong className="is-size-3">Quản lí tài khoản</strong>
@@ -134,6 +147,7 @@ function AccountManagementPage() {
                   <th>Ngày tạo</th>
                   <th></th>
                   <th></th>
+                  {/* <th></th> */}
                 </tr>
               </thead>
               <tbody>
@@ -150,6 +164,22 @@ function AccountManagementPage() {
                     <td>{item.phone_number}</td>
                     <td>{item.role_name}</td>
                     <td>{moment(item.createdAt).format('DD/MM/YYYY')}</td>
+                    <td>{item.is_deleted?
+                  <button 
+                  className='button is-danger is-small mt-2'
+                   type='button'
+                   onClick={()=>{
+                    handleChangeAccountStatus(item)
+                  }} 
+                   >Bị khóa</button>  :
+                   <button 
+                  className='button is-primary is-small mt-2'
+                   type='button'
+                   onClick={()=>{
+                    handleChangeAccountStatus(item)
+                   }}
+                    >Hoạt động</button>
+                  }</td>
                     <td  >
                       <AiOutlineEdit
                         style={{
@@ -161,8 +191,9 @@ function AccountManagementPage() {
                           marginTop: ".75rem"
                         }} />
                     </td>
-                    <td>
-                      < AiOutlineDelete onClick={() => handleDelete(item._id)}
+                    {/* <td>
+                      < AiOutlineDelete 
+                      // onClick={() => handleDelete(item._id)}
                         style={{
                           color: '#ff357e',
                           cursor: 'pointer',
@@ -173,7 +204,7 @@ function AccountManagementPage() {
                         }} />
 
                     </td>
-                   
+                    */}
                   </tr>
                   
                   </ >
@@ -184,7 +215,7 @@ function AccountManagementPage() {
           </div>
         }
       </div>
-    
+     
     </div>
   )
 }

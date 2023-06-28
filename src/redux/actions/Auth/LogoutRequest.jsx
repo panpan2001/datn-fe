@@ -6,6 +6,7 @@ import { logoutFailure,logoutStart,logoutSuccess } from "../../slices/Auth/login
 
 const logoutUser= async (dispatch,id,accessToken,axiosJWT,navigate)=>{
 dispatch(logoutStart())
+console.log({accessToken,id})
 try {
     await axiosJWT.post(LogoutApi,id,{
         headers:{token: `Bearer ${accessToken}`}

@@ -18,7 +18,14 @@ function SearchBar({width, search, setSearch,name,marginTop,marginLeft}) {
                 {/* <BsSearch/> */}
                 <input className="input" type="text" placeholder={name}  onChange={(e) => setSearch(e.target.value)} />
                 {/* <button className='is-primary button'>Tìm kiếm</button> */}
-                <AiOutlineSearch style={{ position: 'absolute', marginLeft:`${marginLeft}`, marginTop:`${marginTop}`,fill:"#dbdbdb"}}/>
+                <AiOutlineSearch 
+                style={{ position: 'absolute',
+                 marginLeft:`${marginLeft}`,
+                  marginTop:`${marginTop}`
+                  ,fill:"#dbdbdb",
+                  width:"2rem",
+                  height:"2rem"
+                  }}/>
 
         </div>
     )

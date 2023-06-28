@@ -146,6 +146,9 @@ function TeacherDemoClassCard({ item }) {
                     // lay link moi sau khi bo link bij del 
                     const newLinkVideoData = [...dataLink]
                     setDataLink(newLinkVideoData)
+                    toast.warning('Bạn mới xóa 1 link đã lưu trong hệ thống. Hãy nhấn nút "Lưu" để cập nhật thay đổi nhé!',{
+                         position: "bottom-right",
+                    })
                }
 
           }

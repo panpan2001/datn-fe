@@ -141,7 +141,7 @@ const handleSearchDemoCourse = (e) => {
                   <th>Thời lượng buổi học (ph)</th>
                   <th>Thời thời gian học (tháng)</th>
                   <th></th>
-                  <th></th>
+                  {/* <th></th> */}
                 </tr>
               </thead>
               <tbody>
@@ -166,7 +166,7 @@ const handleSearchDemoCourse = (e) => {
                           marginTop: ".75rem"
                         }} />
                     </td>
-                    <td>
+                    {/* <td>
                       < AiOutlineDelete onClick={() => handleDeleteCourse(item._id)}
                         style={{
                           color: '#ff357e',
@@ -176,7 +176,7 @@ const handleSearchDemoCourse = (e) => {
                           marginTop: ".75rem",
                           marginRight: ".75rem"
                         }} />
-                    </td>
+                    </td> */}
                   </tr>
                 ))}
               </tbody>
@@ -255,7 +255,7 @@ const handleSearchDemoCourse = (e) => {
                   <th>Lịch học</th>
                   <th>Thời lượng buổi học (ph)</th>
                   <th>Thời gian học (buổi)</th>
-                  <th></th>
+                  {/* <th></th> */}
                   <th></th>
                 </tr>
               </thead>
@@ -281,8 +281,9 @@ const handleSearchDemoCourse = (e) => {
                           marginTop: ".75rem"
                         }} />
                     </td>
-                    <td>
-                      < AiOutlineDelete onClick={() => handleDeleteDemoCourse(item._id)}
+                    {/* <td>
+                      < AiOutlineDelete 
+                      onClick={() => handleDeleteDemoCourse(item._id)}
                         style={{
                           color: '#ff357e',
                           cursor: 'pointer',
@@ -291,7 +292,7 @@ const handleSearchDemoCourse = (e) => {
                           marginTop: ".75rem",
                           marginRight: ".75rem"
                         }} />
-                    </td>
+                    </td> */}
                   </tr>
                 ))}
               </tbody>

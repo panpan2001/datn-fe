@@ -52,7 +52,7 @@ function StudentJudgePage() {
             <div className='student-judge-page_container container-fluid columns' style={{ minHeight: "60vh" }}>
                 <strong className='is-size-4'>Danh sách giáo viên</strong>
                 {demoClasses || officiaClasses ?
-                    <div className="all-teachers_table" style={{ padding: "0 3rem 0 3rem " }}>
+                    <div className="all-teachers_table" style={{ padding: "0 2rem 0 2rem " }}>
                         <table class="table is-fullwidth " style={{ backgroundColor: "#B2FFDA" }}>
                             <thead>
                                 <tr>
@@ -61,8 +61,8 @@ function StudentJudgePage() {
                                     <th>Tên giáo viên</th>
                                     <th>Tên lớp học</th>
                                     <th>Loại lớp học</th>
-                                    <th>Hạng mục</th>
-                                    <th>Cấp độ </th>
+                                    {/* <th>Hạng mục</th> */}
+                                    {/* <th>Cấp độ </th> */}
                                     <th>Ngày đánh giá </th>
                                     <th>Đã đánh giá </th>
                                     <th> </th>
@@ -81,30 +81,52 @@ function StudentJudgePage() {
                                             <td>{item.id_demo_course.id_course.name}</td>
 
                                             <td>Lớp học thử </td>
-                                            <td>{item.id_demo_course.id_course.category_id.type}</td>
-                                            <td>{item.id_demo_course.id_course.category_id.level}</td>
+                                            {/* <td>{item.id_demo_course.id_course.category_id.type}</td> */}
+                                            {/* <td>{item.id_demo_course.id_course.category_id.level}</td> */}
                                             {item.isJudged ?
                                                 (<>
-                                                    <td>
+
                                                     {studentRating && studentRating.length > 0 &&
                                                         studentRating
-                                                        .filter(i => i.id_teacher._id == item.id_demo_course.id_course.id_teacher._id
-                                                            && i.id_course._id == item.id_demo_course.id_course._id)
+                                                            .filter(i => i.id_teacher._id == item.id_demo_course.id_course.id_teacher._id
+                                                                && i.id_course._id == item.id_demo_course.id_course._id)
                                                             .filter(i => i.isDemo == true)
                                                             .map(i =>
-                                                                    <p>{moment(i.createdAt).format("DD/MM/YYYY")} </p>
-                                                               )
+                                                                <>
+                                                                    {i.countBadJudge > 0 ?
+                                                                        <>
+                                                                            <td></td>
+                                                                            <td>Đánh giá lại</td>
+                                                                            <td 
+                                                                            className='has-text-danger'
+                                                                            style={{width:"19rem"}}
+                                                                            >Báo xấu lần {i.countBadJudge}:<br/>
+                                                                            {i.messageFromSystem.map(i => 
+                                                                            <> {i}<br/></>
+                                                                           
+                                                                                )}</td>
+                                                                        </> :
+                                                                        <>
+                                                                            <td>{moment(i.createdAt).format("DD/MM/YYYY")} </td>
+
+                                                                            <td>
+                                                                                <AiOutlineCheckCircle style={{
+                                                                                    color: "green",
+                                                                                    cursor: "pointer",
+                                                                                    width: "1.5rem",
+                                                                                    height: "1rem",
+                                                                                }} />
+                                                                            </td>
+                                                                        </>
+
+                                                                    }
+
+                                                                </>
+                                                            )
                                                     }
-                                                    </td>
-                                                    
-                                                    <td>
-                                                                        <AiOutlineCheckCircle style={{
-                                                                            color: "green",
-                                                                            cursor: "pointer",
-                                                                            width: "1.5rem",
-                                                                            height: "1rem",
-                                                                        }} />
-                                                                    </td>
+
+
+
                                                 </>) :
                                                 (<>
                                                     <td></td>
@@ -112,6 +134,7 @@ function StudentJudgePage() {
                                                         <Link to={`/profile/${account_id}/judgeTeacher/${item.id_demo_course.id_course._id}`}>Đánh giá </Link>
 
                                                     </td>
+                                                    <td></td>
                                                 </>)
                                             }
                                         </tr>
@@ -128,39 +151,61 @@ function StudentJudgePage() {
                                             <td>{item.id_course.name}</td>
 
                                             <td>Lớp học chính thức </td>
-                                            <td>{item.id_course.category_id.type}</td>
-                                            <td>{item.id_course.category_id.level}</td>
+                                            {/* <td>{item.id_course.category_id.type}</td> */}
+                                            {/* <td>{item.id_course.category_id.level}</td> */}
                                             {item.isJudged ?
                                                 (<>
-                                                    <td>
-                                                        {studentRating && studentRating.length > 0 &&
-                                                            studentRating.filter(i => i.id_teacher._id == item.id_course.id_teacher._id
-                                                                && i.id_course == item.id_course._id)
-                                                                .filter(i => i.isDemo == false)
-                                                                .map(i =>
-                                                                    
-                                                                        <p>{moment(i.createdAt).format("DD/MM/YYYY")} </p>
 
-                                                                   )
-                                                        }
-                                                    </td>
+                                                    {studentRating && studentRating.length > 0 &&
+                                                        studentRating
+                                                            .filter(i => i.id_teacher._id == item.id_course.id_teacher._id
+                                                                && i.id_course._id == item.id_course._id)
+                                                            .filter(i => i.isDemo == false)
+                                                            .map(i =>
+                                                                <>
+                                                                    {i.countBadJudge > 0 ?
+                                                                        <>
+                                                                            <td></td>
+                                                                            <td>Đánh giá lại</td>
+                                                                            <td className='has-text-danger'
+                                                                              style={{width:"19rem"}}
+                                                                            >Báo xấu lần {i.countBadJudge}:<br/>
+                                                                            {i.messageFromSystem.map(i=>
+                                                                                <>
+                                                                                {i}<br/>
+                                                                                </>)}</td>
+                                                                            
+                                                                        </> :
+                                                                        <>
+                                                                            <td>{moment(i.createdAt).format("DD/MM/YYYY")} </td>
 
-                                                    <td>
-                                                        <AiOutlineCheckCircle style={{
-                                                            color: "green",
-                                                            cursor: "pointer",
-                                                            width: "1.5rem",
-                                                            height: "1rem",
-                                                        }} />
-                                                    </td>
+                                                                            <td>
+                                                                                <AiOutlineCheckCircle style={{
+                                                                                    color: "green",
+                                                                                    cursor: "pointer",
+                                                                                    width: "1.5rem",
+                                                                                    height: "1rem",
+                                                                                }} />
+                                                                            </td>
+                                                                        </>
+
+                                                                    }
+
+                                                                </>
+                                                            )
+                                                    }
+
+
+
                                                 </>) :
                                                 (<>
-                                                    {/* <td> Chưa đánh giá </td> */}
                                                     <td></td>
+                                                   
                                                     <td>
                                                         <Link to={`/profile/${account_id}/judgeTeacher/${item.id_course._id}`}>Đánh giá </Link>
 
                                                     </td>
+                                                    <td></td>
                                                 </>)
                                             }
                                             {/* <td>{item.isJudged? "Đã đánh giá" : "Chưa đánh giá"}</td>

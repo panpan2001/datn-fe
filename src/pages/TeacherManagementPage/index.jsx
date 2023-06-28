@@ -187,6 +187,20 @@ function TeacherManagementPage() {
                 {moment(item.createdAt).format("DD/MM/YYYY")}
               </p>
             </td>
+            <td>{item.account_id.is_deleted?
+                  <button 
+                  className='button is-danger is-small'
+                   type='button'
+                  style={{marginTop: ".5rem"}}
+                   >Bị khóa</button>  :
+                   <button 
+                  className='button is-primary is-small'
+                   type='button'
+                   style={{marginTop: ".5rem"}}
+
+                    >Hoạt động</button>
+                  }
+                  </td>
             <td  >
               <Link to={`/admin/teacher/${item._id}`}>
                 <AiOutlineEdit
@@ -200,7 +214,7 @@ function TeacherManagementPage() {
                   }} />
               </Link>
             </td>
-            <button className="button  " 
+            {/* <button className="button  " 
               onClick={()=>handleDelete(item._id)}
               style={{ cursor: 'pointer' ,
               border:"none",
@@ -213,10 +227,9 @@ function TeacherManagementPage() {
                   cursor: 'pointer',
                   width: "1.5rem",
                   height: "1.5rem",
-                  // marginTop: ".75rem",
-                  // marginRight: ".75rem"
+                 
                 }} />
-              </button>
+              </button> */}
           </>
         </tr>
       </>

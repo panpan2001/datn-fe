@@ -31,7 +31,7 @@ function AdminManagementLayout({ children }) {
                              width={"30rem"}
                               setSearch={setSearch} 
                               name="Tìm kiếm "
-                              marginTop={'.75rem'}
+                              marginTop={'.3rem'}
                             marginLeft={"-2.5rem"}
                               />
                             <div className="admin-management-header_right">

@@ -31,7 +31,7 @@ function StudentJudgeManagementPage() {
     }
     const [filterRating, setFilterRating] = useState('')
     const [filterTypeCourse, setFilterTypeCourse] = useState('')
-
+    const [filterBadJudge, setFilterBadJudge] = useState(0)
     const listRating = [
         { value: 5, name: "4 - 5" },
         { value: 4, name: "3 - 4" },
@@ -44,29 +44,49 @@ function StudentJudgeManagementPage() {
         { value: 0, name: "Khóa học thử" },
         { value: 1, name: "Khoá học chính thức" },
     ]
+    const listBadJudge = [
+        { value: 0, name: 0 },
+        { value: 1, name: 1 },
+        { value: 2, name: 2 },
+        // { value: 4, name: 3 },
+    ]
     const handleFilterRating = (item) => {
 
-        if (filterRating == "") return item
+        if (filterRating == "" || filterRating == 'Điểm đánh giá') return item
 
         else {
             console.log("filterRating", parseInt(filterRating.split(" - ")[0]))
             const condition1 = parseInt(filterRating.split(" - ")[0])
             const condition2 = parseInt(filterRating.split(" - ")[1])
 
-            return item.rating_avg_teacher > condition1 && item.rating_avg_teacher <= condition2 ? item : null
+            return item.rating_avg_teacher >= condition1 && item.rating_avg_teacher <= condition2 ? item : null
         }
 
     }
     const handleFiltertypeCourse = (item) => {
-        
-        
-      if(filterTypeCourse == "") return item
-      else if(filterTypeCourse == "Khóa học thử") return item.isDemo ? item : null
-      else if(filterTypeCourse == "Khoá học chính thức") return item.isDemo ? null : item
-        
+
+
+        if (filterTypeCourse == "" || filterTypeCourse == 'Số lần') return item
+        else if (filterTypeCourse == "Khóa học thử") return item.isDemo ? item : null
+        else if (filterTypeCourse == "Khoá học chính thức") return item.isDemo ? null : item
+
+    }
+    const handleFilterBadJudge = (item) => {
+        if (filterBadJudge == "" || filterBadJudge == 'Đánh giá xấu') return item
+        else {
+            return item.countBadJudge==filterBadJudge ? item : null
+        }
     }
     const handleMoveToEdit = (id) => {
         navigate(`/admin/studentJudge/${id}`)
+    }
+    const handleDelete = (id) => {
+        alert(`Are you sure you want to delete ${id}`)
+    }
+    const handleResetFilter=()=>{
+        setFilterRating('')
+        setFilterTypeCourse('')
+        setFilterBadJudge("")
     }
     return (
         <div className='student-management-page container mb-6'>
@@ -90,7 +110,13 @@ function StudentJudgeManagementPage() {
                     justifyContent: "flex-end",
                     marginRight: "4rem"
                 }}>
-                    <div className="filter-teacher" style={{display: "flex", flexDirection: "row", alignItems: 'center'}}>
+                    <div className="filter-teacher"
+                        style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            alignItems: 'center',
+                            gap: '1rem',
+                        }}>
                         <FilterCategory
                             // styles={{minHeight: '30vh'}}
                             title={'Điểm đánh giá'}
@@ -105,15 +131,22 @@ function StudentJudgeManagementPage() {
                             setFilter={setFilterTypeCourse}
                             list={listTypeCourse}
                         />
+                         <FilterCategory
+                            // styles={{minHeight: '30vh'}}
+                            title={'Đánh giá xấu'}
+                            filter={filterBadJudge}
+                            setFilter={setFilterBadJudge}
+                            list={listBadJudge}
+                        />
                     </div>
 
-                    <button className="icon-teacher " type='button'
+                    {/* <button className="icon-teacher " type='button'
                         style={{
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",
                             borderRadius: "50%",
-                            marginTop: ".5rem",
+                            marginTop: "1.75rem",
                             marginRight: ".5rem",
                             cursor: "pointer",
                             border: "none",
@@ -127,6 +160,12 @@ function StudentJudgeManagementPage() {
                             fill: "#29A3F0",
                             // borderRadius: "50%",
                         }} />
+                    </button> */}
+                    <button className='button is-primary is-light mr-2 '
+                    style={{marginTop: "2rem"}}
+                    onClick={()=>handleResetFilter()}
+                     type='button'>
+                        Đặt lại
                     </button>
                 </div>
 
@@ -148,10 +187,10 @@ function StudentJudgeManagementPage() {
                             <th>Tên giáo viên</th>
                             <th>Tên khóa học</th>
                             <th>Đánh giá cho</th>
-                            <th>Trung bình đánh giá</th>
+                            <th>Điểm đánh giá</th>
+                            <th>Đánh giá xấu </th>
                             <th></th>
-                            <th></th>
-
+                            {/* <th></th> */}
                         </tr>
                     </thead>
                     <tbody>
@@ -160,18 +199,31 @@ function StudentJudgeManagementPage() {
                                 .filter((item) => handleSearch(item))
                                 .filter((item) => handleFilterRating(item))
                                 .filter((item) => handleFiltertypeCourse(item))
+                                .filter((item) => handleFilterBadJudge(item))
                                 .map((item) => (
                                     <tr className='mb-2'>
                                         <th>{studentRating.indexOf(item) + 1}</th>
                                         <td>{item.id_student.account_id.full_name}</td>
-                                        <td>{item.id_teacher.account_id.full_name}</td>
-                                        <td>{item.id_course.name}</td>
+                                        <td
+                                        >{item.id_teacher.account_id.full_name}</td>
+                                        <td
+                                         style={{ width: "14rem",}}>{item.id_course.name}</td>
                                         <td>{item.isDemo ?
-                                            <button className='button is-info'>Khóa học thử</button> :
-                                            <button className='button is-primary'>Khóa học chính thức</button>}</td>
-                                        <td>{item.rating_avg_teacher}</td>
+                                            <button className='button is-info '>Khóa học thử</button> :
+                                            <button className='button is-primary '>Khóa học chính thức</button>}</td>
+                                        <td
+                                        style={{
+                                            justifyContent: 'center',
+                                            display: 'flex',
+                                            height: '4rem',
+                                            alignItems: 'center'
+                                        }}>{item.rating_avg_teacher}</td>
 
-                                        <td  >
+                                        <td>{item.countBadJudge>0 ?
+                                            <button className='button is-danger '>{item.countBadJudge}</button> :
+                                            <button className='button is-primary is-light' >0</button>
+                                        }</td>
+                                        <td >
                                             <AiOutlineEdit onClick={() => {
                                                 handleMoveToEdit(item._id)
                                             }}
@@ -181,11 +233,13 @@ function StudentJudgeManagementPage() {
                                                     width: "1.5rem",
                                                     height: "1.5rem",
                                                     marginRight: ".75rem",
-                                                    marginTop: ".75rem"
+                                                    marginTop: ".75rem",
+
                                                 }} />
                                         </td>
-                                        <td>
+                                        {/* <td>
                                             < AiOutlineDelete
+                                            onClick={()=> handleDelete(item._id)}
                                                 style={{
                                                     color: '#ff357e',
                                                     cursor: 'pointer',
@@ -195,7 +249,7 @@ function StudentJudgeManagementPage() {
                                                     marginRight: ".75rem"
                                                 }} />
 
-                                        </td>
+                                        </td> */}
                                     </tr>
                                 ))}
                     </tbody>

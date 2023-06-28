@@ -98,7 +98,7 @@ const FindingTeacherPage = () => {
             if (a.length > 0) {
                 a = a.reduce((a, b) => a + b, 0) / a.length
                 // console.log("a tinh", { a })
-                return a > condition1 && a <= condition2 ? item : null
+                return a >= condition1 && a <= condition2 ? item : null
             }
             else {
                 return null
@@ -199,8 +199,8 @@ const FindingTeacherPage = () => {
                             </div>
                             <div className="column is-8 ml-6 ">
                                 {
-                                   teachers.filter((item) => handleSearch(item))
-
+                                   teachers.filter((item) => item.account_id.is_deleted==false)
+                                   .filter((item) => handleSearch(item))
                                         .filter((item) => handleFilterRating(item))
                                         .filter((item) => handleFilterDegree(item))
                                         .filter((item) => handleFilterGender(item))

@@ -95,14 +95,26 @@ function EditTeacherForm() {
             <div className='edit-teacher-form_container container is-centered'>
                 <strong className='is-size-4'>Chỉnh sửa thông tin giáo viên</strong>
                 <div className="detail-teacher-info_container">
-                    <div className="content columns">
+                    <div className="content columns " >
                         <div className="column is-8 content-left "
                         style={{
                             padding: "2rem",
                             margin:"auto",
-                            marginTop:"1rem"
+                            marginTop:"1rem",
+                            marginBottom:"4.5rem"
                         }}>
                             <strong className='is-size-5 '>Thông tin cá nhân</strong>
+                            {teacher.account_id.is_deleted?
+                             <button 
+                             className='button is-danger is-small ml-3'
+                              type='button'
+                              >Bị khóa</button>  :
+                              <button 
+                             className='button is-primary is-small ml-3'
+                              type='button'
+                               >Hoạt động</button>
+                             
+                        }
                             <div className="columns is-multiline ">
                                 <div className="column is-6">
                                     <div className="field">
@@ -536,7 +548,24 @@ function EditTeacherForm() {
 
                         </div>
                     </div>
-                    <div className="group-buttons">
+                    <div className="group-btn"
+                    style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        gap: "1rem",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        width: "81%",
+                        height: "5rem",
+                        position:"fixed",
+                        bottom: ".5rem",
+                        backgroundColor:"#fef9f9",
+                        border: "1px solid  #e4dcdc",
+                        borderRadius: "8px",
+                        padding:"2rem",
+                        marginLeft:"1rem"
+                    }}
+                    >
 
                         <div className="button-left">
                             <button className="button is-danger has-text-white" >

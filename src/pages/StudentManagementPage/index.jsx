@@ -13,6 +13,7 @@ import createAxiosJWT from '../../utils/createInstance'
 import { contextProvider } from '../../layouts/ParentLayouts/AdminManagementLayout'
 import toLowerCaseNonAccentVietnamese from '../../contexts/toLowerCaseNonAccentVietnamese'
 import moment from 'moment'
+import { getAllStudentsSuccess } from '../../redux/slices/Student/getAllStudentSlice'
 
 const StudentManagementPage = () => {
   // const user= useSelector(state=>state.account.accounts)
@@ -28,7 +29,6 @@ const StudentManagementPage = () => {
 
   // },[])
   const searchValue= useContext(contextProvider)
-
   const user = useSelector((state) => state.login.login?.currentUser)
   const dispatch = useDispatch()
   const accessToken = user?.accessToken
@@ -141,7 +141,7 @@ const StudentManagementPage = () => {
                 <th>SDT phụ huynh</th>
                 <th></th>
                 <th></th>
-
+                {/* <th></th> */}
               </tr>
             </thead>
             <tbody>
@@ -157,6 +157,11 @@ const StudentManagementPage = () => {
                    <td>{item.account_id && item.account_id.address}</td>
                   <td>{item.parent_name}</td>
                   <td>{item.parent_phone_number}</td>
+                  <td>{item.account_id.is_deleted?
+                  <button className='button is-danger is-small' 
+                  type='button'
+                  >Bị khóa</button>  :<></>
+                  }</td>
                   <td  >
                       <AiOutlineEdit 
                       style={{
@@ -167,8 +172,9 @@ const StudentManagementPage = () => {
                         marginRight:".75rem",
                         marginTop:".75rem"}} /> 
                     </td>
-                    <td>
-                    < AiOutlineDelete onClick={()=>handleShowModal(item._id)}
+                    {/* <td>
+                    < AiOutlineDelete 
+                    onClick={()=>handleShowModal(item._id)}
                       style={{
                         color:'#ff357e',
                         cursor:'pointer',
@@ -177,7 +183,7 @@ const StudentManagementPage = () => {
                         marginTop:".75rem",
                         marginRight:".75rem"}} /> 
                     
-                    </td>
+                    </td> */}
                 </tr>
               ))}
             </tbody>
