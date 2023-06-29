@@ -19,6 +19,7 @@ import EditCourseForm from '../components/EditCourseForm/EditCourseForm';
 import EditDemoCourseForm from '../components/EditCourseForm/EditDemoCourseForm';
 import StudentRatingDetailForm from '../components/StudentRatingDetailForm';
 import RejudgeForm from '../components/RejudgeForm';
+import ReportCourseForm from '../components/ReportCourseForm';
 
 const LandingPage = React.lazy(() => import('../pages/LandingPage'));
 const LoginPage = React.lazy(() => import('../pages/LoginPage'));
@@ -103,6 +104,7 @@ function ContainerRoutes() {
                   <Route path='/profile/:idAccount/judgeTeacher' element={<StudentJudgePage />} />
                   <Route path='/profile/:idAccount/judgeTeacher/:idTeacher' element={<DetailStudentJudgepage />} />
                   <Route path='profile/:idAccount/judgeTeacher/rejudge/:idStudentRating' element={<RejudgeForm />} />
+                  <Route path='/profile/:idAccount/judgeTeacher/reportCourse/:idReportCourse' element={<ReportCourseForm />} />
 
                 </>
 

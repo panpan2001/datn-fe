@@ -31,3 +31,14 @@ export const AttitudeNames=[
 
  export  const LevelLabelNames= ["Rất tệ","Tệ","Bình thường","Tốt","Rất tốt"]
  export  const DecideLabelNames= ["Không","Có"]
+
+ export const  reportContent = [
+    "Bài giảng quá khó, không phù hợp với trình độ học viên",
+    "Tài liệu, giáo trình không phù hợp với nội dung bài học",
+    "Cách thức truyền đạt và giảng dạy của giáo viên chưa tốt",
+    "Giáo viên không có kiến thức tiếng Anh tốt",
+    "Giáo viên cư xử thiếu đứng đắn, phù hợp",
+    "Trang phục của giáo viên chưa phù hợp",
+    "Giáo viên không đảm bảo thời lượng buổi học (thiếu giờ hoặc quá giờ).",
+
+]

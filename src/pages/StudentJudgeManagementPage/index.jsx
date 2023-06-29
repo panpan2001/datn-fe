@@ -224,10 +224,15 @@ function StudentJudgeManagementPage() {
                                 .filter((item) => handleFilterBadJudge(item))
                                 .map((item) => (
                                     <tr className='mb-2'>
-                                        <th>{studentRating.indexOf(item) + 1}</th>
+                                        <th>
+                                        <div style={{width:"100%", display: "flex", alignItems: "center",justifyContent: "center"}}>
+                                            {studentRating.indexOf(item) + 1}
+                                            </div>
+                                            </th>
                                         <td>{item.id_student.account_id.full_name}</td>
-                                        <td
-                                        >{item.id_teacher.account_id.full_name}</td>
+                                        <td>
+                                            {item.id_teacher.account_id.full_name}
+                                            </td>
                                         <td
                                             style={{ width: "14rem", }}>{item.id_course.name}</td>
                                         <td>{item.isDemo ?

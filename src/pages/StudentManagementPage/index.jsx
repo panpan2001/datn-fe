@@ -145,55 +145,39 @@ const StudentManagementPage = () => {
                 .filter((item) => handleSearch(item))
                 .map((item) => (
                   <tr className='mb-2'>
-                    <th>{student.indexOf(item) + 1}</th>
+                    <th>
+                      <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                        {student.indexOf(item) + 1}
+                      </div>
+                    </th>
+
                     <td>{item.account_id && item.account_id.full_name}</td>
-                    <td>{item.account_id && item.account_id.gender}</td>
-                    <td>{item.account_id && item.account_id.email}</td>
+                    <td>
+                      <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                        {item.account_id && item.account_id.gender}
+                      </div>
+                    </td>
+                    <td>
+                      {item.account_id && item.account_id.email}
+                    </td>
                     <td>{item.account_id && item.account_id.phone_number}</td>
                     <td>{item.account_id && item.account_id.address}</td>
                     <td>{item.parent_name}</td>
                     <td>{item.parent_phone_number}</td>
-                    <td>{item.account_id.is_deleted ?
-                      <button className='button is-danger is-small'
-                        type='button'
-                      >Bị khóa</button> : <></>
-                    }</td>
-                    <td>{item.account_id.is_deleted ?
-                      <button
-                        className='button is-danger is-small'
-                        type='button'
-                        style={{ marginTop: ".5rem" }}
-                      >Bị khóa</button> :
-                      <button
-                        className='button is-primary is-small'
-                        type='button'
-                        style={{ marginTop: ".5rem" }}
-
-                      >Hoạt động</button>
-                    }
+                    <td>
+                      {item.account_id.is_deleted ?
+                        <button
+                          className='button is-danger is-small'
+                          type='button'
+                          style={{ marginTop: ".5rem" }}
+                        >Bị khóa</button> :
+                        <button
+                          className='button is-primary is-small'
+                          type='button'
+                          style={{ marginTop: ".5rem" }}
+                        >Hoạt động</button>
+                      }
                     </td>
-                    {/* <td  >
-                      <AiOutlineEdit 
-                      style={{
-                        color:'#008947',
-                        cursor:'pointer',
-                        width:"1.5rem",
-                        height:"1.5rem",
-                        marginRight:".75rem",
-                        marginTop:".75rem"}} /> 
-                    </td> */}
-                    {/* <td>
-                    < AiOutlineDelete 
-                    onClick={()=>handleShowModal(item._id)}
-                      style={{
-                        color:'#ff357e',
-                        cursor:'pointer',
-                        width:"1.5rem",
-                        height:"1.5rem",
-                        marginTop:".75rem",
-                        marginRight:".75rem"}} /> 
-                    
-                    </td> */}
                   </tr>
                 ))}
             </tbody>
@@ -205,3 +189,41 @@ const StudentManagementPage = () => {
 }
 
 export default StudentManagementPage
+{/* <td>
+                    < AiOutlineDelete 
+                    onClick={()=>handleShowModal(item._id)}
+                      style={{
+                        color:'#ff357e',
+                        cursor:'pointer',
+                        width:"1.5rem",
+                        height:"1.5rem",
+                        marginTop:".75rem",
+                        marginRight:".75rem"}} /> 
+                    
+                    </td> */}
+
+{/* <td>
+                      {item.account_id.is_deleted ?
+                        <button
+                          className='button is-danger is-small'
+                          type='button'
+                          style={{ marginTop: ".5rem" }}
+                        >Bị khóa</button> :
+                        <button
+                          className='button is-primary is-small'
+                          type='button'
+                          style={{ marginTop: ".5rem" }}
+
+                        >Hoạt động</button>
+                      }
+                    </td> */}
+{/* <td  >
+                      <AiOutlineEdit 
+                      style={{
+                        color:'#008947',
+                        cursor:'pointer',
+                        width:"1.5rem",
+                        height:"1.5rem",
+                        marginRight:".75rem",
+                        marginTop:".75rem"}} /> 
+                    </td> */}
