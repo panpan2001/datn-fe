@@ -209,7 +209,9 @@ const FindingTeacherPage = () => {
                                         .map((teacher) =>
                                             <>
                                                 <TeacherShortInfoLeft
-                                                    studentRating={studentRating && studentRating.filter(item => item.id_teacher._id == teacher._id)}
+                                                    studentRating={studentRating && 
+                                                        studentRating.filter(item => item.id_teacher._id == teacher._id
+                                                            && item.isBadJudge == false)}
                                                     color="#b5e5ff" data={teacher} />
                                                 <br />
                                                 <br />

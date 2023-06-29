@@ -3,7 +3,7 @@ import { deleteStudentRatingFailure, deleteStudentRatingStart } from "../../slic
 import { StudentRatingApi } from "../../../utils/BaseUrl"
 import { getStudentRatingSuccess } from "../../slices/StudentRating/getAllStudentRating"
 
-const deleteStudentRating = (id, dispatch, axiosJWT, accessToken,account_id) => {
+const deleteStudentRating = (id, dispatch, axiosJWT, accessToken,account_id, navigate) => {
     dispatch(deleteStudentRatingStart())
     try {
         const res = axiosJWT.delete(StudentRatingApi + id, {
@@ -16,6 +16,7 @@ const deleteStudentRating = (id, dispatch, axiosJWT, accessToken,account_id) => 
         toast.success("Xóa đánh giá thành công ", {
             position: toast.POSITION.BOTTOM_RIGHT
         })
+        navigate('/admin/studentJudge')
     } catch (error) {
         console.log(error)
         dispatch(deleteStudentRatingFailure(error))

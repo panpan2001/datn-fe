@@ -80,7 +80,7 @@ function TeacherManagementPage() {
               {/* <FilterCategory /> */}
   
             </div>
-            <button className="icon-teacher " type='button' onClick={handleShowModal}
+            {/* <button className="icon-teacher " type='button' onClick={handleShowModal}
               style={{
                 display: "flex",
                 alignItems: "center",
@@ -97,9 +97,8 @@ function TeacherManagementPage() {
                 width: "2rem",
                 height: "2rem",
                 fill: "#29A3F0",
-                // borderRadius: "50%",
               }} />
-            </button>
+            </button> */}
           </div>
   
         </div>

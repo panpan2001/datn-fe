@@ -76,7 +76,7 @@ const Navbar = () => {
               <div className="navbar-item">
                 <div className="buttons">
 
-                  <div class="dropdown is-hoverable">
+                  {/* <div class="dropdown is-hoverable">
                     <div class="dropdown-trigger">
                       <AiOutlineBell />
                       <p className='nav-bar_icon '>3 </p>
@@ -88,7 +88,7 @@ const Navbar = () => {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                   {user.role_name == 'admin' &&
                    <Link className="button  ml-4 log_in is-link" to='/admin'>
                    Quản lí

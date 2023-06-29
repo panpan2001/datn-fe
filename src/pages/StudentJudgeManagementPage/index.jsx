@@ -7,6 +7,13 @@ import { contextProvider } from '../../layouts/ParentLayouts/AdminManagementLayo
 import FilterCategory from '../../components/FilterCategory'
 import { useNavigate } from 'react-router-dom'
 import toLowerCaseNonAccentVietnamese from '../../contexts/toLowerCaseNonAccentVietnamese'
+import { BsEye, BsEyeSlash } from 'react-icons/bs'
+import '../../assets/styles/StudentJudgeManagementPage.css'
+import { getStudentRatingSuccess } from '../../redux/slices/StudentRating/getAllStudentRating'
+import createAxiosJWT from '../../utils/createInstance'
+import changeAppearanceStudentRating from '../../redux/actions/StudentRating/ChangeAppearanceStudentRating'
+import { toast } from 'react-toastify'
+
 
 function StudentJudgeManagementPage() {
     const searchValue = useContext(contextProvider)
@@ -14,7 +21,7 @@ function StudentJudgeManagementPage() {
     const user = useSelector((state) => state.login.login?.currentUser)
     const dispatch = useDispatch()
     const accessToken = user?.accessToken
-    //   const axiosJWT = createAxiosJWT(dispatch, user, deleteStudentSuccess)
+    const axiosJWT = createAxiosJWT(dispatch, user, getStudentRatingSuccess)
     const account_id = user?._id
     useEffect(() => {
         getStudentRating(dispatch)
@@ -48,7 +55,7 @@ function StudentJudgeManagementPage() {
         { value: 0, name: 0 },
         { value: 1, name: 1 },
         { value: 2, name: 2 },
-        // { value: 4, name: 3 },
+        { value: 4, name: ">2" },
     ]
     const handleFilterRating = (item) => {
 
@@ -72,9 +79,12 @@ function StudentJudgeManagementPage() {
 
     }
     const handleFilterBadJudge = (item) => {
-        if (filterBadJudge == "" || filterBadJudge == 'Đánh giá xấu') return item
+        if (filterBadJudge == "" || filterBadJudge == 'Số lần cảnh báo') return item
+        else if (filterBadJudge == ">2") {
+            return item.countBadJudge > 2 ? item : null
+        }
         else {
-            return item.countBadJudge==filterBadJudge ? item : null
+            return item.countBadJudge == filterBadJudge ? item : null
         }
     }
     const handleMoveToEdit = (id) => {
@@ -83,10 +93,22 @@ function StudentJudgeManagementPage() {
     const handleDelete = (id) => {
         alert(`Are you sure you want to delete ${id}`)
     }
-    const handleResetFilter=()=>{
+    const handleResetFilter = () => {
         setFilterRating('')
         setFilterTypeCourse('')
         setFilterBadJudge("")
+    }
+    const handleChangeAppearance = (item) => {
+        // an binh luan di, ko xoa, nhung binh luan bi an thi se ko tinh vao rating trung binh cua teacher
+        //    dispatch, id, value, axiosJWT, accessToken, success, account_id
+        // setAppearance(!appearance)
+        //flag 1: cap nhat 1 o list  
+        if (item.countBadJudge == 0) {
+            toast.warning("Đánh giá này không bị cảnh báo. Không thể ẩn !", {
+                position: "top-right",
+            })
+        }
+        else changeAppearanceStudentRating(dispatch, item._id, item.isBadJudge, axiosJWT, accessToken, getStudentRatingSuccess, user._id, 1)
     }
     return (
         <div className='student-management-page container mb-6'>
@@ -131,9 +153,9 @@ function StudentJudgeManagementPage() {
                             setFilter={setFilterTypeCourse}
                             list={listTypeCourse}
                         />
-                         <FilterCategory
+                        <FilterCategory
                             // styles={{minHeight: '30vh'}}
-                            title={'Đánh giá xấu'}
+                            title={'Số lần cảnh báo'}
                             filter={filterBadJudge}
                             setFilter={setFilterBadJudge}
                             list={listBadJudge}
@@ -162,9 +184,9 @@ function StudentJudgeManagementPage() {
                         }} />
                     </button> */}
                     <button className='button is-primary is-light mr-2 '
-                    style={{marginTop: "2rem"}}
-                    onClick={()=>handleResetFilter()}
-                     type='button'>
+                        style={{ marginTop: "2rem" }}
+                        onClick={() => handleResetFilter()}
+                        type='button'>
                         Đặt lại
                     </button>
                 </div>
@@ -181,16 +203,16 @@ function StudentJudgeManagementPage() {
                         boxShadow: "0px 0px 10px #ACEFF6"
                     }}>
                     <thead>
-                        <tr>
+                        <tr style={{ textAlign: "center" }}>
                             <th>STT</th>
                             <th>Tên học viên</th>
                             <th>Tên giáo viên</th>
                             <th>Tên khóa học</th>
-                            <th>Đánh giá cho</th>
+                            <th>Loại khóa học </th>
                             <th>Điểm đánh giá</th>
-                            <th>Đánh giá xấu </th>
+                            <th>Số lần cảnh báo </th>
                             <th></th>
-                            {/* <th></th> */}
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -207,22 +229,56 @@ function StudentJudgeManagementPage() {
                                         <td
                                         >{item.id_teacher.account_id.full_name}</td>
                                         <td
-                                         style={{ width: "14rem",}}>{item.id_course.name}</td>
+                                            style={{ width: "14rem", }}>{item.id_course.name}</td>
                                         <td>{item.isDemo ?
-                                            <button className='button is-info '>Khóa học thử</button> :
-                                            <button className='button is-primary '>Khóa học chính thức</button>}</td>
+                                            <button className='button is-info '>Thử</button> :
+                                            <button className='button is-primary '>Chính thức</button>}</td>
                                         <td
-                                        style={{
-                                            justifyContent: 'center',
-                                            display: 'flex',
-                                            height: '4rem',
-                                            alignItems: 'center'
-                                        }}>{item.rating_avg_teacher}</td>
+                                            style={{
+                                                justifyContent: 'center',
+                                                display: 'flex',
+                                                height: '4rem',
+                                                alignItems: 'center'
+                                            }}>{item.rating_avg_teacher}</td>
 
-                                        <td>{item.countBadJudge>0 ?
-                                            <button className='button is-danger '>{item.countBadJudge}</button> :
-                                            <button className='button is-primary is-light' >0</button>
-                                        }</td>
+                                        <td>{item.countBadJudge > 0 ?
+                                            <div style={{
+                                                display: 'flex',
+                                                flexDirection: 'row',
+                                                justifyContent: 'center',
+                                                alignItems: 'center',
+                                                width: "100%"
+                                            }}>
+                                                <button className='button is-danger '>{item.countBadJudge}</button>
+                                            </div>
+                                            :
+                                            <div
+                                                style={{
+                                                    display: 'flex',
+                                                    flexDirection: 'row',
+                                                    justifyContent: 'center',
+                                                    alignItems: 'center',
+                                                    width: "100%"
+                                                }}>
+                                                <button className='button is-primary is-light' >0</button>
+
+                                            </div>
+                                        }
+                                        </td>
+                                        <td>
+                                            {item.isBadJudge ?
+                                                < BsEyeSlash className='hide-student-rating_icon'
+                                                    onClick={() => handleChangeAppearance(item)}
+                                                />
+                                                :
+
+                                                < BsEye className='show-student-rating_icon'
+                                                    onClick={() => handleChangeAppearance(item)}
+                                                />
+
+                                            }
+                                        </td>
+
                                         <td >
                                             <AiOutlineEdit onClick={() => {
                                                 handleMoveToEdit(item._id)
@@ -233,7 +289,7 @@ function StudentJudgeManagementPage() {
                                                     width: "1.5rem",
                                                     height: "1.5rem",
                                                     marginRight: ".75rem",
-                                                    marginTop: ".75rem",
+                                                    marginTop: ".5rem",
 
                                                 }} />
                                         </td>

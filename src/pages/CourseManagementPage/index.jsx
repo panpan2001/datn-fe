@@ -14,6 +14,7 @@ import adminDelDemoCourse from '../../redux/actions/DemoCourse/adminDelDemoCours
 import { useNavigate } from 'react-router-dom'
 import { contextProvider } from '../../layouts/ParentLayouts/AdminManagementLayout'
 import toLowerCaseNonAccentVietnamese from '../../contexts/toLowerCaseNonAccentVietnamese'
+import { BsEye, BsEyeSlash } from 'react-icons/bs'
 function CourseManagementPage() {
   const searchValue= useContext(contextProvider)
 
@@ -65,7 +66,7 @@ const handleSearchDemoCourse = (e) => {
     )
 }
   return (
-    <div className='course-management-page container mt-6'>
+    <div className='course-management-page container mt-4'>
       <strong className='is-size-3'>Quản lí khóa học</strong>
 
       <div className="course-management-overview_div "
@@ -95,7 +96,7 @@ const handleSearchDemoCourse = (e) => {
             alignItems: 'center'
           }}>
             {/* <FilterCategory /> */}
-            <button className="icon-teacher " type='button'
+            {/* <button className="icon-teacher " type='button'
               style={{
                 display: "flex",
                 alignItems: "center",
@@ -114,7 +115,7 @@ const handleSearchDemoCourse = (e) => {
                 fill: "#29A3F0",
                 // borderRadius: "50%",
               }} />
-            </button>
+            </button> */}
           </div>
 
         </div>
@@ -136,12 +137,12 @@ const handleSearchDemoCourse = (e) => {
                 <tr>
                   <th>STT</th>
                   <th>Tên khóa học</th>
-                  <th>Số lượng học viên</th>
+                  <th>Số lượng <br/>học viên</th>
                   <th>Lịch học</th>
-                  <th>Thời lượng buổi học (ph)</th>
-                  <th>Thời thời gian học (tháng)</th>
+                  <th>Thời lượng <br/> buổi học (ph)</th>
+                  <th>Thời gian học<br/> (tháng)</th>
                   <th></th>
-                  {/* <th></th> */}
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
@@ -149,12 +150,45 @@ const handleSearchDemoCourse = (e) => {
                 .filter(item=>handleSearchCourse(item))
                 .map((item) => (
                   <tr className='mb-2'>
-                    <th>{courses.indexOf(item) + 1}</th>
+                    <th>
+                      <div style={{width:"100%", display: "flex", alignItems: "center",justifyContent: "center"}}>
+                      {courses.indexOf(item) + 1}
+                      </div>
+                      </th>
                     <td>{item.name}</td>
-                    <td>{item.number_of_student}</td>
+                    <td>
+                    <div style={{width:"100%", display: "flex", alignItems: "center",justifyContent: "center"}}>
+
+                      {item.number_of_student}
+                      </div>
+                      </td>
                     <td>{item.schedule}</td>
-                    <td>{item.time_per_lesson}</td>
-                    <td>{item.learning_period}</td>
+                    <td>
+                    <div style={{width:"100%", display: "flex", alignItems: "center",justifyContent: "center"}}>
+                      {item.time_per_lesson}
+                      </div>
+                      </td>
+                    <td>
+                    <div style={{width:"100%", display: "flex", alignItems: "center",justifyContent: "center"}}>
+                      {item.learning_period}
+                      </div>
+                      </td>
+                      <td>
+                        <div>
+                        {item.createdAt ?
+                                                < BsEyeSlash className='hide-student-rating_icon'
+                                                    // onClick={() => handleChangeAppearance(item)}
+                                                />
+                                                :
+
+                                                < BsEye className='show-student-rating_icon'
+                                                    // onClick={() => handleChangeAppearance(item)}
+                                                />
+
+                                            }
+                        </div>
+                      </td>
+                     
                     <td>
                       <AiOutlineEdit onClick={() => handleGoToDetailCourse(item._id)}
                         style={{
@@ -162,8 +196,8 @@ const handleSearchDemoCourse = (e) => {
                           cursor: 'pointer',
                           width: "1.5rem",
                           height: "1.5rem",
-                          marginRight: ".75rem",
-                          marginTop: ".75rem"
+                          // marginRight: ".75rem",
+                          // marginTop: ".75rem"
                         }} />
                     </td>
                     {/* <td>
@@ -211,7 +245,7 @@ const handleSearchDemoCourse = (e) => {
             alignItems: 'center'
           }}>
             {/* <FilterCategory /> */}
-            <button className="icon-teacher " type='button'
+            {/* <button className="icon-teacher " type='button'
               style={{
                 display: "flex",
                 alignItems: "center",
@@ -228,9 +262,8 @@ const handleSearchDemoCourse = (e) => {
                 width: "2rem",
                 height: "2rem",
                 fill: "#29A3F0",
-                // borderRadius: "50%",
               }} />
-            </button>
+            </button> */}
           </div>
 
         </div>

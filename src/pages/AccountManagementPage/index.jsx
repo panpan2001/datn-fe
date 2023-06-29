@@ -97,7 +97,7 @@ function AccountManagementPage() {
             {/* <FilterCategory /> */}
 
           </div>
-          <button className="icon-teacher " type='button'
+          {/* <button className="icon-teacher " type='button'
             style={{
               display: "flex",
               alignItems: "center",
@@ -116,7 +116,7 @@ function AccountManagementPage() {
               fill: "#29A3F0",
               // borderRadius: "50%",
             }} />
-          </button>
+          </button> */}
         </div>
 
       </div>
@@ -146,7 +146,7 @@ function AccountManagementPage() {
                   <th>Vai trò </th>
                   <th>Ngày tạo</th>
                   <th></th>
-                  <th></th>
+                  {/* <th></th> */}
                   {/* <th></th> */}
                 </tr>
               </thead>
@@ -180,7 +180,7 @@ function AccountManagementPage() {
                    }}
                     >Hoạt động</button>
                   }</td>
-                    <td  >
+                    {/* <td  >
                       <AiOutlineEdit
                         style={{
                           color: '#008947',
@@ -190,7 +190,7 @@ function AccountManagementPage() {
                           marginRight: ".75rem",
                           marginTop: ".75rem"
                         }} />
-                    </td>
+                    </td> */}
                     {/* <td>
                       < AiOutlineDelete 
                       // onClick={() => handleDelete(item._id)}

@@ -1,0 +1,7 @@
+@import './RootStyle.css';
+
+.show-student-rating_icon,.hide-student-rating_icon{
+    width: 1.5rem !important;
+    height: 1.5rem !important;
+    margin-top: .5rem;
+}

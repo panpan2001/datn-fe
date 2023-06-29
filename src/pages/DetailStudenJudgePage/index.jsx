@@ -109,7 +109,7 @@ function DetailStudentJudgepage() {
                     <ul>
                         {/* <Link to={navigate(-1)}>Giáo viên của tôi</Link> */}
                         {/* <li><a href="#">Đánh giá giáo viên</a></li> */}
-                        <li><a href={`/profile/${account_id}/judgeTeacher`}>Giáo viên của tôi</a></li>
+                        <li><a href={`/profile/${account_id}/judgeTeacher`}>Danh sách giáo viên</a></li>
                         <li class="is-active"><a href="#" aria-current="page">Đánh giá giáo viên</a></li>
                     </ul>
                 </nav>
