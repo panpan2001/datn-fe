@@ -134,22 +134,24 @@ function DetailClassPage() {
                             </tr>
                         </thead>
                         <tbody style={{ textAlign: "left" }}>
-                            {demoCourse && demoCourse.map((item) => (
-                                <tr className='mb-2'>
-                                    <>
-                                        <th>{demoCourse.indexOf(item) + 1}</th>
-                                        <td>{item.id_course.name}</td>
-                                        <td>{moment(item.start_date).format("DD/MM/YYYY")}</td>
-                                        <td>{moment(item.end_date).format("DD/MM/YYYY")}</td>
-                                        <td>{item.learning_period}</td>
-                                        <td>{parseInt(item.schedule.split(" - ")[0]) < 12 ?
-                                            item.schedule.split(" - ")[0] + ' AM' :
-                                            item.schedule.split(" - ")[0] + ' PM'}
-                                        </td>
-                                        <td>{item.schedule.split(" - ")[1]}</td>
-                                        <td>{formatter.format(item.cost)}</td>
+                            {demoCourse && demoCourse
+                                .filter((item) => item.isHidden === false)
+                                .map((item) => (
+                                    <tr className='mb-2'>
+                                        <>
+                                            <th>{demoCourse.indexOf(item) + 1}</th>
+                                            <td>{item.id_course.name}</td>
+                                            <td>{moment(item.start_date).format("DD/MM/YYYY")}</td>
+                                            <td>{moment(item.end_date).format("DD/MM/YYYY")}</td>
+                                            <td>{item.learning_period}</td>
+                                            <td>{parseInt(item.schedule.split(" - ")[0]) < 12 ?
+                                                item.schedule.split(" - ")[0] + ' AM' :
+                                                item.schedule.split(" - ")[0] + ' PM'}
+                                            </td>
+                                            <td>{item.schedule.split(" - ")[1]}</td>
+                                            <td>{formatter.format(item.cost)}</td>
 
-                                        {/* {currentUser && 
+                                            {/* {currentUser && 
                                          checkRegister(item.start_date, item.schedule.split(" - ")[0])
                                                 ?
 
@@ -167,32 +169,32 @@ function DetailClassPage() {
                                             </Link>)
 
                                         } */}
-                                        {checkRegister(item.start_date, item.schedule.split(" - ")[0])
-                                            ?
-                                            (currentUser ?
+                                            {checkRegister(item.start_date, item.schedule.split(" - ")[0])
+                                                ?
+                                                (currentUser ?
 
-                                                (currentUser.role_name == "student" ?
-                                                    <td>
-                                                        <Link to={`/registerDemoCourse/${item._id}`}>
+                                                    (currentUser.role_name == "student" ?
+                                                        <td>
+                                                            <Link to={`/registerDemoCourse/${item._id}`}>
+                                                                <button className="button is-primary">Học thử </button>
+                                                            </Link>
+                                                        </td>
+                                                        : <></>
+                                                    ) : <td>
+                                                        <Link to={`/login`}>
                                                             <button className="button is-primary">Học thử </button>
                                                         </Link>
                                                     </td>
-                                                    : <></>
-                                                ) : <td>
-                                                    <Link to={`/login`}>
-                                                        <button className="button is-primary">Học thử </button>
-                                                    </Link>
-                                                </td>
 
-                                            )
-                                            :
-                                            <></>
-                                        }
+                                                )
+                                                :
+                                                <></>
+                                            }
 
 
-                                    </>
-                                </tr>
-                            ))}
+                                        </>
+                                    </tr>
+                                ))}
                         </tbody>
                     </table>
                 </div>
@@ -201,22 +203,29 @@ function DetailClassPage() {
                     style={{ gap: '2rem' }}
                 >
 
-                   
+
                     {checkRegister(data.start_date, data.schedule.split(" - ")[0])
                         ?
                         (currentUser ?
 
                             (currentUser.role_name == "student" ?
                                 <td>
-                                    <Link to={`/registerCourse/${idClass}`}>
-                                        <button className="button is-info">Đăng kí  </button>
-                                    </Link>
+                                    {/* khoa chinh thuc bi an thi an nut dang ki */}
+                                    {data.isHidden == false &&
+                                        <Link to={`/registerCourse/${idClass}`}>
+                                            <button className="button is-info">Đăng kí  </button>
+                                        </Link>
+                                    }
+
                                 </td>
                                 : <></>
                             ) : <td>
-                                <Link to={`/login`}>
-                                    <button className="button is-info">Đăng kí </button>
-                                </Link>
+                                {data.isHidden &&
+                                    <Link to={`/login`}>
+                                        <button className="button is-info">Đăng kí </button>
+                                    </Link>
+                                }
+
                             </td>
 
                         )

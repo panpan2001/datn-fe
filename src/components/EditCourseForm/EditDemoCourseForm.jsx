@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import getDemoCourseById from '../../redux/actions/DemoCourse/GetDemoCourseById'
 import moment from 'moment'
 import { AiOutlineCheck, AiOutlineClose, AiOutlineDelete } from 'react-icons/ai'
+import getDemoCourseStudentByDemoCourseId from '../../redux/actions/DemoCourseStudent/GetDemoCourseStudentByDemoCourseId'
 
 function EditDemoCourseForm() {
   const { idDemoCourse } = useParams()
@@ -14,8 +15,11 @@ function EditDemoCourseForm() {
   useEffect(() => {
     // console.log(idCourse)
     getDemoCourseById(idDemoCourse, dispatch)
+    getDemoCourseStudentByDemoCourseId(idDemoCourse, dispatch)
   }, [])
   const demoCourses = useSelector(state => state.getDemoCourseById?.demoCourse?.currentCourse)
+  const demoCourseStudents = useSelector(state => state.getDemoCourseStudentByDemoCourseId?.demoCourses?.currentCourse)
+  console.log({ demoCourses })
   const handleBack = () => {
     navigate('/admin/course')
   }
@@ -27,6 +31,8 @@ function EditDemoCourseForm() {
     console.log("hello")
   }
   if (demoCourses) {
+    // const number_of_report= [...demoCourseStudents].filter(item => item.is_report === true).length
+
     console.log({ demoCourses })
     // setImages(course.image)
     return (
@@ -280,8 +286,20 @@ function EditDemoCourseForm() {
 
             </div>
           </div>
-
-
+          {/* {number_of_report > 0 &&
+          <>
+           <strong className="is-size-4"> Các báo cáo </strong>
+          <div className="columns is-centered  is-multiline mt-4"
+          style={{
+            backgroundColor: 'white',
+            borderRadius: '8px',
+            border: '1px solid var(--border-color)',
+          }}
+          >
+          
+          </div>
+          </>}
+          */}
 
         </div>
         <div className="group-buttons"

@@ -102,13 +102,13 @@ function StudentRatingDetailForm() {
 
     const handleDelete = (id) => {
         // xoa luon ne 
-        // deleteStudentRating(id, dispatch, axiosJWT, accessToken,navigate)
+        deleteStudentRating(id, dispatch, axiosJWT, accessToken,user?._id,navigate)
         // truoc khi xoa thi luon hien form 
         console.log({ id, accessToken })
-        navigate('/admin/studentJudge')
-        toast.success("Xóa đánh giá thành công!", {
-            position: "top-right",
-        })
+        // navigate('/admin/studentJudge')
+        // toast.success("Xóa đánh giá thành công!", {
+        //     position: "top-right",
+        // })
     }
     const handleChangeAppearance = (id) => {
         if(studentRating.countBadJudge==0){
@@ -508,8 +508,8 @@ function StudentRatingDetailForm() {
                         >
     
                             <div className="button-left">
-                                <button className="button is-danger has-text-white"
-                                    onClick={() => handleDelete(studentRating._id)}
+                                {/* <button className="button is-danger has-text-white"
+                                    onClick={() => handleDelete(studentRating._id,1)}
                                 >
     
                                     < AiOutlineDelete
@@ -523,7 +523,7 @@ function StudentRatingDetailForm() {
                                             marginRight: ".25rem",
     
                                         }} />
-                                    Xóa</button>
+                                    Xóa</button> */}
                                 {studentRating.countBadJudge>0  ?
                                 // (
                                 //     appearance== true  ?

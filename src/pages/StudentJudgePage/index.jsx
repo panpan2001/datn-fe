@@ -19,6 +19,8 @@ import { reportContent } from '../../data';
 import { toast } from 'react-toastify';
 import reportDemoCourseStudent from '../../redux/actions/DemoCourseStudent/ReportDemoCourseStudent';
 import { reportDemoCourseStudentSuccess } from '../../redux/slices/DemoCourseStudent/reportDemoCourseStudent';
+import { reportCourseStudentSuccess } from '../../redux/slices/CourseStudent/reportedCourseStudent';
+import reportCourseStudent from '../../redux/actions/CourseStudent/ReportCourseStudent';
 
 
 function StudentJudgePage() {
@@ -31,7 +33,8 @@ function StudentJudgePage() {
     const axiosJWT = createAxiosJWT(dispatch, user, getStudentRatingByStudentIdSuccess)
     const axiosJWTDemoCourse = createAxiosJWT(dispatch, user, getDemoCourseByStudentIdSuccess)
     const axiosJWTCourse = createAxiosJWT(dispatch, user, getCourseStudentByStudentIdSuccess)
-    const axiosJWTReportDemoCourseStudent = createAxiosJWT(dispatch, user, reportDemoCourseStudentSuccess)
+    // const axiosJWTReportDemoCourseStudent = createAxiosJWT(dispatch, user, reportDemoCourseStudentSuccess)
+    // const axiosJWTReportCourseStudent= createAxiosJWT(dispatch, user, reportCourseStudentSuccess)
     const account_id = user?._id
     useEffect(() => {
         getDemoCourseByStudentId(student._id, dispatch, accessToken, axiosJWTDemoCourse)
@@ -46,7 +49,7 @@ function StudentJudgePage() {
     const [visible, setVisible] = useState(false)
     const [show, setShow] = useState("none")
     const [data, setData] = useState(null)
-    const [flag,setFlag] = useState('')
+    const [flag, setFlag] = useState('')
     const [inputValue, setInputValue] = useState('')
     const [reportMessage, setReportMessage] = useState([])
     const [checkedState, setCheckedState] = useState(
@@ -102,18 +105,19 @@ function StudentJudgePage() {
                         reportedMessage: reportMessageSend,
                         reportedDateTime: moment(new Date().getTime()).format("DD/MM/YYYY hh:mm:ss")
                     }
-                    console.log({ value, flag ,data})
-                    if(flag == 1){
-                    reportDemoCourseStudent(data._id,value,dispatch,accessToken,axiosJWTReportDemoCourseStudent,account_id)
+                    console.log({ value, flag, data })
+                    if (flag == 1) {
+                        reportDemoCourseStudent(data._id, value, dispatch, accessToken, axiosJWTDemoCourse, account_id)
                     }
-                    else{
+                    else {
+                        reportCourseStudent(data._id, value, dispatch, accessToken, axiosJWTCourse, account_id)
 
                     }
                     // toast.success("Báo cáo đã được gửi!", {
                     //     position: "top-right",
                     // })
                 }
-                else{
+                else {
                     toast.warning('Bạn chưa điền nội dung cho báo cáo. Hãy thực hiện lại!', {
                         position: "top-right",
                     })
@@ -220,7 +224,13 @@ function StudentJudgePage() {
                                                                                             </li>)}
                                                                                     </div>
                                                                                 </td>
-                                                                                <td></td>
+                                                                                <td>
+                                                                                    <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                                                                                        {/* <Link to={`/profile/${account_id}/judgeTeacher/reportCourse/${item.id_demo_course.id_course._id}`}> */}
+                                                                                        <button className='button is-small is-warning' onClick={() => { handleOpenForm(item, 1) }}>Báo cáo </button>
+                                                                                        {/* </Link> */}
+                                                                                    </div>
+                                                                                </td>
                                                                             </> :
                                                                             //ko co danh gia xau
                                                                             <>
@@ -241,7 +251,13 @@ function StudentJudgePage() {
                                                                                     </div>
                                                                                 </td>
                                                                                 <td></td>
-                                                                                <td></td>
+                                                                                <td>
+                                                                                    <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                                                                                        {/* <Link to={`/profile/${account_id}/judgeTeacher/reportCourse/${item.id_demo_course.id_course._id}`}> */}
+                                                                                        <button className='button is-small is-warning' onClick={() => { handleOpenForm(item, 1) }}>Báo cáo </button>
+                                                                                        {/* </Link> */}
+                                                                                    </div>
+                                                                                </td>
                                                                             </>
                                                                     }
                                                                 </>
@@ -251,7 +267,7 @@ function StudentJudgePage() {
                                                 // chua danh gia 
                                                 (<>
 
-                                                    {/* check xem da dc danh gia chua  */}
+                                                    {/* check xem da dc danh gia chua, dc bao cao chua: phai het khoa hoc ms dc danh gia , bat dau khoa hoc thi dc bao cao  */}
                                                     {new Date(item.id_demo_course.end_date).getTime() <= Date.now() ?
                                                         <>
                                                             {/* // da dc danh gia do tg end demo be hon thoi gia hien tai */}
@@ -268,9 +284,7 @@ function StudentJudgePage() {
                                                             </td>
                                                             <td>
                                                                 <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                                                                    {/* <Link to={`/profile/${account_id}/judgeTeacher/reportCourse/${item.id_demo_course.id_course._id}`}> */}
-                                                                    <button className='button is-small is-warning' onClick={() => {handleOpenForm(item, 1)}}>Báo cáo </button>
-                                                                    {/* </Link> */}
+                                                                    <button className='button is-small is-warning' onClick={() => { handleOpenForm(item, 1) }}>Báo cáo </button>
                                                                 </div>
                                                             </td>
                                                         </>
@@ -280,7 +294,16 @@ function StudentJudgePage() {
                                                         <>
                                                             <td></td>
                                                             <td></td>
+                                                            {/* xem da bat dau chua, neu roi thi bao cao dc , chua thi ko dc bao caao */}
+                                                            {new Date(item.id_demo_course.start_date).getTime() <= Date.now() ?
+                                                            <td>
+                                                                 <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                                                                    <button className='button is-small is-warning' onClick={() => { handleOpenForm(item, 1) }}>Báo cáo </button>
+                                                                </div>
+                                                            </td>:
                                                             <td></td>
+                                                            }
+                                                            
                                                         </>
 
                                                     }
@@ -361,7 +384,13 @@ function StudentJudgePage() {
                                                                                             </li>)}
                                                                                     </div>
                                                                                 </td>
-                                                                                <td></td>
+                                                                                <td>
+                                                                                    <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                                                                                        {/* <Link to={`/profile/${account_id}/judgeTeacher/reportCourse/${item.id_demo_course.id_course._id}`}> */}
+                                                                                        <button className='button is-small is-warning' onClick={() => { handleOpenForm(item, 0) }}>Báo cáo </button>
+                                                                                        {/* </Link> */}
+                                                                                    </div>
+                                                                                </td>
                                                                             </> :
                                                                             //ko co danh gia xau
                                                                             <>
@@ -382,7 +411,13 @@ function StudentJudgePage() {
                                                                                     </div>
                                                                                 </td>
                                                                                 <td></td>
-                                                                                <td></td>
+                                                                                <td>
+                                                                                    <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                                                                                        {/* <Link to={`/profile/${account_id}/judgeTeacher/reportCourse/${item.id_demo_course.id_course._id}`}> */}
+                                                                                        <button className='button is-small is-warning' onClick={() => { handleOpenForm(item, 0) }}>Báo cáo </button>
+                                                                                        {/* </Link> */}
+                                                                                    </div>
+                                                                                </td>
                                                                             </>
                                                                     }
                                                                 </>
@@ -392,7 +427,7 @@ function StudentJudgePage() {
                                                 // chua danh gia 
                                                 (<>
 
-                                                    {/* check xem da dc danh gia chua  */}
+                                                    {/* check xem da dc danh gia chua tg dc danh gi phai la sau khi bat dau khoa hoc chinh thuc */}
                                                     {new Date(item.id_course.start_date).getTime() <= Date.now() ?
                                                         <>
                                                             {/* // da dc danh gia do tg end demo be hon thoi gia hien tai */}
@@ -408,9 +443,11 @@ function StudentJudgePage() {
                                                             <td>
                                                             </td>
                                                             <td>
-                                                                <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                                                                    <button className='button is-small is-info'>Báo cáo </button>
-                                                                </div>
+                                                            <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                                                                                        {/* <Link to={`/profile/${account_id}/judgeTeacher/reportCourse/${item.id_demo_course.id_course._id}`}> */}
+                                                                                        <button className='button is-small is-warning' onClick={() => { handleOpenForm(item, 0) }}>Báo cáo </button>
+                                                                                        {/* </Link> */}
+                                                                                    </div>
                                                             </td>
                                                         </>
 
@@ -420,6 +457,11 @@ function StudentJudgePage() {
                                                             <td></td>
                                                             <td></td>
                                                             <td></td>
+                                                            <td>
+                                                                {/* <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                                                                    <button className='button is-small is-warning' onClick={() => { handleOpenForm(item, 0) }}>Báo cáo </button>
+                                                                </div> */}
+                                                            </td>
                                                         </>
 
                                                     }
@@ -446,13 +488,60 @@ function StudentJudgePage() {
                 }}>
                     <div className="modal-background"></div>
 
-                    <div className="modal-content is-centered " style={{ marginTop: "5rem" }}>
+                    <div className="modal-content is-centered " style={{ marginTop: "5rem", height: "70vh" }}>
                         <header className="modal-card-head">
                             <p className="modal-card-title">Báo cáo khóa học </p>
                             <button className="modal-close is-large" aria-label="close" onClick={() => setShow("none")}></button>
 
                         </header>
-
+                        <strong className='is-size-5'>Khóa học bạn muốn báo cáo: </strong>
+                        <button className='button is-warning is-light'>{data && data.countReported>0? `Đã báo cáo ${data.countReported} lần`:"Chưa báo cáo lần nào."}</button>
+                        <div className="warning_content"
+                            style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                textAlign: "left",
+                                padding: "1rem"
+                            }}
+                        >
+                            <div className="column ">
+                                <label className="label">Tên khóa học</label>
+                                <input
+                                    className="input"
+                                    type="text"
+                                    placeholder="Tên khóa học"
+                                    name="Tên khóa học"
+                                    id="Tên khóa học"
+                                    value={data &&(flag==1? data.id_demo_course.id_course.name : data.id_course.name)}
+                                    readOnly={true}
+                                />
+                            </div>
+                            <div className="column ">
+                                <label className="label">Loại khóa học</label>
+                                <input
+                                    className="input"
+                                    type="text"
+                                    placeholder="Loại khóa học"
+                                    name="Loại khóa học"
+                                    id="Loại khóa học"
+                                    value={flag==1? "Khóa học thử" : "Khóa học chính thức"}
+                                    readOnly={true}
+                                />
+                            </div>
+                            <div className="column">
+                                <label className="label">Tên giáo viên</label>
+                                <input
+                                    className="input"
+                                    type="text"
+                                    placeholder="Tên giáo viên"
+                                    name="Tên giáo viên"
+                                    id="Tên giáo viên"
+                                    value={data && (flag==1? data.id_demo_course.id_course.id_teacher.account_id.full_name 
+                                        : data.id_course.id_teacher.account_id.full_name)}
+                                    readOnly={true}
+                                />
+                            </div>
+                            </div>
                         <strong className='is-size-5'>Nội dung bạn muốn báo cáo là? </strong>
                         <div className="warning_content"
                             style={{
@@ -491,7 +580,7 @@ function StudentJudgePage() {
                             </div>
                         </div>
                         <div >
-                            <button className="button is-warning mr-6" type="submit" onClick={() => handleSubmit(data,flag)}>Hoàn thành </button>
+                            <button className="button is-warning mr-6" type="submit" onClick={() => handleSubmit(data, flag)}>Hoàn thành </button>
                             <button className="button is-danger" onClick={() => setShow("none")}>Hủy  </button>
                         </div >
                     </div>

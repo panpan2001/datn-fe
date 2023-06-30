@@ -1,7 +1,7 @@
 import { toast } from "react-toastify"
 import { DemoCourseStudentApi } from "../../../utils/BaseUrl"
 import { reportDemoCourseStudentFail, reportDemoCourseStudentStart, reportDemoCourseStudentSuccess } from "../../slices/DemoCourseStudent/reportDemoCourseStudent"
-import { getDemoCourseByStudentIdSuccess } from "../../slices/DemoCourseStudent/getDemoCourseByStudentId"
+import { getDemoCourseByStudentIdStart, getDemoCourseByStudentIdSuccess } from "../../slices/DemoCourseStudent/getDemoCourseByStudentId"
 
 const reportDemoCourseStudent= async (id,value,dispatch,accessToken,axiosJWT,account_id)=>{
     dispatch(reportDemoCourseStudentStart())
@@ -13,11 +13,12 @@ const reportDemoCourseStudent= async (id,value,dispatch,accessToken,axiosJWT,acc
             }
         })
         
-        dispatch(reportDemoCourseStudentSuccess(res.data))
+        dispatch(getDemoCourseByStudentIdSuccess(res.data))
         toast.success("Gửi cảnh báo thành công!", {
             position: "top-right",
         })
     } catch (error) {
+        console.log(error)
         dispatch(reportDemoCourseStudentFail())
         toast.error("Gửi cảnh báo thất bại!", {
             position: "top-right",

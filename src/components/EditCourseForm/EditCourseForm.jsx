@@ -14,6 +14,7 @@ function EditCourseForm() {
   useEffect(() => {
     console.log(idCourse)
     getCoursebyId(idCourse, dispatch)
+  
   }, [])
   const course = useSelector(state => state.getCourseById?.course?.currentCourse)
   // useSelector((state)=>state.getCourseById.course?.currentCourse)
@@ -278,7 +279,15 @@ function EditCourseForm() {
             </div>
           </div>
 
-
+          <div className="columns is-centered  is-multiline mt-4"
+          style={{
+            backgroundColor: 'white',
+            borderRadius: '8px',
+            border: '1px solid var(--border-color)',
+          }}
+          >
+          
+          </div>
 
         </div>
         <div className="group-buttons-course-management "

@@ -16,7 +16,7 @@ const deleteStudentRating = (id, dispatch, axiosJWT, accessToken,account_id, nav
         toast.success("Xóa đánh giá thành công ", {
             position: toast.POSITION.BOTTOM_RIGHT
         })
-        navigate('/admin/studentJudge')
+        navigate('admin/studentJudge',{replace:true})
     } catch (error) {
         console.log(error)
         dispatch(deleteStudentRatingFailure(error))

@@ -24,7 +24,7 @@ function DetailTeacherpage() {
     useEffect(() => {
         getTeacherById(id, dispatch)
         getStudentRating(dispatch)
-
+        
     }, [id])
     const teacher = useSelector(state => state.getTeacherById.teacher?.currentTeacher)
     const user = useSelector((state) => state.login.login?.currentUser)
@@ -44,7 +44,7 @@ function DetailTeacherpage() {
     const courseStudent = useSelector((state) => state.getAllCourseStudent?.courseStudents?.currentCourseStudent)
     const DemoCourseStudent = useSelector((state) => state.getAllDemoCourseStudent?.demoCourseStudents?.currentDemoCourseStudent)
 
-    // console.log({ classes })
+    console.log({ classes })
     console.log({ demoCourses })
     // console.log(teacher.personal_description.split('\n'))
     /// 
@@ -66,7 +66,11 @@ function DetailTeacherpage() {
             rating_content_4 = (studentRating.map(i => i.rating_content_4).reduce((a, b) => a + b, 0) / rating_avg_teacher.length).toFixed(2)
 
         }
-
+const handleFiterHiddenCourse=(item)=>{
+    const course = classes.filter(i=>i._id==item.id_course._id)
+    console.log("handleFiterHiddenCourse",course.isHidden==true? item:null)
+    return course.isHidden==true? item:null
+}
         return (
             < >
                 {teacher &&
@@ -339,7 +343,9 @@ function DetailTeacherpage() {
                                     </tr>
                                 </thead>
                                 <tbody style={{ textAlign: "left" }}>
-                                    {classes && classes.map((item) => (
+                                    {classes && classes
+                                    .filter((item) => item.isHidden === false)
+                                    .map((item) => (
                                         <>
                                             <tr key={item._id}>
                                                 <td>
@@ -366,7 +372,11 @@ function DetailTeacherpage() {
                                             {/* <DetailClassModalForm id={item._id} data={item} show={show} setShow={setShow} /> */}
                                         </>
                                     ))}
-                                    {demoCourses && demoCourses.map((item) => (
+                                    {demoCourses && demoCourses
+                                    // course bi an di thi demo course van hien dc nhưng nut dang ki course chinh thuc bi an la dc
+                                    // .filter((item) => handleFiterHiddenCourse(item))
+                                    .filter((item) => item.isHidden === false)
+                                    .map((item) => (
                                         <>
                                             <tr key={item._id}>
                                                 <td>

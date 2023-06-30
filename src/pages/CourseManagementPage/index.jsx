@@ -17,8 +17,12 @@ import toLowerCaseNonAccentVietnamese from '../../contexts/toLowerCaseNonAccentV
 import { BsEye, BsEyeSlash } from 'react-icons/bs'
 import getAllDemoCourseStudent from '../../redux/actions/DemoCourseStudent/GetAllDemoCourseStudent'
 import getAllCourseStudent from '../../redux/actions/CourseStudent/GetAllCourseStudent'
+import { toast } from 'react-toastify'
+import changeDemoCourseAppearance from '../../redux/actions/DemoCourse/changeDemoCourseAppearance'
+import { changeCourseAppearanceFailure } from '../../redux/slices/Course/changeCourseAppearance'
+import changeCourseAppearance from '../../redux/actions/Course/ChangeCourseAppearance'
 function CourseManagementPage() {
-  const searchValue= useContext(contextProvider)
+  const searchValue = useContext(contextProvider)
 
   const user = useSelector((state) => state.login.login?.currentUser)
   const dispatch = useDispatch()
@@ -26,7 +30,7 @@ function CourseManagementPage() {
   const axiosJWTCourse = createAxiosJWT(dispatch, user, getAllCoursesSuccess)
   const axiosJWTDemoCourse = createAxiosJWT(dispatch, user, getAllDemoCoursesSuccess)
   const account_id = user?._id
-  const navigate=useNavigate()
+  const navigate = useNavigate()
   useEffect(() => {
     getAllDemoCourses(dispatch)
     getAllCourses(dispatch)
@@ -34,6 +38,7 @@ function CourseManagementPage() {
     getAllCourseStudent(dispatch)
   }, [])
   const courses = useSelector((state) => state.getAllCourses?.courses?.allCourses)
+  console.log({ courses })
   const demoCourses = useSelector((state) => state.getAllDemoCourse?.demoCourses?.allCourses)
   const demoCourseStudents = useSelector((state) => state.getAllDemoCourseStudent?.demoCourseStudents?.currentDemoCourseStudent)
   const courseStudents = useSelector((state) => state.getAllCourseStudent?.courseStudents?.currentCourseStudent)
@@ -44,43 +49,67 @@ function CourseManagementPage() {
   const handleDeleteDemoCourse = (id) => {
     adminDelDemoCourse(id, account_id, dispatch, axiosJWTDemoCourse, accessToken)
   }
-const handleGoToDetailCourse = (id) => {
-  console.log("id course ",id)
-  navigate(`/admin/course/${id}`)
-}
-const handleGoToDetailDemoCourse = (id) => {
-  console.log("id demo ",id)
-  navigate(`/admin/course/demo/${id}`)
-}
-const handleSearchCourse = (e) => {
-  return searchValue== 0 ? e : 
-  (toLowerCaseNonAccentVietnamese(e.name)
-  .includes(toLowerCaseNonAccentVietnamese(searchValue))?
-  e :
-  null
-    ) 
-  
-  
-}
-const handleSearchDemoCourse = (e) => {
-  return searchValue== 0 ? e : 
-  (toLowerCaseNonAccentVietnamese(e.id_course.name)
-  .includes(toLowerCaseNonAccentVietnamese(searchValue))?
-  e :
-  null
-    )
-}
+  const handleGoToDetailCourse = (id) => {
+    console.log("id course ", id)
+    navigate(`/admin/course/${id}`)
+  }
+  const handleGoToDetailDemoCourse = (id) => {
+    console.log("id demo ", id)
+    navigate(`/admin/course/demo/${id}`)
+  }
+  const handleSearchCourse = (e) => {
+    return searchValue == 0 ? e :
+      (toLowerCaseNonAccentVietnamese(e.name)
+        .includes(toLowerCaseNonAccentVietnamese(searchValue)) ?
+        e :
+        null
+      )
 
-const handleChangeAppearance = (e,flag) => {
-  const hiddenStatus= e.isHidden
-  if(flag==1){
-  //  changeDemoCourseAppearance( hiddenStatus, account_id, dispatch, axiosJWTDemoCourse, accessToken)
-alert(e._id)
+
   }
-  else {
-    // changeCourseAppearance( hiddenStatus, account_id, dispatch, axiosJWTCourse, accessToken)
+  const handleSearchDemoCourse = (e) => {
+    return searchValue == 0 ? e :
+      (toLowerCaseNonAccentVietnamese(e.id_course.name)
+        .includes(toLowerCaseNonAccentVietnamese(searchValue)) ?
+        e :
+        null
+      )
   }
-}
+
+  const handleChangeAppearance = (e, flag) => {
+    console.log({ e, flag })
+    const value = {
+      isHidden: e.isHidden
+    }
+    if (flag == 1) {
+      if (
+        demoCourseStudents.
+          filter(demoCourse => e._id ===
+            demoCourse.id_demo_course._id &&
+            demoCourse.isReported == true).length > 0
+      ) {
+        changeDemoCourseAppearance(e._id, value, account_id, dispatch, axiosJWTDemoCourse, accessToken, getAllDemoCoursesSuccess)
+
+      }
+      else {
+        toast.warning("Khóa học này không bị báo cáo. Không thể ẩn !", {
+          position: "top-right",
+        })
+      }
+    }
+    else {
+      if (courseStudents.filter(course => e._id ===
+        course.id_course._id &&
+        course.isReported == true).length > 0) {
+          changeCourseAppearance(e._id, value, account_id, dispatch, axiosJWTCourse, accessToken, getAllCoursesSuccess)
+      }
+      else {
+        toast.warning("Khóa học này không bị báo cáo. Không thể ẩn !", {
+          position: "top-right",
+        })
+      }
+    }
+  }
 
   return (
     <div className='course-management-page container mt-4'>
@@ -161,87 +190,91 @@ alert(e._id)
                 <tr>
                   <th>STT</th>
                   <th>Tên khóa học</th>
-                  <th>Số lượng học viên</th>
+                  <th>Tên giáo viên</th>
                   <th>Lịch học</th>
                   {/* <th>Thời lượng <br/> buổi học (ph)</th> */}
-                  <th>Thời gian học(tháng)</th>
+                  <th>Số lượng học viên</th>
+                  <th></th>
                   <th></th>
                   <th></th>
                 </tr>
               </thead>
               <tbody>
                 {courses && courses
-                .filter(item=>handleSearchCourse(item))
-                .map((item) => (
-                  <tr className='mb-2'>
-                    <th>
-                      <div style={{width:"100%", display: "flex", alignItems: "center",justifyContent: "center"}}>
-                      {courses.indexOf(item) + 1}
-                      </div>
+                  .filter(item => handleSearchCourse(item))
+                  .map((item) => (
+                    <tr className='mb-2'>
+                      <th>
+                        <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                          {courses.indexOf(item) + 1}
+                        </div>
                       </th>
-                    <td>{item.name}</td>
-                    <td>
-                    <div style={{width:"100%", display: "flex", alignItems: "center",justifyContent: "center"}}>
+                      <td>{item.name}</td>
+                      <td>
+                        {/* <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}> */}
 
-                      {item.number_of_student}
-                      </div>
+                          {item.id_teacher.account_id.full_name}
+                        {/* </div> */}
                       </td>
-                    <td>{item.schedule}</td>
-                    {/* <td>
+                      <td>{item.schedule}</td>
+                      {/* <td>
                     <div style={{width:"100%", display: "flex", alignItems: "center",justifyContent: "center"}}>
                       {item.time_per_lesson}
                       </div>
                       </td> */}
-                    <td>
-                    <div style={{width:"100%", display: "flex", alignItems: "center",justifyContent: "center"}}>
-                      {item.learning_period}
-                      </div>
-                      </td>
                       <td>
-                        {courseStudents && courseStudents.filter(course=>item._id===course.id_course._id && course.isReported==true).length>0 ?
-                        <div  style={{width:"100%", display: "flex", alignItems: "center",justifyContent: "center"}}>
-                          <button className='button  is-danger is-light is-small'>
-                            {courseStudents.filter(course=>item._id===course.id_course._id && course.isReported==true).length}</button>
-                        </div>:
-                        <div  style={{width:"100%", display: "flex", alignItems: "center",justifyContent: "center"}}>
-                          <button className='button  is-primary is-light is-small'>0</button>
-                        </div>
-                      }
-                      </td>
-                      <td>
-                        <div style={{width:"100%", display: "flex", alignItems: "center",justifyContent: "center"}}>
-                        {item.createdAt ?
-                                                < BsEyeSlash style={{
-                                                  width: "1.5rem",
-                                                  height: "1.5rem",
-                                                }}
-                                                className='hide-student-rating_icon'
-                                                />
-                                                :
-                                                < BsEye 
-                                                style={{
-                                                  width: "1.5rem",
-                                                  height: "1.5rem",
-                                                }}
-                                                className='show-student-rating_icon'
-                                                />
-                                            }
+                        <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                          {item.number_of_student}
                         </div>
                       </td>
-                    <td>
-                      <div style={{width:"100%", display: "flex", alignItems: "center",justifyContent: "center"}}>
-                      <AiOutlineEdit onClick={() => handleGoToDetailCourse(item._id)}
-                        style={{
-                          color: '#008947',
-                          cursor: 'pointer',
-                          width: "1.5rem",
-                          height: "1.5rem",
-                          // marginRight: ".75rem",
-                          // marginTop: ".75rem"
-                        }} />
-                      </div>
-                    </td>
-                    {/* <td>
+                      <td>
+                        {courseStudents && courseStudents.filter(course => item._id === course.id_course._id && course.isReported == true).length > 0 ?
+                          <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                            <button className='button  is-danger is-light is-small'>
+                              {courseStudents.filter(course => item._id === course.id_course._id && course.isReported == true).length}</button>
+                          </div> :
+                          <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                            <button className='button  is-primary is-light is-small'>0</button>
+                          </div>
+                        }
+                      </td>
+                      <td>
+                        <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                          {item.isHidden ?
+                            < BsEyeSlash
+                              onClick={() => handleChangeAppearance(item, 0)}
+                              style={{
+                                width: "1.5rem",
+                                height: "1.5rem",
+                              }}
+                              className='hide-student-rating_icon'
+                            />
+                            :
+                            < BsEye
+                              onClick={() => handleChangeAppearance(item, 0)}
+                              style={{
+                                width: "1.5rem",
+                                height: "1.5rem",
+                              }}
+                              className='show-student-rating_icon'
+                            />
+                          }
+                        </div>
+                      </td>
+                      <td>
+                        <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                          <AiOutlineEdit onClick={() => handleGoToDetailCourse(item._id)}
+                            style={{
+                              color: '#008947',
+                              cursor: 'pointer',
+                              width: "1.5rem",
+                              height: "1.5rem",
+                              // marginRight: ".75rem",
+                              // marginTop: ".75rem"
+                            }} />
+                        </div>
+                      </td>
+                      {/* <td>
                       < AiOutlineDelete onClick={() => handleDeleteCourse(item._id)}
                         style={{
                           color: '#ff357e',
@@ -252,8 +285,8 @@ alert(e._id)
                           marginRight: ".75rem"
                         }} />
                     </td> */}
-                  </tr>
-                ))}
+                    </tr>
+                  ))}
               </tbody>
             </table>
           </div>
@@ -313,12 +346,12 @@ alert(e._id)
       <div className='demo_course-management_table is-centered mr-5 mt-3'>
         {demoCourses &&
           <div className='teacher-management_table is-centered mr-5 mt-3'
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignContent: "center",
-          }}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignContent: "center",
+            }}
           >
             <table className="table"
               style={{
@@ -332,10 +365,10 @@ alert(e._id)
                 <tr>
                   <th>STT</th>
                   <th>Tên khóa học</th>
-                  <th>Số lượng học viên</th>
+                  <th>Tên giáo viên</th>
                   <th>Lịch học</th>
                   {/* <th>Thời lượng<br/> buổi học (ph)</th> */}
-                  <th>Thời gian học (buổi)</th>
+                  <th>Số lượng học viên</th>
                   <th></th>
                   <th></th>
                   <th></th>
@@ -343,85 +376,85 @@ alert(e._id)
               </thead>
               <tbody>
                 {demoCourses && demoCourses
-                .filter(item=>handleSearchDemoCourse(item))
-                .map((item) => (
-                  <tr className='mb-2'>
-                    <th>
-                      <div style={{width:"100%", display: "flex", alignItems: "center",justifyContent: "center"}}>
-                      {demoCourses.indexOf(item) + 1}
-                      </div>
+                  .filter(item => handleSearchDemoCourse(item))
+                  .map((item) => (
+                    <tr className='mb-2'>
+                      <th>
+                        <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                          {demoCourses.indexOf(item) + 1}
+                        </div>
                       </th>
-                    <td>
-                      {item.id_course&& item.id_course.name}</td>
-                    <td>
-                      <div style={{width:"100%", display: "flex", alignItems: "center",justifyContent: "center"}}>
-                      {item.id_course&&item.id_course.number_of_student}
-                      </div>
+                      <td>
+                        {item.id_course && item.id_course.name}</td>
+                      <td>
+                        {/* <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}> */}
+                          {item.id_course && item.id_course.id_teacher.account_id.full_name}
+                        {/* </div> */}
                       </td>
-                    <td>{item.schedule}</td>
-                    {/* <td>
+                      <td>{item.schedule}</td>
+                      {/* <td>
                       <div style={{width:"100%", display: "flex", alignItems: "center",justifyContent: "center"}}>
                       {item.id_course&&item.id_course.time_per_lesson}
                       </div>
                       </td> */}
-                    <td>
-                    <div style={{width:"100%", display: "flex", alignItems: "center",justifyContent: "center"}}>
-                    {item.learning_period}
-                    </div>
+                      <td>
+                        <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                          {item.id_course && item.id_course.number_of_student}
+                        </div>
                       </td>
                       <td>
-                        { demoCourseStudents &&
-                         demoCourseStudents
-                         .filter(demoCourse=>item._id === demoCourse.id_demo_course._id && demoCourse.isReported==true).length>0?
-                       <>
-                        <div  style={{width:"100%", display: "flex", alignItems: "center",justifyContent: "center"}}>
-                          <button className='button  is-danger is-light is-small'>
-                            {demoCourseStudents.filter(demoCourse=>item._id === demoCourse.id_demo_course._id && demoCourse.isReported==true).length}
-                            </button>
-                        </div>
-                        </>
-                        :
-                        <div  style={{width:"100%", display: "flex", alignItems: "center",justifyContent: "center"}}>
-                          <button className='button  is-primary is-light is-small'>0</button>
-                        </div>
-                      }
+                        {demoCourseStudents &&
+                          demoCourseStudents
+                            .filter(demoCourse => item._id === demoCourse.id_demo_course._id && demoCourse.isReported == true).length > 0 ?
+                          <>
+                            <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                              <button className='button  is-danger is-light is-small'>
+                                {demoCourseStudents.filter(demoCourse => item._id === demoCourse.id_demo_course._id && demoCourse.isReported == true).length}
+                              </button>
+                            </div>
+                          </>
+                          :
+                          <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                            <button className='button  is-primary is-light is-small'>0</button>
+                          </div>
+                        }
                       </td>
                       <td>
-                      <div style={{width:"100%", display: "flex", alignItems: "center",justifyContent: "center"}}>
-                      {item.isHidden ?
-                                                < BsEyeSlash 
-                                                onClick={()=>handleChangeAppearance(item,1)}
-                                                style={{
-                                                  width: "1.5rem",
-                                                  height: "1.5rem",
-                                                }}
-                                               
-                                                />
-                                                :
-                                                < BsEye 
-                                                onClick={()=>handleChangeAppearance(item,1)}
-                                                style={{
-                                                  width: "1.5rem",
-                                                  height: "1.5rem",
-                                                }}
-                                                />
-                                            }
-                      </div>
+                        <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                          {item.isHidden ?
+                            < BsEyeSlash
+                              onClick={() => handleChangeAppearance(item, 1)}
+                              style={{
+                                width: "1.5rem",
+                                height: "1.5rem",
+                              }}
+
+                            />
+                            :
+                            < BsEye
+                              onClick={() => handleChangeAppearance(item, 1)}
+                              style={{
+                                width: "1.5rem",
+                                height: "1.5rem",
+                              }}
+                            />
+                          }
+                        </div>
                       </td>
 
-                    <td>
-                      <div style={{width:"100%", display: "flex", alignItems: "center",justifyContent: "center"}}>
-                      <AiOutlineEdit onClick={()=>handleGoToDetailDemoCourse(item._id)}
-                        style={{
-                          color: '#008947',
-                          cursor: 'pointer',
-                          width: "1.5rem",
-                          height: "1.5rem",
-                        }} />
-                      </div>
-                    
-                    </td>
-                    {/* <td>
+                      <td>
+                        <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                          <AiOutlineEdit onClick={() => handleGoToDetailDemoCourse(item._id)}
+                            style={{
+                              color: '#008947',
+                              cursor: 'pointer',
+                              width: "1.5rem",
+                              height: "1.5rem",
+                            }} />
+                        </div>
+
+                      </td>
+                      {/* <td>
                       < AiOutlineDelete 
                       onClick={() => handleDeleteDemoCourse(item._id)}
                         style={{
@@ -433,8 +466,8 @@ alert(e._id)
                           marginRight: ".75rem"
                         }} />
                     </td> */}
-                  </tr>
-                ))}
+                    </tr>
+                  ))}
               </tbody>
             </table>
           </div>
