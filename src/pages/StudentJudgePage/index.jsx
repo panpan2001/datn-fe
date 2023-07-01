@@ -28,13 +28,10 @@ function StudentJudgePage() {
     const dispatch = useDispatch()
     const student = useSelector((state) => state.getStudentByAccountId.students?.infoStudent)
     const user = useSelector((state) => state.login.login?.currentUser)
-    // console.log({user} )
     const accessToken = user?.accessToken
     const axiosJWT = createAxiosJWT(dispatch, user, getStudentRatingByStudentIdSuccess)
     const axiosJWTDemoCourse = createAxiosJWT(dispatch, user, getDemoCourseByStudentIdSuccess)
     const axiosJWTCourse = createAxiosJWT(dispatch, user, getCourseStudentByStudentIdSuccess)
-    // const axiosJWTReportDemoCourseStudent = createAxiosJWT(dispatch, user, reportDemoCourseStudentSuccess)
-    // const axiosJWTReportCourseStudent= createAxiosJWT(dispatch, user, reportCourseStudentSuccess)
     const account_id = user?._id
     useEffect(() => {
         getDemoCourseByStudentId(student._id, dispatch, accessToken, axiosJWTDemoCourse)

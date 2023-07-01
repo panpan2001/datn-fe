@@ -102,7 +102,7 @@ function StudentRatingDetailForm() {
 
     const handleDelete = (id) => {
         // xoa luon ne 
-        deleteStudentRating(id, dispatch, axiosJWT, accessToken,user?._id,navigate)
+        deleteStudentRating(id, dispatch, axiosJWT, accessToken, user?._id, navigate)
         // truoc khi xoa thi luon hien form 
         console.log({ id, accessToken })
         // navigate('/admin/studentJudge')
@@ -111,24 +111,24 @@ function StudentRatingDetailForm() {
         // })
     }
     const handleChangeAppearance = (id) => {
-        if(studentRating.countBadJudge==0){
+        if (studentRating.countBadJudge == 0) {
             toast.warning('Đánh giá này chưa bị báo xấu, không thể ẩn !', {
                 position: "top-right",
             })
         }
         else {
- // an binh luan di, ko xoa, nhung binh luan bi an thi se ko tinh vao rating trung binh cua teacher
-    //    dispatch, id, value, axiosJWT, accessToken, success, account_id
-    appearance.current = !appearance.current
-    //flag: 0 cap nhat 1 
-        changeAppearanceStudentRating(dispatch,id,studentRating.isBadJudge,axiosJWT,accessToken,getStudentRatingByIdSuccess,user._id,0)
-   
+            // an binh luan di, ko xoa, nhung binh luan bi an thi se ko tinh vao rating trung binh cua teacher
+            //    dispatch, id, value, axiosJWT, accessToken, success, account_id
+            appearance.current = !appearance.current
+            //flag: 0 cap nhat 1 
+            changeAppearanceStudentRating(dispatch, id, studentRating.isBadJudge, axiosJWT, accessToken, getStudentRatingByIdSuccess, user._id, 0)
+
         }
-       
+
     }
     const appearance = useRef(studentRating)
-    if(studentRating){
-       appearance.current = ! studentRating.isBadJudge
+    if (studentRating) {
+        appearance.current = !studentRating.isBadJudge
         return (
             <div className='judge-teacher-form_container container is-centered'
                 style={{
@@ -144,9 +144,9 @@ function StudentRatingDetailForm() {
                     <div className="detail-judge-teacher_container"
                         style={{
                             //    margin:'auto',
-    
+
                         }}>
-    
+
                         <div className="content columns"
                             style={{
                                 padding: "1rem",
@@ -212,7 +212,7 @@ function StudentRatingDetailForm() {
                                             name="Ngày cập nhật"
                                             id='Ngày cập nhật'
                                             readOnly={true}
-                                            value={studentRating.studentUpdatedAt ? studentRating.studentUpdatedAt.split(" ")[0]: moment(studentRating.createdAt).format('DD/MM/YYYY ')}
+                                            value={studentRating.studentUpdatedAt ? studentRating.studentUpdatedAt.split(" ")[0] : moment(studentRating.createdAt).format('DD/MM/YYYY ')}
                                         />
                                     </div>
                                     <div className="column is-4">
@@ -247,11 +247,11 @@ function StudentRatingDetailForm() {
                                                 backgroundColor: "#FFC6B2"
                                             }}>
                                             <label className="label is-size-6">Điểm đánh giá trung bình</label>
-    
+
                                             <strong className='is-size-5'>{studentRating.rating_avg_teacher}</strong>
                                         </div>
                                         <div className="column is-4"></div>
-    
+
                                     </div>
                                     <div className="column is-6"
                                         style={{ display: 'flex', flexDirection: "column", alignItems: "center" }}>
@@ -270,9 +270,9 @@ function StudentRatingDetailForm() {
                                             <label className="label is-size-6">{JudgeFormNames[0]}</label>
                                             <strong className='is-size-5'>{studentRating.rating_content_1}</strong>
                                         </div>
-    
+
                                     </div>
-    
+
                                     <div className="column is-6"
                                         style={{ display: 'flex', flexDirection: "column", alignItems: "center" }}>
                                         <div
@@ -290,9 +290,9 @@ function StudentRatingDetailForm() {
                                             <label className="label is-size-6">{JudgeFormNames[1]}</label>
                                             <strong className='is-size-5'>{studentRating.rating_content_2}</strong>
                                         </div>
-    
+
                                     </div>
-    
+
                                     <div className="column is-6"
                                         style={{ display: 'flex', flexDirection: "column", alignItems: "center" }}>
                                         <div
@@ -310,9 +310,9 @@ function StudentRatingDetailForm() {
                                             <label className="label is-size-6">{JudgeFormNames[2]}</label>
                                             <strong className='is-size-5'>{studentRating.rating_content_3}</strong>
                                         </div>
-    
+
                                     </div>
-    
+
                                     <div className="column is-6"
                                         style={{ display: 'flex', flexDirection: "column", alignItems: "center" }}>
                                         <div
@@ -330,7 +330,7 @@ function StudentRatingDetailForm() {
                                             <label className="label is-size-6">{JudgeFormNames[3]}</label>
                                             <strong className='is-size-5'>{studentRating.rating_content_4}</strong>
                                         </div>
-    
+
                                     </div>
                                     <div className="column is-12">
                                         <label className="label">Bình luận</label>
@@ -345,7 +345,7 @@ function StudentRatingDetailForm() {
                                         ></textarea>
                                     </div>
                                 </div>
-    
+
                             </div>
                             <div className="teacher-and-course-info_container" style={{
                                 display: "flex",
@@ -367,14 +367,14 @@ function StudentRatingDetailForm() {
                                         width: '50%'
                                     }}>
                                     <strong className='is-size-5'>Thông tin giáo viên</strong>
-    
+
                                     <div className=" column is-12  teacher_img"
                                         style={{
                                             display: "flex",
                                             justifyContent: "center",
                                         }} >
                                         {/* <img src={studentRating.id_teacher.personal_image} /> */}
-    
+
                                     </div>
                                     <div className="column ">
                                         <label className="label">Họ và tên</label>
@@ -388,7 +388,7 @@ function StudentRatingDetailForm() {
                                             value={studentRating.id_teacher.account_id.full_name}
                                         />
                                     </div>
-    
+
                                     <div className="column ">
                                         <label className="label">Giới tính</label>
                                         <input
@@ -400,9 +400,9 @@ function StudentRatingDetailForm() {
                                             readOnly={true}
                                             value={studentRating.id_teacher.account_id.gender}
                                         />
-    
+
                                     </div>
-    
+
                                     <div className="column ">
                                         <label className="label">Email</label>
                                         <input
@@ -427,8 +427,8 @@ function StudentRatingDetailForm() {
                                             value={studentRating.id_teacher.account_id.phone_number}
                                         />
                                     </div>
-    
-    
+
+
                                 </div>
                                 <br />
                                 <div className="columns is-6 is-multiline "
@@ -461,12 +461,12 @@ function StudentRatingDetailForm() {
                                         </div>
                                         <div className="column ">
                                             <label className="label">Loại khóa học</label>
-    
+
                                             {studentRating.isDemo ?
                                                 <button className='button is-info'>Khóa học thử</button> :
                                                 <button className='button is-primary'>Khóa học chính thức </button>
                                             }
-    
+
                                         </div>
                                         <div className="column  ">
                                             <label className="label">Cấp độ</label>
@@ -478,16 +478,16 @@ function StudentRatingDetailForm() {
                                                 id='phone_number'
                                                 readOnly={true}
                                                 value={studentRating.id_course.category_id.level}
-    
+
                                             />
                                         </div>
                                     </div>
-    
+
                                 </div>
                                 <br />
                             </div>
-    
-    
+
+
                         </div>
                         <div className="group-btn"
                             style={{
@@ -506,7 +506,7 @@ function StudentRatingDetailForm() {
                                 padding: "2rem"
                             }}
                         >
-    
+
                             <div className="button-left">
                                 {/* <button className="button is-danger has-text-white"
                                     onClick={() => handleDelete(studentRating._id,1)}
@@ -524,58 +524,7 @@ function StudentRatingDetailForm() {
     
                                         }} />
                                     Xóa</button> */}
-                                {studentRating.countBadJudge>0  ?
-                                // (
-                                //     appearance== true  ?
-                                //     <button className="button is-dark ml-3"
-                                //         onClick={() => handleChangeAppearance(studentRating._id)}
-                                //     >
-    
-                                //         < BsEyeSlash
-                                //             style={{
-                                //                 // color: 'white',
-                                //                 cursor: 'pointer',
-                                //                 width: "1.5rem",
-                                //                 height: "1.5rem",
-                                //                 marginTop: "-0.25rem",
-                                //                 marginRight: ".25rem",
-    
-                                //             }} />
-                                //         Ẩn đánh giá </button> :
-    
-                                //     <button className="button is-info ml-3"
-                                //         onClick={() => handleChangeAppearance(studentRating._id)}
-                                //     >
-                                //         < BsEye
-                                //             style={{
-                                //                 // color: 'white',
-                                //                 cursor: 'pointer',
-                                //                 width: "1.5rem",
-                                //                 height: "1.5rem",
-                                //                 // marginTop: "-0.25rem",
-                                //                 marginRight: ".25rem",
-    
-                                //             }} />
-                                //         Hiện đánh giá </button>
-                                //     )
-                                <button className="button is-info ml-3"
-                                        onClick={() => handleChangeAppearance(studentRating._id)}
-                                    >
-                                        < BsEye
-                                            style={{
-                                                // color: 'white',
-                                                cursor: 'pointer',
-                                                width: "1.5rem",
-                                                height: "1.5rem",
-                                                // marginTop: "-0.25rem",
-                                                marginRight: ".25rem",
-    
-                                            }} />
-                                        Ẩn/hiện đánh giá </button>
-                                    :
-                                    <></>
-                                }
-    
+                               
                             </div>
                             <div className="button-right">
                                 <button
@@ -589,7 +538,7 @@ function StudentRatingDetailForm() {
                                             height: "1.5rem",
                                             marginRight: ".25rem",
                                             marginBottom: ".25rem",
-    
+
                                         }} /> Cảnh báo
                                 </button>
                                 <button
@@ -602,7 +551,7 @@ function StudentRatingDetailForm() {
                                             width: "1.5rem",
                                             height: "1.5rem",
                                             marginRight: ".25rem",
-    
+
                                         }} /> Xóa cảnh báo
                                 </button>
                                 <button className="button is-light"
@@ -616,11 +565,11 @@ function StudentRatingDetailForm() {
                                             width: "1.5rem",
                                             height: "1.5rem",
                                             marginRight: ".25rem",
-    
+
                                         }} /> Thoát
                                 </button>
                             </div>
-    
+
                         </div>
                     </div>
                 }
@@ -630,7 +579,7 @@ function StudentRatingDetailForm() {
                         // marginTop: "20rem",
                     }}>
                     <div className="modal-background"></div>
-    
+
                     <div className="modal-content is-centered"
                         style={{ marginTop: "5rem" }}
                     >
@@ -641,7 +590,7 @@ function StudentRatingDetailForm() {
                                 onClick={() => setShow("none")}>
                             </button>
                         </header>
-    
+
                         <strong className='is-size-5'>Nội dung bạn muốn cảnh báo là gì ? </strong>
                         <div className="warning_content"
                             style={{
@@ -700,13 +649,76 @@ function StudentRatingDetailForm() {
                                 Thoát
                             </button>
                         </div >
-    
+
                     </div>
                 </div>
             </div>
         )
     }
-   
+
 }
 
 export default StudentRatingDetailForm
+
+/* 
+
+ {studentRating.countBadJudge > 0 ?
+                                    // (
+                                    //     appearance== true  ?
+                                    //     <button className="button is-dark ml-3"
+                                    //         onClick={() => handleChangeAppearance(studentRating._id)}
+                                    //     >
+
+                                    //         < BsEyeSlash
+                                    //             style={{
+                                    //                 // color: 'white',
+                                    //                 cursor: 'pointer',
+                                    //                 width: "1.5rem",
+                                    //                 height: "1.5rem",
+                                    //                 marginTop: "-0.25rem",
+                                    //                 marginRight: ".25rem",
+
+                                    //             }} />
+                                    //         Ẩn đánh giá </button> :
+
+                                    //     <button className="button is-info ml-3"
+                                    //         onClick={() => handleChangeAppearance(studentRating._id)}
+                                    //     >
+                                    //         < BsEye
+                                    //             style={{
+                                    //                 // color: 'white',
+                                    //                 cursor: 'pointer',
+                                    //                 width: "1.5rem",
+                                    //                 height: "1.5rem",
+                                    //                 // marginTop: "-0.25rem",
+                                    //                 marginRight: ".25rem",
+
+                                    //             }} />
+                                    //         Hiện đánh giá </button>
+                                    //     )
+                                    <button className="button is-info ml-3"
+                                        onClick={() => handleChangeAppearance(studentRating._id)}
+                                    >
+                                        < BsEye
+                                            style={{
+                                                // color: 'white',
+                                                cursor: 'pointer',
+                                                width: "1.5rem",
+                                                height: "1.5rem",
+                                                marginRight: ".25rem",
+
+                                            }} />
+                                        Ẩn/hiện đánh giá </button>
+                                    :
+                                    <></>
+                                }
+
+
+
+
+
+
+
+
+
+*/

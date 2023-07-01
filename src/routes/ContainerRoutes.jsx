@@ -20,6 +20,10 @@ import EditDemoCourseForm from '../components/EditCourseForm/EditDemoCourseForm'
 import StudentRatingDetailForm from '../components/StudentRatingDetailForm';
 import RejudgeForm from '../components/RejudgeForm';
 import ReportCourseForm from '../components/ReportCourseForm';
+import TeacherNotification from '../components/Notification/TeacherNotification';
+import CourseNotification from '../components/Notification/CourseNotification';
+import DemoCourseNotification from '../components/Notification/DemoCourseNotification';
+import SystemNotification from '../components/Notification/SystemNotification';
 
 const LandingPage = React.lazy(() => import('../pages/LandingPage'));
 const LoginPage = React.lazy(() => import('../pages/LoginPage'));
@@ -95,6 +99,8 @@ function ContainerRoutes() {
                   currentUSer.role_name && currentUSer.role_name == 'teacher' &&
                   <>
                     <Route path='/profile/:idAccount/teacherClass' element={<TeacherCurrentClassForm />} />
+                    <Route path='/profile/:idAccount/notification' element={<TeacherNotification />} />
+                      
                   </>
                 }
 
@@ -126,10 +132,10 @@ function ContainerRoutes() {
 
           < Route path='/admin' element={<AdminManagementLayout />}>
             <Route index element={<DashboardPage />} />
-            <Route path='/admin/account' element={<AccountManagementPage />} />
+            {/* <Route path='/admin/account' element={<AccountManagementPage />} />
             <Route path='/admin/student' element={<StudentManagementPage />} />
             <Route path='/admin/teacher' element={<TeacherManagementPage />} />
-            <Route path="/admin/teacher/:id" element={<EditTeacherForm />} />
+            <Route path="/admin/teacher/:id" element={<EditTeacherForm />} /> */}
             <Route path='/admin/course' element={<CourseManagementPage />} />
             <Route path='/admin/studentJudge' element={<StudentJudgeManagementPage />} />
             <Route path='/admin/studentJudge/:idRating' element={<StudentRatingDetailForm />}  />

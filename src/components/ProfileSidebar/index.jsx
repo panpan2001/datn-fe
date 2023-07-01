@@ -6,7 +6,7 @@ import { useState } from 'react'
 import '../../assets/styles/ProfilePage.css'
 import Item from '../Item'
 import { motion } from 'framer-motion'
-import { AiOutlineUser, AiOutlineSetting, AiOutlineBook, AiOutlineEdit, AiOutlineDatabase, AiOutlineFileAdd } from 'react-icons/ai'
+import { AiOutlineUser, AiOutlineSetting, AiOutlineBook, AiOutlineEdit, AiOutlineDatabase, AiOutlineFileAdd, AiOutlineBell } from 'react-icons/ai'
 import { useSelector } from 'react-redux'
 
 
@@ -43,7 +43,10 @@ const ProfileSideBar = () => {
 
             )
           }
-          <Item icon={<AiOutlineSetting />} name={"Cài đặt"} />
+          {currentUser.role_name == 'teacher'&& 
+          <Item icon={< AiOutlineBell />} name={"Thông báo"} navigate={`/profile/${currentUser._id}/notification`} />
+          }
+          {/* <Item icon={<AiOutlineSetting />} name={"Cài đặt"} /> */}
         </div>
       </div>
 

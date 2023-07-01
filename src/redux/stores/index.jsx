@@ -66,6 +66,7 @@ import reportDemoCourseStudentReducer from "../slices/DemoCourseStudent/reportDe
 import reportCourseStudentReducer from "../slices/CourseStudent/reportedCourseStudent";
 import changeCourseAppearanceReducer from "../slices/Course/changeCourseAppearance";
 import changeDemoCourseAppearanceReducer from "../slices/DemoCourseStudent/changeDemoCourseAppearanceSlice";
+import sendDemoCourseReportMessageReducer from "../slices/DemoCourse/sendDemoCourseReportMessageSice";
 
 const persistConfig = {
     key:'root',
@@ -138,7 +139,8 @@ const rootReducer= combineReducers({
     reportDemoCourseStudent:reportDemoCourseStudentReducer,
     reportCourseStudent:reportCourseStudentReducer,
     changeCourseAppearance:changeCourseAppearanceReducer,
-    changeDemoCourseAppearance:changeDemoCourseAppearanceReducer
+    changeDemoCourseAppearance:changeDemoCourseAppearanceReducer,
+    sendDemoCourseReportMessage:sendDemoCourseReportMessageReducer
 })
 const persistedReducer=persistReducer(persistConfig,rootReducer)
 

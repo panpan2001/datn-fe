@@ -4,7 +4,7 @@ import { getDemoCourseStudentByDemoCourseIdFailure, getDemoCourseStudentByDemoCo
 
 
 const getDemoCourseStudentByDemoCourseId = async(id,dispatch)=>{
-    console.log("id",{id})
+    // console.log("id",{id})
     dispatch(getDemoCourseStudentByDemoCourseIdStart())
     try {
         const res = await axios.get(DemoCourseStudentApi+ 'demoCourse/'+id)

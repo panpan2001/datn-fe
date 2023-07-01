@@ -101,7 +101,7 @@ function CourseManagementPage() {
       if (courseStudents.filter(course => e._id ===
         course.id_course._id &&
         course.isReported == true).length > 0) {
-          changeCourseAppearance(e._id, value, account_id, dispatch, axiosJWTCourse, accessToken, getAllCoursesSuccess)
+        changeCourseAppearance(e._id, value, account_id, dispatch, axiosJWTCourse, accessToken, getAllCoursesSuccess)
       }
       else {
         toast.warning("Khóa học này không bị báo cáo. Không thể ẩn !", {
@@ -192,9 +192,9 @@ function CourseManagementPage() {
                   <th>Tên khóa học</th>
                   <th>Tên giáo viên</th>
                   <th>Lịch học</th>
-                  {/* <th>Thời lượng <br/> buổi học (ph)</th> */}
                   <th>Số lượng học viên</th>
-                  <th></th>
+                  <th>Số học viên báo cáo</th>
+                  <th>Số lần cảnh báo</th>
                   <th></th>
                   <th></th>
                 </tr>
@@ -211,20 +211,14 @@ function CourseManagementPage() {
                       </th>
                       <td>{item.name}</td>
                       <td>
-                        {/* <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}> */}
-
-                          {item.id_teacher.account_id.full_name}
-                        {/* </div> */}
+                        {item.id_teacher.account_id.full_name}
                       </td>
                       <td>{item.schedule}</td>
-                      {/* <td>
-                    <div style={{width:"100%", display: "flex", alignItems: "center",justifyContent: "center"}}>
-                      {item.time_per_lesson}
-                      </div>
-                      </td> */}
+
                       <td>
+
                         <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                          {item.number_of_student}
+                          {courseStudents && courseStudents.filter(course => item._id === course.id_course._id).length}
                         </div>
                       </td>
                       <td>
@@ -237,6 +231,14 @@ function CourseManagementPage() {
                             <button className='button  is-primary is-light is-small'>0</button>
                           </div>
                         }
+                      </td>
+                      <td>
+                        <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                          {item.countReportedTime > 0 ?
+                            <button className="button is-warning is-small ">{item.countReportedTime}</button> :
+                            <button className="button is-primary is-light  is-small ">0</button>
+                          }
+                        </div>
                       </td>
                       <td>
                         <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -367,9 +369,9 @@ function CourseManagementPage() {
                   <th>Tên khóa học</th>
                   <th>Tên giáo viên</th>
                   <th>Lịch học</th>
-                  {/* <th>Thời lượng<br/> buổi học (ph)</th> */}
                   <th>Số lượng học viên</th>
-                  <th></th>
+                  <th>Số học viên báo cáo</th>
+                  <th>Số lần cảnh báo</th>
                   <th></th>
                   <th></th>
                 </tr>
@@ -388,7 +390,7 @@ function CourseManagementPage() {
                         {item.id_course && item.id_course.name}</td>
                       <td>
                         {/* <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}> */}
-                          {item.id_course && item.id_course.id_teacher.account_id.full_name}
+                        {item.id_course && item.id_course.id_teacher.account_id.full_name}
                         {/* </div> */}
                       </td>
                       <td>{item.schedule}</td>
@@ -399,7 +401,9 @@ function CourseManagementPage() {
                       </td> */}
                       <td>
                         <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                          {item.id_course && item.id_course.number_of_student}
+                          {demoCourseStudents &&
+                            demoCourseStudents
+                              .filter(demoCourse => item._id === demoCourse.id_demo_course._id).length}
                         </div>
                       </td>
                       <td>
@@ -418,6 +422,14 @@ function CourseManagementPage() {
                             <button className='button  is-primary is-light is-small'>0</button>
                           </div>
                         }
+                      </td>
+                      <td>
+                        <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                          {item.countReportedTime > 0 ?
+                            <button className="button is-warning is-small ">{item.countReportedTime}</button> :
+                            <button className="button is-primary is-light  is-small ">0</button>
+                          }
+                        </div>
                       </td>
                       <td>
                         <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
