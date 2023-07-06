@@ -16,6 +16,8 @@ import getDemoCourseByStudentId from '../../redux/actions/DemoCourseStudent/GetD
 import { getDemoCourseByStudentIdSuccess } from '../../redux/slices/DemoCourseStudent/getDemoCourseByStudentId'
 import { getCourseStudentByStudentIdSuccess } from '../../redux/slices/CourseStudent/getCourseStudentByStudentId'
 import getCourseStudentByStudentId from '../../redux/actions/CourseStudent/GetCourseStudentByStudentId'
+import '../../assets/styles/DetailStudentJudgepage.css'
+
 function DetailStudentJudgepage() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -113,6 +115,18 @@ function DetailStudentJudgepage() {
                         <li class="is-active"><a href="#" aria-current="page">Đánh giá giáo viên</a></li>
                     </ul>
                 </nav>
+                <div className="rating-mark_container container">
+                    <p><strong>Lưu ý: </strong> Mỗi tiêu chí được đánh giá theo thang điểm từ 1 đến 5 với các mức độ như sau: </p>
+                    <ol className='rating-mark_list'>
+                    <li className="rating-1">Hoàn toàn không đồng ý</li>
+                    <li className="rating-2">Không đồng ý</li>
+                    <li className="rating-3">Đồng ý một phần</li>
+                    <li className="rating-4">Đồng ý</li>
+                    <li className="rating-5">Hoàn toàn đồng ý</li>
+                    </ol>
+{/* <p>Tiêu chí nào mà không được học viên cho điểm sẽ được tính là 0 và cộng vào điểm tổng của nội dung đánh giá đó</p> */}
+                   
+                </div>
                 <div className="create-class-select-option"
                     style={{
                         display: 'flex',

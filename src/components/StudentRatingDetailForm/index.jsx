@@ -508,7 +508,7 @@ function StudentRatingDetailForm() {
                         >
 
                             <div className="button-left">
-                                {/* <button className="button is-danger has-text-white"
+                                <button className="button is-danger has-text-white"
                                     onClick={() => handleDelete(studentRating._id,1)}
                                 >
     
@@ -523,7 +523,7 @@ function StudentRatingDetailForm() {
                                             marginRight: ".25rem",
     
                                         }} />
-                                    Xóa</button> */}
+                                    Xóa</button>
                                
                             </div>
                             <div className="button-right">

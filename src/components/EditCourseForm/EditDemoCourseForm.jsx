@@ -16,7 +16,7 @@ function EditDemoCourseForm() {
   const { idDemoCourse } = useParams()
   const dispatch = useDispatch()
   const [show, setShow] = useState('none')
-  
+
   // const [images, setImages] = useState("")
   const navigate = useNavigate()
   const user = useSelector((state) => state.login.login?.currentUser)
@@ -41,10 +41,7 @@ function EditDemoCourseForm() {
     console.log("hello")
   }
   if (demoCourses && number_of_register) {
-    // const number_of_register= [...demoCourseStudents].filter(item => item.is_report === true).length
-
     console.log({ demoCourses })
-
     const handleDelete = (id) => {
       // alert("len",demoCourseStudents.lenght)
 
@@ -63,18 +60,7 @@ function EditDemoCourseForm() {
     }
     const number_of_report = number_of_register.filter(item => item.isReported == true)
     console.log({ number_of_report })
-let  warningMesage=      [... new Set(number_of_report.map(i=>i.reportedMessage).flat())]
-
-    // const handleHidden = (id) => {
-    //   if (number_of_report == 0) {
-    //     toast.warning("Khóa học này không bị báo cáo . Không thể ẩn !", {
-    //       position: "top-right",
-    //     })
-    //   }
-    //   else {
-    //     changeDemoCourseAppearance(id, { isHidden: demoCourses.isHidden }, account_id, dispatch, axiosJWTDemoCourse, accessToken, getDemoCourseByIdSuccess)
-    //   }
-    // }
+    let warningMesage = [... new Set(number_of_report.map(i => i.reportedMessage).flat())]
 
     const handleSendWarning = (id) => {
       const warningMessageSend = [...warningMesage]
@@ -83,56 +69,23 @@ let  warningMesage=      [... new Set(number_of_report.map(i=>i.reportedMessage)
       }
       setInputValue('')
       setShow('none')
-      console.log({warningMessageSend})
-        ///send canh bao :account_id,value,dispatch,axiosJWT,accessToken
-        const value = {
-          reportedMessage: warningMessageSend,
-          reportedDateTime: moment( new Date().getTime()).format('YYYY-MM-DD HH:mm:ss')
-        }
-        console.table({value})
-        // id,value,account_id,dispatch,axiosJWT,accessToken
-        sendDemoCourseReportMessage(id, value, account_id, dispatch, axiosJWT, accessToken)
+      console.log({ warningMessageSend })
+      ///send canh bao :account_id,value,dispatch,axiosJWT,accessToken
+      const value = {
+        reportedMessage: warningMessageSend,
+        reportedDateTime: moment(new Date().getTime()).format('YYYY-MM-DD HH:mm:ss')
       }
-    
+      console.table({ value })
+      // id,value,account_id,dispatch,axiosJWT,accessToken
+      sendDemoCourseReportMessage(id, value, account_id, dispatch, axiosJWT, accessToken)
+    }
+
 
     return (
-      <form className='detail-class-page_container   is-centered ' >
+      <div className='detail-class-page_container   is-centered ' >
         <div className='detail-class-page_form is-centered ' style={{ margin: "auto 2rem" }}>
           <strong className="is-size-4"> Khóa học thử</strong>
-          {/* <div className="column is-12 mt-1  class-image-upload_column-is-5"
-                style={{ width: "100%" }}>
-                <div className="field class-image-upload_field " >
-                  <label className="label">Ảnh đại diện</label>
-                  <div style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "1rem",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}>
-                    <img 
-                    style={{ width: "50%" }}
-                    src={demoCourses.id_course.image? demoCourses.id_course.image: require('../../assets/images/no-class.jpg')}/>
-                    <button
-                      type='button ml-6'
-                      className='button is-primary'
-                      id="choose-image_button"
-    
-                    >
-                      <p id='upload-teacher-image_p'>Chọn ảnh</p>
-                      <input className="file-input"
-                        type="file"
-                        multiple accept="image/*"
-                        name=""
-                        onChange={(e) => setImages(e.target.files)} />
-                    </button>
-                    <p
-                      id='personal_image'
-                      name='personal_image'
-                    ></p>
-                  </div>
-                </div>
-              </div> */}
+
           <div className="columns is-centered  is-multiline"
             style={{
               marginTop: "1rem",
@@ -350,40 +303,35 @@ let  warningMesage=      [... new Set(number_of_report.map(i=>i.reportedMessage)
             <div  >
               <strong className="is-size-4"> Các báo cáo </strong>
               <div style={{
-                  marginTop: "1rem",
-                  // backgroundColor: "white",
-                  // padding: "1rem",
-                  // border: "1px solid var(--border-color)",
-                  // borderRadius: "8px",
-                  // marginRight: "1rem",
-                  // marginBottom: "6.5rem",
-                  justifyContent: "center",
-                  display: "flex",
-                  flexDirection: "row",
-                }}>
-                  <div className="column is-3" 
+                marginTop: "1rem",
+
+                justifyContent: "center",
+                display: "flex",
+                flexDirection: "row",
+              }}>
+                <div className="column is-3"
                   style={{
                     display: "flex",
                     flexDirection: "column",
                     border: "1px solid var(--border-color)",
                     borderRadius: "8px",
-                    backgroundColor:"#ffe08a"
+                    backgroundColor: "#ffe08a"
                   }}>
-                    <label className="label ">Số người báo cáo</label>
-                    <strong>{number_of_report.length}</strong>
-                  </div>
-                  <div className="column is-3 ml-4" 
+                  <label className="label ">Số người báo cáo</label>
+                  <strong>{number_of_report.length}</strong>
+                </div>
+                <div className="column is-3 ml-4"
                   style={{
                     display: "flex",
                     flexDirection: "column",
                     border: "1px solid var(--border-color)",
                     borderRadius: "8px",
-                    backgroundColor:"#f14668",
+                    backgroundColor: "#f14668",
                   }}>
                   <label className="label has-text-white">Số lần quản trị viên cảnh báo </label>
-                    <strong className="has-text-white">{demoCourses.countReportedTime}</strong>
-                  </div>
+                  <strong className="has-text-white">{demoCourses.countReportedTime}</strong>
                 </div>
+              </div>
               <div className="columns is-centered  is-multiline mt-4"
                 style={{
                   marginTop: "1rem",
@@ -401,7 +349,7 @@ let  warningMesage=      [... new Set(number_of_report.map(i=>i.reportedMessage)
                     display: "flex",
                     flexDirection: "row",
                     textAlign: "left",
-                    
+
                   }}>
                     <div className="column">
                       <label className="label">Tên người báo cáo</label>
@@ -469,37 +417,26 @@ let  warningMesage=      [... new Set(number_of_report.map(i=>i.reportedMessage)
           }}>
 
           <div className="button-left">
-            {/* <button className="button is-danger has-text-white" type='button'>
-              < AiOutlineDelete onClick={() => handleDelete(demoCourses._id)}
-                style={{
-                  color: 'white',
-                  cursor: 'pointer',
-                  width: "1.5rem",
-                  height: "1.5rem",
-                  marginTop: "-0.25rem",
-                  marginRight: ".25rem",
 
-                }} />
-              Xóa</button> */}
-              {
-                number_of_report.length >0 && 
-                <button
-              type='button'
-              className="button is-warning"
-              onClick={() => setShow("block")}
-            >
-              <AiOutlineAlert
-                style={{
-                  cursor: 'pointer',
-                  width: "1.5rem",
-                  height: "1.5rem",
-                  marginRight: ".25rem",
-                  marginBottom: ".25rem",
+            {
+              number_of_report.length > 0 &&
+              <button
+                type='button'
+                className="button is-warning"
+                onClick={() => setShow("block")}
+              >
+                <AiOutlineAlert
+                  style={{
+                    cursor: 'pointer',
+                    width: "1.5rem",
+                    height: "1.5rem",
+                    marginRight: ".25rem",
+                    marginBottom: ".25rem",
 
-                }} /> Cảnh báo
-            </button>
-              }
-            
+                  }} /> Cảnh báo
+              </button>
+            }
+
           </div>
           <div className="button-right">
             <button className="button is-primary" type='submit' onClick={() => handleSave()}>
@@ -518,7 +455,7 @@ let  warningMesage=      [... new Set(number_of_report.map(i=>i.reportedMessage)
                 height: "1.5rem",
                 marginRight: ".25rem",
 
-              }} /> Hủy
+              }} /> Thoát
             </button>
           </div>
 
@@ -550,7 +487,7 @@ let  warningMesage=      [... new Set(number_of_report.map(i=>i.reportedMessage)
                 textAlign: "left",
               }}
             >
-              {warningMesage.map((item, index) => 
+              {warningMesage.map((item, index) =>
                 <ol key={index}>{item}</ol>
               )}
               <div className="field">
@@ -586,12 +523,33 @@ let  warningMesage=      [... new Set(number_of_report.map(i=>i.reportedMessage)
 
           </div>
         </div>
-      </form >
+      </div >
     )
   }
 }
 
 export default EditDemoCourseForm
+
+{/* <button className="button is-danger has-text-white" type='button'>
+              < AiOutlineDelete onClick={() => handleDelete(demoCourses._id)}
+                style={{
+                  color: 'white',
+                  cursor: 'pointer',
+                  width: "1.5rem",
+                  height: "1.5rem",
+                  marginTop: "-0.25rem",
+                  marginRight: ".25rem",
+
+
+
+                      // backgroundColor: "white",
+                  // padding: "1rem",
+                  // border: "1px solid var(--border-color)",
+                  // borderRadius: "8px",
+                  // marginRight: "1rem",
+                  // marginBottom: "6.5rem",
+                }} />
+              Xóa</button> */}
 
 {/* {demoCourses.isHidden == false ?
               <button className="button is-dark ml-3" type='button'>
@@ -620,4 +578,66 @@ export default EditDemoCourseForm
 
                   }} />
                 Hiện</button>
-            } */}
+            } 
+          
+               // const handleHidden = (id) => {
+    //   if (number_of_report == 0) {
+    //     toast.warning("Khóa học này không bị báo cáo . Không thể ẩn !", {
+    //       position: "top-right",
+    //     })
+    //   }
+    //   else {
+    //     changeDemoCourseAppearance(id, { isHidden: demoCourses.isHidden }, account_id, dispatch, axiosJWTDemoCourse, accessToken, getDemoCourseByIdSuccess)
+    //   }
+    // }
+   // const handleHidden = (id) => {
+    //   if (number_of_report == 0) {
+    //     toast.warning("Khóa học này không bị báo cáo . Không thể ẩn !", {
+    //       position: "top-right",
+    //     })
+    //   }
+    //   else {
+    //     changeDemoCourseAppearance(id, { isHidden: demoCourses.isHidden }, account_id, dispatch, axiosJWTDemoCourse, accessToken, getDemoCourseByIdSuccess)
+    //   }
+    // }
+
+          
+          
+          
+          
+          */}
+
+{/* <div className="column is-12 mt-1  class-image-upload_column-is-5"
+                style={{ width: "100%" }}>
+                <div className="field class-image-upload_field " >
+                  <label className="label">Ảnh đại diện</label>
+                  <div style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "1rem",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}>
+                    <img 
+                    style={{ width: "50%" }}
+                    src={demoCourses.id_course.image? demoCourses.id_course.image: require('../../assets/images/no-class.jpg')}/>
+                    <button
+                      type='button ml-6'
+                      className='button is-primary'
+                      id="choose-image_button"
+    
+                    >
+                      <p id='upload-teacher-image_p'>Chọn ảnh</p>
+                      <input className="file-input"
+                        type="file"
+                        multiple accept="image/*"
+                        name=""
+                        onChange={(e) => setImages(e.target.files)} />
+                    </button>
+                    <p
+                      id='personal_image'
+                      name='personal_image'
+                    ></p>
+                  </div>
+                </div>
+              </div> */}

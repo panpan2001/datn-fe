@@ -132,10 +132,10 @@ function ContainerRoutes() {
 
           < Route path='/admin' element={<AdminManagementLayout />}>
             <Route index element={<DashboardPage />} />
-            {/* <Route path='/admin/account' element={<AccountManagementPage />} />
+            <Route path='/admin/account' element={<AccountManagementPage />} />
             <Route path='/admin/student' element={<StudentManagementPage />} />
             <Route path='/admin/teacher' element={<TeacherManagementPage />} />
-            <Route path="/admin/teacher/:id" element={<EditTeacherForm />} /> */}
+            <Route path="/admin/teacher/:id" element={<EditTeacherForm />} />
             <Route path='/admin/course' element={<CourseManagementPage />} />
             <Route path='/admin/studentJudge' element={<StudentJudgeManagementPage />} />
             <Route path='/admin/studentJudge/:idRating' element={<StudentRatingDetailForm />}  />

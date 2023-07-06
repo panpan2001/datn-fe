@@ -1,12 +1,15 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import getAllDemoCourseByTeacherId from '../../redux/actions/DemoCourse/GetAllDemoCourseByTeacherId'
-import { BsBookmarks } from 'react-icons/bs'
+import { BsBookmarks, BsFillBookmarkFill } from 'react-icons/bs'
 import { AiOutlineWarning } from 'react-icons/ai'
+import moment from 'moment'
 
 function DemoCourseNotification({ setShow, show, teacherId }) {
     console.log("DemoCourseNotification teacher id ", teacherId)
     const dispatch = useDispatch()
+    const [seen, setSeen] = useState(false)
+
     useEffect(() => {
         getAllDemoCourseByTeacherId(teacherId, dispatch)
     }, [])
@@ -14,42 +17,56 @@ function DemoCourseNotification({ setShow, show, teacherId }) {
     console.log("DemoCourseNotification  ", demoCourse)
 
     return (
-        <div style={{ display: `${show == 1 ? 'block' : 'none'}` }}>
-            
-            {demoCourse && demoCourse
-            .filter((item) => item.countReportedTime >0)
-            .map((item) => 
-                <div className='card mb-2' style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    padding: '1rem 2rem',
-                    cursor: 'pointer',
-                    flexDirection: 'row',
-                }}>
-                    <div style={{
-                        display: 'flex',
-                        alignItems: 'flex-start',
-                        justifyContent: 'flex-start',
-                        flexDirection:'column',
-                        textAlign: 'left',
-                        marginRight: '5rem',
-                        
-                    }}>
-                        <div style={{ display: 'flex', alignItems: 'flex-end',marginBottom: '1rem' }}>
-                            <AiOutlineWarning fill={"#f1c40f"} style={{ width: '2rem', height: '2rem' ,}}/>
-                        <strong className='is-size-5 mt-2 ml-2 has-text-warning is-dark'>Cảnh báo </strong>
+        <div style={{ display: `${show == 1 ? 'block' : 'none'}`, marginBottom: '2rem' }}>
 
+            {demoCourse && demoCourse
+                .filter((item) => item.countReportedTime > 0)
+                .map((item) =>
+                    <div className='card mb-4' style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'flex-start',
+                        padding: '1rem 2rem',
+                        cursor: 'pointer',
+                        flexDirection: 'row',
+                        //  marginBottom: '2rem'
+                    }}>
+                        <div style={{
+                            display: 'flex',
+                            alignItems: 'flex-start',
+                            justifyContent: 'flex-start',
+                            flexDirection: 'column',
+                            textAlign: 'left',
+                            marginRight: '5rem',
+
+                        }}>
+                            <div style={{ display: 'flex', alignItems: 'flex-end', marginBottom: '1rem' }}>
+                                <AiOutlineWarning fill={"#f1c40f"} style={{ width: '2rem', height: '2rem', }} />
+                                <strong className='is-size-5 mt-2 ml-2 has-text-warning is-dark'>Cảnh báo </strong>
+
+                            </div>
+                            <p>{'Khóa học thử: '} <strong>{`${item.id_course.name}`}</strong></p>
+                            <p>{'Ngày bắt đầu: '}<strong>{`${moment(item.start_date).format('DD/MM/YYYY')}`}</strong></p>
+                            <p>{'Ngày kết thúc: '}<strong>{`${moment(item.end_date).format('DD/MM/YYYY')}`}</strong></p>
+                            <p>{'Bị báo cáo với nội dung như sau:' }</p>
+                            <p>{item.reportedMessage.map(i =>
+                                <li>{i}</li>)}
+                            </p>
+                            <hr />
+                            <p>Nếu có kháng nghị về cảnh báo, vui lòng liên hệ trực tiếp đến quản trị viên qua email:
+                                <strong>qtvFindingTeacher@gmail.com</strong>  hoặc đường dây nóng: <strong>00112233</strong></p>
                         </div>
-                        <p>{`Khóa học  thử ${item.id_course.name}, bắt đầu vào ngày ${item.start_date}, kết thúc vào ngày ${item.end_date} bị báo cáo với nội dung như sau: `}</p>
-                    <p>{item.reportedMessage.map(i=>
-                        <li>{i}</li>)}</p>
+                        <div>
+                            <BsFillBookmarkFill
+                                onClick={() => setSeen(!seen)}
+                                style={{
+                                    fill: `${seen ? '#f1c40f' : '#000'}`,
+                                    color: `${seen ? '#f1c40f' : '#000'}`,
+                                }}
+                            />
+                        </div>
                     </div>
-                    <div>
-                    <BsBookmarks/>
-                    </div>
-                </div>
-            )}
+                )}
 
         </div>
     )

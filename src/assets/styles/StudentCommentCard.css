@@ -1,0 +1,10 @@
+@import './RootStyle.css';
+
+.star_icon{
+    width: 1.5rem !important;
+    height: 1.5rem !important;
+}
+
+.student-comment_card-content{
+    margin: 0 !important;
+}

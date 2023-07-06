@@ -3,21 +3,34 @@ import { useNavigate, useParams } from 'react-router-dom'
 import getCoursebyId from '../../redux/actions/Course/GetCoursebyId'
 import { useDispatch, useSelector } from 'react-redux'
 import moment from 'moment'
-import { AiOutlineCheck, AiOutlineClose, AiOutlineDelete } from 'react-icons/ai'
+import { AiOutlineAlert, AiOutlineCheck, AiOutlineClose, AiOutlineDelete } from 'react-icons/ai'
+import getCourseStudentByCourseId from '../../redux/actions/CourseStudent/GetCourseStudentByCourseId'
+import createAxiosJWT from '../../utils/createInstance'
+import { getCourseByIdSuccess } from '../../redux/slices/Course/getCourseById'
+import sendCourseMessage from '../../redux/actions/Course/SendCourseMessage'
 
 function EditCourseForm() {
   const { idCourse } = useParams()
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [images, setImages] = useState("")
-
+  const user = useSelector((state) => state.login.login?.currentUser)
+  const accessToken = user?.accessToken
+  const axiosJWT = createAxiosJWT(dispatch, user, getCourseByIdSuccess)
+  const account_id = user?._id
   useEffect(() => {
-    console.log(idCourse)
+    // console.log(idCourse)
     getCoursebyId(idCourse, dispatch)
-  
+    getCourseStudentByCourseId(idCourse, dispatch)
   }, [])
   const course = useSelector(state => state.getCourseById?.course?.currentCourse)
   // useSelector((state)=>state.getCourseById.course?.currentCourse)
+  const number_of_register= useSelector(state => state.getCourseStudentByCourseId?.courseStudent?.currentCourseStudent)
+  console.log({ number_of_register })
+
+  const [inputValue, setInputValue] = useState('')
+  const [show, setShow] = useState('none')
+
   const handleBack = () => {
     navigate('/admin/course')
   }
@@ -28,9 +41,30 @@ function EditCourseForm() {
   const handleSave = () => {
     console.log("hello")
   }
-  if (course) {
+  if (course && number_of_register) {
     console.log({ course })
-    // setImages(course.image)
+    const number_of_report = number_of_register.filter(item => item.isReported == true)
+    let warningMesage = [... new Set(number_of_report.map(i => i.reportedMessage).flat())]
+
+    const handleSendWarning = (id) => {
+      const warningMessageSend = [...warningMesage]
+      if (inputValue !== "") {
+        warningMessageSend.push(inputValue)
+      }
+      setInputValue('')
+      setShow('none')
+      console.log({ warningMessageSend })
+      ///send canh bao :account_id,value,dispatch,axiosJWT,accessToken
+      const value = {
+        reportedMessage: warningMessageSend,
+        reportedDateTime: moment(new Date().getTime()).format('YYYY-MM-DD HH:mm:ss')
+      }
+      console.table({ value })
+      // id,value,account_id,dispatch,axiosJWT,accessToken
+      sendCourseMessage(course._id, value, account_id, dispatch, axiosJWT, accessToken)
+    }
+
+
     return (
       <form className='edit-class-page_container   is-centered 'style={{marginBottom: "7rem"}} >
         <div className='edit-class-page_form is-centered ' style={{ margin: "auto 2rem" }}>
@@ -289,6 +323,110 @@ function EditCourseForm() {
           
           </div>
 
+          {number_of_report.length > 0 &&
+            <div  >
+              <strong className="is-size-4"> Các báo cáo </strong>
+              <div style={{
+                marginTop: "1rem",
+
+                justifyContent: "center",
+                display: "flex",
+                flexDirection: "row",
+              }}>
+                <div className="column is-3"
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    border: "1px solid var(--border-color)",
+                    borderRadius: "8px",
+                    backgroundColor: "#ffe08a"
+                  }}>
+                  <label className="label ">Số người báo cáo</label>
+                  <strong>{number_of_report.length}</strong>
+                </div>
+                <div className="column is-3 ml-4"
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    border: "1px solid var(--border-color)",
+                    borderRadius: "8px",
+                    backgroundColor: "#f14668",
+                  }}>
+                  <label className="label has-text-white">Số lần quản trị viên cảnh báo </label>
+                  <strong className="has-text-white">{course.countReportedTime}</strong>
+                </div>
+              </div>
+              <div className="columns is-centered  is-multiline mt-4"
+                style={{
+                  marginTop: "1rem",
+                  backgroundColor: "white",
+                  padding: "1rem",
+                  border: "1px solid var(--border-color)",
+                  borderRadius: "8px",
+                  marginRight: "1rem",
+                  marginBottom: "6.5rem",
+                }}>
+                {number_of_report.map((item, index) =>
+                  <div className="columns is-multiline " style={{
+                    marginTop: "1rem",
+                    backgroundColor: "white",
+                    display: "flex",
+                    flexDirection: "row",
+                    textAlign: "left",
+
+                  }}>
+                    <div className="column">
+                      <label className="label">Tên người báo cáo</label>
+                      <input
+                        className="input"
+                        type="text"
+                        placeholder="Tên người báo cáo"
+                        name="name"
+                        id="name"
+                        readOnly={true}
+                        value={item.id_student.account_id.full_name}
+                      />
+                    </div>
+                    <div className="column ">
+                      <label className="label">Số lần báo cáo </label>
+                      <input
+                        className="input"
+                        type="text"
+                        placeholder="Số lần báo cáo "
+                        name="Số lần báo cáo "
+                        id="Số lần báo cáo "
+                        readOnly={true}
+                        value={item.countReported}
+                      />
+                    </div>
+                    <div className="column ">
+                      <label className="label">Ngày báo cáo </label>
+                      <input
+                        className="Ngày báo cáo  input"
+                        type="text"
+                        placeholder="Ngày báo cáo"
+                        name="Ngày báo cáo"
+                        id="Ngày báo cáo"
+                        readOnly={true}
+                        value={item.reportedDateTime}
+                      />
+                    </div>
+                    <div className="column is-12 ml-2" style={{ textAlign: 'left' }}>
+                      <label className="label">Nội dung báo cáo: </label>
+                      {item.reportedMessage.map(i =>
+                      (<>
+                        <li key={i}>{i}</li>
+
+                      </>))}
+
+                    </div>
+                    <hr />
+                  </div>
+                )}
+
+              </div>
+            </div>}
+
         </div>
         <div className="group-buttons-course-management "
           style={{
@@ -310,7 +448,7 @@ function EditCourseForm() {
         >
 
           <div className="button-left">
-            <button className="button is-danger has-text-white" >
+            {/* <button className="button is-danger has-text-white" >
               < AiOutlineDelete onClick={() => handleDelete(course._id)}
                 style={{
                   color: 'white',
@@ -321,7 +459,22 @@ function EditCourseForm() {
                   marginRight: ".25rem",
 
                 }} />
-              Xóa</button>
+              Xóa</button> */}
+                <button
+                type='button'
+                className="button is-warning"
+                onClick={() => setShow("block")}
+              >
+                <AiOutlineAlert
+                  style={{
+                    cursor: 'pointer',
+                    width: "1.5rem",
+                    height: "1.5rem",
+                    marginRight: ".25rem",
+                    marginBottom: ".25rem",
+
+                  }} /> Cảnh báo
+              </button>
           </div>
           <div className="button-right">
             <button className="button is-primary" onClick={() => handleSave()}>
@@ -333,17 +486,79 @@ function EditCourseForm() {
 
               }} /> Lưu
             </button>
-            <button className="button is-warning" type='button' onClick={handleBack}>
+            <button className="button is-warning is-light" type='button' onClick={handleBack}>
               <AiOutlineClose style={{
                 cursor: 'pointer',
                 width: "1.5rem",
                 height: "1.5rem",
                 marginRight: ".25rem",
 
-              }} /> Hủy
+              }} /> Thoát
             </button>
           </div>
+          <div className="modal "
+          style={{
+            display: `${show}`,
+            // marginTop: "20rem",
+          }}>
+          <div className="modal-background"></div>
 
+          <div className="modal-content is-centered"
+            style={{ marginTop: "5rem" }}
+          >
+            <header className="modal-card-head">
+              <p className="modal-card-title">Cảnh báo</p>
+              <button className="modal-close is-large"
+                aria-label="close"
+                onClick={() => setShow("none")}>
+              </button>
+            </header>
+
+            <strong className='is-size-5'>Nội dung cảnh báo: </strong>
+            <div className="warning_content"
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "1rem",
+                textAlign: "left",
+              }}
+            >
+              {warningMesage.map((item, index) =>
+                <ol key={index}>{item}</ol>
+              )}
+              <div className="field">
+                <label className="label">Thêm nội dung khác:</label>
+                <input
+                  className="input"
+                  type="text"
+                  placeholder="Nội dung khác"
+                  name="other_content"
+                  id="other_content"
+                  value={inputValue}
+                  onChange={(e) => setInputValue(e.target.value)}
+                />
+              </div>
+            </div>
+            <div >
+              <button
+                className="button is-warning mr-6"
+                type='submit'
+                onClick={() => handleSendWarning(course._id)}>
+                Hoàn thành
+              </button>
+              <button
+                type='button'
+                className="button is-danger"
+                onClick={() => {
+                  setShow("none")
+                  // navigate('/admin/studentJudge')
+                }}>
+                Thoát
+              </button>
+            </div >
+
+          </div>
+        </div>
         </div>
       </form>
     )

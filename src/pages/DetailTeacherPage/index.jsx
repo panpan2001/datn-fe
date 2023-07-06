@@ -17,6 +17,7 @@ import getAllDemoCourseByTeacherId from '../../redux/actions/DemoCourse/GetAllDe
 import getAllCourseStudent from '../../redux/actions/CourseStudent/GetAllCourseStudent'
 import getStudentRating from '../../redux/actions/StudentRating/GetStudentRating'
 import { JudgeFormNames } from '../../data'
+import StudentCommentCard from '../../components/StudentCommentCard'
 function DetailTeacherpage() {
     const dispatch = useDispatch()
     const { id } = useParams()
@@ -410,6 +411,19 @@ const handleFiterHiddenCourse=(item)=>{
                                 </tbody>
                             </table>
 
+                        </div>
+
+                        <div className='student-comment'style={{ width: "100%" }}>
+                            <strong className='is-size-6'>Học sinh nói gì về giáo viên {teacher.account_id.full_name}</strong>
+                            <hr/>
+                            <div className='student-comment-content'>
+                            {
+                                studentRating && studentRating.slice(0, 3).map((item) => (
+                                    <StudentCommentCard key={item._id} data={item} />
+                                ))
+                            }
+                            </div>
+                          
                         </div>
                     </div>
 

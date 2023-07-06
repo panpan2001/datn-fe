@@ -1,0 +1,30 @@
+@import './RootStyle.css'; 
+
+.rating-mark_container{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    align-items: flex-start;
+    justify-content: center;
+    background: #f03a5f;
+    color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid #d92246;
+}
+
+.rating-mark_list{
+    padding-left: 2rem;
+}
+
+.create-class-select-option {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    background-color: aquamarine;
+    padding: 1rem;
+    border: 1px solid #5cdab0;
+    border-radius: 8px;
+}

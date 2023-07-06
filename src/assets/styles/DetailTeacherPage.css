@@ -92,7 +92,8 @@ align-items: center !important;
 .teacher-description:hover,
 .teacher-schedule:hover,
 .teacher-academic:hover,
-.teacher-degree :hover {
+.teacher-degree :hover,
+.student-comment:hover {
   box-shadow: 0 4px 4px 4px var(--border-color);
 }
 
@@ -213,3 +214,23 @@ justify-content: space-around;
 /* .rating-info-wrap:first-child :hover {
   box-shadow: 0 4px #e2e0df;
 } */
+
+.student-comment{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 1rem;
+  width: 100%;
+    padding: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: white;
+}
+.student-comment-content{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
