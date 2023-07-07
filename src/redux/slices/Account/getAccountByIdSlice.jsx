@@ -13,7 +13,13 @@ const getAccountByIdSlice = createSlice({
     initialState:initialState,
     reducers:{
         getAccountByIdStart: (state)=>{
-            state.account.isFetching=true
+            return {
+                ...state,
+                account:{
+                    ...state.account,
+                    isFetching:true
+                }
+            }
         },
         getAccountByIdSuccess:(state,action)=>{
             return{

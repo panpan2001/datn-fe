@@ -16,7 +16,7 @@ const registerCourse=async (value,dispatch,navigate,accessToken,axiosJWT,account
         toast.success("Đăng ký khóa học  thành công",{
             position: toast.POSITION.BOTTOM_RIGHT
         })
-        navigate("/profile/studentClass")
+        navigate(`/profile/${account_id}/studentClass`)
     } catch (error) {
         dispatch(registerCourseFailure())
         console.log({error})

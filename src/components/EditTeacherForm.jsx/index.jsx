@@ -568,7 +568,7 @@ function EditTeacherForm() {
                     >
 
                         <div className="button-left">
-                            <button className="button is-danger has-text-white" >
+                            {/* <button className="button is-danger has-text-white" >
                                 < AiOutlineDelete onClick={() => handleDelete(teacher.id)}
                                     style={{
                                         color: 'white',
@@ -579,7 +579,7 @@ function EditTeacherForm() {
                                         marginRight: ".25rem",
 
                                     }} />
-                                Xóa</button>
+                                Xóa</button> */}
                         </div>
                         <div className="button-right">
                             <button className="button is-primary" onClick={() => handleSave()}>

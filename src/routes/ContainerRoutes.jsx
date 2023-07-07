@@ -24,6 +24,7 @@ import TeacherNotification from '../components/Notification/TeacherNotification'
 import CourseNotification from '../components/Notification/CourseNotification';
 import DemoCourseNotification from '../components/Notification/DemoCourseNotification';
 import SystemNotification from '../components/Notification/SystemNotification';
+import EditAccountForm from '../components/EditAccountForm';
 
 const LandingPage = React.lazy(() => import('../pages/LandingPage'));
 const LoginPage = React.lazy(() => import('../pages/LoginPage'));
@@ -69,8 +70,7 @@ function ContainerRoutes() {
           <Route path='/findingTeacher' element={<FindingTeacherPage />} />
           <Route path='/detailTeacher/:id' element={<DetailTeacherPage />} />
           <Route path='/detailTeacher/:id/detailClass/:idClass' element={<DetailClassPage />} />
-          <Route path='/registerCourse/:idClass' element={<RegisterCoursePage />} />
-          <Route path='/registerDemoCourse/:idDemoCourse' element={<RegisterDemoCoursePage />} />
+
 
           {/* <Route path='/findingCourse' element={<FindingCoursePage />} /> */}
           {/* user can access */}
@@ -100,13 +100,15 @@ function ContainerRoutes() {
                   <>
                     <Route path='/profile/:idAccount/teacherClass' element={<TeacherCurrentClassForm />} />
                     <Route path='/profile/:idAccount/notification' element={<TeacherNotification />} />
-                      
+
                   </>
                 }
 
               </Route>
               {currentUSer.role_name && currentUSer.role_name == 'student' &&
                 <>
+                  <Route path='/registerCourse/:idClass' element={<RegisterCoursePage />} />
+                  <Route path='/registerDemoCourse/:idDemoCourse' element={<RegisterDemoCoursePage />} />
                   <Route path='/profile/:idAccount/judgeTeacher' element={<StudentJudgePage />} />
                   <Route path='/profile/:idAccount/judgeTeacher/:idTeacher' element={<DetailStudentJudgepage />} />
                   <Route path='profile/:idAccount/judgeTeacher/rejudge/:idStudentRating' element={<RejudgeForm />} />
@@ -133,14 +135,15 @@ function ContainerRoutes() {
           < Route path='/admin' element={<AdminManagementLayout />}>
             <Route index element={<DashboardPage />} />
             <Route path='/admin/account' element={<AccountManagementPage />} />
+            <Route path='/admin/account/:idAccount' element={<EditAccountForm />} />
             <Route path='/admin/student' element={<StudentManagementPage />} />
             <Route path='/admin/teacher' element={<TeacherManagementPage />} />
             <Route path="/admin/teacher/:id" element={<EditTeacherForm />} />
             <Route path='/admin/course' element={<CourseManagementPage />} />
             <Route path='/admin/studentJudge' element={<StudentJudgeManagementPage />} />
-            <Route path='/admin/studentJudge/:idRating' element={<StudentRatingDetailForm />}  />
-              <Route path='/admin/course/:idCourse' element={<EditCourseForm />} />
-              <Route path='/admin/course/demo/:idDemoCourse' element={<EditDemoCourseForm />} />
+            <Route path='/admin/studentJudge/:idRating' element={<StudentRatingDetailForm />} />
+            <Route path='/admin/course/:idCourse' element={<EditCourseForm />} />
+            <Route path='/admin/course/demo/:idDemoCourse' element={<EditDemoCourseForm />} />
             <Route path="/admin/*" element={<NotFound />} />
           </Route>
 

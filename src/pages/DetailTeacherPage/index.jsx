@@ -18,6 +18,7 @@ import getAllCourseStudent from '../../redux/actions/CourseStudent/GetAllCourseS
 import getStudentRating from '../../redux/actions/StudentRating/GetStudentRating'
 import { JudgeFormNames } from '../../data'
 import StudentCommentCard from '../../components/StudentCommentCard'
+import getAllDemoCourseStudent from '../../redux/actions/DemoCourseStudent/GetAllDemoCourseStudent'
 function DetailTeacherpage() {
     const dispatch = useDispatch()
     const { id } = useParams()
@@ -38,13 +39,14 @@ function DetailTeacherpage() {
         getAllCourseByIdTeacher(id, dispatch)
         getAllDemoCourseByTeacherId(id, dispatch)
         getAllCourseStudent(dispatch)
+        getAllDemoCourseStudent(dispatch)
     }, [id])
 
     const classes = useSelector((state) => state.getAllCourseByIdTeacher?.courses?.currentCourses)
     const demoCourses = useSelector((state) => state.getAllDemoCourseByTeacherId?.demoCourses?.currentCourse)
     const courseStudent = useSelector((state) => state.getAllCourseStudent?.courseStudents?.currentCourseStudent)
     const DemoCourseStudent = useSelector((state) => state.getAllDemoCourseStudent?.demoCourseStudents?.currentDemoCourseStudent)
-
+    // console.log({DemoCourseStudent})
     console.log({ classes })
     console.log({ demoCourses })
     // console.log(teacher.personal_description.split('\n'))
@@ -359,9 +361,13 @@ const handleFiterHiddenCourse=(item)=>{
 
                                                 <td>
                                                     {/* <button className="button is-link" onClick={() => setShow("block")}>Chi tiết </button> */}
-                                                    <Link to={`/detailTeacher/${teacher._id}/detailClass/${item._id}`}>
-                                                        <button className="button is-link" >Chi tiết </button>
-                                                    </Link>
+                                                    {
+                                                         new Date(item.start_date).getTime() > Date.now() &&
+                                                         <Link to={`/detailTeacher/${teacher._id}/detailClass/${item._id}`}>
+                                                         <button className="button is-link" >Chi tiết </button>
+                                                     </Link>
+                                                    }
+                                                   
                                                 </td>
                                                 {/* <td>
                                             <button className="button is-primary" >Học thử </button>
@@ -399,9 +405,13 @@ const handleFiterHiddenCourse=(item)=>{
                                         
                                         } */}
                                                 <td>
-                                                    <Link to={`/detailTeacher/${teacher._id}/detailClass/${item.id_course._id}`}>
+                                                    {
+                                                        new Date(item.start_date).getTime() > Date.now() &&
+                                                        <Link to={`/detailTeacher/${teacher._id}/detailClass/${item.id_course._id}`}>
                                                         <button className="button is-link" >Chi tiết </button>
                                                     </Link>
+                                                    }
+                                                   
 
                                                 </td>
 

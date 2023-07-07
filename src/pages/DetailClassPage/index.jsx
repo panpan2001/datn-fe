@@ -27,6 +27,7 @@ function DetailClassPage() {
     }, [])
     const data = useSelector((state) => state.getCourseById.course?.currentCourse)
     const demoCourse = useSelector((state) => state.getAllDemoCourseByCourseId?.demoCourses?.currentCourse)
+    console.log({data})
     const checkRegister = (a, b) => {
         console.log("checkRegister", a, b, new Date(a + " " + b).getTime() > Date.now())
 
@@ -220,7 +221,7 @@ function DetailClassPage() {
                                 </td>
                                 : <></>
                             ) : <td>
-                                {data.isHidden &&
+                                {data.isHidden == false &&
                                     <Link to={`/login`}>
                                         <button className="button is-info">Đăng kí </button>
                                     </Link>
@@ -230,7 +231,8 @@ function DetailClassPage() {
 
                         )
                         :
-                        <></>
+                        <>
+                        </>
                     }
 
                     <button className="button is-danger" onClick={() => navigate(-1)}>Thoát  </button>

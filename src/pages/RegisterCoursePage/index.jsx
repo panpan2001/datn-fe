@@ -42,7 +42,7 @@ const formik=useFormik({
     onSubmit:(values)=>{
       console.log(values)
       if(course.isDemoClass){
-        registerDemoCourse(values,dispatch,navigate,accessToken,axiosJWT)
+        registerDemoCourse(values,dispatch,navigate,accessToken,axiosJWT,account_id)
       }
       else {
         const values={

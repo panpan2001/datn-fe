@@ -8,7 +8,7 @@ const getAccountById = async ( dispatch,account_id) => {
     try {
         const res= await axios.get(AccountApi+account_id,account_id,)
         dispatch(getAccountByIdSuccess(res.data))
-        console.table("account info ",res.data)
+        // console.table("account info ",res.data)
         return res.data
     } catch (error) {
         console.log("get account id error",error)
