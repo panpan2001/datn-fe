@@ -222,7 +222,7 @@ function StudentJudgePage() {
                                                                                     </div>
                                                                                 </td>
                                                                                 <td>
-                                                                                    <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                                                                                    <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "flex-start" }}>
                                                                                         {/* <Link to={`/profile/${account_id}/judgeTeacher/reportCourse/${item.id_demo_course.id_course._id}`}> */}
                                                                                         <button className='button is-small is-warning' onClick={() => { handleOpenForm(item, 1) }}>Báo cáo </button>
                                                                                         {/* </Link> */}
@@ -249,7 +249,7 @@ function StudentJudgePage() {
                                                                                 </td>
                                                                                 <td></td>
                                                                                 <td>
-                                                                                    <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                                                                                    <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "flex-start" }}>
                                                                                         {/* <Link to={`/profile/${account_id}/judgeTeacher/reportCourse/${item.id_demo_course.id_course._id}`}> */}
                                                                                         <button className='button is-small is-warning' onClick={() => { handleOpenForm(item, 1) }}>Báo cáo </button>
                                                                                         {/* </Link> */}
@@ -280,7 +280,7 @@ function StudentJudgePage() {
                                                             <td>
                                                             </td>
                                                             <td>
-                                                                <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                                                                <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "flex-start" }}>
                                                                     <button className='button is-small is-warning' onClick={() => { handleOpenForm(item, 1) }}>Báo cáo </button>
                                                                 </div>
                                                             </td>
@@ -291,10 +291,11 @@ function StudentJudgePage() {
                                                         <>
                                                             <td></td>
                                                             <td></td>
+                                                            <td></td>
                                                             {/* xem da bat dau chua, neu roi thi bao cao dc , chua thi ko dc bao caao */}
                                                             {new Date(item.id_demo_course.start_date).getTime() <= Date.now() ?
                                                             <td>
-                                                                 <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                                                                 <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "flex-start" }}>
                                                                     <button className='button is-small is-warning' onClick={() => { handleOpenForm(item, 1) }}>Báo cáo </button>
                                                                 </div>
                                                             </td>:
@@ -382,7 +383,7 @@ function StudentJudgePage() {
                                                                                     </div>
                                                                                 </td>
                                                                                 <td>
-                                                                                    <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                                                                                    <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "flex-start" }}>
                                                                                         {/* <Link to={`/profile/${account_id}/judgeTeacher/reportCourse/${item.id_demo_course.id_course._id}`}> */}
                                                                                         <button className='button is-small is-warning' onClick={() => { handleOpenForm(item, 0) }}>Báo cáo </button>
                                                                                         {/* </Link> */}
@@ -409,7 +410,7 @@ function StudentJudgePage() {
                                                                                 </td>
                                                                                 <td></td>
                                                                                 <td>
-                                                                                    <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                                                                                    <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "flex-start" }}>
                                                                                         {/* <Link to={`/profile/${account_id}/judgeTeacher/reportCourse/${item.id_demo_course.id_course._id}`}> */}
                                                                                         <button className='button is-small is-warning' onClick={() => { handleOpenForm(item, 0) }}>Báo cáo </button>
                                                                                         {/* </Link> */}
@@ -440,7 +441,7 @@ function StudentJudgePage() {
                                                             <td>
                                                             </td>
                                                             <td>
-                                                            <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                                                            <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "flex-start" }}>
                                                                                         {/* <Link to={`/profile/${account_id}/judgeTeacher/reportCourse/${item.id_demo_course.id_course._id}`}> */}
                                                                                         <button className='button is-small is-warning' onClick={() => { handleOpenForm(item, 0) }}>Báo cáo </button>
                                                                                         {/* </Link> */}
@@ -454,10 +455,11 @@ function StudentJudgePage() {
                                                             <td></td>
                                                             <td></td>
                                                             <td></td>
+                                                            
                                                             <td>
-                                                                {/* <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                                                                <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "flex-start" }}>
                                                                     <button className='button is-small is-warning' onClick={() => { handleOpenForm(item, 0) }}>Báo cáo </button>
-                                                                </div> */}
+                                                                </div>
                                                             </td>
                                                         </>
 

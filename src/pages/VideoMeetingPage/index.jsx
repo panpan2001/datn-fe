@@ -5,7 +5,7 @@ import {
   useMeeting,
   useParticipant,
 } from "@videosdk.live/react-sdk";
-import { authToken, createMeeting } from "./API";
+import { authToken, createMeeting, getMeetingRoomByLink } from "./API";
 // import getMeetingAndToken from "./API";
 import ReactPlayer from "react-player";
 import JoinScreen from "./JoinScreen";
@@ -24,39 +24,47 @@ function Container(props) {
 
 function VideoMeeting() {
   const [meetingId, setMeetingId] = useState(null);
-const [links, setLinks] = useState(null);
-  const getMeetingAndToken = async (id) => {
-    if(id == null) {
-      const {roomId,links} = await createMeeting({ token: authToken });
-      console.log({meetingId});
+  const [links, setLinks] = useState(null);
+  const getMeetingAndToken = async (value, flag) => {
+    if (flag == 0) {
+      const { roomId, links } = await createMeeting({ token: authToken });
+      // console.log({meetingId});
       setMeetingId(roomId);
       setLinks(links);
     }
-    else {
-      setMeetingId(id);
-      setLinks(null);
+    else if (flag == 1) {
+      setLinks(value);
+      // getMeetingRoomByLink(authToken);
     }
-    // setMeetingId(meetingId);
+    else {
+      setMeetingId(value);
+    }
   };
   const onMeetingLeave = () => {
     setMeetingId(null);
+    setLinks(null);
   };
   return authToken && meetingId ?
-   (
-    <MeetingProvider
-      config={{
-        meetingId,
-        micEnabled: true,
-        webcamEnabled: true,
-        name: "C.V. Raman",
+    (
+      <MeetingProvider
+      style={{
+        with: "100vw",
+        height: "100vh",
+        margin:"0"
       }}
-      token={authToken}
-    >
-      <MeetingView meetingId={meetingId} link={links} onMeetingLeave={onMeetingLeave} />
-    </MeetingProvider>
-  ) : (
-    <JoinScreen getMeetingAndToken={getMeetingAndToken} />
-  );
+        config={{
+          meetingId,
+          micEnabled: true,
+          webcamEnabled: true,
+          // name: "C.V. Raman",
+        }}
+        token={authToken}
+      >
+        <MeetingView meetingId={meetingId} link={links} onMeetingLeave={onMeetingLeave} />
+      </MeetingProvider>
+    ) : (
+      <JoinScreen getMeetingAndToken={getMeetingAndToken} />
+    );
 }
 
 export default VideoMeeting

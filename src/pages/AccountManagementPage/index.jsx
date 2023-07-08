@@ -165,7 +165,8 @@ function AccountManagementPage() {
                         className='mb-2'
                         key={item._id}
                         style={{ background: `${checkColor(item.role_name)}` }}
-                        onClick={() => handleDetail(item)} >
+                        // onClick={() => handleDetail(item)} 
+                        >
                         <th>
                           <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
                             {accounts.indexOf(item) + 1}

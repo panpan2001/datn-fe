@@ -10,7 +10,7 @@ function MeetingView(props) {
 const awsDirPath = "/meeting-recordings/";
   const [joined, setJoined] = useState(null);
  
-  console.log(props.link);
+  console.log("MeetingView link",props.link);
   //Get the method which will be used to join the meeting.
   //We will also get the participants list to display all participants
   const { join, participants ,startRecording, stopRecording} = useMeeting({
@@ -31,7 +31,85 @@ const awsDirPath = "/meeting-recordings/";
     console.log("onMeetingLeft");
   }
 
-  //Event to know some other participant left
+  console.log({participants})
+  return (
+    <div className="meeting-view_container" style={{
+      display: "flex",
+      flexDirection: "column",
+      gap: "1rem",
+      padding:"1rem ",
+      width: "100%",
+      minHeight: "100vh",
+      justifyContent: "flex-start",
+      alignItems: "center",
+
+    }}>
+      <div style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "1rem",
+        justifyContent: "center",
+        alignItems: "flex-start",
+        border: "1px solid var(--border-color)",
+        backgroundColor: "white",
+        borderRadius: "8px",
+        padding: "1rem",
+      }}>
+      <h3 >Meeting Id: {props.meetingId}</h3>
+
+      </div>
+      {/* <h3>Link: {props.link.get_room}</h3> */}
+      {joined && joined == "JOINED" ? (
+        <div className="metting-view_container" style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "1rem",
+        }}>
+          <Controls />
+          <div className="participants_container columns is-multiline" style={{
+            display: "flex",
+            gap: "1rem",
+            flexDirection: "row ",
+            alignItems: "center",
+            justifyContent: "center",
+            // margin:"auto"
+          }}>
+          {[...participants.keys()].map((participantId) => (
+            <ParticipantView
+              participantId={participantId}
+              key={participantId}
+            />
+          ))}
+          </div>
+         
+          {/* <button onClick={handleLeaveMeeting}>Leave Meeting</button> */}
+          {/* <button onClick={handleEndMeeting}>End Meeting</button> */}
+          {/* <button onClick={handleStartRecording}>record </button>
+          <button onClick={handleStopRecording}>stop record </button> */}
+        </div>
+      ) : joined && joined == "JOINING" ? (
+        <p>Joining the meeting...</p>
+      ) : (
+        <div style={{ display: "flex", 
+        flexDirection: "column", 
+        gap: "1rem",
+        alignItems: "center",
+        justifyContent: "center",
+         }}>
+          <button className="button is-danger is-light" onClick={joinMeeting}>Join</button>
+          
+        </div>
+
+      )}
+    </div>
+  );
+}
+
+export default MeetingView
+
+/* 
+
+//Event to know some other participant left
   function onParticipantLeft(participant) {
     console.log(" onParticipantLeft", participant);
   }
@@ -95,35 +173,5 @@ const awsDirPath = "/meeting-recordings/";
       console.log("Meeting recording is unknown");
     }
   }
-  return (
-    <div className="container">
-      <h3>Meeting Id: {props.meetingId}</h3>
-      <h3>Link: {props.link.get_room}</h3>
-      {joined && joined == "JOINED" ? (
-        <div>
-          <Controls />
-          {[...participants.keys()].map((participantId) => (
-            <ParticipantView
-              participantId={participantId}
-              key={participantId}
-            />
-          ))}
-          <button onClick={handleLeaveMeeting}>Leave Meeting</button>
-          <button onClick={handleEndMeeting}>End Meeting</button>
-          <button onClick={handleStartRecording}>record </button>
-          <button onClick={handleStopRecording}>stop record </button>
-        </div>
-      ) : joined && joined == "JOINING" ? (
-        <p>Joining the meeting...</p>
-      ) : (
-        <>
-          <button onClick={joinMeeting}>Join</button>
-          
-        </>
 
-      )}
-    </div>
-  );
-}
-
-export default MeetingView
+*/

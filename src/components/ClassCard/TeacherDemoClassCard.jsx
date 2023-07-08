@@ -130,7 +130,7 @@ function TeacherDemoClassCard({ item }) {
                 setShowIconAdd) => {
                setShowComponent("block")
                setShowIconAdd('none')
-               console.log(item, dataLink[item])
+               console.log(item, dataLink[item],originArr)
                let del = dataLink.splice(item, 1).toString()
                const check = [...originArr].includes(del)
                if (check == false) {
@@ -174,7 +174,7 @@ function TeacherDemoClassCard({ item }) {
                else {
                     addLinkVideoDemoCourse(link, del_link, account_id, item._id, dispatch, axiosJWTLinkVideo, user.accessToken)
                }
-
+               setDelLinkVideo(new Set())
                setShowComponent("none")
                setShowIconAdd('block')
           }
@@ -227,20 +227,20 @@ function TeacherDemoClassCard({ item }) {
                                         <div className="link-video_container" style={{ textAlign: "left" }}>
                                              <p><strong>Link meeting: </strong></p>
                                              <div style={{ display: "block" }}>
-                                                  {dataLinkMeeting.map((item) =>
-                                                       <div id={item} key={dataLinkMeeting.indexOf(item)} className='link-video-add-more-show_div'>
-                                                            <p className='link-add_p ' key={dataLinkMeeting.indexOf(item)} id={item}>{item}</p>
+                                                  {dataLinkMeeting.map((i) =>
+                                                       <div id={i} key={dataLinkMeeting.indexOf(i)} className='link-video-add-more-show_div'>
+                                                            <p className='link-add_p ' key={dataLinkMeeting.indexOf(i)} id={i}>{i}</p>
                                                             <button
                                                                  className='button delete-link_button '
-                                                                 id={item}
-                                                                 key={dataLinkMeeting.indexOf(item)}
+                                                                 id={i}
+                                                                 key={dataLinkMeeting.indexOf(i)}
                                                                  // item, dataLink,setDataLink,originArr,delLinkState,setDelLink
                                                                  onClick={() =>
                                                                       handleDeleteLinkData(
-                                                                           dataLinkMeeting.indexOf(item),
+                                                                           dataLinkMeeting.indexOf(i),
                                                                             dataLinkMeeting,
                                                                              setDataLinkMeeting, 
-                                                                             item.link_meeeting, 
+                                                                             item.link_meeting, 
                                                                              delLinkMeeting,
                                                                               setDelLinkMeeting,
                                                                               setShowComponent2,
@@ -296,7 +296,7 @@ function TeacherDemoClassCard({ item }) {
                                                   onClick={() => {
                                                        setShowComponent2("none")
                                                        setShowIconAdd2("block")
-                                                       setNewLinkMeeting([])
+                                                       // setNewLinkMeeting([])
                                                        setInputValue2("")
                                                   }}
 
@@ -344,7 +344,7 @@ function TeacherDemoClassCard({ item }) {
                                                   onClick={() => {
                                                        setShowComponent2("none")
                                                        setShowIconAdd2("block")
-                                                       setNewLinkMeeting([])
+                                                       // setNewLinkMeeting([])
                                                        setInputValue2("")
                                                   }}>Hủy</button>
                                         </div>
@@ -361,15 +361,15 @@ function TeacherDemoClassCard({ item }) {
                               <div className="link-video_container">
                                    <p><strong>Link video: </strong></p>
 
-                                   {data_link_videos.map((item) =>
-                                        <div id={item} key={data_link_videos.indexOf(item)} className='link-video-add-more-show_div'>
-                                             <p className='link-add_p ' key={data_link_videos.indexOf(item)} id={item}>{item}</p>
+                                   {data_link_videos.map((i) =>
+                                        <div id={i} key={data_link_videos.indexOf(i)} className='link-video-add-more-show_div'>
+                                             <p className='link-add_p ' key={data_link_videos.indexOf(i)} id={i}>{i}</p>
                                              <button
                                                   className='button delete-link_button '
-                                                  id={item}
-                                                  key={data_link_videos.indexOf(item)}
+                                                  id={i}
+                                                  key={data_link_videos.indexOf(i)}
                                                   onClick={() => handleDeleteLinkData(
-                                                       data_link_videos.indexOf(item),
+                                                       data_link_videos.indexOf(i),
                                                        data_link_videos,
                                                        setDataLinkVideo,
                                                        item.link_video,
@@ -431,7 +431,7 @@ function TeacherDemoClassCard({ item }) {
                                         onClick={() => {
                                              setShowComponent("none")
                                              setShowIconAdd("block")
-                                             setNewLinkVideo([])
+                                             // setNewLinkVideo([])
                                              setInputValue("")
                                         }}
 
@@ -488,7 +488,7 @@ function TeacherDemoClassCard({ item }) {
                                         onClick={() => {
                                              setShowComponent("none")
                                              setShowIconAdd("block")
-                                             setNewLinkVideo([])
+                                             // setNewLinkVideo([])
                                              setInputValue("")
                                         }}>Hủy</button>
                               </div>
@@ -496,7 +496,7 @@ function TeacherDemoClassCard({ item }) {
                          </div>
                     </div>
                     <div>
-                         <button className="button is-link mr-3" >Chỉnh sửa </button>
+                         {/* <button className="button is-link mr-3" >Chỉnh sửa </button> */}
 
                          <button className="button is-danger" onClick={() => setShow("block")}>Xóa </button>
 
