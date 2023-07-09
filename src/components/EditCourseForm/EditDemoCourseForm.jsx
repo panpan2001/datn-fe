@@ -77,7 +77,7 @@ function EditDemoCourseForm() {
       }
       console.table({ value })
       // id,value,account_id,dispatch,axiosJWT,accessToken
-      sendDemoCourseReportMessage(id, value, account_id, dispatch, axiosJWT, accessToken)
+      sendDemoCourseReportMessage(id, value, account_id, dispatch, axiosJWT, accessToken,navigate)
     }
 
 

@@ -177,6 +177,21 @@ const StudentClassAccordion = ({ data }) => {
                 </div>
 
               </div>
+              <div className="  column  is-12">
+                <p><strong>Link video: </strong></p>
+                <div>
+                  {data.id_course.link_video && data.id_course.link_video.map(item =>
+                    <input
+                      type="text "
+                      className='input mb-2'
+                      value={item}
+                      readOnly={true}
+                    />
+                  )
+                  }
+                </div>
+
+              </div>
             </div>
 
             <div className="student-class_button"

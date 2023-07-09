@@ -25,6 +25,7 @@ import CourseNotification from '../components/Notification/CourseNotification';
 import DemoCourseNotification from '../components/Notification/DemoCourseNotification';
 import SystemNotification from '../components/Notification/SystemNotification';
 import EditAccountForm from '../components/EditAccountForm';
+import StudentNotification from '../components/Notification/StudentNotification';
 
 const LandingPage = React.lazy(() => import('../pages/LandingPage'));
 const LoginPage = React.lazy(() => import('../pages/LoginPage'));
@@ -41,7 +42,7 @@ const CreateCoursePage = React.lazy(() => import('../pages/CreateCoursePage'))
 const DetailClassPage = React.lazy(() => import('../pages/DetailClassPage'))
 const RegisterCoursePage = React.lazy(() => import('../pages/RegisterCoursePage'))
 const RegisterDemoCoursePage = React.lazy(() => import('../pages/RegisterDemoCoursePage'))
-
+const VideoMeetingPage = React.lazy(() => import('../pages/VideoMeetingPage'))
 
 const DashboardPage = React.lazy(() => import('../pages/DasboardPage'));
 const AccountManagementPage = React.lazy(() => import('../pages/AccountManagementPage'));
@@ -85,6 +86,8 @@ function ContainerRoutes() {
           </>}
           {isLoggedIn &&
             <>
+                                <Route path='/joinClass' element={<VideoMeetingPage />} />
+
               <Route path='/profile/:idAccount' element={<ProfilePage />}>
                 <Route index element={<PersonalInfo />} />
                 {
@@ -92,6 +95,8 @@ function ContainerRoutes() {
                   <>
                     <Route path='/profile/:idAccount/myclass' element={<PersonalInfo />} />
                     <Route path='/profile/:idAccount/studentClass' element={<StudentCurrentClassForm />} />
+                    <Route path='/profile/:idAccount/notification' element={<StudentNotification />} />
+
                   </>
                 }
 
@@ -113,6 +118,7 @@ function ContainerRoutes() {
                   <Route path='/profile/:idAccount/judgeTeacher/:idTeacher' element={<DetailStudentJudgepage />} />
                   <Route path='profile/:idAccount/judgeTeacher/rejudge/:idStudentRating' element={<RejudgeForm />} />
                   <Route path='/profile/:idAccount/judgeTeacher/reportCourse/:idReportCourse' element={<ReportCourseForm />} />
+                  {/* <Route path='/joinClass' element={<VideoMeetingPage />} /> */}
 
                 </>
 
@@ -131,7 +137,6 @@ function ContainerRoutes() {
 
         {isLoggedIn && currentUSer.role_name && currentUSer.role_name == 'admin' &&
           // just  admin can access */ 
-
           < Route path='/admin' element={<AdminManagementLayout />}>
             <Route index element={<DashboardPage />} />
             <Route path='/admin/account' element={<AccountManagementPage />} />
@@ -146,9 +151,11 @@ function ContainerRoutes() {
             <Route path='/admin/course/demo/:idDemoCourse' element={<EditDemoCourseForm />} />
             <Route path="/admin/*" element={<NotFound />} />
           </Route>
-
         }
+        {/* {isLoggedIn && (currentUSer.role_name == 'student' || currentUSer.role_name == 'teacher') &&
+          <Route path='/joinClass' element={<VideoMeetingPage />} />
 
+        } */}
       </Routes>
     </BrowserRouter >
   )

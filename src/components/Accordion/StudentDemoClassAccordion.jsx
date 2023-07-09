@@ -12,7 +12,7 @@ import getCoursebyId from "../../redux/actions/Course/GetCoursebyId";
 
 
 const StudentDemoClassAccordion = ({ data, color }) => {
-  console.log("demo class",{data})
+  console.log("demo class", { data })
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const register_date = new Date(data.createdAt).toLocaleString('en-US', { timeZone: 'Asia/Ho_Chi_Minh' });
@@ -144,22 +144,36 @@ const StudentDemoClassAccordion = ({ data, color }) => {
             </div>
 
             <div className="  column  is-12">
-            <p><strong>Link meeting: </strong>{data.link_meeting}</p>
-            <div>
-                  {data.id_demo_course.id_course.link_meeting && data.id_demo_course.id_course.link_meeting.map(item =>
-                    <input
-                      type="text "
-                      className='input mb-2'
-                      value={item}
-                      readOnly={true}
-                    />
-                  )
-                  }
-                </div>
-          </div>
+              <p><strong>Link meeting: </strong>{data.link_meeting}</p>
+              <div>
+                {data.id_demo_course.id_course.link_meeting && data.id_demo_course.id_course.link_meeting.map(item =>
+                  <input
+                    type="text "
+                    className='input mb-2'
+                    value={item}
+                    readOnly={true}
+                  />
+                )
+                }
+              </div>
+            </div>
+            <div className="  column  is-12">
+              <p><strong>Link video: </strong>{data.link_meeting}</p>
+              <div>
+                {data.id_demo_course.id_course.link_video && data.id_demo_course.id_course.link_video.map(item =>
+                  <input
+                    type="text "
+                    className='input mb-2'
+                    value={item}
+                    readOnly={true}
+                  />
+                )
+                }
+              </div>
+            </div>
           </div>
 
-         
+
 
           <div className="student-class_button"
             style={{
@@ -192,18 +206,18 @@ const StudentDemoClassAccordion = ({ data, color }) => {
                 </header>
 
 
-                { new Date (data.id_demo_course.end_date).getTime() > Date.now()? 
-                (warning ?
+                {new Date(data.id_demo_course.end_date).getTime() > Date.now() ?
+                  (warning ?
 
-                
-                <strong className='is-size-5'>Bạn chắc chắn muốn hủy khóa học này chứ? </strong> :
-                  <strong className='is-size-5'>Hạn cuối để hủy khóa học là 24h trước khi khóa học bắt đầu. Hiện tại, bạn không thể hủy khóa học này! </strong>
 
-                )
-              :(<>
-                                <strong className='is-size-5'>Khóa học đã kết thúc. Bạn không thể hủy khóa học này! </strong>
+                    <strong className='is-size-5'>Bạn chắc chắn muốn hủy khóa học này chứ? </strong> :
+                    <strong className='is-size-5'>Hạn cuối để hủy khóa học là 24h trước khi khóa học bắt đầu. Hiện tại, bạn không thể hủy khóa học này! </strong>
 
-              </>)
+                  )
+                  : (<>
+                    <strong className='is-size-5'>Khóa học đã kết thúc. Bạn không thể hủy khóa học này! </strong>
+
+                  </>)
                 }
                 <div >
                   {warning ?

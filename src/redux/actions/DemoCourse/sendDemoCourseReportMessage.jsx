@@ -3,7 +3,7 @@ import { DemoCourseApi } from "../../../utils/BaseUrl"
 import { getDemoCourseByIdSuccess } from "../../slices/DemoCourse/getDemoCourseById"
 import { sendDemoCourseReportMessageFail, sendDemoCourseReportMessageStart } from "../../slices/DemoCourse/sendDemoCourseReportMessageSice"
 
-const sendDemoCourseReportMessage= async(id,value,account_id,dispatch,axiosJWT,accessToken)=>{
+const sendDemoCourseReportMessage= async(id,value,account_id,dispatch,axiosJWT,accessToken,navigate)=>{
     dispatch(sendDemoCourseReportMessageStart())
     try {
         const res= await axiosJWT.patch(DemoCourseApi+"report/"+ id,value,{
@@ -16,6 +16,7 @@ const sendDemoCourseReportMessage= async(id,value,account_id,dispatch,axiosJWT,a
         toast.success("Gửi cảnh báo thành công", {
             position: toast.POSITION.TOP_RIGHT
         })
+        navigate('/admin/course')
     } catch (error) {
         dispatch(sendDemoCourseReportMessageFail(error))
         console.log(error)

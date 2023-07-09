@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import {
   MeetingProvider,
   MeetingConsumer,
@@ -45,7 +45,11 @@ function VideoMeeting() {
     setLinks(null);
   };
   return authToken && meetingId ?
+
+
     (
+      <Suspense>
+     
       <MeetingProvider
       style={{
         with: "100vw",
@@ -62,8 +66,13 @@ function VideoMeeting() {
       >
         <MeetingView meetingId={meetingId} link={links} onMeetingLeave={onMeetingLeave} />
       </MeetingProvider>
-    ) : (
+      </Suspense>
+    ) : 
+    (
+      <Suspense>
       <JoinScreen getMeetingAndToken={getMeetingAndToken} />
+
+      </Suspense>
     );
 }
 

@@ -61,7 +61,7 @@ function EditCourseForm() {
       }
       console.table({ value })
       // id,value,account_id,dispatch,axiosJWT,accessToken
-      sendCourseMessage(course._id, value, account_id, dispatch, axiosJWT, accessToken)
+      sendCourseMessage(course._id, value, account_id, dispatch, axiosJWT, accessToken,navigate)
     }
 
 

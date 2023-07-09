@@ -7,31 +7,21 @@ import DemoCourseNotification from './DemoCourseNotification'
 import SystemNotification from './SystemNotification'
 import getTeacherByAccountId from '../../redux/actions/Teacher/GetTeacherByAccountId'
 import { useDispatch, useSelector } from 'react-redux'
-import getAllDemoCourseByTeacherId from '../../redux/actions/DemoCourse/GetAllDemoCourseByTeacherId'
-import getAllCourseByIdTeacher from '../../redux/actions/Course/GetAllCourseByIdTeacher'
+import getStudentByAccountId from '../../redux/actions/Student/GetStudentByAccountId'
 
-function TeacherNotification() {
-    const [show, setShow] = useState(1)
+function StudentNotification() {
+    const [show, setShow] = useState(3)
     const user = useSelector((state) => state.login.login?.currentUser)
     const dispatch = useDispatch()
-    // useEffect(() => {
-    //     getTeacherByAccountId(user._id, dispatch)
-    // }, [])
-    const teacher = useSelector((state) => state.getTeacherByAccountId.teacher?.currentTeacher)
-    console.log({ teacher })
-useEffect(() => {
-    console.log("hola")
-    getAllDemoCourseByTeacherId(teacher?._id, dispatch)
-    getAllCourseByIdTeacher(teacher?._id, dispatch)
+    useEffect(() => {
+        getStudentByAccountId(dispatch,user._id)
+    }, [])
+    const student = useSelector((state) => state.getStudentByAccountId.students?.infoStudent)
 
-},[])
-const demoCourse = useSelector((state) => state.getAllDemoCourseByTeacherId?.demoCourses?.currentCourse)
-const course = useSelector((state) => state.getAllCourseByIdTeacher?.courses?.currentCourses)
-console.log({course},{demoCourse})
     return (
         <div style={{ width: '100%' }}>
-            <strong className='is-size-4'>Thông báo</strong>
-            <div className="tabs is-centered" style={{ width: '100%' }}>
+            <strong className='is-size-4 ' style={{marginBottom:"1rem"}}>Thông báo</strong>
+            {/* <div className="tabs is-centered" style={{ width: '100%' }}>
                 <ul style={{ width: '100%' }}>
                     <li
                         onClick={() => setShow(1)}
@@ -58,34 +48,23 @@ console.log({course},{demoCourse})
                         </a>
                     </li>
                 </ul>
-            </div>
+            </div> */}
             {/*  style={{ display: `${show === 1 ? 'block' : 'none'}` }} */}
-            <DemoCourseNotification
-             setShow={setShow} 
-             show={show} 
-             teacherId={teacher ? teacher._id : undefined} 
-             flag={user.role_name=='student'? 1:0} 
-             demoCourse={demoCourse}
-             />
-            <CourseNotification 
+            {/* <DemoCourseNotification setShow={setShow} show={show} teacherId={student ? student._id : undefined} flag={user.role_name=='student'? 1:0} />
+            <CourseNotification setShow={setShow} show={show} teacherId={student ? student._id : undefined} flag={user.role_name=='student'? 1:0}/> */}
+            <SystemNotification 
             setShow={setShow} 
             show={show} 
-            teacherId={teacher ? teacher._id : undefined} 
-            flag={user.role_name=='student'? 1:0}
-            course={course}
+            teacherId={student ? student._id : undefined} 
+            flag={user.role_name=='student'? 1:0} 
+            user={student}
             />
-            <SystemNotification 
-            setShow={setShow}
-             show={show} 
-             teacherId={teacher ? teacher._id : undefined} 
-             flag={user.role_name=='student'? 1:0} 
-             user={teacher}/>
 
         </div>
     )
 }
 
-export default TeacherNotification
+export default StudentNotification
 
 /*
 

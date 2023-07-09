@@ -38,6 +38,8 @@ const ProfileSideBar = () => {
               <>
                 <Item icon={<AiOutlineBook />} name={"Khóa học của tôi"} navigate={`/profile/${currentUser._id}/studentClass`} />
                 {/* <Item icon={< AiOutlineEdit />} name={"Đánh giá giáo viên"} navigate={'/profile/judgeTeacher'} /> */}
+                <Item icon={< AiOutlineBell />} name={"Thông báo"} navigate={`/profile/${currentUser._id}/notification`} />
+
               </> : 
                <Item icon={< AiOutlineBook />} name={"Khóa học của tôi"} navigate={`/profile/${currentUser._id}/teacherClass`} />
 

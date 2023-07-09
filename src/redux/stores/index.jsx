@@ -71,6 +71,10 @@ import getCourseStudentByCourseIdReducer from "../slices/CourseStudent/getCourse
 import sendCourseMessageReducer from "../slices/Course/sendCourseReportMessageSlice";
 import updateStudentReducer from "../slices/Student/updateStudentSlice";
 import getAccountByIdReducer from "../slices/Account/getAccountByIdSlice";
+import changeSeenMessageReducer from "../slices/Account/changeSeenMeassge";
+import deleteSeenMessageReducer from "../slices/Account/deleteSeenMessageSlice";
+import deleteDemoCourseReportReducer from "../slices/DemoCourse/deleteDemoCourseReportSlice";
+import deleteCourseReportReducer from "../slices/Course/deleteCourseReportSlice";
 
 const persistConfig = {
     key:'root',
@@ -147,7 +151,11 @@ const rootReducer= combineReducers({
     sendDemoCourseReportMessage:sendDemoCourseReportMessageReducer,
     getCourseStudentByCourseId: getCourseStudentByCourseIdReducer,
     sendCourseMessage:sendCourseMessageReducer,
-    updateStudent: updateStudentReducer
+    updateStudent: updateStudentReducer,
+    changeSeenMessage: changeSeenMessageReducer,
+    deleteSeenMessage:deleteSeenMessageReducer,
+    deleteDemoCourseReport:deleteDemoCourseReportReducer,
+    deleteCourseReport:deleteCourseReportReducer
 })
 const persistedReducer=persistReducer(persistConfig,rootReducer)
 

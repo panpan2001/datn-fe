@@ -3,7 +3,7 @@ import { CourseApi, CourseStudentApi } from "../../../utils/BaseUrl"
 import { getCourseByIdSuccess } from "../../slices/Course/getCourseById"
 import { sendCourseMessageFailure, sendCourseMessageStart, sendCourseMessageSuccess } from "../../slices/Course/sendCourseReportMessageSlice"
 
-const   sendCourseMessage = async(id, value, account_id, dispatch, axiosJWT, accessToken)=>{
+const   sendCourseMessage = async(id, value, account_id, dispatch, axiosJWT, accessToken,navigate)=>{
     dispatch(sendCourseMessageStart())
     try {
         const res= await axiosJWT.patch(CourseApi+"report/"+id,value,{
@@ -16,6 +16,7 @@ const   sendCourseMessage = async(id, value, account_id, dispatch, axiosJWT, acc
         toast.success("Gửi cảnh báo thành công", {
             position: toast.POSITION.TOP_RIGHT
         })
+        navigate('/admin/course')
     }
     catch (error) {
         dispatch(sendCourseMessageFailure(error))
