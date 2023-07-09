@@ -25,17 +25,13 @@ function CourseNotification({ setShow, show, teacherId, flag, course }) {
     }, [])
     // const course = useSelector((state) => state.getAllCourseByIdTeacher?.courses?.currentCourses)
     // console.log({ course })
-    const [seen, setSeen] = useState(new Array(course.length).fill(false))
-    const handleSeen=(item)=>{
-        const mark= seen.map((i, position) => item === position ? !i : i)
-        // .filter(i => i == false)
-        setSeen([...mark])
-    }
+   
    const  handleDeleteReport=(item)=>{
     // id, dispatch, account_id, axiosJWT, accessToken, flag
         deleteCourseReport(item._id, dispatch, user?._id, axiosJWT, user?.accessToken, flag,teacherId)
     }
     const courses = useSelector((state) => state.getAllCourseByIdTeacher?.courses?.currentCourses)
+    console.log("CourseNotification student", { courses })
     return (
         <div style={{ display: `${show == 2 ? 'block' : 'none'}`, marginBottom: '2rem' }}>
 
@@ -87,15 +83,11 @@ function CourseNotification({ setShow, show, teacherId, flag, course }) {
 
 
                             </div>
-                            {/* {seen[demoCourse.indexOf(item)] ? */}
                             <button
                                 className='button is-link is-light ml-4'
                                 type='button'
                                 onClick={() => handleDeleteReport(item)}
                             >Xóa</button>
-                            {/* :
-                             <></>    
-                            } */}
                         </div>
                     ) :
                 <p>Không có thông báo nào.</p>

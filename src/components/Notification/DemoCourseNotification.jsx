@@ -9,7 +9,7 @@ import createAxiosJWT from '../../utils/createInstance'
 import deleteDemoCourseReport from '../../redux/actions/DemoCourse/deleteDemoCourseReport'
 
 function DemoCourseNotification({ setShow, show, teacherId, flag,demoCourse }) {
-    console.log("DemoCourseNotification teacher id ", teacherId)
+
     const dispatch = useDispatch()
     const user = useSelector((state) => state.login.login?.currentUser)
     const axiosJWT= createAxiosJWT(dispatch, user, getAllDemoCourseByTeacherIdSuccess)
@@ -22,21 +22,14 @@ function DemoCourseNotification({ setShow, show, teacherId, flag,demoCourse }) {
             console.log({flag})
         }
     }, [])
-    // const demoCourse = useSelector((state) => state.getAllDemoCourseByTeacherId?.demoCourses?.currentCourse)
-    console.log("DemoCourse  ", demoCourse)
-    const [seen, setSeen] = useState(new Array(demoCourse.length).fill(false))
-    const handleSeen=(item)=>{
-        const mark= seen.map((i, position) => item === position ? !i : i)
-        // .filter(i => i == false)
-        setSeen([...mark])
-    }
+    const demoCourses = useSelector((state) => state.getAllDemoCourseByTeacherId?.demoCourses?.currentCourse)
+    console.log("DemoCourses  ", demoCourses)
+
    const  handleDeleteReport=(item)=>{
-    // id, dispatch, account_id, axiosJWT, accessToken, flag
         deleteDemoCourseReport(item._id, dispatch, user?._id, axiosJWT, user?.accessToken, flag,teacherId)
     }
     if(demoCourse){
-        // const arr= new Array(demoCourse.length).fill(false)
-        // setSeen(arr)
+    
         return (
             <div style={{ display: `${show == 1 ? 'block' : 'none'}`, marginBottom: '2rem' }}>
     
@@ -88,15 +81,12 @@ function DemoCourseNotification({ setShow, show, teacherId, flag,demoCourse }) {
                               
                               
                             </div>
-                            {/* {seen[demoCourse.indexOf(item)] ? */}
                             <button 
                             className='button is-link is-light ml-4'
                              type='button'
                              onClick={() => handleDeleteReport(item)}
                              >Xóa</button>
-                             {/* :
-                             <></>    
-                            } */}
+                           
                         </div>
                     ):
                     <p>Không có thông báo nào.</p>
