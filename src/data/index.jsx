@@ -40,5 +40,10 @@ export const AttitudeNames=[
     "Giáo viên cư xử thiếu đứng đắn, phù hợp",
     "Trang phục của giáo viên chưa phù hợp",
     "Giáo viên không đảm bảo thời lượng buổi học (thiếu giờ hoặc quá giờ).",
-
+    "Link meeting không vào được",
+    "Link video không vào được",
+    "Link meeting không đúng",
+    "Link video không đúng",
 ]
+
+export const authToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlrZXkiOiI5OTJmOTM5Yi1jMzJiLTRmYTEtYWU3OC04ZjFkYTdhZmY2N2UiLCJwZXJtaXNzaW9ucyI6WyJhbGxvd19qb2luIl0sImlhdCI6MTY4ODc1NTA2NCwiZXhwIjoxNjkxMzQ3MDY0fQ.5VARyalwljq1kYS5RzCXGUzJCGeIoSbjABgjcm23Qn0";

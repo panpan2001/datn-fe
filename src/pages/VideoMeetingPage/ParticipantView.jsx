@@ -1,8 +1,11 @@
 import { useParticipant } from "@videosdk.live/react-sdk";
 import { useEffect, useMemo, useRef } from "react";
 import ReactPlayer from "react-player";
-
+import { useSelector } from "react-redux";
+import '../../assets/styles/ParticipantView.css';
 function ParticipantView(props) {
+  const user = useSelector((state) => state.login.login?.currentUser)
+console.log("{user}",user.role_name);
   const micRef = useRef(null);
   const { webcamStream, micStream, webcamOn, micOn, isLocal, displayName, disableMic } =
     useParticipant(props.participantId);
@@ -51,7 +54,7 @@ function ParticipantView(props) {
       borderRadius: "8px",
       backgroundColor: "#343434",
       // minHeight: "22rem",
-      maxWidth: "24rem",
+      maxWidth:`${user.role_name} =='teacher'? "48rem":"24rem"`
     }}>
 
       <div className="participant-info" style={{
@@ -63,7 +66,7 @@ function ParticipantView(props) {
         borderRadius: "8px",
         border: "1px solid ",
         width: "350px",
-        height: "4.5rem",
+        height: "6rem",
         display: "flex",
         justifyContent: "center",
         flexDirection: "column",
@@ -71,8 +74,9 @@ function ParticipantView(props) {
         // gap: "1rem"
       }}>
 <div>
-<p>Participant: {displayName}</p>
-
+<p className="mb-3">
+  {/* {user.role_name =='teacher' ? "Giáo viên":"Học viên" }:  */}
+  {displayName}</p>
 </div>
         <div style={{
           display: "flex",
@@ -100,11 +104,9 @@ function ParticipantView(props) {
           controls={false}
           muted={true}
           playing={true}
-          //
           url={videoStream}
-          //
-          height={"13rem"}
-          width={"20rem"}
+          height={'auto'}
+          width={user.role_name =='teacher'? "50rem":"20rem"}
           onError={(err) => {
             console.log(err, "participant video error");
           }}

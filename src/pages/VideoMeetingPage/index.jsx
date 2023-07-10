@@ -5,11 +5,14 @@ import {
   useMeeting,
   useParticipant,
 } from "@videosdk.live/react-sdk";
-import { authToken, createMeeting, getMeetingRoomByLink } from "./API";
+import {  createMeeting, getMeetingRoomByLink } from "./API";
 // import getMeetingAndToken from "./API";
 import ReactPlayer from "react-player";
 import JoinScreen from "./JoinScreen";
 import MeetingView from "./MeetingView";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { authToken } from "../../data";
 
 function VideoComponent(props) {
   return null;
@@ -23,22 +26,15 @@ function Container(props) {
 
 
 function VideoMeeting() {
+  const {idJoinClass}= useParams();
   const [meetingId, setMeetingId] = useState(null);
   const [links, setLinks] = useState(null);
-  const getMeetingAndToken = async (value, flag) => {
-    if (flag == 0) {
-      const { roomId, links } = await createMeeting({ token: authToken });
-      // console.log({meetingId});
-      setMeetingId(roomId);
-      setLinks(links);
-    }
-    else if (flag == 1) {
-      setLinks(value);
-      // getMeetingRoomByLink(authToken);
-    }
-    else {
+  const user = useSelector((state) => state.login.login?.currentUser)
+  const getMeetingAndToken = async (value) => {
+   
       setMeetingId(value);
-    }
+      console.log({value});
+    
   };
   const onMeetingLeave = () => {
     setMeetingId(null);
@@ -60,17 +56,18 @@ function VideoMeeting() {
           meetingId,
           micEnabled: true,
           webcamEnabled: true,
-          // name: "C.V. Raman",
+          name: `${user.full_name}`,
+          screenShareEnabled: true,
         }}
         token={authToken}
       >
-        <MeetingView meetingId={meetingId} link={links} onMeetingLeave={onMeetingLeave} />
+        <MeetingView meetingId={meetingId}  onMeetingLeave={onMeetingLeave} />
       </MeetingProvider>
       </Suspense>
     ) : 
     (
       <Suspense>
-      <JoinScreen getMeetingAndToken={getMeetingAndToken} />
+      <JoinScreen getMeetingAndToken={getMeetingAndToken}  />
 
       </Suspense>
     );

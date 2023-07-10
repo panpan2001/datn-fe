@@ -66,6 +66,7 @@ function SystemNotification({ setShow, show, teacherId, flag, user }) {
         {user && user.account_id.messageFromSystem.length > 0 ?
           
           user.account_id.messageFromSystem
+          // .slice().reverse()
             .map((item) =>
               <div className='card mb-4 mt-4' style={{
                 display: 'flex',

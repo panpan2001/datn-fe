@@ -7,12 +7,12 @@ import '../../assets/styles/StudentClassAccordion.css'
 import cancelRegisterDemoCourse from "../../redux/actions/DemoCourseStudent/CancelRegisterDemoCourse";
 import createAxiosJWT from "../../utils/createInstance";
 import { cancelRegisterDemoCourseSuccess } from "../../redux/slices/DemoCourseStudent/cancelRegisterDemoCourse";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import getCoursebyId from "../../redux/actions/Course/GetCoursebyId";
 
 
 const StudentDemoClassAccordion = ({ data, color }) => {
-  console.log("demo class", { data })
+  console.log("demo class", new Date(data.id_demo_course.start_date), new Date(data.id_demo_course.start_date).getTime() > Date.now() ?true :false)
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const register_date = new Date(data.createdAt).toLocaleString('en-US', { timeZone: 'Asia/Ho_Chi_Minh' });
@@ -146,13 +146,19 @@ const StudentDemoClassAccordion = ({ data, color }) => {
             <div className="  column  is-12">
               <p><strong>Link meeting: </strong>{data.link_meeting}</p>
               <div>
-                {data.id_demo_course.id_course.link_meeting && data.id_demo_course.id_course.link_meeting.map(item =>
+                {data.id_demo_course.link_meeting && data.id_demo_course.link_meeting.map(item =>
+                
+                  new Date(data.id_demo_course.start_date).getTime() > Date.now() ?
                   <input
                     type="text "
                     className='input mb-2'
                     value={item}
-                    readOnly={true}
-                  />
+                    disabled={true}
+
+                  />:
+                  <Link to={`/joinClass/${item}`}>{item}</Link>
+                
+                  
                 )
                 }
               </div>
@@ -160,15 +166,12 @@ const StudentDemoClassAccordion = ({ data, color }) => {
             <div className="  column  is-12">
               <p><strong>Link video: </strong>{data.link_meeting}</p>
               <div>
-                {data.id_demo_course.id_course.link_video && data.id_demo_course.id_course.link_video.map(item =>
-                  <input
-                    type="text "
-                    className='input mb-2'
-                    value={item}
-                    readOnly={true}
-                  />
+                {data.id_demo_course.link_video && data.id_demo_course.link_video.map(item =>
+                  
+                <li> <Link to={item}>{item}</Link></li>
                 )
                 }
+               
               </div>
             </div>
           </div>

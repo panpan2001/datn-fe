@@ -2,21 +2,34 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 
-function JoinScreen({ getMeetingAndToken }) {
+function JoinScreen2({ getMeetingAndToken }) {
   const user = useSelector((state) => state.login.login?.currentUser)
 
   const {idJoinClass}= useParams();
     const [meetingId, setMeetingId] = useState(idJoinClass);
     const [ meetingLink, setMeetingLink ] = useState(null);
     const navigate = useNavigate();
-    
-    const onClickId = async (value) => {
-      await getMeetingAndToken(value);
+    const onClickLink = async (value) => {
+      await getMeetingAndToken(value,1);
     };
- 
+   
+    const onClick = async () => {
+      await getMeetingAndToken(meetingId,0);
+    };
     return (
       <>
-     
+       {/* <div>
+        <input
+          type="text"
+          placeholder="Enter Meeting Link"
+          onChange={(e) => {
+            setMeetingLink(e.target.value);
+          }}
+        />
+        <button onClick={()=>{onClickLink(meetingLink)}}>Join</button>
+      
+      </div>
+      {" or "} */}
        <div className="join-screen container"
         style={{
         display: "flex",
@@ -27,13 +40,7 @@ function JoinScreen({ getMeetingAndToken }) {
         margin:"auto",
         height:"100vh"
        }}>
-        <img 
-       style={{
-        width: "40rem",
-        marginBottom: "1rem",
-        height:"auto"
-      }}
-       src={require('../../assets/images/addLink.jpg')}/>
+        {/* <strong>Mã phòng học: {idJoinClass}</strong> */}
         <div className="join-by-id_container" 
         style={{
           display: "flex",
@@ -44,17 +51,7 @@ function JoinScreen({ getMeetingAndToken }) {
           margin:"1rem ",
           width:"100%"
         }}>
-        <input
-       className="input"
-         type="text"
-         placeholder="Enter Meeting Id"
-         value={idJoinClass}
-         onChange={(e) => {
-           setMeetingId(e.target.value);
-         }}
-       />
        
-       <button className="button is-danger is-light" type="button" onClick={()=>(onClickId(meetingId))}>OK</button>
         </div>
         <div className="create-meeting_container"
      style={{
@@ -64,8 +61,12 @@ function JoinScreen({ getMeetingAndToken }) {
       justifyContent: "center",
       alignItems: "center",
      }}>
-  
-     <button className="button is-warning is-light" onClick={()=>{navigate(-1)}}>Thoát</button>
+      {
+        user && user.role_name=='teacher' &&
+        <button className="button is-success" type="button" onClick={()=>{onClick()}}>Tạo phòng học</button>
+
+      }
+     <button className="button is-warning is-light" onClick={()=>{navigate(-1)}}>Ra phòng học</button>
 
      </div>
      </div>
@@ -75,4 +76,4 @@ function JoinScreen({ getMeetingAndToken }) {
     );
   }
 
-  export default JoinScreen;
+  export default JoinScreen2;

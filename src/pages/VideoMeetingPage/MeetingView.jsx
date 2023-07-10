@@ -3,17 +3,15 @@ import { useState } from "react";
 import Controls from "./Control";
 import ParticipantView from "./ParticipantView";
 import { Constants } from "@videosdk.live/react-sdk";
+import { useNavigate } from "react-router-dom";
 
 function MeetingView(props) {
   const webhookUrl = "https://webhook.your-api-server.com";
-
-const awsDirPath = "/meeting-recordings/";
+const navigate = useNavigate();
+  const awsDirPath = "/meeting-recordings/";
   const [joined, setJoined] = useState(null);
- 
-  console.log("MeetingView link",props.link);
-  //Get the method which will be used to join the meeting.
-  //We will also get the participants list to display all participants
-  const { join, participants ,startRecording, stopRecording} = useMeeting({
+
+  const { join, participants, startRecording, stopRecording } = useMeeting({
     //callback for when meeting is joined successfully
     onMeetingJoined: () => {
       setJoined("JOINED");
@@ -31,81 +29,114 @@ const awsDirPath = "/meeting-recordings/";
     console.log("onMeetingLeft");
   }
 
-  console.log({participants})
-  return (
-    <div className="meeting-view_container" style={{
-      display: "flex",
-      flexDirection: "column",
-      gap: "1rem",
-      padding:"1rem ",
-      width: "100%",
-      minHeight: "100vh",
-      justifyContent: "flex-start",
-      alignItems: "center",
+  console.log({ participants })
+ 
 
-    }}>
-      <div style={{
+  if (joined && joined == "JOINED") {
+    return (
+      <div className="meeting-view_container container-fluid " style={{
         display: "flex",
         flexDirection: "column",
         gap: "1rem",
-        justifyContent: "center",
-        alignItems: "flex-start",
-        border: "1px solid var(--border-color)",
-        backgroundColor: "white",
-        borderRadius: "8px",
-        padding: "1rem",
-      }}>
-      <h3 >Meeting Id: {props.meetingId}</h3>
+        padding: "1rem ",
+        width: "100%",
+        minHeight: "100vh",
+        justifyContent: "flex-start",
+        alignItems: "center",
 
-      </div>
-      {/* <h3>Link: {props.link.get_room}</h3> */}
-      {joined && joined == "JOINED" ? (
-        <div className="metting-view_container" style={{
+      }}>
+        <div style={{
           display: "flex",
           flexDirection: "column",
           gap: "1rem",
+          justifyContent: "center",
+          alignItems: "flex-start",
+          border: "1px solid var(--border-color)",
+          backgroundColor: "white",
+          borderRadius: "8px",
+          padding: "1rem",
         }}>
-          <Controls />
+          <div className="metting-view_container" style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "1rem",
+            marginBottom: "1rem",
+          }}>
+
+            <h3 >Meeting Id: {props.meetingId}</h3>
+             </div>
+          </div>
+          <Controls meetingId={props.meetingId} />
           <div className="participants_container columns is-multiline" style={{
             display: "flex",
             gap: "1rem",
             flexDirection: "row ",
             alignItems: "center",
             justifyContent: "center",
-            // margin:"auto"
           }}>
-          {[...participants.keys()].map((participantId) => (
-            <ParticipantView
-              participantId={participantId}
-              key={participantId}
-            />
-          ))}
+            {[...participants.keys()].map((participantId) => (
+              <ParticipantView
+                participantId={participantId}
+                key={participantId}
+              />
+            ))}
           </div>
-         
-          {/* <button onClick={handleLeaveMeeting}>Leave Meeting</button> */}
-          {/* <button onClick={handleEndMeeting}>End Meeting</button> */}
-          {/* <button onClick={handleStartRecording}>record </button>
-          <button onClick={handleStopRecording}>stop record </button> */}
         </div>
-      ) : joined && joined == "JOINING" ? (
-        <p>Joining the meeting...</p>
-      ) : (
-        <div style={{ display: "flex", 
-        flexDirection: "column", 
+      
+    )
+  } else
+    if (joined && joined == "JOINING") {
+      return <div style={{
+        display: "flex",
+        flexDirection: "column",
         gap: "1rem",
         alignItems: "center",
         justifyContent: "center",
-         }}>
-          <button className="button is-danger is-light" onClick={joinMeeting}>Join</button>
-          
-        </div>
+        margin: "auto",
+        minHeight: "80vh",
 
-      )}
-    </div>
-  );
+      }}>
+        <p>Đang vào cuộc họp...</p>
+        {/* <button className="button is-warning is-light" onClick={()=>{navigate(-1)}}>Thoát</button> */}
+      </div>
+
+    } else {
+      return <div style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "1rem",
+        alignItems: "center",
+        justifyContent: "center",
+        margin: "auto",
+        minHeight: "80vh",
+
+      }}>
+<div style={{
+  display: "flex",
+  flexDirection: "row",
+  gap: "1rem",
+  alignItems: "center",
+  justifyContent: "center",
+}}>
+ <button className="button is-info " onClick={()=>{joinMeeting()}}>Tham gia</button>
+        <button className="button is-danger " onClick={()=>{navigate(-1)}}>Thoát</button>
+</div>
+       
+        <img style={{
+          width: "40rem",
+          marginBottom: "1rem",
+          height:"auto"
+        }}
+        src={require('../../assets/images/joinMeeting.jpg')}/>
+
+        </div>
+      // joinMeeting();
+    }
 }
 
 export default MeetingView
+ 
+
 
 /* 
 

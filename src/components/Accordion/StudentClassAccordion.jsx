@@ -5,7 +5,7 @@ import getCourseCategoryById from "../../redux/actions/CourseCategory/GetCourseC
 import { BiChevronsUp, BiEditAlt, BiTrash } from "react-icons/bi";
 import '../../assets/styles/StudentClassAccordion.css'
 import createAxiosJWT from "../../utils/createInstance";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import cancelRegisterCourse from "../../redux/actions/CourseStudent/cancelRegisterCourse";
 import { cancelRegisterCourseSuccess } from "../../redux/slices/CourseStudent/cancelRegisterCourse";
 import cancelRegisterDemoCourse from "../../redux/actions/DemoCourseStudent/CancelRegisterDemoCourse";
@@ -166,12 +166,16 @@ const StudentClassAccordion = ({ data }) => {
                 <p><strong>Link meeting: </strong></p>
                 <div>
                   {data.id_course.link_meeeting && data.id_course.link_meeeting.map(item =>
-                    <input
+                  new Date(data.id_course.start_date).getTime() > Date.now() ?
+                  
+                   <input
                       type="text "
                       className='input mb-2'
                       value={item}
-                      readOnly={true}
-                    />
+                      disabled={ true }
+                    />:
+                    <li><Link to={`/joinClass/${item}`}>{item}</Link></li>
+                   
                   )
                   }
                 </div>
@@ -181,12 +185,7 @@ const StudentClassAccordion = ({ data }) => {
                 <p><strong>Link video: </strong></p>
                 <div>
                   {data.id_course.link_video && data.id_course.link_video.map(item =>
-                    <input
-                      type="text "
-                      className='input mb-2'
-                      value={item}
-                      readOnly={true}
-                    />
+                    <li><Link to={item}>{item}</Link></li>
                   )
                   }
                 </div>

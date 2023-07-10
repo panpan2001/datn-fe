@@ -18,9 +18,10 @@ import { getCourseByIdSuccess } from '../../redux/slices/Course/getCourseById'
 import validator from 'validator'
 import { toast } from 'react-toastify'
 import addLinkMeeting from '../../redux/actions/Course/AddLinkMeeting'
+import { Link } from 'react-router-dom'
 
 function ClassCard({ data }) {
-     console.log("ClassCard",{ data })
+     console.log("ClassCard", { data })
      console.log("data link meeting ", data.link_meeeting)
      const [show, setShow] = useState("none")
      const [show2, setShow2] = useState("none")
@@ -99,20 +100,23 @@ function ClassCard({ data }) {
                const add = inputValue.split()
                console.log("link video", add)
                setInput("")
-               if (validator.isURL(inputValue)) {
-                    const newList = [...newlinkArr, ...add]
-                    setNewLink(newList)
-                    console.log("new link arr", newList)
+               const newList = [...newlinkArr, ...add]
+               setNewLink(newList)
+               console.log("new link arr", newList)
+               // if (validator.isURL(inputValue)) {
+               //      const newList = [...newlinkArr, ...add]
+               //      setNewLink(newList)
+               //      console.log("new link arr", newList)
 
-               }
-               else {
-                    toast.error("Link video không hợp lệ",
-                         {
-                              position: "bottom-right",
-                         }
-                    )
-                    setInput("")
-               }
+               // }
+               // else {
+               //      toast.error("Link video không hợp lệ",
+               //           {
+               //                position: "bottom-right",
+               //           }
+               //      )
+               //      setInput("")
+               // }
 
           }
 
@@ -138,7 +142,7 @@ function ClassCard({ data }) {
                setShowIconAdd) => {
                setShowComponent("block")
                setShowIconAdd('none')
-               console.log(data,item, dataLink[item],originArr)
+               console.log(data, item, dataLink[item], originArr)
                let del = dataLink.splice(item, 1).toString()
                const check = [...originArr].includes(del)
                if (check == false) {
@@ -251,45 +255,98 @@ function ClassCard({ data }) {
                                         <p><strong>Số lượng học viên: </strong>{data.number_of_student}</p>
                                    </div>
                                    <div className=" teacher_class_card_content column  is-6">
-                                        <p><strong>Số lượng đăng kí: </strong>{number_register}</p>
+                                        <p><strong>Số lượng đăng kí: </strong>{number_register}
+
+                                        </p>
                                    </div>
+                                   {courseStudent.filter(item => item.id_course._id === data._id).length > 0 &&
+                                   <div className=" teacher_class_card_content column  is-10">
+                                   <table class="table is-fullwidth is-hoverable">
+                                        <thead>
+                                             <tr>
+
+                                                  <th>Tên học viên</th>
+                                                  <th>Email</th>
+                                                  <th>SDT</th>
+
+
+                                             </tr>
+                                        </thead>
+                                        <tbody style={{ textAlign: "left" }}>
+                                             {courseStudent
+                                                  .filter(item => item.id_course._id === data._id)
+                                                  .map((item, index) => (
+                                                       <tr key={index}>
+                                                            <td>{item.id_student.account_id.full_name}</td>
+                                                            <td>{item.id_student.account_id.email}</td>
+                                                            <td>{item.id_student.account_id.phone_number}</td>
+                                                       </tr>
+
+                                                  ))}
+
+                                        </tbody>
+                                   </table>
+                              </div>
+                                   }
                                    <div className=" teacher_class_card_content column  is-12"
                                         style={{ paddingRight: "2rem" }}  >
                                         <div className="link-video_container" style={{ textAlign: "left" }}>
                                              <p><strong>Link meeting: </strong></p>
                                              <div style={{ display: "block" }}>
-                                                  {dataLinkMeeting.map((item) =>
-                                                       <div id={item} key={dataLinkMeeting.indexOf(item)} className='link-video-add-more-show_div'>
-                                                            <p className='link-add_p ' key={dataLinkMeeting.indexOf(item)} id={item}>{item}</p>
-                                                            <button
-                                                                 className='button delete-link_button '
-                                                                 id={item}
-                                                                 key={dataLinkMeeting.indexOf(item)}
-                                                                 // item, dataLink,setDataLink,originArr,delLinkState,setDelLink
-                                                                 onClick={() =>
-                                                                      handleDeleteLinkData(
-                                                                           dataLinkMeeting.indexOf(item),
-                                                                           dataLinkMeeting,
-                                                                           setDataLinkMeeting,
-                                                                           data.link_meeeting,
-                                                                           delLinkMeeting,
-                                                                           setDelLinkMeeting,
-                                                                           setShowComponent2,
-                                                                           setShowIconAdd2
-                                                                      )}>
-                                                                 <IoIosCloseCircleOutline className='add-link-video_icon-remove' />
+                                                  {
+                                                       dataLinkMeeting.length == 0 ?
+                                                            <div className='link-video-add-more-show_div'>
+                                                                 {
+                                                                      Date.now() < new Date(data.end_date).getTime() ?
+                                                                           <Link to={`/getLinkMeeting/${data._id}?isDemo=false`} className='link-add_p ' key={1}>
+                                                                                <button className='button is-success'>Tạo mã lớp học  </button>
+                                                                           </Link>
+                                                                           : <></>
+                                                                 }
 
-                                                            </button>
+                                                            </div >
+                                                            :
+                                                            dataLinkMeeting.map((item) =>
+                                                                 <div id={item} key={dataLinkMeeting.indexOf(item)} className='link-video-add-more-show_div'>
+                                                                      {/* <button className='button is-success'> */}
+                                                                      <Link to={`/joinClass/${data._id}/${item}?isDemo=false`} className='link-add_p ' key={dataLinkMeeting.indexOf(item)} id={item}>
+                                                                           {/* <button className='button is-success'>Vào lớp học  </button> */}
+                                                                           {item}
+                                                                      </Link>
 
-                                                       </div >
-                                                  )
+                                                                      {/* </button> */}
+                                                                      <button
+                                                                           className='button delete-link_button '
+                                                                           id={item}
+                                                                           key={dataLinkMeeting.indexOf(item)}
+                                                                           // item, dataLink,setDataLink,originArr,delLinkState,setDelLink
+                                                                           onClick={() =>
+                                                                                handleDeleteLinkData(
+                                                                                     dataLinkMeeting.indexOf(item),
+                                                                                     dataLinkMeeting,
+                                                                                     setDataLinkMeeting,
+                                                                                     data.link_meeeting,
+                                                                                     delLinkMeeting,
+                                                                                     setDelLinkMeeting,
+                                                                                     setShowComponent2,
+                                                                                     setShowIconAdd2
+                                                                                )}>
+                                                                           <IoIosCloseCircleOutline className='add-link-video_icon-remove' />
+
+                                                                      </button>
+
+                                                                 </div >
+                                                            )
                                                   }
                                              </div>
 
                                              <div>
                                                   {newLinkMeeting.map((item) =>
                                                        <div id={item} key={newLinkMeeting.indexOf(item)} className='link-video-add-more-show_div'>
-                                                            <p className='link-add_p ' key={newLinkMeeting.indexOf(item)} id={item}>{item}</p>
+                                                            <button className="button is-success">
+                                                                 <Link to={`/joinClass/${item}`} className='link-add_p ' key={newLinkMeeting.indexOf(item)} id={item}>{item}</Link>
+
+                                                            </button>
                                                             <button
                                                                  className='button delete-link_button '
                                                                  id={item}
@@ -504,6 +561,8 @@ function ClassCard({ data }) {
                                                   }}>Hủy</button>
                                         </div>
                                    </div>
+                                  
+                                   
                               </div>
                               <hr className='mr-6' />
                               <div className="group-buttons teacher-class-card_buttons ">
@@ -550,7 +609,7 @@ function ClassCard({ data }) {
                          }}>
                               <div className="modal-background"></div>
 
-                              <div className="modal-content is-centered" style={{marginTop: "2rem"}}>
+                              <div className="modal-content is-centered" style={{ marginTop: "2rem" }}>
                                    <header className="modal-card-head">
                                         <p className="modal-card-title">Chỉnh sửa thông tin khóa học</p>
                                         <button className="modal-close is-large" aria-label="close" onClick={() => setShow2("none")}></button>

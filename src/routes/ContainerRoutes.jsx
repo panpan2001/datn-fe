@@ -26,6 +26,7 @@ import DemoCourseNotification from '../components/Notification/DemoCourseNotific
 import SystemNotification from '../components/Notification/SystemNotification';
 import EditAccountForm from '../components/EditAccountForm';
 import StudentNotification from '../components/Notification/StudentNotification';
+import VideoMeeting2 from '../pages/VideoMeetingPage/index copy';
 
 const LandingPage = React.lazy(() => import('../pages/LandingPage'));
 const LoginPage = React.lazy(() => import('../pages/LoginPage'));
@@ -86,7 +87,7 @@ function ContainerRoutes() {
           </>}
           {isLoggedIn &&
             <>
-                                <Route path='/joinClass' element={<VideoMeetingPage />} />
+                                <Route path='/joinClass/:idClass/:idJoinClass' element={<VideoMeetingPage />} />
 
               <Route path='/profile/:idAccount' element={<ProfilePage />}>
                 <Route index element={<PersonalInfo />} />
@@ -128,6 +129,8 @@ function ContainerRoutes() {
                 currentUSer.role_name && currentUSer.role_name == 'teacher' &&
                 <>
                   <Route path='/:idAccount/createClass' element={<CreateCoursePage />} />
+                  <Route path='/getLinkMeeting/:idClass' element={<VideoMeeting2 />} />
+
                 </>
               }
 

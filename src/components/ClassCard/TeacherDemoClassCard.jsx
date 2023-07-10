@@ -14,6 +14,7 @@ import { toast } from 'react-toastify'
 import addLinkVideoDemoCourse from '../../redux/actions/DemoCourse/addLinkVideoDemoCourse'
 import { getDemoCourseByIdSuccess } from '../../redux/slices/DemoCourse/getDemoCourseById'
 import addLinkMeetingDemoCourse from '../../redux/actions/DemoCourse/addLinkMeetingDemoCourse'
+import { Link } from 'react-router-dom'
 
 function TeacherDemoClassCard({ item }) {
      console.log("demo course", item)
@@ -48,7 +49,7 @@ function TeacherDemoClassCard({ item }) {
           setShow("none")
      }
 
-     
+
 
 
      // -----------------link video action ! --------------///
@@ -61,15 +62,15 @@ function TeacherDemoClassCard({ item }) {
      const [newLinkVideo, setNewLinkVideo] = useState([])
      const [delLinkVideo, setDelLinkVideo] = useState(new Set())
 
-       // -----------------link meeting state ! --------------///
-       const [inputValue2, setInputValue2] = useState("")
-       const [showIconAdd2, setShowIconAdd2] = useState("block")
-       const [showComponent2, setShowComponent2] = useState("none")
-  
-       const [linkMeeting, setLinkMeeting] = useState("")
-       const [dataLinkMeeting, setDataLinkMeeting] = useState([...item.link_meeting])
-       const [newLinkMeeting, setNewLinkMeeting] = useState([])
-       const [delLinkMeeting, setDelLinkMeeting] = useState(new Set())
+     // -----------------link meeting state ! --------------///
+     const [inputValue2, setInputValue2] = useState("")
+     const [showIconAdd2, setShowIconAdd2] = useState("block")
+     const [showComponent2, setShowComponent2] = useState("none")
+
+     const [linkMeeting, setLinkMeeting] = useState("")
+     const [dataLinkMeeting, setDataLinkMeeting] = useState([...item.link_meeting])
+     const [newLinkMeeting, setNewLinkMeeting] = useState([])
+     const [delLinkMeeting, setDelLinkMeeting] = useState(new Set())
 
      if (DemoCourseStudent) {
           number_register = DemoCourseStudent.filter((i) => i.id_demo_course._id === item._id).length
@@ -86,29 +87,33 @@ function TeacherDemoClassCard({ item }) {
                }
           }
 
-          const handleAddLink = (inputValue, newlinkArr, setNewLink,setInput) => {
+          const handleAddLink = (inputValue, newlinkArr, setNewLink, setInput) => {
 
                const add = inputValue.split()
                console.log("link video", add)
                setInput("")
-               if (validator.isURL(inputValue)) {
-                    const newList = [...newlinkArr, ...add]
-                    setNewLink(newList)
-                    console.log("new link arr", newList)
+               const newList = [...newlinkArr, ...add]
+               setNewLink(newList)
+               console.log("new link arr", newList)
 
-               }
-               else {
-                    toast.error("Link video không hợp lệ",
-                         {
-                              position: "bottom-right",
-                         }
-                    )
-                    setInput("")
-               }
+               // if (validator.isURL(inputValue)) {
+               //      const newList = [...newlinkArr, ...add]
+               //      setNewLink(newList)
+               //      console.log("new link arr", newList)
+
+               // }
+               // else {
+               //      toast.error("Link video không hợp lệ",
+               //           {
+               //                position: "bottom-right",
+               //           }
+               //      )
+               //      setInput("")
+               // }
 
           }
 
-          const handleDeleteLinkNew = (item, newLinkState, setNewLink,setShowComponent,setShowIconAdd) => {
+          const handleDeleteLinkNew = (item, newLinkState, setNewLink, setShowComponent, setShowIconAdd) => {
                setShowComponent("block")
                setShowIconAdd('none')
                // const del= newLinkVideo[item]
@@ -121,16 +126,16 @@ function TeacherDemoClassCard({ item }) {
           }
           //lay link bi xo tren giao dien de xoa trong db
           const handleDeleteLinkData = (item,
-                dataLink, 
-                setDataLink, 
-                originArr, 
-                delLinkState, 
-                setDelLink,
-                setShowComponent,
-                setShowIconAdd) => {
+               dataLink,
+               setDataLink,
+               originArr,
+               delLinkState,
+               setDelLink,
+               setShowComponent,
+               setShowIconAdd) => {
                setShowComponent("block")
                setShowIconAdd('none')
-               console.log(item, dataLink[item],originArr)
+               console.log(item, dataLink[item], originArr)
                let del = dataLink.splice(item, 1).toString()
                const check = [...originArr].includes(del)
                if (check == false) {
@@ -146,7 +151,7 @@ function TeacherDemoClassCard({ item }) {
                     // lay link moi sau khi bo link bij del 
                     const newLinkVideoData = [...dataLink]
                     setDataLink(newLinkVideoData)
-                    toast.warning('Bạn mới xóa 1 link đã lưu trong hệ thống. Hãy nhấn nút "Lưu" để cập nhật thay đổi nhé!',{
+                    toast.warning('Bạn mới xóa 1 link đã lưu trong hệ thống. Hãy nhấn nút "Lưu" để cập nhật thay đổi nhé!', {
                          position: "bottom-right",
                     })
                }
@@ -154,12 +159,12 @@ function TeacherDemoClassCard({ item }) {
           }
 
           const handleSaveLinkVideo = (dataLinkState,
-                newLinkState,
-                 deLinkState,
-                  checTypeOfLink,
-                  setShowComponent,
-                  setShowIconAdd
-                  ) => {
+               newLinkState,
+               deLinkState,
+               checTypeOfLink,
+               setShowComponent,
+               setShowIconAdd
+          ) => {
                //tong hop link cu da del va link ms dc them vao
                let link = [...new Set([...dataLinkState, ...newLinkState])]
                // del link tu set thanh array 
@@ -223,13 +228,59 @@ function TeacherDemoClassCard({ item }) {
                          <div className=" teacher_demo_class_cars_content column column is-6">
                               <p><strong>Số lượng đăng kí: </strong>{number_register}</p>
                          </div>
-                         <div className=" teacher_demo_class_cars_content column column is-12"    style={{ paddingRight: "2rem" }}  >
-                                        <div className="link-video_container" style={{ textAlign: "left" }}>
-                                             <p><strong>Link meeting: </strong></p>
-                                             <div style={{ display: "block" }}>
-                                                  {dataLinkMeeting.map((i) =>
+                         {DemoCourseStudent.filter((i) => i.id_demo_course._id === item._id).length > 0 &&
+
+                         <div className=" teacher_demo_class_cars_content column column is-11">
+                                   <table class="table is-fullwidth is-hoverable">
+                                        <thead>
+                                             <tr>
+
+                                                  <th>Tên học viên</th>
+                                                  <th>Email</th>
+                                                  <th>SDT</th>
+
+
+                                             </tr>
+                                        </thead>
+                                        <tbody style={{ textAlign: "left" }}>
+                                             {DemoCourseStudent
+                                                  .filter((i) => i.id_demo_course._id === item._id)
+                                                  .map((i, index) => (
+                                                       <tr key={index}>
+                                                            <td>{i.id_student.account_id.full_name}</td>
+                                                            <td>{i.id_student.account_id.email}</td>
+                                                            <td>{i.id_student.account_id.phone_number}</td>
+                                                       </tr>
+
+                                                  ))}
+
+                                        </tbody>
+                                   </table>
+                             
+                                 
+                         </div>
+                    }
+                         <div className=" teacher_demo_class_cars_content column column is-12" style={{ paddingRight: "2rem" }}  >
+                              <div className="link-video_container" style={{ textAlign: "left" }}>
+                                   <p><strong>Link meeting: </strong></p>
+                                   <div style={{ display: "block" }}>
+                                        {
+
+                                             dataLinkMeeting.length == 0 ?
+                                                  <div className='link-video-add-more-show_div'>
+                                                       {(Date.now() < new Date(item.end_date).getTime()) ?
+                                                            <Link to={`/getLinkMeeting/${item._id}?isDemo=true`} className='link-add_p ' key={1}>
+                                                                 <button className='button is-success'>Tạo mã lớp học  </button>
+                                                            </Link>
+                                                            : <></>
+                                                       }
+
+                                                  </div >
+                                                  :
+                                                  dataLinkMeeting.map((i) =>
                                                        <div id={i} key={dataLinkMeeting.indexOf(i)} className='link-video-add-more-show_div'>
-                                                            <p className='link-add_p ' key={dataLinkMeeting.indexOf(i)} id={i}>{i}</p>
+                                                                 <Link to={`/joinClass/${item._id}/${i}?isDemo=true`} className='link-add_p ' key={dataLinkMeeting.indexOf(i)} id={i}>{i}</Link >
+
                                                             <button
                                                                  className='button delete-link_button '
                                                                  id={i}
@@ -238,116 +289,116 @@ function TeacherDemoClassCard({ item }) {
                                                                  onClick={() =>
                                                                       handleDeleteLinkData(
                                                                            dataLinkMeeting.indexOf(i),
-                                                                            dataLinkMeeting,
-                                                                             setDataLinkMeeting, 
-                                                                             item.link_meeting, 
-                                                                             delLinkMeeting,
-                                                                              setDelLinkMeeting,
-                                                                              setShowComponent2,
-                                                                              setShowIconAdd2
-                                                                              )}>
+                                                                           dataLinkMeeting,
+                                                                           setDataLinkMeeting,
+                                                                           item.link_meeting,
+                                                                           delLinkMeeting,
+                                                                           setDelLinkMeeting,
+                                                                           setShowComponent2,
+                                                                           setShowIconAdd2
+                                                                      )}>
                                                                  <IoIosCloseCircleOutline className='add-link-video_icon-remove' />
 
                                                             </button>
 
                                                        </div >
                                                   )
-                                                  }
-                                             </div>
+                                        }
+                                   </div>
 
-                                             <div>
-                                                  {newLinkMeeting.map((item) =>
-                                                       <div id={item} key={newLinkMeeting.indexOf(item)} className='link-video-add-more-show_div'>
-                                                            <p className='link-add_p ' key={newLinkMeeting.indexOf(item)} id={item}>{item}</p>
-                                                            <button
-                                                                 className='button delete-link_button '
-                                                                 id={item}
-                                                                 key={newLinkMeeting.indexOf(item)}
-                                                                 onClick={() => 
-                                                                 handleDeleteLinkNew(
-                                                                      newLinkMeeting.indexOf(item), 
-                                                                 newLinkMeeting, 
+                                   <div>
+                                        {newLinkMeeting.map((item) =>
+                                             <div id={item} key={newLinkMeeting.indexOf(item)} className='link-video-add-more-show_div'>
+                                                  <Link to={`/joinClass/${item}`} className='link-add_p ' key={newLinkMeeting.indexOf(item)} id={item}>{item}</Link>
+                                                  <button
+                                                       className='button delete-link_button '
+                                                       id={item}
+                                                       key={newLinkMeeting.indexOf(item)}
+                                                       onClick={() =>
+                                                            handleDeleteLinkNew(
+                                                                 newLinkMeeting.indexOf(item),
+                                                                 newLinkMeeting,
                                                                  setNewLinkMeeting,
                                                                  setShowComponent2,
                                                                  setShowIconAdd2)}>
-                                                                 <IoIosCloseCircleOutline className='add-link-video_icon-remove'
+                                                       <IoIosCloseCircleOutline className='add-link-video_icon-remove'
 
-                                                                 />
+                                                       />
 
-                                                            </button>
+                                                  </button>
 
-                                                       </div >
-                                                  )
-                                                  }
-                                             </div>
+                                             </div >
+                                        )
+                                        }
+                                   </div>
 
 
-                                        </div>
-                                        <div className='add-link-video_div-wrap'>
-                                             <AiOutlinePlusCircle className='add-link-video_icon-plus'
+                              </div>
+                              <div className='add-link-video_div-wrap'>
+                                   <AiOutlinePlusCircle className='add-link-video_icon-plus'
 
-                                                  onClick={() => handleShowEnd()}
-                                                  style={{
-                                                       display: `${showIconAdd2}`,
+                                        onClick={() => handleShowEnd()}
+                                        style={{
+                                             display: `${showIconAdd2}`,
 
-                                                  }} />
-                                             <IoIosRemoveCircleOutline
-                                                  className='add-link-video_icon-remove'
-                                                  onClick={() => {
-                                                       setShowComponent2("none")
-                                                       setShowIconAdd2("block")
-                                                       // setNewLinkMeeting([])
-                                                       setInputValue2("")
-                                                  }}
+                                        }} />
+                                   <IoIosRemoveCircleOutline
+                                        className='add-link-video_icon-remove'
+                                        onClick={() => {
+                                             setShowComponent2("none")
+                                             setShowIconAdd2("block")
+                                             // setNewLinkMeeting([])
+                                             setInputValue2("")
+                                        }}
 
-                                                  style={{
-                                                       display: `${showComponent2}`,
-                                                       width: "3rem !important",
-                                                       height: "3rem !important",
-                                                       cursor: "pointer",
-                                                       borderRadius: "50%",
-                                                       boxShadow: "0 0 8px 2px #85CEFE"
+                                        style={{
+                                             display: `${showComponent2}`,
+                                             width: "3rem !important",
+                                             height: "3rem !important",
+                                             cursor: "pointer",
+                                             borderRadius: "50%",
+                                             boxShadow: "0 0 8px 2px #85CEFE"
 
-                                                  }} />
-                                             <input
-                                                  type="text"
-                                                  className='input'
-                                                  style={{ display: `${showComponent2}` }}
-                                                  placeholder='Link video'
-                                                  value={inputValue2}
-                                                  id={Math.random()}
-                                                  onChange={(e) => {
-                                                       setLinkMeeting(e.target.value)
-                                                       setInputValue2(e.target.value)
-                                                  }}
-                                             />
-                                             <button
-                                                  className='button is-link'
-                                                  style={{ display: `${showComponent2}` }}
-                                                  onClick={() => handleAddLink(inputValue2, newLinkMeeting, setNewLinkMeeting,setInputValue2)}>
-                                                  Thêm
-                                             </button>
+                                        }} />
+                                   <input
+                                        type="text"
+                                        className='input'
+                                        style={{ display: `${showComponent2}` }}
+                                        placeholder='Link video'
+                                        value={inputValue2}
+                                        id={Math.random()}
+                                        onChange={(e) => {
+                                             setLinkMeeting(e.target.value)
+                                             setInputValue2(e.target.value)
+                                        }}
+                                   />
+                                   <button
+                                        className='button is-link'
+                                        style={{ display: `${showComponent2}` }}
+                                        onClick={() => handleAddLink(inputValue2, newLinkMeeting, setNewLinkMeeting, setInputValue2)}>
+                                        Thêm
+                                   </button>
 
-                                        </div>
-                                        <div className='up-link-video_group-buttons' >
-                                             <button className='button is-warning'
-                                                  style={{ display: `${showComponent2}` }}
-                                                  // dataLinkState,newLinkState,deLinkState,checTypeOfLink
-                                                  onClick={() => handleSaveLinkVideo(dataLinkMeeting, 
-                                                  newLinkMeeting, delLinkMeeting,
-                                                   "Meeting",
-                                                   setShowComponent2,
-                                                   setShowIconAdd2
-                                                   )}>Lưu</button>
-                                             <button className='button is-danger'
-                                                  style={{ display: `${showComponent2}` }}
-                                                  onClick={() => {
-                                                       setShowComponent2("none")
-                                                       setShowIconAdd2("block")
-                                                       // setNewLinkMeeting([])
-                                                       setInputValue2("")
-                                                  }}>Hủy</button>
-                                        </div>
+                              </div>
+                              <div className='up-link-video_group-buttons' >
+                                   <button className='button is-warning'
+                                        style={{ display: `${showComponent2}` }}
+                                        // dataLinkState,newLinkState,deLinkState,checTypeOfLink
+                                        onClick={() => handleSaveLinkVideo(dataLinkMeeting,
+                                             newLinkMeeting, delLinkMeeting,
+                                             "Meeting",
+                                             setShowComponent2,
+                                             setShowIconAdd2
+                                        )}>Lưu</button>
+                                   <button className='button is-danger'
+                                        style={{ display: `${showComponent2}` }}
+                                        onClick={() => {
+                                             setShowComponent2("none")
+                                             setShowIconAdd2("block")
+                                             // setNewLinkMeeting([])
+                                             setInputValue2("")
+                                        }}>Hủy</button>
+                              </div>
                          </div>
                          <div className=" teacher_demo_class_cars_content column column is-12"
                               style={{
@@ -377,7 +428,7 @@ function TeacherDemoClassCard({ item }) {
                                                        setDelLinkVideo,
                                                        setShowComponent,
                                                        setShowIconAdd
-                                                       )}>
+                                                  )}>
                                                   <IoIosCloseCircleOutline className='add-link-video_icon-remove' />
 
                                              </button>
@@ -399,7 +450,7 @@ function TeacherDemoClassCard({ item }) {
                                                        setNewLinkVideo,
                                                        setShowComponent,
                                                        setShowIconAdd
-                                                       )}>
+                                                  )}>
                                                   <IoIosCloseCircleOutline className='add-link-video_icon-remove'
                                                        style={{
                                                             // display: `${showIconAdd}`,
@@ -463,12 +514,12 @@ function TeacherDemoClassCard({ item }) {
                                         style={{ display: `${showComponent}` }}
                                         onClick={() => handleAddLink(
                                              inputValue,
-                                             newLinkVideo, 
-                                             setNewLinkVideo, 
+                                             newLinkVideo,
+                                             setNewLinkVideo,
                                              setInputValue,
                                              setShowComponent,
                                              setShowIconAdd
-                                             )}>
+                                        )}>
                                         Thêm
                                    </button>
 
@@ -476,13 +527,13 @@ function TeacherDemoClassCard({ item }) {
                               <div className='up-link-video_group-buttons' >
                                    <button className='button is-warning'
                                         style={{ display: `${showComponent}` }}
-                                        onClick={() => handleSaveLinkVideo( data_link_videos, 
-                                        newLinkVideo,
-                                         delLinkVideo, 
-                                         "Video", 
-                                         setShowComponent,
-                                         setShowIconAdd
-                                         )}>Lưu</button>
+                                        onClick={() => handleSaveLinkVideo(data_link_videos,
+                                             newLinkVideo,
+                                             delLinkVideo,
+                                             "Video",
+                                             setShowComponent,
+                                             setShowIconAdd
+                                        )}>Lưu</button>
                                    <button className='button is-danger'
                                         style={{ display: `${showComponent}` }}
                                         onClick={() => {

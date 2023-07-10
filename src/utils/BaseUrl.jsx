@@ -1,6 +1,9 @@
-const BASE_URL = "http://localhost:3001/api"
+// const BASE_URL = "http://localhost:3001/api"
+const BASE_URL = window.location.origin.replace(":3000",":3001/api")
+console.log({ BASE_URL })
 const UPLOAD_IMG_URL= "https://api.cloudinary.com/v1_1/djt76m22x/image/upload"
 
+const VIDEO_SDK_URL= "https://api.videosdk.live/v2"
 
 const LoginApi = BASE_URL + "/auth/login"
 const RegisterApi = BASE_URL + "/auth/register"
@@ -21,6 +24,7 @@ const StudentRatingApi= BASE_URL+"/studentRatings/"
 
 export {
    UPLOAD_IMG_URL,
+   VIDEO_SDK_URL,
    LoginApi,
    RegisterApi,
    AccountApi,
