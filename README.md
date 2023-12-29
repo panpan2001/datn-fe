@@ -12,10 +12,10 @@ Display English teacher information and propose good English teacher for student
 
 # Technology:
 
-## FE: ReactJS, Redux toolkit, BulmaCSS.
-## BE: NodeJS(ExpressJS).
-## DB: MongoDB, Cloudinary.
-## Other: Video SDK
+- FE: ReactJS, Redux toolkit, BulmaCSS.
+- BE: NodeJS(ExpressJS).
+- DB: MongoDB, Cloudinary.
+-  Other: Video SDK
 
 
 
@@ -24,8 +24,4 @@ Display English teacher information and propose good English teacher for student
 
 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
